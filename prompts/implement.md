@@ -1,0 +1,8 @@
+/gocomposer-development
+
+このプロジェクトのCLAUDE.mdとdocs/implementation-plan.mdを読み、/Users/kouji/oss/composerを基準に、/Users/kouji/dev/gocomposerへGo製Composer互換CLIを実装してください。
+設計だけで終わらず、基盤・依存解決・install/update・autoload・操作CLI・実アプリ統合・回帰検証まで連続して進めてください。段階ごとの承認や通常の設計選択の確認は不要です。不具合は再現テストを加えて修正してください。
+参照元のSHAとMIT表示を保持し、公式ComposerのラッパーではなくGo本体で処理してください。参照元や既存アプリへ依存をインストールせず、プロジェクト内の一時コピーで公式比較してください。
+公式PHPがPATHにない場合は、既存Podman/Dockerなどを調べて独立したoracle環境を作ってください。利用できない環境は成功扱いにせず、独立して進められる実装を続けてください。
+上記の実装計画の受入条件とscripts/verify.shを満たすまで、実装・テスト・公式比較・差異修正を継続してください。既存ソースの網羅的な移植を一度に済ませたと主張せず、実証範囲を記録してください。
+認証・利用上限・管理ポリシー・解消不能な外部障害で停止する場合は、docs/progress.mdに具体的な再開作業を残してください。commit・push・公開・グローバルインストールは行わないでください。

@@ -1,0 +1,28 @@
+{
+    "manifests": {
+        "flexfix/recipe-lib": {
+            "manifest": {
+                "copy-from-recipe": {
+                    "bin/": "%BIN_DIR%/"
+                },
+                "composer-scripts": {
+                    "echo recipe-lib auto-script": "script"
+                },
+                "container": {
+                    "recipe_lib.enabled": true
+                }
+            },
+            "files": {
+                "bin/recipe-lib": {
+                    "contents": [
+                        "#!/usr/bin/env php",
+                        "<?php",
+                        "echo \"recipe-lib\\n\";"
+                    ],
+                    "executable": true
+                }
+            },
+            "ref": "4a4b4c4d4e4f505152535455565758595a5b5c5d"
+        }
+    }
+}

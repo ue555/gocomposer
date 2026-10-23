@@ -1,0 +1,339 @@
+{
+ "emails": [
+  "a@b.co",
+  "foo.bar@example.com",
+  "foo@localhost",
+  "\"quoted\"@example.com",
+  "a..b@example.com",
+  ".a@example.com",
+  "a@-example.com",
+  "a@example",
+  "a@[127.0.0.1]",
+  "a@[IPv6:::1]",
+  "a@[IPv6:2001:db8::1]",
+  "user+tag@sub.example.org",
+  "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@example.com",
+  "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@example.com",
+  "a@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.com",
+  "a@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.com",
+  "a@b..com",
+  "a@b.c",
+  "a@b.c1",
+  "a@xn--bcher-kva.ch",
+  "é@example.com",
+  "a@é.com",
+  "",
+  "@example.com",
+  "a@",
+  "a b@example.com",
+  "a@b.com\n",
+  "\"a@b\"@example.com"
+ ],
+ "urls": [
+  "http://example.com",
+  "https://example.com/x",
+  "ftp://example.com",
+  "example.com",
+  "http:/x",
+  "http://",
+  "//example.com",
+  "irc://irc.freenode.net/composer",
+  "ircs://x/y",
+  "mailto:a@b.c",
+  "http://user:pw@host:80/p?q#f",
+  "HTTP://EXAMPLE.COM",
+  "http://[::1]/",
+  "https://exa mple.com",
+  ""
+ ],
+ "packages": [
+  {
+   "name": "acme/foo",
+   "description": "x"
+  },
+  {
+   "name": "Acme/Foo"
+  },
+  {
+   "name": "acme"
+  },
+  {
+   "name": "acme/con"
+  },
+  {
+   "name": "acme/foo.json"
+  },
+  {
+   "name": "acme/foo",
+   "version": "1.0.0-wtf"
+  },
+  {
+   "name": "acme/foo",
+   "version": "1.0"
+  },
+  {
+   "name": "acme/foo",
+   "type": "my_type"
+  },
+  {
+   "name": "acme/foo",
+   "type": 5
+  },
+  {
+   "name": "acme/foo",
+   "bin": [
+    "bin/x",
+    "../evil",
+    "bin/$(rm)"
+   ]
+  },
+  {
+   "name": "acme/foo",
+   "bin": "bin/a b;c"
+  },
+  {
+   "name": "acme/foo",
+   "homepage": "example.com"
+  },
+  {
+   "name": "acme/foo",
+   "homepage": "http://example.com"
+  },
+  {
+   "name": "acme/foo",
+   "keywords": [
+    "ok",
+    "bad!",
+    "with space",
+    5,
+    true
+   ]
+  },
+  {
+   "name": "acme/foo",
+   "time": "2020-01-01"
+  },
+  {
+   "name": "acme/foo",
+   "time": "not a date"
+  },
+  {
+   "name": "acme/foo",
+   "license": "MIT"
+  },
+  {
+   "name": "acme/foo",
+   "license": "Foo"
+  },
+  {
+   "name": "acme/foo",
+   "license": " MIT "
+  },
+  {
+   "name": "acme/foo",
+   "license": [
+    "MIT",
+    5,
+    "GPL-2.0+",
+    "proprietary"
+   ]
+  },
+  {
+   "name": "acme/foo",
+   "license": 5
+  },
+  {
+   "name": "acme/foo",
+   "authors": [
+    {
+     "name": "A",
+     "email": "bad",
+     "homepage": "nope"
+    },
+    "str",
+    {
+     "name": 5
+    }
+   ]
+  },
+  {
+   "name": "acme/foo",
+   "support": {
+    "email": "x",
+    "irc": "http://x",
+    "issues": "nope",
+    "docs": "https://ok",
+    "rss": 5
+   }
+  },
+  {
+   "name": "acme/foo",
+   "funding": [
+    {
+     "type": "github",
+     "url": "https://github.com/x"
+    },
+    {
+     "url": "bad"
+    },
+    "str"
+   ]
+  },
+  {
+   "name": "acme/foo",
+   "require": {
+    "php": ">=7.4",
+    "acme/bar": "*",
+    "Acme/Baz": "^1.0",
+    "bad name!": "1.0",
+    "acme/qux": 5,
+    "acme/nope": "~>1",
+    "acme/x": "==1.0.0",
+    "acme/none": ">2 <1",
+    "acme/foo": "1.0"
+   }
+  },
+  {
+   "name": "acme/foo",
+   "require-dev": {
+    "acme/bar": "dev-master"
+   },
+   "conflict": {
+    "acme/r": "*"
+   },
+   "replace": {
+    "acme/r": "self.version"
+   }
+  },
+  {
+   "name": "acme/foo",
+   "suggest": {
+    "acme/x": "why",
+    "acme/y": 5
+   }
+  },
+  {
+   "name": "acme/foo",
+   "minimum-stability": "rc"
+  },
+  {
+   "name": "acme/foo",
+   "minimum-stability": "RC"
+  },
+  {
+   "name": "acme/foo",
+   "minimum-stability": "bogus"
+  },
+  {
+   "name": "acme/foo",
+   "autoload": {
+    "psr-4": {
+     "Acme": "src/",
+     "Ok\\": "src/"
+    },
+    "weird": []
+   }
+  },
+  {
+   "name": "acme/foo",
+   "target-dir": "x",
+   "autoload": {
+    "psr-4": {
+     "A\\": "src"
+    }
+   }
+  },
+  {
+   "name": "acme/foo",
+   "source": {
+    "type": "git"
+   },
+   "dist": {
+    "type": 5,
+    "url": "-x",
+    "reference": "-r"
+   }
+  },
+  {
+   "name": "acme/foo",
+   "source": {
+    "type": "perforce",
+    "url": "rsh:cmd",
+    "reference": "1"
+   }
+  },
+  {
+   "name": "acme/foo",
+   "extra": {
+    "branch-alias": {
+     "dev-master": "1.0.x-dev",
+     "dev-a": "1.0",
+     "dev-b": 5,
+     "dev-c": "foo-dev",
+     "2.0.x-dev": "1.0.x-dev"
+    }
+   }
+  },
+  {
+   "name": "acme/foo",
+   "extra": {
+    "branch-alias": "x"
+   }
+  },
+  {
+   "name": "acme/foo",
+   "config": {
+    "platform": {
+     "php": "7.4.0",
+     "ext-x": false,
+     "ext-y": true,
+     "ext-z": "nope"
+    }
+   }
+  },
+  {
+   "name": "acme/foo",
+   "include-path": [
+    "a",
+    [
+     "b"
+    ]
+   ]
+  },
+  {
+   "name": "acme/foo",
+   "php-ext": {
+    "extension-name": 5
+   }
+  },
+  {
+   "name": "acme/foo",
+   "type": "php-ext",
+   "php-ext": {
+    "priority": "x",
+    "support-zts": "y",
+    "os-families": [
+     "linux",
+     "beos"
+    ],
+    "configure-options": [
+     {
+      "name": "a"
+     },
+     {
+      "x": 1
+     },
+     "s"
+    ]
+   }
+  },
+  {
+   "name": "acme/foo",
+   "scripts": "x",
+   "extra": "y"
+  },
+  {
+   "description": "no name"
+  }
+ ]
+}

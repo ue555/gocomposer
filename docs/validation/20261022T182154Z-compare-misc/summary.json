@@ -1,0 +1,546 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "e6a0d9e271a6c37be9ff2fc01112d5a4100a720c732e083e4299efe54a079240",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T182155Z",
+  "results": [
+    {
+      "scenario": "run-script-basic",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-alias-run",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-abbrev",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-args",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-args-dashdash",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-list",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-list-short",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-missing-argument",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-not-defined",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-event-constant-name",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-event",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-event-array",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281\n- (oracle) Stack trace:\n- (oracle)  /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281\n- (oracle)  /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:80\n- (oracle)  /oracle-source/src/Composer/Package/Loader/RootPackageLoader.php:134\n- (oracle)  /oracle-source/src/Composer/Factory.php:394\n- (oracle)  /oracle-source/src/Composer/Factory.php:627\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:676\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:443\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:169\n- (oracle)  /oracle-source/vendor/symfony/console/Application.php:171\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:142\n- (oracle)  /oracle-source/bin/composer:113"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-package-event",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-dev-mode",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-no-dev",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-dev-and-no-dev",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-no-dev-env",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-timeout-invalid",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-timeout-negative",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-timeout",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281\n- (oracle) The following exception is caused by a process timeout\n- (oracle) Check https://getcomposer.org/doc/06-config.md#process-timeout for details"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-timeout-zero",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-process-timeout-env",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281\n- (oracle) The following exception is caused by a process timeout\n- (oracle) Check https://getcomposer.org/doc/06-config.md#process-timeout for details"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-fail",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 3,
+      "go_exit": 3
+    },
+    {
+      "scenario": "run-script-nested",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-nested-verbose",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281\n- (oracle) Stack trace:\n- (oracle)  /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281\n- (oracle)  /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:80\n- (oracle)  /oracle-source/src/Composer/Package/Loader/RootPackageLoader.php:134\n- (oracle)  /oracle-source/src/Composer/Factory.php:394\n- (oracle)  /oracle-source/src/Composer/Factory.php:627\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:676\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:443\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:169\n- (oracle)  /oracle-source/vendor/symfony/console/Application.php:171\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:142\n- (oracle)  /oracle-source/bin/composer:113"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-missing-ref",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-multi-args",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-no-additional-args",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-putenv",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-no-scripts",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-skip-env",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-skip-env-verbose",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281\n- (oracle) Stack trace:\n- (oracle)  /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281\n- (oracle)  /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:80\n- (oracle)  /oracle-source/src/Composer/Package/Loader/RootPackageLoader.php:134\n- (oracle)  /oracle-source/src/Composer/Factory.php:394\n- (oracle)  /oracle-source/src/Composer/Factory.php:627\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:676\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:443\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:169\n- (oracle)  /oracle-source/vendor/symfony/console/Application.php:171\n- (oracle)  /oracle-source/src/Composer/Console/Application.php:142\n- (oracle)  /oracle-source/bin/composer:113\n- (oracle)   [InvalidArgumentException]                    \n- (oracle) Exception trace:\n- (oracle)   at /oracle-source/src/Composer/Command/RunScriptCommand.php:125\n- (oracle)  Composer\\Command\\RunScriptCommand-\u003eexecute() at /oracle-source/vendor/symfony/console/Command/Command.php:298\n- (oracle)  Symfony\\Component\\Console\\Command\\Command-\u003erun() at /oracle-source/vendor/symfony/console/Application.php:1040\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRunCommand() at /oracle-source/vendor/symfony/console/Application.php:301\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRun() at /oracle-source/src/Composer/Console/Application.php:504\n- (oracle)  Composer\\Console\\Application-\u003edoRunComposer() at /oracle-source/src/Composer/Console/Application.php:169\n- (oracle)  Composer\\Console\\Application-\u003edoRun() at /oracle-source/vendor/symfony/console/Application.php:171\n- (oracle)  Symfony\\Component\\Console\\Application-\u003erun() at /oracle-source/src/Composer/Console/Application.php:142\n- (oracle)  Composer\\Console\\Application-\u003erun() at /oracle-source/bin/composer:113\n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-quiet",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) test-ran"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-direct",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-direct-args",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-direct-unknown-option",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-direct-dashdash",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-direct-alias",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-direct-alias2",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-direct-nested",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-direct-fail",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 3,
+      "go_exit": 3
+    },
+    {
+      "scenario": "run-script-direct-dev-mode",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-direct-event-not-command",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-direct-abbrev",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-unknown-command",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Deprecation Notice: The `putenv` script name is reserved for internal use, please avoid defining it in /oracle-source/src/Composer/Package/Loader/ArrayLoader.php:281"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-override-warning",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-aliases-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-list-empty",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-no-json",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) \n+ (go) In \u003clocation\u003e:\n+ (go)                                                                                \n+ (go)   Composer could not find a composer.json file in /work/project                \n+ (go)   To initialize a project, please create a composer.json file. See https://ge  \n+ (go)   tcomposer.org/basic-usage                                                    \n+ (go)                                                                                \n+ (go) \n+ (go) run-script [--timeout TIMEOUT] [--dev] [--no-dev] [-l|--list] [--] [\u003cscript\u003e [\u003cargs\u003e...]]\n+ (go) \n- (oracle) Composer could not find a composer.json file in /work/project\n- (oracle) To initialize a project, please create a composer.json file. See https://getcomposer.org/basic-usage"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "run-script-disable-timeout",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "run-script-working-dir",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "exec-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "exec-no-binary",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "exec-run",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "exec-run-args",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "exec-run-php",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "exec-missing",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) /bin/sh: 1: nope: not found\n- (oracle) sh: 1: nope: not found"
+      ],
+      "oracle_exit": 127,
+      "go_exit": 127
+    },
+    {
+      "scenario": "exec-no-scripts",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "exec-verbose",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "exec-no-bins",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "exec-local-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "exec-no-json",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) \n+ (go) In \u003clocation\u003e:\n+ (go)                                                                                \n+ (go)   Composer could not find a composer.json file in /work/project                \n+ (go)   To initialize a project, please create a composer.json file. See https://ge  \n+ (go)   tcomposer.org/basic-usage                                                    \n+ (go)                                                                                \n+ (go) \n+ (go) exec [-l|--list] [--] [\u003cbinary\u003e [\u003cargs\u003e...]]\n+ (go) \n- (oracle) Composer could not find a composer.json file in /work/project\n- (oracle) To initialize a project, please create a composer.json file. See https://getcomposer.org/basic-usage"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    }
+  ]
+}

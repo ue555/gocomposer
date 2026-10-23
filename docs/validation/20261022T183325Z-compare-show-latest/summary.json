@@ -1,0 +1,142 @@
+{
+  "all_match": true,
+  "environment": {
+    "gocomposer_sha256": "cce199076e97cf1cb951f4c66df7971ce683ad8b9cc3751f26f4f2c3c7880eb9",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T183325Z",
+  "results": [
+    {
+      "scenario": "show-latest-cooldown-long",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-latest-cooldown-long-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-latest-cooldown-short",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-latest-cooldown-zero",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-latest-cooldown-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-latest-cooldown-package",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-latest-cooldown-time",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-latest-cooldown-time-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-latest-cooldown-time-strict",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-latest-cooldown-time-ansi",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-latest-cooldown-time-verbose",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-latest-cooldown-time-passed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-latest-cooldown-time-package",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-latest-cooldown-time-package-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-latest-cooldown-config",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-latest-cooldown-config-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "outdated-cooldown-config",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "outdated-cooldown-config-zero",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

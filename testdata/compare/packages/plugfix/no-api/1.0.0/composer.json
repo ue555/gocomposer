@@ -1,0 +1,1 @@
+{"name":"plugfix/no-api","description":"Plugin without a composer-plugin-api requirement","type":"composer-plugin","license":"MIT","autoload":{"psr-4":{"Plugfix\\NoApi\\":"src/"}},"extra":{"class":"Plugfix\\NoApi\\Plugin"}}

@@ -1,0 +1,10 @@
+{
+    "name": "gocomposer-it/live-psr",
+    "description": "Tiny project whose dists are downloaded live (no seeded cache)",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "psr/log": "^3.0",
+        "psr/container": "^2.0"
+    }
+}

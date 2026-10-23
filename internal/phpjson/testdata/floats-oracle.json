@@ -1,0 +1,132 @@
+[
+    {
+        "json": "1",
+        "var_export": "1.0",
+        "serialize": "d:1;"
+    },
+    {
+        "json": "1000000000000000",
+        "var_export": "1000000000000000.0",
+        "serialize": "d:1000000000000000;"
+    },
+    {
+        "json": "10000000000000000",
+        "var_export": "10000000000000000.0",
+        "serialize": "d:10000000000000000;"
+    },
+    {
+        "json": "1.0e+17",
+        "var_export": "1.0E+17",
+        "serialize": "d:1.0E+17;"
+    },
+    {
+        "json": "1.0e+18",
+        "var_export": "1.0E+18",
+        "serialize": "d:1.0E+18;"
+    },
+    {
+        "json": "-0",
+        "var_export": "-0.0",
+        "serialize": "d:-0;"
+    },
+    {
+        "json": "0.1",
+        "var_export": "0.1",
+        "serialize": "d:0.1;"
+    },
+    {
+        "json": "1.5e-7",
+        "var_export": "1.5E-7",
+        "serialize": "d:1.5E-7;"
+    },
+    {
+        "json": "1.0e+25",
+        "var_export": "1.0E+25",
+        "serialize": "d:1.0E+25;"
+    },
+    {
+        "json": "100",
+        "var_export": "100.0",
+        "serialize": "d:100;"
+    },
+    {
+        "json": "0.0001",
+        "var_export": "0.0001",
+        "serialize": "d:0.0001;"
+    },
+    {
+        "json": "1.0e-5",
+        "var_export": "1.0E-5",
+        "serialize": "d:1.0E-5;"
+    },
+    {
+        "json": "123456789.123",
+        "var_export": "123456789.123",
+        "serialize": "d:123456789.123;"
+    },
+    {
+        "json": "1.7976931348623157e+308",
+        "var_export": "1.7976931348623157E+308",
+        "serialize": "d:1.7976931348623157E+308;"
+    },
+    {
+        "json": "5.0e-324",
+        "var_export": "5.0E-324",
+        "serialize": "d:5.0E-324;"
+    },
+    {
+        "json": "2.5",
+        "var_export": "2.5",
+        "serialize": "d:2.5;"
+    },
+    {
+        "json": "-2.5",
+        "var_export": "-2.5",
+        "serialize": "d:-2.5;"
+    },
+    {
+        "json": "0.3333333333333333",
+        "var_export": "0.3333333333333333",
+        "serialize": "d:0.3333333333333333;"
+    },
+    {
+        "json": "0.6666666666666666",
+        "var_export": "0.6666666666666666",
+        "serialize": "d:0.6666666666666666;"
+    },
+    {
+        "json": "0.0001",
+        "var_export": "0.0001",
+        "serialize": "d:0.0001;"
+    },
+    {
+        "json": "99999999999999980",
+        "var_export": "99999999999999980.0",
+        "serialize": "d:99999999999999980;"
+    },
+    {
+        "json": "0.3",
+        "var_export": "0.3",
+        "serialize": "d:0.3;"
+    },
+    {
+        "json": "1.2345678901234567e+19",
+        "var_export": "1.2345678901234567E+19",
+        "serialize": "d:1.2345678901234567E+19;"
+    },
+    {
+        "json": "-1.0e-10",
+        "var_export": "-1.0E-10",
+        "serialize": "d:-1.0E-10;"
+    },
+    {
+        "json": "3.14159",
+        "var_export": "3.14159",
+        "serialize": "d:3.14159;"
+    },
+    {
+        "json": "-1.23456e+32",
+        "var_export": "-1.23456E+32",
+        "serialize": "d:-1.23456E+32;"
+    }
+]

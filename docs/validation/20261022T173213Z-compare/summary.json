@@ -1,0 +1,2641 @@
+{
+  "all_match": true,
+  "environment": {
+    "gocomposer_sha256": "c72c8df888a9f2f675084b95798a893517f882cd89132ed778b39e05b7c23eb4",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T173213Z",
+  "results": [
+    {
+      "scenario": "update-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "update-basic-progress",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "update-v2-metadata",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "install-from-lock",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "install-no-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "install-twice",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "dry-run-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "dump-autoload-optimized",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "dump-autoload-authoritative",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "replace",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "conflict-unresolvable",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "conflict-resolves-lower",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "platform-php-too-low",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "missing-extension",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "ignore-platform-reqs",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-platform-php",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "not-found-package",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "stability-beta-flag",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "stability-too-low",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "dev-branch-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "partial-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "partial-update-with-deps",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "broken-archive",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "checksum-mismatch",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "download-404",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "path-traversal-archive",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "failure-keeps-vendor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "no-lock-install",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "check-platform-reqs-ok",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "check-platform-reqs-fail",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "check-platform-reqs-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "check-platform-reqs-lock",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "validate-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-clean",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-warnings",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "validate-strict-warnings",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "validate-no-check",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-missing-file",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 3,
+      "go_exit": 3
+    },
+    {
+      "scenario": "validate-invalid-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "validate-duplicate-key",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-lock-stale",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "validate-lock-stale-no-check",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-with-dependencies",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-bad-constraint",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-name-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-direct",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-no-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-path",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-package",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-package-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-tree",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-tree-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-package-tree",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-locked",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-self",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-self-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-platform-php",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-wildcard",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-not-found",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-version-arg",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-self-name-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-locked-package",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-platform-list-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-bad-format",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-tree-latest",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-nothing-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-recursive",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-tree",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-php",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-notfound",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "depends-locked",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "prohibits-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "prohibits-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "prohibits-php",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "prohibits-tree",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "why-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-nothing-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "licenses-text",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "licenses-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "licenses-summary",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "licenses-no-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "licenses-locked",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "licenses-bad-format",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "suggests-default",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "suggests-all",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "suggests-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "suggests-by-suggestion",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "suggests-both",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "suggests-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "suggests-filter",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-publish-errors",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "validate-lax-fail",
+      "status": "KNOWN-DIFF",
+      "known_reason": "Composer crashes with a PHP TypeError in ConfigValidator (Preg::isMatch on an array); gocomposer reports the LAX schema error instead. Both exit 1.",
+      "differences": [
+        "stderr:\n+ (go)                                                                      \n+ (go)   \"./composer.json\" does not match the expected JSON schema:         \n+ (go)    - require.acme/log : Array value found, but a string is required  \n+ (go)                                                                      \n- (oracle)                                                                                \n- (oracle)   [TypeError]                                                                  \n- (oracle)   Composer\\Pcre\\Preg::isMatch(): Argument #2 ($subject) must be of type strin  \n- (oracle)   g, array given, called in /oracle-source/src/Composer/Util/ConfigValidator.  \n- (oracle)   php on line 179                                                              \n- (oracle)                                                                                \n- (oracle) Exception trace:\n- (oracle)   at /oracle-source/vendor/composer/pcre/src/Preg.php:289\n- (oracle)  Composer\\Pcre\\Preg::isMatch() at /oracle-source/src/Composer/Util/ConfigValidator.php:179\n- (oracle)  Composer\\Util\\ConfigValidator-\u003evalidate() at /oracle-source/src/Composer/Command/ValidateCommand.php:89\n- (oracle)  Composer\\Command\\ValidateCommand-\u003eexecute() at /oracle-source/vendor/symfony/console/Command/Command.php:298\n- (oracle)  Symfony\\Component\\Console\\Command\\Command-\u003erun() at /oracle-source/vendor/symfony/console/Application.php:1040\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRunCommand() at /oracle-source/vendor/symfony/console/Application.php:301\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRun() at /oracle-source/src/Composer/Console/Application.php:504\n- (oracle)  Composer\\Console\\Application-\u003edoRunComposer() at /oracle-source/src/Composer/Console/Application.php:169\n- (oracle)  Composer\\Console\\Application-\u003edoRun() at /oracle-source/vendor/symfony/console/Application.php:171\n- (oracle)  Symfony\\Component\\Console\\Application-\u003erun() at /oracle-source/src/Composer/Console/Application.php:142\n- (oracle)  Composer\\Console\\Application-\u003erun() at /oracle-source/bin/composer:113\n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "validate-lax-fail-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "composer-auth-invalid",
+      "status": "KNOWN-DIFF",
+      "known_reason": "Composer prints the schema warnings and then dies with a PHP fatal TypeError (BaseIO::checkAndSetAuthentication with an int username, exit 255); gocomposer prints the same warnings and ignores the non-string credential.",
+      "differences": [
+        "exit code: oracle=255 go=0",
+        "stderr:\n+ (go) ./composer.json is valid, but with a few warnings\n+ (go) See https://getcomposer.org/doc/04-schema.md for details on the schema\n+ (go) # General warnings\n+ (go) - No license specified, it is recommended to do so. For closed-source software you may use \"proprietary\" as license.\n- (oracle) Fatal error: Uncaught TypeError: Composer\\IO\\BaseIO::checkAndSetAuthentication(): Argument #2 ($username) must be of type string, int given, called in /oracle-source/src/Composer/IO/BaseIO.php on line 175 and defined in /oracle-source/src/Composer/IO/BaseIO.php:95\n- (oracle) Stack trace:\n- (oracle) #0 /oracle-source/src/Composer/IO/BaseIO.php(175): Composer\\IO\\BaseIO-\u003echeckAndSetAuthentication('example.org', 5, NULL)\n- (oracle) #1 /oracle-source/src/Composer/Factory.php(357): Composer\\IO\\BaseIO-\u003eloadConfiguration(Object(Composer\\Config))\n- (oracle) #2 /oracle-source/src/Composer/Factory.php(627): Composer\\Factory-\u003ecreateComposer(Object(Composer\\IO\\ConsoleIO), Array, true, '/work/project', true, false)\n- (oracle) #3 /oracle-source/src/Composer/Console/Application.php(676): Composer\\Factory::create(Object(Composer\\IO\\ConsoleIO), NULL, true, false)\n- (oracle) #4 /oracle-source/src/Composer/Console/Application.php(585): Composer\\Console\\Application-\u003egetComposer(false, true)\n- (oracle) #5 /oracle-source/src/Composer/Console/Application.php(532): Composer\\Console\\Application-\u003ehintCommonErrors(Object(ErrorException), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n- (oracle) #6 /oracle-source/src/Composer/Console/Application.php(169): Composer\\Console\\Application-\u003edoRunComposer(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Composer\\IO\\ConsoleIO))\n- (oracle) #7 /oracle-source/vendor/symfony/console/Application.php(171): Composer\\Console\\Application-\u003edoRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n- (oracle) #8 /oracle-source/src/Composer/Console/Application.php(142): Symfony\\Component\\Console\\Application-\u003erun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n- (oracle) #9 /oracle-source/bin/composer(113): Composer\\Console\\Application-\u003erun()\n- (oracle) #10 {main}\n- (oracle)   thrown in /oracle-source/src/Composer/IO/BaseIO.php on line 95"
+      ],
+      "oracle_exit": 255,
+      "go_exit": 0
+    },
+    {
+      "scenario": "composer-auth-malformed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "policy-advisory-blocks",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-advisory-blocks-vv",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-advisory-only-vulnerable",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "policy-no-blocking-audit",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-env-no-blocking",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-audit-install",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 5,
+      "go_exit": 5
+    },
+    {
+      "scenario": "policy-audit-install-table",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 5,
+      "go_exit": 5
+    },
+    {
+      "scenario": "policy-audit-install-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 5,
+      "go_exit": 5
+    },
+    {
+      "scenario": "policy-audit-plain",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 5,
+      "go_exit": 5
+    },
+    {
+      "scenario": "policy-abandoned",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-abandoned-ignore",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-ignore-advisory",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-disabled",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-cooldown-all",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "policy-cooldown-none",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "policy-cooldown-no-cooldown",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-locked-vulnerable-install",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-partial-update-vulnerable",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-guess-version",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-explicit",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-no-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-dry-run",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-first-no-lock",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-no-composer-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "require-not-found",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "require-min-stability",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "require-platform-incompatible",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "require-fails-reverts",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "require-move-from-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-sort-packages",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-too-strict",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-self",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "require-ext-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "require-alias-arg",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "require-fixed-library",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "require-fixed-project",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-update-with-deps",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-crlf-file",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "require-tabs-file",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "remove-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "remove-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "remove-wrong-section",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "remove-not-required",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "remove-wildcard",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "remove-no-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "remove-dry-run",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "remove-still-required",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "remove-unused",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "remove-no-args",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "remove-mixed-case",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "remove-allow-plugins",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-no-args",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-vendor-dir",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-bin-dir",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-bin-dir-absolute",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-bin-dir-source",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-set-in-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-bin-dir-custom-vendor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-process-timeout",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-bool",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-bool-default",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-allow-plugins-empty",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-platform-empty",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-secure-svn-domains",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-github-protocols",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-github-protocols-secure",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-github-protocols-git-first",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-gitlab-domains-dedupe",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-audit",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-audit-nested",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-nested-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-get-extra-nested",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-extra-object",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-extra",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-extra-list-index",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-suggest",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-name",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-license",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-homepage-default",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-min-stability-default",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-prefer-stable-default",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-keywords",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-repositories",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-repositories-default",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-repo-index",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-repo-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-get-repo-prefix",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-undefined",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-get-undefined-dotted",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-get-leading-dot",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-get-cache-files-maxsize",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-cache-dir-env",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-env-vendor-dir",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-home",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-data-dir",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-cafile-empty",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-gitlab-protocol-null",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-get-preferred-install-map",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-policy",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-policy-nested",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-auth-file",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-unicode-slashes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-scalar-unicode",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-get-scalar-float",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-list-source",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-list-plain",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-list-custom",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-list-named-repos",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-list-env",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-list-bad-maxsize",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-list-global",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-list-auth",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-sort-packages",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-bool-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-process-timeout",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-process-timeout-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-too-many",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-vendor-dir",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-preferred-install",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-preferred-install-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-preferred-install-pkg",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-preferred-install-pkg-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-store-auths",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-store-auths-false",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-discard-changes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-bump-after-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-platform-check",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-use-parent-dir",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-cache-maxsize",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-cache-maxsize-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-bin-compat-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-gitlab-protocol",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-autoloader-suffix-null",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-cafile-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-cafile",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-capath-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-github-protocols",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-github-protocols-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-github-domains",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-disable-tls",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-disable-tls-off",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-unset-disable-tls",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-unset-key",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-unset-with-value",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-unknown",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-allow-plugins-bool",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-lock-false",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-audit-abandoned",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-audit-abandoned-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-audit-block-insecure",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-audit-ignore",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-audit-ignore-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-audit-ignore-json-scalar",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-audit-ignore-merge",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-audit-ignore-merge-mixed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-audit-ignore-severity",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-audit-ignore-severity-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-unset-audit",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-unset-audit-ignore",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-block",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-audit",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-audit-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-block-scope",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-block-scope-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-cooldown-period",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-cooldown-period-int",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-cooldown-period-null",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-cooldown-period-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-list-off",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-list-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-custom-block",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-custom-scope",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-custom-scope-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-custom-audit-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-custom-ignore",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-reserved",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-reserved-name",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-reserved-ignore",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-sources",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-unknown-field",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-ignore-unreachable",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-ignore-unreachable-bad",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-ignore-unreachable-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-ignore-unreachable-json-bool",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-ignore-unreachable-bool",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-ignore-id-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-ignore-merge",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-ignore-merge-mixed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-set-policy-ignore-severity",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-set-policy-ignore-source",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-unset-policy-nested",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-unset-policy",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-repo-add",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-repo-add-append",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-repo-add-plain",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-repo-disable-packagist",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-repo-add-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-repo-add-invalid-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-repo-add-true",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-repo-add-three",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-repo-remove",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-repo-remove-assoc",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-repo-get-named",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-extra-set",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-extra-set-new",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-extra-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-extra-json-merge-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-extra-json-merge-object",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-extra-json-merge-mixed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-extra-json-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-extra-unset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-extra-unset-all",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-suggest-set",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-suggest-unset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-scripts-set",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-scripts-set-one",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-scripts-unset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-prop-name",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-prop-description",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-prop-min-stability",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-prop-min-stability-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-prop-prefer-stable",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-prop-keywords",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-prop-license",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-prop-unset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-prop-unset-other",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-prop-type-too-many",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-platform-set",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-platform-set-false",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-platform-unset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-platform-unset-all",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-allow-plugins-set",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-allow-plugins-wildcard",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-allow-plugins-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-allow-plugins-unset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-github-local",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-github-global",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-github-too-many",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-auth-http-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-http-basic-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-auth-bitbucket",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-bitbucket-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-auth-gitlab-token-pair",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-gitlab-token-three",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-auth-gitlab-oauth",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-bearer",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-forgejo",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-forgejo-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-auth-custom-headers",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-custom-headers-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-auth-unset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-unset-missing-file",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-auth-existing-in-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-global-set",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-global-set-modes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-global-get-existing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-global-list-existing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-global-merged-in-local",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-global-dir-absolute",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-global-property",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-global-extra",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-global-repo",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-global-unset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-global-with-file",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-global-no-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-file-get",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-file-set",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-file-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-no-composer-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-invalid-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "config-composer-env",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-editor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-editor-auth",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

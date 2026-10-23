@@ -1,0 +1,1 @@
+{"name":"acme/log-impl","description":"Provides psr/log-implementation","provide":{"psr/log-implementation":"1.0.0"},"require":{"acme/log":"^1.0"},"autoload":{"psr-4":{"Acme\\LogImpl\\":"src/"}}}

@@ -1,0 +1,253 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "59417ced76b9e99d09167ce79986aa56dfe336b508338eb0b7f0ce038fe159dc",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T155152Z",
+  "results": [
+    {
+      "scenario": "update-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "update-basic-progress",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle)  0/6 [\u003e---------------------------]   0%\n- (oracle)  6/6 [============================] 100%\n- (oracle)  0/6 [\u003e---------------------------]   0%\n- (oracle)  6/6 [============================] 100%"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "update-v2-metadata",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "install-from-lock",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) No security vulnerability advisories found.",
+        "stderr:\n- (oracle) Warning: Accessing 127.0.0.1 over http which is an insecure protocol.\n+ (go) Warning: Accessing 127.0.0.1 over http which is an insecure protocol."
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "install-no-dev",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) No security vulnerability advisories found.",
+        "stderr:\n- (oracle) Warning: Accessing 127.0.0.1 over http which is an insecure protocol.\n+ (go) Warning: Accessing 127.0.0.1 over http which is an insecure protocol."
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "install-twice",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) No security vulnerability advisories found.",
+        "stderr:\n- (oracle) Warning: Accessing 127.0.0.1 over http which is an insecure protocol.\n+ (go) Warning: Accessing 127.0.0.1 over http which is an insecure protocol."
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "dry-run-update",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) Analyzed 65 packages to resolve dependencies\n+ (go) Analyzed 75 rules to resolve dependencies\n+ (go) Installs: acme/log:1.1.0, acme/util:1.1.0, acme/cli:1.0.0, acme/devtools:1.0.0, acme/log-impl:1.0.0, acme/http:1.2.0\n+ (go) Installs: acme/log:1.1.0, acme/util:1.1.0, acme/cli:1.0.0, acme/devtools:1.0.0, acme/log-impl:1.0.0, acme/http:1.2.0"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "dump-autoload-optimized",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "dump-autoload-authoritative",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "replace",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "conflict-unresolvable",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "conflict-resolves-lower",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "platform-php-too-low",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "missing-extension",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "ignore-platform-reqs",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "config-platform-php",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "not-found-package",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "stability-beta-flag",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "stability-too-low",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "dev-branch-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "partial-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "partial-update-with-deps",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "broken-archive",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=100 go=1",
+        "stderr:\n- (oracle)   - Downloading acme/broken (1.0.0)\n- (oracle)   - Downloading acme/broken (1.0.0)\n- (oracle)   - Downloading acme/broken (1.0.0)\n+ (go)   The downloaded archive for acme/broken is truncated or corrupt, zip end of c\n+ (go)   entral directory not found (file size: 201 bytes)\n- (oracle)   The downloaded archive for acme/broken is truncated or corrupt, zip end of\n- (oracle)   central directory not found (file size: 201 bytes)\n- (oracle) update [--with WITH] [--prefer-source] [--prefer-dist] [--prefer-install PREFER-INSTALL] [--dry-run] [--dev] [--no-dev] [--lock] [--no-install] [--no-audit] [--audit-format AUDIT-FORMAT] [--no-security-blocking] [--no-blocking] [--no-cooldown] [--no-autoloader] [--no-suggest] [--no-progress] [-w|--with-dependencies] [-W|--with-all-dependencies] [-v|vv|vvv|--verbose] [-o|--optimize-autoloader] [-a|--classmap-authoritative] [--strict-psr-autoloader] [--apcu-autoloader] [--apcu-autoloader-prefix APCU-AUTOLOADER-PREFIX] [--ignore-platform-req IGNORE-PLATFORM-REQ] [--ignore-platform-reqs] [--prefer-stable] [--prefer-lowest] [-m|--minimal-changes] [--patch-only] [-i|--interactive] [--root-reqs] [--bump-after-update [BUMP-AFTER-UPDATE]] [--] [\u003cpackages\u003e...]\n- (oracle) "
+      ],
+      "oracle_exit": 100,
+      "go_exit": 1
+    },
+    {
+      "scenario": "checksum-mismatch",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go)   The checksum verification of the file failed (downloaded from http://127.0.0\n+ (go)   .1:8899/dists/acme-badsum-1.0.0.zip)\n- (oracle)   The checksum verification of the file failed (downloaded from http://127.0.\n- (oracle)   0.1:8899/dists/acme-badsum-1.0.0.zip)\n- (oracle) update [--with WITH] [--prefer-source] [--prefer-dist] [--prefer-install PREFER-INSTALL] [--dry-run] [--dev] [--no-dev] [--lock] [--no-install] [--no-audit] [--audit-format AUDIT-FORMAT] [--no-security-blocking] [--no-blocking] [--no-cooldown] [--no-autoloader] [--no-suggest] [--no-progress] [-w|--with-dependencies] [-W|--with-all-dependencies] [-v|vv|vvv|--verbose] [-o|--optimize-autoloader] [-a|--classmap-authoritative] [--strict-psr-autoloader] [--apcu-autoloader] [--apcu-autoloader-prefix APCU-AUTOLOADER-PREFIX] [--ignore-platform-req IGNORE-PLATFORM-REQ] [--ignore-platform-reqs] [--prefer-stable] [--prefer-lowest] [-m|--minimal-changes] [--patch-only] [-i|--interactive] [--root-reqs] [--bump-after-update [BUMP-AFTER-UPDATE]] [--] [\u003cpackages\u003e...]\n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "download-404",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=100 go=1",
+        "stderr:\n+ (go)   The \"http://127.0.0.1:8899/dists/does-not-exist.zip\" file could not be downl\n+ (go)   oaded (HTTP/1.1 404 Not Found)\n- (oracle)   The \"http://127.0.0.1:8899/dists/does-not-exist.zip\" file could not be down\n- (oracle)   loaded (HTTP/1.1 404 Not Found)\n- (oracle) update [--with WITH] [--prefer-source] [--prefer-dist] [--prefer-install PREFER-INSTALL] [--dry-run] [--dev] [--no-dev] [--lock] [--no-install] [--no-audit] [--audit-format AUDIT-FORMAT] [--no-security-blocking] [--no-blocking] [--no-cooldown] [--no-autoloader] [--no-suggest] [--no-progress] [-w|--with-dependencies] [-W|--with-all-dependencies] [-v|vv|vvv|--verbose] [-o|--optimize-autoloader] [-a|--classmap-authoritative] [--strict-psr-autoloader] [--apcu-autoloader] [--apcu-autoloader-prefix APCU-AUTOLOADER-PREFIX] [--ignore-platform-req IGNORE-PLATFORM-REQ] [--ignore-platform-reqs] [--prefer-stable] [--prefer-lowest] [-m|--minimal-changes] [--patch-only] [-i|--interactive] [--root-reqs] [--bump-after-update [BUMP-AFTER-UPDATE]] [--] [\u003cpackages\u003e...]\n- (oracle) "
+      ],
+      "oracle_exit": 100,
+      "go_exit": 1
+    },
+    {
+      "scenario": "path-traversal-archive",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=0 go=1",
+        "stdout:\n- (oracle) No security vulnerability advisories found.",
+        "stderr:\n+ (go)     Install of acme/evil failed\n+ (go) \n+ (go) In \u003clocation\u003e:\n+ (go) \n+ (go)   Failed to extract acme/evil: archive entry \"../../evil-escaped.txt\" escapes\n+ (go)   the extraction directory\n+ (go) \n+ (go) \n- (oracle) Generating autoload files",
+        "project tree:\n- (oracle) D vendor\n- (oracle) D vendor/acme\n- (oracle) D vendor/acme/evil\n- (oracle) D vendor/acme/evil/acme-evil-efa6f12\n- (oracle) D vendor/composer\n- (oracle) F vendor/acme/evil/acme-evil-efa6f12/composer.json 644 ee71c15e5d5d2a26\n- (oracle) F vendor/acme/evil/evil-escaped.txt 644 6f20d6e2bf761eb1\n- (oracle) F vendor/autoload.php 644 2990f90bc2ff17f2\n- (oracle) F vendor/composer/ClassLoader.php 644 d4b2313e562edf94\n- (oracle) F vendor/composer/InstalledVersions.php 644 1e4525198301d1ed\n- (oracle) F vendor/composer/LICENSE 644 7855ac293067aebe\n- (oracle) F vendor/composer/autoload_classmap.php 644 375085d0d6690301\n- (oracle) F vendor/composer/autoload_namespaces.php 644 ede505407590638a\n- (oracle) F vendor/composer/autoload_psr4.php 644 c35c405f584d1f28\n- (oracle) F vendor/composer/autoload_real.php 644 fe0d4d531038d171\n- (oracle) F vendor/composer/autoload_static.php 644 06a52ea3a393820d\n- (oracle) F vendor/composer/installed.json 644 2ae0185f79798182\n- (oracle) F vendor/composer/installed.php 644 a8fd330f4f65cf07",
+        "vendor/composer/autoload_classmap.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_classmap.php @generated by Composer\n- (oracle) \n- (oracle) $vendorDir = dirname(__DIR__);\n- (oracle) $baseDir = dirname($vendorDir);\n- (oracle) \n- (oracle) return array(\n- (oracle)     'Composer\\\\InstalledVersions' =\u003e $vendorDir . '/composer/InstalledVersions.php',\n- (oracle) );\n- (oracle) ",
+        "vendor/composer/autoload_psr4.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_psr4.php @generated by Composer\n- (oracle) \n- (oracle) $vendorDir = dirname(__DIR__);\n- (oracle) $baseDir = dirname($vendorDir);\n- (oracle) \n- (oracle) return array(\n- (oracle)     'App\\\\' =\u003e array($baseDir . '/src'),\n- (oracle) );\n- (oracle) ",
+        "vendor/composer/autoload_real.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_real.php @generated by Composer\n- (oracle) \n- (oracle) class ComposerAutoloaderInita347aad43421fccd839f53909d7cd6e5\n- (oracle) {\n- (oracle)     private static $loader;\n- (oracle) \n- (oracle)     public static function loadClassLoader($class)\n- (oracle)     {\n- (oracle)         if ('Composer\\Autoload\\ClassLoader' === $class) {\n- (oracle)             require __DIR__ . '/ClassLoader.php';\n- (oracle)         }\n- (oracle)     }\n- (oracle) \n- (oracle)     /**\n- (oracle)      * @return \\Composer\\Autoload\\ClassLoader\n- (oracle)      */\n- (oracle)     public static function getLoader()\n- (oracle)     {\n- (oracle)         if (null !== self::$loader) {\n- (oracle)             return self::$loader;\n- (oracle)         }\n- (oracle) \n- (oracle)         spl_autoload_register(array('ComposerAutoloaderInita347aad43421fccd839f53909d7cd6e5', 'loadClassLoader'), true, true);\n- (oracle)         self::$loader = $loader = new \\Composer\\Autoload\\ClassLoader(\\dirname(__DIR__));\n- (oracle)         spl_autoload_unregister(array('ComposerAutoloaderInita347aad43421fccd839f53909d7cd6e5', 'loadClassLoader'));\n- (oracle) \n- (oracle)         require __DIR__ . '/autoload_static.php';\n- (oracle)         call_user_func(\\Composer\\Autoload\\ComposerStaticInita347aad43421fccd839f53909d7cd6e5::getInitializer($loader));\n- (oracle) \n- (oracle)         $loader-\u003eregister(true);\n- (oracle) \n- (oracle)         return $loader;\n- (oracle)     }\n- (oracle) }\n- (oracle) ",
+        "vendor/composer/autoload_static.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_static.php @generated by Composer\n- (oracle) \n- (oracle) namespace Composer\\Autoload;\n- (oracle) \n- (oracle) class ComposerStaticInita347aad43421fccd839f53909d7cd6e5\n- (oracle) {\n- (oracle)     public static $prefixLengthsPsr4 = array (\n- (oracle)         'A' =\u003e\n- (oracle)         array (\n- (oracle)             'App\\\\' =\u003e 4,\n- (oracle)         ),\n- (oracle)     );\n- (oracle) \n- (oracle)     public static $prefixDirsPsr4 = array (\n- (oracle)         'App\\\\' =\u003e\n- (oracle)         array (\n- (oracle)             0 =\u003e __DIR__ . '/../..' . '/src',\n- (oracle)         ),\n- (oracle)     );\n- (oracle) \n- (oracle)     public static $classMap = array (\n- (oracle)         'Composer\\\\InstalledVersions' =\u003e __DIR__ . '/..' . '/composer/InstalledVersions.php',\n- (oracle)     );\n- (oracle) \n- (oracle)     public static function getInitializer(ClassLoader $loader)\n- (oracle)     {\n- (oracle)         return \\Closure::bind(function () use ($loader) {\n- (oracle)             $loader-\u003eprefixLengthsPsr4 = ComposerStaticInita347aad43421fccd839f53909d7cd6e5::$prefixLengthsPsr4;\n- (oracle)             $loader-\u003eprefixDirsPsr4 = ComposerStaticInita347aad43421fccd839f53909d7cd6e5::$prefixDirsPsr4;\n- (oracle)             $loader-\u003eclassMap = ComposerStaticInita347aad43421fccd839f53909d7cd6e5::$classMap;\n- (oracle) \n- (oracle)         }, null, ClassLoader::class);\n- (oracle)     }\n- (oracle) }\n- (oracle) ",
+        "vendor/composer/installed.json:\n- (oracle) {\n- (oracle)     \"packages\": [\n- (oracle)         {\n- (oracle)             \"name\": \"acme/evil\",\n- (oracle)             \"version\": \"1.0.0\",\n- (oracle)             \"version_normalized\": \"1.0.0.0\",\n- (oracle)             \"dist\": {\n- (oracle)                 \"type\": \"zip\",\n- (oracle)                 \"url\": \"http://127.0.0.1:8899/dists/acme-evil-1.0.0.zip\",\n- (oracle)                 \"reference\": \"efa6f128215acc47aa16ce8c95bba29d063b6d6e\",\n- (oracle)                 \"shasum\": \"0c1f3358693eca9995de74ea35706c0641c0457c\"\n- (oracle)             },\n- (oracle)             \"time\": \"2024-01-02T03:04:05+00:00\",\n- (oracle)             \"type\": \"library\",\n- (oracle)             \"installation-source\": \"dist\",\n- (oracle)             \"description\": \"Archive with path traversal\",\n- (oracle)             \"install-path\": \"../acme/evil\"\n- (oracle)         }\n- (oracle)     ],\n- (oracle)     \"dev\": true,\n- (oracle)     \"dev-package-names\": []\n- (oracle) }",
+        "vendor/composer/installed.php:\n- (oracle) \u003c?php return array(\n- (oracle)     'root' =\u003e array(\n- (oracle)         'name' =\u003e 'test/project',\n- (oracle)         'pretty_version' =\u003e '1.0.0+no-version-set',\n- (oracle)         'version' =\u003e '1.0.0.0',\n- (oracle)         'reference' =\u003e null,\n- (oracle)         'type' =\u003e 'project',\n- (oracle)         'install_path' =\u003e __DIR__ . '/../../',\n- (oracle)         'aliases' =\u003e array(),\n- (oracle)         'dev' =\u003e true,\n- (oracle)     ),\n- (oracle)     'versions' =\u003e array(\n- (oracle)         'acme/evil' =\u003e array(\n- (oracle)             'pretty_version' =\u003e '1.0.0',\n- (oracle)             'version' =\u003e '1.0.0.0',\n- (oracle)             'reference' =\u003e 'efa6f128215acc47aa16ce8c95bba29d063b6d6e',\n- (oracle)             'type' =\u003e 'library',\n- (oracle)             'install_path' =\u003e __DIR__ . '/../acme/evil',\n- (oracle)             'aliases' =\u003e array(),\n- (oracle)             'dev_requirement' =\u003e false,\n- (oracle)         ),\n- (oracle)         'test/project' =\u003e array(\n- (oracle)             'pretty_version' =\u003e '1.0.0+no-version-set',\n- (oracle)             'version' =\u003e '1.0.0.0',\n- (oracle)             'reference' =\u003e null,\n- (oracle)             'type' =\u003e 'project',\n- (oracle)             'install_path' =\u003e __DIR__ . '/../../',\n- (oracle)             'aliases' =\u003e array(),\n- (oracle)             'dev_requirement' =\u003e false,\n- (oracle)         ),\n- (oracle)     ),\n- (oracle) );"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 1
+    },
+    {
+      "scenario": "failure-keeps-vendor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "no-lock-install",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) No security vulnerability advisories found."
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

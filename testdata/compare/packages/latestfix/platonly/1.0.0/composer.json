@@ -1,0 +1,1 @@
+{"name":"latestfix/platonly","description":"Only release needs a future PHP","type":"library","license":"MIT","require":{"php":">=99"}}

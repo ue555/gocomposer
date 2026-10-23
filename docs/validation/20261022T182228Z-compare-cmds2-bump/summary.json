@@ -1,0 +1,210 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "e6a0d9e271a6c37be9ff2fc01112d5a4100a720c732e083e4299efe54a079240",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T182229Z",
+  "results": [
+    {
+      "scenario": "bump-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-dry-run",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "bump-dev-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-no-dev-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-library",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-library-dev-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-untyped",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-filter",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-filter-wildcard",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-nothing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-nothing-dry-run",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-lock-outdated",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "bump-lock-disabled",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle)   [LogicException]                                   \n- (oracle) Exception trace:\n- (oracle)   at /oracle-source/src/Composer/Package/Locker.php:342\n- (oracle)  Composer\\Package\\Locker-\u003egetLockData() at /oracle-source/src/Composer/Package/Locker.php:168\n- (oracle)  Composer\\Package\\Locker-\u003egetLockedRepository() at /oracle-source/src/Composer/Command/BumpCommand.php:126\n- (oracle)  Composer\\Command\\BumpCommand-\u003edoBump() at /oracle-source/src/Composer/Command/BumpCommand.php:75\n- (oracle)  Composer\\Command\\BumpCommand-\u003eexecute() at /oracle-source/vendor/symfony/console/Command/Command.php:298\n- (oracle)  Symfony\\Component\\Console\\Command\\Command-\u003erun() at /oracle-source/vendor/symfony/console/Application.php:1040\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRunCommand() at /oracle-source/vendor/symfony/console/Application.php:301\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRun() at /oracle-source/src/Composer/Console/Application.php:504\n- (oracle)  Composer\\Console\\Application-\u003edoRunComposer() at /oracle-source/src/Composer/Console/Application.php:169\n- (oracle)  Composer\\Console\\Application-\u003edoRun() at /oracle-source/vendor/symfony/console/Application.php:171\n- (oracle)  Symfony\\Component\\Console\\Application-\u003erun() at /oracle-source/src/Composer/Console/Application.php:142\n- (oracle)  Composer\\Console\\Application-\u003erun() at /oracle-source/bin/composer:113\n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "bump-installed-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-not-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-branch-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-no-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "bump-after-update-flag",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-no-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-dry-run",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) ./composer.json would be updated with:\n+ (go)  - require.acme/log: ^1.1\n+ (go)  - require.acme/http: ^1.2\n+ (go)  - require.acme/util: \u003e=1.1",
+        "stderr:\n- (oracle) In \u003clocation\u003e:\n- (oracle)                                                \n- (oracle)   Could not read ./composer.lock               \n- (oracle)                                                \n- (oracle)   The file \"./composer.lock\" is not readable.  \n- (oracle)                                                \n- (oracle) \n- (oracle) update [--with WITH] [--prefer-source] [--prefer-dist] [--prefer-install PREFER-INSTALL] [--dry-run] [--dev] [--no-dev] [--lock] [--no-install] [--no-audit] [--audit-format AUDIT-FORMAT] [--no-security-blocking] [--no-blocking] [--no-cooldown] [--no-autoloader] [--no-suggest] [--no-progress] [-w|--with-dependencies] [-W|--with-all-dependencies] [-v|vv|vvv|--verbose] [-o|--optimize-autoloader] [-a|--classmap-authoritative] [--strict-psr-autoloader] [--apcu-autoloader] [--apcu-autoloader-prefix APCU-AUTOLOADER-PREFIX] [--ignore-platform-req IGNORE-PLATFORM-REQ] [--ignore-platform-reqs] [--prefer-stable] [--prefer-lowest] [-m|--minimal-changes] [--patch-only] [-i|--interactive] [--root-reqs] [--bump-after-update [BUMP-AFTER-UPDATE]] [--] [\u003cpackages\u003e...]\n- (oracle) \n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "bump-after-update-config",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-config-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-untyped",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-partial",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-nothing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-lock",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

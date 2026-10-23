@@ -1,0 +1,33 @@
+{
+  "all_match": true,
+  "environment": {
+    "gocomposer_sha256": "bdd689d43a9bc2b632a3c0d7fc2ea757ee9c36c8625490df82d7a820f76cb1ab",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T182352Z",
+  "results": [
+    {
+      "scenario": "bump-lock-disabled",
+      "status": "KNOWN-DIFF",
+      "known_reason": "Composer dies with an internal LogicException (BumpCommand reads the locked repository when the lock config is disabled) which Symfony renders with its class name and stack trace; gocomposer reports the same message with the same exit code 1.",
+      "differences": [
+        "stderr:\n- (oracle)   [LogicException]                                   \n- (oracle) Exception trace:\n- (oracle)   at /oracle-source/src/Composer/Package/Locker.php:342\n- (oracle)  Composer\\Package\\Locker-\u003egetLockData() at /oracle-source/src/Composer/Package/Locker.php:168\n- (oracle)  Composer\\Package\\Locker-\u003egetLockedRepository() at /oracle-source/src/Composer/Command/BumpCommand.php:126\n- (oracle)  Composer\\Command\\BumpCommand-\u003edoBump() at /oracle-source/src/Composer/Command/BumpCommand.php:75\n- (oracle)  Composer\\Command\\BumpCommand-\u003eexecute() at /oracle-source/vendor/symfony/console/Command/Command.php:298\n- (oracle)  Symfony\\Component\\Console\\Command\\Command-\u003erun() at /oracle-source/vendor/symfony/console/Application.php:1040\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRunCommand() at /oracle-source/vendor/symfony/console/Application.php:301\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRun() at /oracle-source/src/Composer/Console/Application.php:504\n- (oracle)  Composer\\Console\\Application-\u003edoRunComposer() at /oracle-source/src/Composer/Console/Application.php:169\n- (oracle)  Composer\\Console\\Application-\u003edoRun() at /oracle-source/vendor/symfony/console/Application.php:171\n- (oracle)  Symfony\\Component\\Console\\Application-\u003erun() at /oracle-source/src/Composer/Console/Application.php:142\n- (oracle)  Composer\\Console\\Application-\u003erun() at /oracle-source/bin/composer:113\n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "bump-after-update-dry-run",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    }
+  ]
+}

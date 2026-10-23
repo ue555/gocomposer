@@ -1,0 +1,14 @@
+{
+    "_comment": "Fixed real projects for scripts/integration.sh. git projects are cloned at the pinned commit (tag verified); locks are generated once with the official Composer and committed next to this file.",
+    "projects": [
+        {"name": "library-symfony-console", "git": "https://github.com/symfony/console.git", "ref": "v7.4.9", "commit": "d7d2b64a45a89d607865927b176fa51c33ddbb58", "license": "MIT"},
+        {"name": "cli-app", "dir": "cli-app", "run": [["php", "bin/app", "greet", "--name=probe"], ["php", "vendor/bin/app", "list", "--raw"]]},
+        {"name": "laravel", "git": "https://github.com/laravel/laravel.git", "ref": "v13.9.0", "commit": "3514078f98ddf932a65c0b71983db2fb8bd0f939", "license": "MIT", "laravel": true, "run": [["php", "artisan", "about"], ["php", "artisan", "list", "--raw"]]},
+        {"name": "live-psr", "dir": "live-psr", "live": true},
+        {"name": "plugin-installers", "dir": "plugin-installers", "run": [["sh", "-c", "find web -maxdepth 4 -name '*.php' | sort | head -20"]]},
+        {"name": "plugin-php-http-discovery", "dir": "plugin-php-http-discovery", "run": [["php", "-r", "require 'vendor/autoload.php'; echo get_class(Http\\Discovery\\Psr17FactoryDiscovery::findRequestFactory()), PHP_EOL;"]]},
+        {"name": "plugin-phpcs", "dir": "plugin-phpcs", "run": [["php", "vendor/bin/phpcs", "-i"], ["php", "vendor/bin/phpcs", "--config-show"]]},
+        {"name": "plugin-pest", "dir": "plugin-pest", "run": [["cat", "vendor/pest-plugins.json"]]},
+        {"name": "symfony-skeleton", "dir": "symfony-skeleton", "license": "MIT", "lockCommand": "update --no-progress --no-interaction", "treeSkip": ["var"], "normalize": [{"glob": ".env*", "regex": "APP_SECRET=[0-9a-f]*", "replace": "APP_SECRET=RANDOM"}], "run": [["php", "bin/console", "--version"], ["php", "bin/console", "list", "--raw"]], "steps": [{"name": "recipes-install", "commands": ["install --no-progress --no-interaction --no-scripts", "symfony:recipes:install --no-interaction", "recipes"], "runs": true}]}
+    ]
+}

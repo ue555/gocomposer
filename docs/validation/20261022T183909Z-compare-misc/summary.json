@@ -1,0 +1,80 @@
+{
+  "all_match": true,
+  "environment": {
+    "gocomposer_sha256": "4a13e0d881aaaa4055e32bc3e4b848f562f664b40052995ff45c5d261b4895c4",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T183909Z",
+  "results": [
+    {
+      "scenario": "self-update-basic",
+      "status": "KNOWN-DIFF",
+      "known_reason": "gocomposer has no self-update mechanism (it is not a composer.phar): like Composer run from a source checkout it prints \"This instance of Composer does not have the self-update command.\" and exits 1, but the explanatory second line names gocomposer instead of Composer's system-package/project-package reasons",
+      "differences": [
+        "stdout:\n+ (go) gocomposer does not implement self-update as it is not distributed as a composer.phar. Rebuild or reinstall gocomposer to update it.\n- (oracle) This could be due to a number of reasons, such as Composer being installed as a system package on your OS, or Composer being installed as a package in the current project."
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "self-update-alias",
+      "status": "KNOWN-DIFF",
+      "known_reason": "gocomposer has no self-update mechanism (it is not a composer.phar): like Composer run from a source checkout it prints \"This instance of Composer does not have the self-update command.\" and exits 1, but the explanatory second line names gocomposer instead of Composer's system-package/project-package reasons",
+      "differences": [
+        "stdout:\n+ (go) gocomposer does not implement self-update as it is not distributed as a composer.phar. Rebuild or reinstall gocomposer to update it.\n- (oracle) This could be due to a number of reasons, such as Composer being installed as a system package on your OS, or Composer being installed as a package in the current project."
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "self-update-rollback",
+      "status": "KNOWN-DIFF",
+      "known_reason": "gocomposer has no self-update mechanism (it is not a composer.phar): like Composer run from a source checkout it prints \"This instance of Composer does not have the self-update command.\" and exits 1, but the explanatory second line names gocomposer instead of Composer's system-package/project-package reasons",
+      "differences": [
+        "stdout:\n+ (go) gocomposer does not implement self-update as it is not distributed as a composer.phar. Rebuild or reinstall gocomposer to update it.\n- (oracle) This could be due to a number of reasons, such as Composer being installed as a system package on your OS, or Composer being installed as a package in the current project."
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "self-update-version",
+      "status": "KNOWN-DIFF",
+      "known_reason": "gocomposer has no self-update mechanism (it is not a composer.phar): like Composer run from a source checkout it prints \"This instance of Composer does not have the self-update command.\" and exits 1, but the explanatory second line names gocomposer instead of Composer's system-package/project-package reasons",
+      "differences": [
+        "stdout:\n+ (go) gocomposer does not implement self-update as it is not distributed as a composer.phar. Rebuild or reinstall gocomposer to update it.\n- (oracle) This could be due to a number of reasons, such as Composer being installed as a system package on your OS, or Composer being installed as a package in the current project."
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "self-update-no-json",
+      "status": "KNOWN-DIFF",
+      "known_reason": "gocomposer has no self-update mechanism (it is not a composer.phar): like Composer run from a source checkout it prints \"This instance of Composer does not have the self-update command.\" and exits 1, but the explanatory second line names gocomposer instead of Composer's system-package/project-package reasons",
+      "differences": [
+        "stdout:\n+ (go) gocomposer does not implement self-update as it is not distributed as a composer.phar. Rebuild or reinstall gocomposer to update it.\n- (oracle) This could be due to a number of reasons, such as Composer being installed as a system package on your OS, or Composer being installed as a package in the current project."
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "self-update-bad-option",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "self-update-too-many",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    }
+  ]
+}

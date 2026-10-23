@@ -1,0 +1,1 @@
+{"name":"flexfix/auto-bundle","description":"Fixture bundle without a recipe (auto-generated recipe)","type":"symfony-bundle","license":"MIT","autoload":{"psr-4":{"Flexfix\\AutoBundle\\":"src/"}}}

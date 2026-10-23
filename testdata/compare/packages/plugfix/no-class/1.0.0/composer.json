@@ -1,0 +1,1 @@
+{"name":"plugfix/no-class","description":"Plugin without extra.class","type":"composer-plugin","license":"MIT","require":{"composer-plugin-api":"^2.0"}}

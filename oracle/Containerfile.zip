@@ -1,0 +1,15 @@
+# Variant of the 8.4 oracle with PHP's zip extension, only for the scenarios
+# whose Composer code path requires ext-zip (ArtifactRepository::__construct
+# throws "The artifact repository requires PHP's zip extension" without it).
+# The default oracle deliberately lacks ext-zip so ZipDownloader uses unzip.
+# Build: podman build --build-arg BASE=localhost/gocomposer-oracle:8.4 \
+#          -t localhost/gocomposer-oracle:8.4-zip -f oracle/Containerfile.zip oracle
+ARG BASE=localhost/gocomposer-oracle:8.4
+FROM ${BASE}
+USER root
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends libzip-dev \
+ && docker-php-ext-install zip \
+ && rm -rf /var/lib/apt/lists/*
+USER oracle
+WORKDIR /work

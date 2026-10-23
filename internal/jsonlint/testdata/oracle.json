@@ -1,0 +1,655 @@
+[
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n...\n^\nExpected one of: 'STRING', '}'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n...\n^\nExpected one of: 'STRING', '}'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n...\n^\nExpected one of: 'STRING', '}'"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n}...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n}...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n}...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n[1,2,]\n----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[' - It appears you have an extra trailing comma"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n[1,2,]\n----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[' - It appears you have an extra trailing comma"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n[1,2,]\n----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[' - It appears you have an extra trailing comma"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": 1,}\n-------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": 1,}\n-------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": 1,}\n-------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\" 1}\n----^\nExpected one of: 'EOF', '}', ':', ',', ']'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\" 1}\n----^\nExpected one of: 'EOF', '}', ':', ',', ']'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\" 1}\n----^\nExpected one of: 'EOF', '}', ':', ',', ']'"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{'a': 1}\n^\nInvalid string, it appears you used single quotes instead of double quotes"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{'a': 1}\n^\nInvalid string, it appears you used single quotes instead of double quotes"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{'a': 1}\n^\nInvalid string, it appears you used single quotes instead of double quotes"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": \"b\\c\"}\n-----^\nInvalid string, it appears you have an unescaped backslash at: \\c"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": \"b\\c\"}\n-----^\nInvalid string, it appears you have an unescaped backslash at: \\c"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": \"b\\c\"}\n-----^\nInvalid string, it appears you have an unescaped backslash at: \\c"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": \"b\\qxyz\"}\n-----^\nInvalid string, it appears you have an unescaped backslash at: \\qxyz"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": \"b\\qxyz\"}\n-----^\nInvalid string, it appears you have an unescaped backslash at: \\qxyz"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": \"b\\qxyz\"}\n-----^\nInvalid string, it appears you have an unescaped backslash at: \\qxyz"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": \"linebreak\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": \"linebreak\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": \"linebreak\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": 01}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": 01}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": 01}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": tru}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": tru}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": tru}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": True}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": True}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": True}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": nul}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": nul}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": nul}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": [1 2]}\n--------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": [1 2]}\n--------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": [1 2]}\n--------^\nExpected one of: 'EOF', '}', ',', ']'"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": {\"b\": }}\n-----------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": {\"b\": }}\n-----------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": {\"b\": }}\n-----------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": null,
+        "dup": {
+            "msg": "Parse error on line 1:\n...e\": \"x\", \"name\": \"y\"}\n----------------------^\nDuplicate key: name",
+            "key": "name",
+            "line": 1
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n...e\": \"x\", \"name\": \"y\"}\n----------------------^\nDuplicate key: name",
+            "key": "name",
+            "line": 1
+        }
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": null,
+        "dup": {
+            "msg": "Parse error on line 4:\n...  \"b\": 2,  \"a\": 3}\n-------------------^\nDuplicate key: a",
+            "key": "a",
+            "line": 4
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 4:\n...  \"b\": 2,  \"a\": 3}\n-------------------^\nDuplicate key: a",
+            "key": "a",
+            "line": 4
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": 1} x\n--------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": 1} x\n--------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": 1} x\n--------^\nExpected one of: 'EOF', '}', ',', ']'"
+        }
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": {
+            "msg": "BOM detected, make sure your input does not include a Unicode Byte-Order-Mark"
+        },
+        "dup": {
+            "msg": "BOM detected, make sure your input does not include a Unicode Byte-Order-Mark"
+        },
+        "dupassoc": {
+            "msg": "BOM detected, make sure your input does not include a Unicode Byte-Order-Mark"
+        }
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": 1.}\n------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": 1.}\n------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": 1.}\n------^\nExpected one of: 'EOF', '}', ',', ']'"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": .5}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": .5}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": .5}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": 1e}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": 1e}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": 1e}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": +1}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": +1}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": +1}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": \"\\u12\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": \"\\u12\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": \"\\u12\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        }
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": {
+            "msg": "Lexical error on line 1. Comments are not allowed.\n// c{\"a\":1}\n^"
+        },
+        "dup": {
+            "msg": "Lexical error on line 1. Comments are not allowed.\n// c{\"a\":1}\n^"
+        },
+        "dupassoc": {
+            "msg": "Lexical error on line 1. Comments are not allowed.\n// c{\"a\":1}\n^"
+        }
+    },
+    {
+        "default": {
+            "msg": "Lexical error on line 1. Comments are not allowed.\n{\"a\":1 /* c */}\n------^"
+        },
+        "dup": {
+            "msg": "Lexical error on line 1. Comments are not allowed.\n{\"a\":1 /* c */}\n------^"
+        },
+        "dupassoc": {
+            "msg": "Lexical error on line 1. Comments are not allowed.\n{\"a\":1 /* c */}\n------^"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 5:\n...\": \"^1.0\"    }    \"autoload\": {}}\n--------------------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dup": {
+            "msg": "Parse error on line 5:\n...\": \"^1.0\"    }    \"autoload\": {}}\n--------------------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 5:\n...\": \"^1.0\"    }    \"autoload\": {}}\n--------------------^\nExpected one of: 'EOF', '}', ',', ']'"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 4:\n...e/log\": \"^1.0\",    }}\n---------------------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        },
+        "dup": {
+            "msg": "Parse error on line 4:\n...e/log\": \"^1.0\",    }}\n---------------------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 4:\n...e/log\": \"^1.0\",    }}\n---------------------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": \"unterminated}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": \"unterminated}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": \"unterminated}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n... \"b\": \"y\\\\\", \"c\": 3,]}\n----------------------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n... \"b\": \"y\\\\\", \"c\": 3,]}\n----------------------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n... \"b\": \"y\\\\\", \"c\": 3,]}\n----------------------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', ']'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', ']'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', ']'"
+        }
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": [}\n------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', ']'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": [}\n------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', ']'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": [}\n------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', ']'"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n... {\"c\": [1, 2, {\"d\": }]}}}\n----------------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n... {\"c\": [1, 2, {\"d\": }]}}}\n----------------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n... {\"c\": [1, 2, {\"d\": }]}}}\n----------------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n... value\", \"another\": nope}\n----------------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n... value\", \"another\": nope}\n----------------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n... value\", \"another\": nope}\n----------------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\":1,,\"b\":2}\n------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\":1,,\"b\":2}\n------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\":1,,\"b\":2}\n------^\nExpected: 'STRING' - It appears you have an extra trailing comma"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{,}\n^\nExpected one of: 'STRING', '}'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{,}\n^\nExpected one of: 'STRING', '}'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{,}\n^\nExpected one of: 'STRING', '}'"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\":1}}\n------^\nExpected: 'EOF'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\":1}}\n------^\nExpected: 'EOF'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\":1}}\n------^\nExpected: 'EOF'"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n[1]]\n--^\nExpected: 'EOF'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n[1]]\n--^\nExpected: 'EOF'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n[1]]\n--^\nExpected: 'EOF'"
+        }
+    },
+    {
+        "default": null,
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"é\": 1, \"é\": 2}\n----------------^\nDuplicate key: é",
+            "key": "é",
+            "line": 1
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"é\": 1, \"é\": 2}\n----------------^\nDuplicate key: é",
+            "key": "é",
+            "line": 1
+        }
+    },
+    {
+        "default": null,
+        "dup": {
+            "msg": "Parse error on line 1:\n...\"a\\\"b\": 1, \"a\\\"b\": 2}\n----------------------^\nDuplicate key: a\"b",
+            "key": "a\"b",
+            "line": 1
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n...\"a\\\"b\": 1, \"a\\\"b\": 2}\n----------------------^\nDuplicate key: a\"b",
+            "key": "a\"b",
+            "line": 1
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"x\": 1e5, \"y\": 12abc}\n---------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"x\": 1e5, \"y\": 12abc}\n---------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"x\": 1e5, \"y\": 12abc}\n---------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"x\": -}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"x\": -}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"x\": -}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"x\": 1-2}\n------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"x\": 1-2}\n------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"x\": 1-2}\n------^\nExpected one of: 'EOF', '}', ',', ']'"
+        }
+    },
+    {
+        "default": null,
+        "dup": {
+            "msg": "Parse error on line 3:\n{\"k\": \"v\",\"k\": \"w\"}\n-----------------^\nDuplicate key: k",
+            "key": "k",
+            "line": 3
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 3:\n{\"k\": \"v\",\"k\": \"w\"}\n-----------------^\nDuplicate key: k",
+            "key": "k",
+            "line": 3
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 2:\n\t{\t\"a\": 1\t\"b\": 2}\n---------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dup": {
+            "msg": "Parse error on line 2:\n\t{\t\"a\": 1\t\"b\": 2}\n---------^\nExpected one of: 'EOF', '}', ',', ']'"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 2:\n\t{\t\"a\": 1\t\"b\": 2}\n---------^\nExpected one of: 'EOF', '}', ',', ']'"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": [1, 2, 3,]}\n--------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[' - It appears you have an extra trailing comma"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": [1, 2, 3,]}\n--------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[' - It appears you have an extra trailing comma"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": [1, 2, 3,]}\n--------------^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[' - It appears you have an extra trailing comma"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": \"tab\there\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": \"tab\there\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": \"tab\there\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": \"ctrl\u0001\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": \"ctrl\u0001\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": \"ctrl\u0001\"}\n-----^\nInvalid string, it appears you forgot to terminate a string, or attempted to write a multiline string which is invalid"
+        }
+    },
+    {
+        "default": null,
+        "dup": null,
+        "dupassoc": null
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\nn...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\nn...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\nn...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\nt...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\nt...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\nt...\n^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    },
+    {
+        "default": {
+            "msg": "Parse error on line 1:\n{\"a\": falsey}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dup": {
+            "msg": "Parse error on line 1:\n{\"a\": falsey}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        },
+        "dupassoc": {
+            "msg": "Parse error on line 1:\n{\"a\": falsey}\n-----^\nExpected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['"
+        }
+    }
+]

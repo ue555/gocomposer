@@ -1,0 +1,118 @@
+{
+  "all_match": true,
+  "environment": {
+    "gocomposer_sha256": "ec567b7e5992ea2d43058e8c26745097fcde395c41222f76200f427dcf714451",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T183806Z",
+  "results": [
+    {
+      "scenario": "diagnose-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "diagnose-clean",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-locked",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-lock-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "diagnose-no-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-schema-error",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-platform-override",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-disable-tls",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-github-oauth",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-proxy",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-proxy-no-proxy",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-proxy-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-ipresolve",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "diagnose-network",
+      "status": "KNOWN-DIFF",
+      "known_reason": "network checks run without COMPOSER_DISABLE_NETWORK inside --network=none: packagist/GitHub failures are reported as [Composer\\Downloader\\TransportException] with curl's error text by Composer and Go net/http's text by gocomposer, and Composer's self-audit reports its own dependencies while gocomposer has no Composer installation to audit",
+      "differences": [
+        "stdout:\n+ (go) Checking Composer and its dependencies for vulnerabilities: WARNING\n+ (go) Could not find Composer's installed.json, this must be a non-standard Composer installation.\n- (oracle) Checking Composer and its dependencies for vulnerabilities: Failed performing audit: curl error 6 while downloading https://repo.packagist.org/packages.json: Could not resolve host: repo.packagist.org\n- (oracle) The following exception probably indicates you are offline or have misconfigured DNS resolver(s)\n- (oracle) The following exception probably indicates you are offline or have misconfigured DNS resolver(s)",
+        "stderr:\n- (oracle) Warning: Accessing 127.0.0.1 over http which is an insecure protocol."
+      ],
+      "oracle_exit": 2,
+      "go_exit": 2
+    }
+  ]
+}

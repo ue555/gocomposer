@@ -1,0 +1,4443 @@
+[
+ {
+  "name": "type string vs int",
+  "schema": {
+   "type": "string"
+  },
+  "data": 5
+ },
+ {
+  "name": "type string vs float",
+  "schema": {
+   "type": "string"
+  },
+  "data": 1.5
+ },
+ {
+  "name": "type string vs null",
+  "schema": {
+   "type": "string"
+  },
+  "data": null
+ },
+ {
+  "name": "type string vs bool",
+  "schema": {
+   "type": "string"
+  },
+  "data": true
+ },
+ {
+  "name": "type string vs array",
+  "schema": {
+   "type": "string"
+  },
+  "data": []
+ },
+ {
+  "name": "type string vs object",
+  "schema": {
+   "type": "string"
+  },
+  "data": {}
+ },
+ {
+  "name": "type two",
+  "schema": {
+   "type": [
+    "string",
+    "array"
+   ]
+  },
+  "data": 5
+ },
+ {
+  "name": "type three",
+  "schema": {
+   "type": [
+    "string",
+    "number",
+    "null"
+   ]
+  },
+  "data": {}
+ },
+ {
+  "name": "type integer vs float",
+  "schema": {
+   "type": "integer"
+  },
+  "data": 1.0
+ },
+ {
+  "name": "type number vs numeric string",
+  "schema": {
+   "type": "number"
+  },
+  "data": "5"
+ },
+ {
+  "name": "type number ok",
+  "schema": {
+   "type": "number"
+  },
+  "data": 5
+ },
+ {
+  "name": "type any",
+  "schema": {
+   "type": "any"
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "type unknown",
+  "schema": {
+   "type": "foo"
+  },
+  "data": 1
+ },
+ {
+  "name": "type unknown in list",
+  "schema": {
+   "type": [
+    "foo"
+   ]
+  },
+  "data": 1
+ },
+ {
+  "name": "type list with schema",
+  "schema": {
+   "type": [
+    {
+     "type": "string"
+    },
+    "integer"
+   ]
+  },
+  "data": true
+ },
+ {
+  "name": "type schema object",
+  "schema": {
+   "type": {
+    "type": "string"
+   }
+  },
+  "data": 5
+ },
+ {
+  "name": "type object vs empty array",
+  "schema": {
+   "type": "object"
+  },
+  "data": []
+ },
+ {
+  "name": "type array vs empty object",
+  "schema": {
+   "type": "array"
+  },
+  "data": {}
+ },
+ {
+  "name": "type null vs 0",
+  "schema": {
+   "type": "null"
+  },
+  "data": 0
+ },
+ {
+  "name": "type boolean vs string",
+  "schema": {
+   "type": "boolean"
+  },
+  "data": "true"
+ },
+ {
+  "name": "type list valid second",
+  "schema": {
+   "type": [
+    "integer",
+    "string"
+   ]
+  },
+  "data": "x"
+ },
+ {
+  "name": "type empty string",
+  "schema": {
+   "type": ""
+  },
+  "data": 1
+ },
+ {
+  "name": "required missing",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "a": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "a",
+    "b"
+   ]
+  },
+  "data": {
+   "c": 1
+  }
+ },
+ {
+  "name": "required present wrong type",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "a": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "a",
+    "b"
+   ]
+  },
+  "data": {
+   "a": 1,
+   "b": 2
+  }
+ },
+ {
+  "name": "additionalProperties false",
+  "schema": {
+   "properties": {
+    "a": {}
+   },
+   "additionalProperties": false
+  },
+  "data": {
+   "a": "x",
+   "b": 1,
+   "$schema": "y",
+   "c": null
+  }
+ },
+ {
+  "name": "additionalProperties schema",
+  "schema": {
+   "additionalProperties": {
+    "type": "integer"
+   }
+  },
+  "data": {
+   "a": "x",
+   "b": "y",
+   "c": 3
+  }
+ },
+ {
+  "name": "additionalProperties true",
+  "schema": {
+   "additionalProperties": true,
+   "properties": {
+    "a": {
+     "type": "string"
+    }
+   }
+  },
+  "data": {
+   "a": 1,
+   "b": 2
+  }
+ },
+ {
+  "name": "patternProperties",
+  "schema": {
+   "patternProperties": {
+    "^x-": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false
+  },
+  "data": {
+   "x-a": 1,
+   "y": 2,
+   "x-b": "ok"
+  }
+ },
+ {
+  "name": "patternProperties invalid regex",
+  "schema": {
+   "patternProperties": {
+    "[": {
+     "type": "string"
+    },
+    "^ok$": {
+     "type": "integer"
+    }
+   }
+  },
+  "data": {
+   "ok": "no"
+  }
+ },
+ {
+  "name": "patternProperties lookahead",
+  "schema": {
+   "patternProperties": {
+    "^ignore(?!-unreachable$)": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": {
+    "type": "boolean"
+   }
+  },
+  "data": {
+   "ignore": 1,
+   "ignore-unreachable": 2,
+   "ignoreX": "s",
+   "other": "z"
+  }
+ },
+ {
+  "name": "patternProperties falsy schema",
+  "schema": {
+   "patternProperties": {
+    "^a": null,
+    "^b": false
+   },
+   "additionalProperties": false
+  },
+  "data": {
+   "a1": 1,
+   "b1": 2,
+   "c": 3
+  }
+ },
+ {
+  "name": "patternProperties loose in_array",
+  "schema": {
+   "patternProperties": {
+    "^1$": {}
+   },
+   "additionalProperties": false
+  },
+  "data": {
+   "1": 1,
+   "1.0": 2,
+   "01": 3
+  }
+ },
+ {
+  "name": "nested additionalProperties path",
+  "schema": {
+   "properties": {
+    "require": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "data": {
+   "require": {
+    "foo/bar": 1,
+    "baz~qux": 2,
+    "pc%t": 3
+   }
+  }
+ },
+ {
+  "name": "numeric keys path",
+  "schema": {
+   "additionalProperties": {
+    "type": "string"
+   }
+  },
+  "data": {
+   "123": 1,
+   "1.5": 2,
+   "1e3": 3,
+   " 7": 4,
+   "-5": 5,
+   "+8": 6,
+   ".5": 7,
+   "0x1A": 8,
+   "1 ": 9
+  }
+ },
+ {
+  "name": "numeric keys overflow",
+  "schema": {
+   "additionalProperties": {
+    "type": "string"
+   }
+  },
+  "data": {
+   "99999999999999999999": 1,
+   "1e20": 2,
+   "-1e20": 3,
+   "9223372036854775808": 4
+  }
+ },
+ {
+  "name": "dotted keys trimmed",
+  "schema": {
+   "additionalProperties": {
+    "type": "string"
+   }
+  },
+  "data": {
+   "a.": 1,
+   "..b": 2,
+   "c.d": 3,
+   ".": 4
+  }
+ },
+ {
+  "name": "empty key",
+  "schema": {
+   "additionalProperties": {
+    "type": "string"
+   },
+   "required": [
+    ""
+   ]
+  },
+  "data": {
+   "": 1
+  }
+ },
+ {
+  "name": "empty key missing",
+  "schema": {
+   "required": [
+    ""
+   ]
+  },
+  "data": {
+   "x": 1
+  }
+ },
+ {
+  "name": "required non string",
+  "schema": {
+   "required": [
+    1
+   ]
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "required on empty array",
+  "schema": {
+   "required": [
+    "a"
+   ],
+   "properties": {
+    "a": {
+     "required": true
+    }
+   }
+  },
+  "data": []
+ },
+ {
+  "name": "draft3 required true",
+  "schema": {
+   "properties": {
+    "a": {
+     "required": true
+    },
+    "b": {
+     "required": false,
+     "type": "string"
+    },
+    "c": {
+     "type": "string"
+    }
+   }
+  },
+  "data": {}
+ },
+ {
+  "name": "draft3 required with enum",
+  "schema": {
+   "properties": {
+    "a": {
+     "required": true,
+     "enum": [
+      "x"
+     ]
+    }
+   }
+  },
+  "data": {}
+ },
+ {
+  "name": "draft3 required root",
+  "schema": {
+   "required": true
+  },
+  "data": {}
+ },
+ {
+  "name": "min max properties",
+  "schema": {
+   "minProperties": 2,
+   "maxProperties": 3
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "max properties",
+  "schema": {
+   "minProperties": 2,
+   "maxProperties": 3
+  },
+  "data": {
+   "a": 1,
+   "b": 2,
+   "c": 3,
+   "d": 4
+  }
+ },
+ {
+  "name": "minProperties on property def",
+  "schema": {
+   "properties": {
+    "a": {
+     "type": "object",
+     "minProperties": 2
+    }
+   }
+  },
+  "data": {
+   "a": {}
+  }
+ },
+ {
+  "name": "minProperties via ref def",
+  "schema": {
+   "definitions": {
+    "o": {
+     "type": "object",
+     "minProperties": 2
+    }
+   },
+   "properties": {
+    "a": {
+     "$ref": "#/definitions/o"
+    }
+   }
+  },
+  "data": {
+   "a": {
+    "x": 1
+   }
+  }
+ },
+ {
+  "name": "minProperties float ignored",
+  "schema": {
+   "minProperties": 2.0
+  },
+  "data": {}
+ },
+ {
+  "name": "maxProperties negative",
+  "schema": {
+   "maxProperties": -1
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "requires draft3",
+  "schema": {
+   "properties": {
+    "a": {
+     "requires": "b"
+    }
+   }
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "requires draft3 falsy",
+  "schema": {
+   "properties": {
+    "a": {
+     "requires": "b"
+    }
+   }
+  },
+  "data": {
+   "a": 1,
+   "b": 0
+  }
+ },
+ {
+  "name": "dependencies",
+  "schema": {
+   "dependencies": {
+    "a": [
+     "b",
+     "c"
+    ],
+    "d": "e",
+    "f": {
+     "required": [
+      "g"
+     ]
+    },
+    "z": [
+     "y"
+    ]
+   }
+  },
+  "data": {
+   "a": 1,
+   "d": 1,
+   "f": 1
+  }
+ },
+ {
+  "name": "dependencies satisfied",
+  "schema": {
+   "dependencies": {
+    "a": [
+     "b"
+    ]
+   }
+  },
+  "data": {
+   "a": 1,
+   "b": 2
+  }
+ },
+ {
+  "name": "properties with non object def",
+  "schema": {
+   "properties": {
+    "a": true,
+    "b": 5
+   },
+   "additionalProperties": false
+  },
+  "data": {
+   "a": 1,
+   "b": 2
+  }
+ },
+ {
+  "name": "dollar schema key allowed",
+  "schema": {
+   "additionalProperties": false
+  },
+  "data": {
+   "$schema": "x"
+  }
+ },
+ {
+  "name": "items schema",
+  "schema": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "data": [
+   "a",
+   1,
+   true
+  ]
+ },
+ {
+  "name": "tuple additionalItems false",
+  "schema": {
+   "items": [
+    {
+     "type": "string"
+    }
+   ],
+   "additionalItems": false
+  },
+  "data": [
+   "a",
+   1,
+   2
+  ]
+ },
+ {
+  "name": "tuple additionalItems false nested",
+  "schema": {
+   "properties": {
+    "list": {
+     "items": [
+      {}
+     ],
+     "additionalItems": false
+    }
+   }
+  },
+  "data": {
+   "list": [
+    1,
+    2
+   ]
+  }
+ },
+ {
+  "name": "tuple additionalItems schema",
+  "schema": {
+   "items": [
+    {
+     "type": "string"
+    }
+   ],
+   "additionalItems": {
+    "type": "integer"
+   }
+  },
+  "data": [
+   "a",
+   "b",
+   3
+  ]
+ },
+ {
+  "name": "tuple no additionalItems",
+  "schema": {
+   "items": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "integer"
+    }
+   ]
+  },
+  "data": [
+   1,
+   "x",
+   null
+  ]
+ },
+ {
+  "name": "tuple more schemas",
+  "schema": {
+   "items": [
+    {
+     "type": "string"
+    },
+    {
+     "required": true
+    },
+    {
+     "type": "integer"
+    }
+   ]
+  },
+  "data": [
+   "a"
+  ]
+ },
+ {
+  "name": "tuple empty data",
+  "schema": {
+   "items": [
+    {
+     "required": true
+    }
+   ]
+  },
+  "data": []
+ },
+ {
+  "name": "items object with additionalItems",
+  "schema": {
+   "items": {
+    "type": "string"
+   },
+   "additionalItems": {
+    "type": "integer"
+   }
+  },
+  "data": [
+   "a",
+   1,
+   true,
+   "b",
+   2.5
+  ]
+ },
+ {
+  "name": "min items",
+  "schema": {
+   "minItems": 2,
+   "maxItems": 3
+  },
+  "data": [
+   1
+  ]
+ },
+ {
+  "name": "max items",
+  "schema": {
+   "minItems": 2,
+   "maxItems": 3
+  },
+  "data": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "name": "unique items numeric",
+  "schema": {
+   "uniqueItems": true
+  },
+  "data": [
+   1,
+   1.0,
+   "1"
+  ]
+ },
+ {
+  "name": "unique items objects",
+  "schema": {
+   "uniqueItems": true
+  },
+  "data": [
+   {
+    "a": 1,
+    "b": [
+     1
+    ]
+   },
+   {
+    "b": [
+     1
+    ],
+    "a": 1
+   }
+  ]
+ },
+ {
+  "name": "unique items valid",
+  "schema": {
+   "uniqueItems": true
+  },
+  "data": [
+   1,
+   "1",
+   [
+    1
+   ],
+   {
+    "1": 1
+   }
+  ]
+ },
+ {
+  "name": "items false",
+  "schema": {
+   "items": false
+  },
+  "data": [
+   1
+  ]
+ },
+ {
+  "name": "items false empty",
+  "schema": {
+   "items": false
+  },
+  "data": []
+ },
+ {
+  "name": "items true",
+  "schema": {
+   "items": true
+  },
+  "data": [
+   1,
+   "x"
+  ]
+ },
+ {
+  "name": "authors path",
+  "schema": {
+   "properties": {
+    "authors": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "properties": {
+       "name": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "name"
+      ]
+     }
+    }
+   }
+  },
+  "data": {
+   "authors": [
+    {
+     "name": 1
+    },
+    {},
+    {
+     "name": "ok"
+    }
+   ]
+  }
+ },
+ {
+  "name": "nested arrays path",
+  "schema": {
+   "items": {
+    "items": {
+     "type": "integer"
+    }
+   }
+  },
+  "data": [
+   [
+    1,
+    "a"
+   ],
+   [
+    "b"
+   ]
+  ]
+ },
+ {
+  "name": "length multibyte short",
+  "schema": {
+   "minLength": 3,
+   "maxLength": 4
+  },
+  "data": "é"
+ },
+ {
+  "name": "length multibyte long",
+  "schema": {
+   "minLength": 3,
+   "maxLength": 4
+  },
+  "data": "ééééé"
+ },
+ {
+  "name": "length ok multibyte",
+  "schema": {
+   "minLength": 3,
+   "maxLength": 4
+  },
+  "data": "日本語"
+ },
+ {
+  "name": "pattern trailing newline",
+  "schema": {
+   "pattern": "^[a-z]+$"
+  },
+  "data": "abc\n"
+ },
+ {
+  "name": "pattern fail",
+  "schema": {
+   "pattern": "^[a-z]+$"
+  },
+  "data": "ABC"
+ },
+ {
+  "name": "pattern invalid",
+  "schema": {
+   "pattern": "("
+  },
+  "data": "x"
+ },
+ {
+  "name": "pattern unicode digit",
+  "schema": {
+   "items": {
+    "pattern": "^\\d+$"
+   }
+  },
+  "data": [
+   "１２",
+   "12",
+   "a"
+  ]
+ },
+ {
+  "name": "pattern tilde",
+  "schema": {
+   "pattern": "a~b"
+  },
+  "data": "xa~by"
+ },
+ {
+  "name": "pattern tilde fail",
+  "schema": {
+   "pattern": "^a~b$"
+  },
+  "data": "ab"
+ },
+ {
+  "name": "pattern unicode word",
+  "schema": {
+   "items": {
+    "pattern": "^\\w+$"
+   }
+  },
+  "data": [
+   "日本",
+   "a_b",
+   "a-b",
+   "é"
+  ]
+ },
+ {
+  "name": "pattern inline flags",
+  "schema": {
+   "items": {
+    "pattern": "(?i)^abc$"
+   }
+  },
+  "data": [
+   "ABC",
+   "abd"
+  ]
+ },
+ {
+  "name": "pattern space classes",
+  "schema": {
+   "items": {
+    "pattern": "^\\s$"
+   }
+  },
+  "data": [
+   " ",
+   " ",
+   " ",
+   "\u000b",
+   "x"
+  ]
+ },
+ {
+  "name": "pattern word boundary",
+  "schema": {
+   "items": {
+    "pattern": "\\bfoo\\b"
+   }
+  },
+  "data": [
+   "a foo b",
+   "afoo",
+   "éfoo"
+  ]
+ },
+ {
+  "name": "pattern dollar D-less",
+  "schema": {
+   "items": {
+    "pattern": "^a$"
+   }
+  },
+  "data": [
+   "a\n",
+   "a\n\n",
+   "\na"
+  ]
+ },
+ {
+  "name": "pattern dot newline",
+  "schema": {
+   "items": {
+    "pattern": "^.$"
+   }
+  },
+  "data": [
+   "\n",
+   "é",
+   "ab"
+  ]
+ },
+ {
+  "name": "pattern backref",
+  "schema": {
+   "items": {
+    "pattern": "^(a+)b\\1$"
+   }
+  },
+  "data": [
+   "aabaa",
+   "aaba"
+  ]
+ },
+ {
+  "name": "pattern lazy and alternation",
+  "schema": {
+   "items": {
+    "pattern": "^(?:a|ab)c$"
+   }
+  },
+  "data": [
+   "abc",
+   "ac",
+   "abbc"
+  ]
+ },
+ {
+  "name": "pattern lookbehind",
+  "schema": {
+   "items": {
+    "pattern": "(?<!x)y"
+   }
+  },
+  "data": [
+   "xy",
+   "zy",
+   "y"
+  ]
+ },
+ {
+  "name": "pattern case insensitive class",
+  "schema": {
+   "items": {
+    "pattern": "(?i)^[a-z]+$"
+   }
+  },
+  "data": [
+   "ABC",
+   "K",
+   "é"
+  ]
+ },
+ {
+  "name": "pattern posix",
+  "schema": {
+   "items": {
+    "pattern": "^[[:alpha:]]+$"
+   }
+  },
+  "data": [
+   "abc",
+   "日本",
+   "a1"
+  ]
+ },
+ {
+  "name": "pattern unicode property",
+  "schema": {
+   "items": {
+    "pattern": "^\\p{Lu}\\p{Ll}*$"
+   }
+  },
+  "data": [
+   "Abc",
+   "abc",
+   "Éa"
+  ]
+ },
+ {
+  "name": "pattern quantifier braces",
+  "schema": {
+   "items": {
+    "pattern": "^a{2,3}$|^x{,2}$|^b{$"
+   }
+  },
+  "data": [
+   "aa",
+   "aaaa",
+   "x",
+   "b{",
+   "xxx"
+  ]
+ },
+ {
+  "name": "pattern composer name",
+  "schema": {
+   "items": {
+    "pattern": "^[a-z0-9]([_.-]?[a-z0-9]+)*/[a-z0-9](([_.]|-{1,2})?[a-z0-9]+)*$"
+   }
+  },
+  "data": [
+   "vendor/pkg",
+   "Vendor/pkg",
+   "a--b/c---d",
+   "a/b-",
+   "a_b/c.d"
+  ]
+ },
+ {
+  "name": "pattern non string",
+  "schema": {
+   "pattern": 5
+  },
+  "data": "x"
+ },
+ {
+  "name": "minimum",
+  "schema": {
+   "minimum": 1,
+   "maximum": 10
+  },
+  "data": 0
+ },
+ {
+  "name": "maximum",
+  "schema": {
+   "minimum": 1,
+   "maximum": 10
+  },
+  "data": 11
+ },
+ {
+  "name": "min max float ok",
+  "schema": {
+   "minimum": 1,
+   "maximum": 10
+  },
+  "data": 5.5
+ },
+ {
+  "name": "exclusive minimum",
+  "schema": {
+   "minimum": 1,
+   "exclusiveMinimum": true
+  },
+  "data": 1
+ },
+ {
+  "name": "exclusive maximum",
+  "schema": {
+   "maximum": 1,
+   "exclusiveMaximum": true
+  },
+  "data": 1
+ },
+ {
+  "name": "exclusive false",
+  "schema": {
+   "minimum": 1,
+   "exclusiveMinimum": false
+  },
+  "data": 0
+ },
+ {
+  "name": "missing maximum",
+  "schema": {
+   "exclusiveMaximum": true
+  },
+  "data": 5
+ },
+ {
+  "name": "missing minimum",
+  "schema": {
+   "exclusiveMinimum": true
+  },
+  "data": 5
+ },
+ {
+  "name": "multipleOf float ok",
+  "schema": {
+   "multipleOf": 0.01
+  },
+  "data": 1.23
+ },
+ {
+  "name": "multipleOf float fail",
+  "schema": {
+   "multipleOf": 0.01
+  },
+  "data": 1.234
+ },
+ {
+  "name": "multipleOf int",
+  "schema": {
+   "multipleOf": 3
+  },
+  "data": 10
+ },
+ {
+  "name": "multipleOf tiny",
+  "schema": {
+   "multipleOf": 1e-07
+  },
+  "data": 1e-08
+ },
+ {
+  "name": "multipleOf zero",
+  "schema": {
+   "multipleOf": 0
+  },
+  "data": 5
+ },
+ {
+  "name": "divisibleBy",
+  "schema": {
+   "divisibleBy": 2
+  },
+  "data": 3
+ },
+ {
+  "name": "divisibleBy float",
+  "schema": {
+   "divisibleBy": 2.5
+  },
+  "data": 3
+ },
+ {
+  "name": "minimum numeric string",
+  "schema": {
+   "type": "string",
+   "minimum": 10
+  },
+  "data": "5"
+ },
+ {
+  "name": "minimum numeric string ws",
+  "schema": {
+   "minimum": 10,
+   "maximum": 20
+  },
+  "data": " 25 "
+ },
+ {
+  "name": "minimum float message",
+  "schema": {
+   "minimum": 1.5
+  },
+  "data": 1
+ },
+ {
+  "name": "minimum huge message",
+  "schema": {
+   "minimum": 1e+20
+  },
+  "data": 1
+ },
+ {
+  "name": "maximum huge negative",
+  "schema": {
+   "maximum": -1e+20
+  },
+  "data": 1
+ },
+ {
+  "name": "maximum 1.8e19",
+  "schema": {
+   "maximum": 1.8e+19
+  },
+  "data": 2e+19
+ },
+ {
+  "name": "minimum string schema",
+  "schema": {
+   "minimum": "abc"
+  },
+  "data": 5
+ },
+ {
+  "name": "number int vs float compare",
+  "schema": {
+   "maximum": 9007199254740993
+  },
+  "data": 9007199254740992.0
+ },
+ {
+  "name": "enum strings",
+  "schema": {
+   "enum": [
+    "a",
+    "b"
+   ]
+  },
+  "data": "c"
+ },
+ {
+  "name": "enum numeric string",
+  "schema": {
+   "enum": [
+    1,
+    2
+   ]
+  },
+  "data": "1"
+ },
+ {
+  "name": "enum int vs float",
+  "schema": {
+   "enum": [
+    1
+   ]
+  },
+  "data": 1.0
+ },
+ {
+  "name": "enum object",
+  "schema": {
+   "enum": [
+    {
+     "a": 1,
+     "b": 2
+    }
+   ]
+  },
+  "data": {
+   "b": 2,
+   "a": 1
+  }
+ },
+ {
+  "name": "enum array order",
+  "schema": {
+   "enum": [
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  "data": [
+   2,
+   1
+  ]
+ },
+ {
+  "name": "enum escaping",
+  "schema": {
+   "enum": [
+    "a/b",
+    "é",
+    "\"q\"",
+    1.5,
+    null,
+    true,
+    {
+     "k": [
+      1
+     ]
+    }
+   ]
+  },
+  "data": "x"
+ },
+ {
+  "name": "enum null",
+  "schema": {
+   "enum": [
+    null
+   ]
+  },
+  "data": null
+ },
+ {
+  "name": "enum string int",
+  "schema": {
+   "enum": [
+    "1"
+   ]
+  },
+  "data": 1
+ },
+ {
+  "name": "enum bool vs int",
+  "schema": {
+   "enum": [
+    true
+   ]
+  },
+  "data": 1
+ },
+ {
+  "name": "enum on object",
+  "schema": {
+   "enum": {
+    "a": "x",
+    "b": "y"
+   }
+  },
+  "data": "y"
+ },
+ {
+  "name": "enum empty",
+  "schema": {
+   "enum": []
+  },
+  "data": 1
+ },
+ {
+  "name": "const fail",
+  "schema": {
+   "const": "x"
+  },
+  "data": "y"
+ },
+ {
+  "name": "const numeric",
+  "schema": {
+   "const": 1
+  },
+  "data": 1.0
+ },
+ {
+  "name": "const object",
+  "schema": {
+   "const": {
+    "a": [
+     1
+    ]
+   }
+  },
+  "data": {
+   "a": [
+    1
+   ]
+  }
+ },
+ {
+  "name": "const object fail",
+  "schema": {
+   "const": {
+    "a": [
+     1
+    ]
+   }
+  },
+  "data": {
+   "a": [
+    2
+   ]
+  }
+ },
+ {
+  "name": "const null ignored",
+  "schema": {
+   "const": null
+  },
+  "data": 5
+ },
+ {
+  "name": "const in property",
+  "schema": {
+   "properties": {
+    "x": {
+     "const": false
+    }
+   }
+  },
+  "data": {
+   "x": 0
+  }
+ },
+ {
+  "name": "anyOf fail",
+  "schema": {
+   "anyOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "integer"
+    }
+   ]
+  },
+  "data": true
+ },
+ {
+  "name": "anyOf ok",
+  "schema": {
+   "anyOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "integer"
+    }
+   ]
+  },
+  "data": 1
+ },
+ {
+  "name": "anyOf empty",
+  "schema": {
+   "anyOf": []
+  },
+  "data": 1
+ },
+ {
+  "name": "oneOf none",
+  "schema": {
+   "oneOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "integer"
+    }
+   ]
+  },
+  "data": true
+ },
+ {
+  "name": "oneOf two",
+  "schema": {
+   "oneOf": [
+    {
+     "type": "integer"
+    },
+    {
+     "minimum": 0
+    }
+   ]
+  },
+  "data": 5
+ },
+ {
+  "name": "oneOf one",
+  "schema": {
+   "oneOf": [
+    {
+     "type": "integer"
+    },
+    {
+     "type": "string"
+    }
+   ]
+  },
+  "data": 5
+ },
+ {
+  "name": "oneOf with prior errors",
+  "schema": {
+   "required": [
+    "x"
+   ],
+   "oneOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "array"
+    },
+    {
+     "required": [
+      "y"
+     ]
+    }
+   ]
+  },
+  "data": {}
+ },
+ {
+  "name": "oneOf empty",
+  "schema": {
+   "oneOf": []
+  },
+  "data": 1
+ },
+ {
+  "name": "oneOf empty with prior",
+  "schema": {
+   "type": "string",
+   "oneOf": []
+  },
+  "data": 1
+ },
+ {
+  "name": "allOf",
+  "schema": {
+   "allOf": [
+    {
+     "type": "string"
+    },
+    {
+     "minLength": 5
+    },
+    {
+     "pattern": "^a"
+    }
+   ]
+  },
+  "data": "abc"
+ },
+ {
+  "name": "allOf ok",
+  "schema": {
+   "allOf": [
+    {
+     "type": "string"
+    },
+    {
+     "minLength": 2
+    }
+   ]
+  },
+  "data": "abc"
+ },
+ {
+  "name": "not matched",
+  "schema": {
+   "not": {
+    "type": "string"
+   }
+  },
+  "data": "x"
+ },
+ {
+  "name": "not ok",
+  "schema": {
+   "not": {
+    "type": "string"
+   }
+  },
+  "data": 1
+ },
+ {
+  "name": "not in property",
+  "schema": {
+   "properties": {
+    "a": {
+     "not": {
+      "required": [
+       "b"
+      ]
+     }
+    }
+   }
+  },
+  "data": {
+   "a": {
+    "b": 1
+   }
+  }
+ },
+ {
+  "name": "nested anyOf in oneOf",
+  "schema": {
+   "oneOf": [
+    {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    {
+     "type": "object",
+     "required": [
+      "z"
+     ]
+    }
+   ]
+  },
+  "data": {
+   "q": 1
+  }
+ },
+ {
+  "name": "anyOf nested paths",
+  "schema": {
+   "properties": {
+    "r": {
+     "anyOf": [
+      {
+       "type": "object",
+       "properties": {
+        "u": {
+         "type": "string"
+        }
+       }
+      },
+      {
+       "type": "array"
+      }
+     ]
+    }
+   }
+  },
+  "data": {
+   "r": {
+    "u": 1
+   }
+  }
+ },
+ {
+  "name": "disallow match",
+  "schema": {
+   "disallow": "string"
+  },
+  "data": "x"
+ },
+ {
+  "name": "disallow ok",
+  "schema": {
+   "disallow": [
+    "string",
+    "integer"
+   ]
+  },
+  "data": 1.5
+ },
+ {
+  "name": "disallow list match",
+  "schema": {
+   "disallow": [
+    "string",
+    "integer"
+   ]
+  },
+  "data": 1
+ },
+ {
+  "name": "extends object",
+  "schema": {
+   "extends": {
+    "type": "string"
+   }
+  },
+  "data": 1
+ },
+ {
+  "name": "extends array",
+  "schema": {
+   "extends": [
+    {
+     "type": "string"
+    },
+    {
+     "minimum": 5
+    }
+   ]
+  },
+  "data": 1
+ },
+ {
+  "name": "format email",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "email"
+   }
+  },
+  "data": [
+   "user@example.com",
+   "user@localhost",
+   "a@b.c",
+   "a@b.co",
+   "user+tag@example.co.jp",
+   "ユーザー@example.com",
+   "user@exämple.com",
+   "\"quoted\"@example.com",
+   "a@[127.0.0.1]",
+   "a@[IPv6:::1]",
+   "no-at",
+   "a@b..com",
+   "",
+   "a.@b.com",
+   ".a@b.com",
+   "a@-b.com",
+   "a@b-.com",
+   "a@xn--bcher-kva.ch",
+   "A@EXAMPLE.COM",
+   "a@b.c1",
+   "a@1.com",
+   "user@example.com\n"
+  ]
+ },
+ {
+  "name": "format uri",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "uri"
+   }
+  },
+  "data": [
+   "https://example.com",
+   "http://exa mple.com",
+   "ftp://a.b/c d",
+   "mailto:a@b.co",
+   "mailto:bad",
+   "urn:isbn:123",
+   "news:comp.lang",
+   "news:comp..lang",
+   "tel:+1-234",
+   "tel:abc",
+   "file:///etc",
+   "//example.com",
+   "example.com",
+   "http://a..b",
+   "http://a:0",
+   "http://a:00",
+   "http://a:70000",
+   "http://[::1]:80/x",
+   "https://example.com/path?q=1#frag",
+   "irc://irc.freenode.org/composer",
+   "http://user:pass@host/",
+   "http://example.com\n",
+   "http://ex_ample.com/",
+   "HTTP://EXAMPLE.COM",
+   "git@github.com:a/b.git",
+   "http://é.com",
+   "data:,x",
+   "https://example.com/a<b",
+   "https://example.com/%7E",
+   "x:",
+   "https://"
+  ]
+ },
+ {
+  "name": "format uri-reference",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "uri-reference"
+   }
+  },
+  "data": [
+   "/relative/path",
+   "../x",
+   "#frag",
+   "a b",
+   "%zz",
+   "http://x",
+   "\\back",
+   "//",
+   "///a",
+   ":/x",
+   "://x",
+   "?q",
+   "",
+   "http://bad host",
+   "rel%20ok"
+  ]
+ },
+ {
+  "name": "format uriref alias",
+  "schema": {
+   "format": "uriref"
+  },
+  "data": "a b"
+ },
+ {
+  "name": "format date",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "date"
+   }
+  },
+  "data": [
+   "2021-01-01",
+   "2021-02-29",
+   "2020-02-29",
+   "2021-13-01",
+   "2021-1-01",
+   "0000-01-01",
+   "2021-01-01T",
+   "x",
+   "2021-00-10",
+   "2021-04-31",
+   "1900-02-29",
+   "2000-02-29",
+   "20210-01-01",
+   " 2021-01-01"
+  ]
+ },
+ {
+  "name": "format time",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "time"
+   }
+  },
+  "data": [
+   "12:00:00",
+   "24:00:00",
+   "23:59:60",
+   "1:00:00",
+   "12:00",
+   "00:00:00",
+   "23:59:59",
+   "12:60:00",
+   "ab:cd:ef"
+  ]
+ },
+ {
+  "name": "format date-time",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "date-time"
+   }
+  },
+  "data": [
+   "2021-01-01T12:00:00Z",
+   "2021-01-01t12:00:00z",
+   "2021-01-01 12:00:00+01:00",
+   "2021-01-01T12:00:00.123456789+0100",
+   "1998-12-31T23:59:60Z",
+   "1998-12-31T23:59:60+01:00",
+   "1999-01-01T00:59:60+01:00",
+   "1998-12-31T18:59:60-05:00",
+   "2021-02-30T00:00:00Z",
+   "2021-01-01T12:00:00",
+   "2021-01-01T25:00:00Z",
+   "2021-01-01T12:00:00Z\n",
+   "2021-01-01T12:00:00+24:00",
+   "2021-01-01T12:00:00.Z",
+   "0000-00-00T00:00:00Z",
+   "2020-02-29T23:59:59.5-23:59",
+   "2021/01/01T00:00:00Z"
+  ]
+ },
+ {
+  "name": "format utc-millisec",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "utc-millisec"
+   }
+  },
+  "data": [
+   "123",
+   "-5",
+   "0",
+   "007",
+   "-0",
+   "abc",
+   "1.5",
+   "9223372036854775807",
+   "+5",
+   123,
+   1.5,
+   " 5"
+  ]
+ },
+ {
+  "name": "format regex",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "regex"
+   }
+  },
+  "data": [
+   "^a$",
+   "(",
+   "a~b",
+   "[a-z",
+   "\\",
+   "(?<n>x)\\k<n>",
+   5
+  ]
+ },
+ {
+  "name": "format color",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "color"
+   }
+  },
+  "data": [
+   "red",
+   "RED",
+   "#fff",
+   "#ffff",
+   "#GGG",
+   "#A0b1C2",
+   5,
+   "orange"
+  ]
+ },
+ {
+  "name": "format style",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "style"
+   }
+  },
+  "data": [
+   "color: red;",
+   "color red",
+   "a:b;c:d",
+   "",
+   ";"
+  ]
+ },
+ {
+  "name": "format style number",
+  "schema": {
+   "format": "style"
+  },
+  "data": 5
+ },
+ {
+  "name": "format phone",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "phone"
+   }
+  },
+  "data": [
+   "555 555 5555",
+   "(555) 555 5555",
+   "+555 555 5555",
+   "5555555555",
+   "555 555 5555\n"
+  ]
+ },
+ {
+  "name": "format phone number",
+  "schema": {
+   "format": "phone"
+  },
+  "data": 5.5
+ },
+ {
+  "name": "format ipv4",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "ipv4"
+   }
+  },
+  "data": [
+   "127.0.0.1",
+   "256.0.0.1",
+   "01.0.0.1",
+   "1.2.3",
+   "::1",
+   " 1.2.3.4",
+   "0.0.0.0",
+   "1.2.3.4.",
+   "1.2.3.04",
+   "255.255.255.255",
+   "1.2.3.4\n"
+  ]
+ },
+ {
+  "name": "format ip-address",
+  "schema": {
+   "format": "ip-address"
+  },
+  "data": "1.2.3.400"
+ },
+ {
+  "name": "format ipv6",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "ipv6"
+   }
+  },
+  "data": [
+   "::1",
+   "::",
+   "1::",
+   "1:2:3:4:5:6:7:8",
+   "1:2:3:4:5:6:7:8:9",
+   "::ffff:1.2.3.4",
+   "1:2:3:4:5:6:1.2.3.4",
+   ":1::",
+   "1:::2",
+   "fe80::1%eth0",
+   "12345::",
+   "1.2.3.4",
+   "1::2::3",
+   "1:2:3:4:5:6:7::",
+   "::1:2:3:4:5:6:7",
+   "1:2:3:4:5:6:7:1.2.3.4",
+   "FFFF::abcd",
+   "1:",
+   "g::1"
+  ]
+ },
+ {
+  "name": "format hostname",
+  "schema": {
+   "type": "array",
+   "items": {
+    "format": "hostname"
+   }
+  },
+  "data": [
+   "example.com",
+   "-bad.com",
+   "a_b.com",
+   "a..b",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.com",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.com",
+   "localhost",
+   "ex-ample.com",
+   "example.com.",
+   "ex--ample.com",
+   "a-.com",
+   "例え.jp",
+   5
+  ]
+ },
+ {
+  "name": "format host-name alias",
+  "schema": {
+   "format": "host-name"
+  },
+  "data": "bad_host"
+ },
+ {
+  "name": "format unknown",
+  "schema": {
+   "format": "foo"
+  },
+  "data": "x"
+ },
+ {
+  "name": "format number uri",
+  "schema": {
+   "format": "uri"
+  },
+  "data": 5
+ },
+ {
+  "name": "format numeric string uri",
+  "schema": {
+   "format": "uri"
+  },
+  "data": "5"
+ },
+ {
+  "name": "format true matches date",
+  "schema": {
+   "format": true
+  },
+  "data": "x"
+ },
+ {
+  "name": "format zero",
+  "schema": {
+   "format": 0
+  },
+  "data": "x"
+ },
+ {
+  "name": "format numeric string utc",
+  "schema": {
+   "format": "utc-millisec"
+  },
+  "data": "123"
+ },
+ {
+  "name": "format numeric string date",
+  "schema": {
+   "format": "date"
+  },
+  "data": "2021"
+ },
+ {
+  "name": "ref definitions",
+  "schema": {
+   "definitions": {
+    "s": {
+     "type": "string"
+    }
+   },
+   "properties": {
+    "a": {
+     "$ref": "#/definitions/s"
+    }
+   }
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "ref recursive",
+  "schema": {
+   "definitions": {
+    "node": {
+     "type": "object",
+     "properties": {
+      "child": {
+       "$ref": "#/definitions/node"
+      },
+      "v": {
+       "type": "integer"
+      }
+     }
+    }
+   },
+   "$ref": "#/definitions/node"
+  },
+  "data": {
+   "v": "a",
+   "child": {
+    "v": 1,
+    "child": {
+     "v": "b",
+     "child": 3
+    }
+   }
+  }
+ },
+ {
+  "name": "ref missing",
+  "schema": {
+   "properties": {
+    "a": {
+     "$ref": "#/definitions/nope"
+    }
+   }
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "ref loop",
+  "schema": {
+   "definitions": {
+    "a": {
+     "$ref": "#/definitions/b"
+    },
+    "b": {
+     "$ref": "#/definitions/a"
+    }
+   },
+   "properties": {
+    "x": {
+     "$ref": "#/definitions/a"
+    }
+   }
+  },
+  "data": {
+   "x": 1
+  }
+ },
+ {
+  "name": "ref root",
+  "schema": {
+   "type": "object",
+   "properties": {
+    "x": {
+     "$ref": "#"
+    }
+   }
+  },
+  "data": {
+   "x": 1
+  }
+ },
+ {
+  "name": "ref with id",
+  "schema": {
+   "id": "http://example.com/root.json",
+   "definitions": {
+    "a": {
+     "type": "integer"
+    }
+   },
+   "properties": {
+    "x": {
+     "$ref": "#/definitions/a"
+    }
+   }
+  },
+  "data": {
+   "x": "s"
+  }
+ },
+ {
+  "name": "ref escaped",
+  "schema": {
+   "definitions": {
+    "a/b": {
+     "type": "integer"
+    },
+    "c~d": {
+     "type": "string"
+    },
+    "e%f": {
+     "type": "boolean"
+    }
+   },
+   "properties": {
+    "x": {
+     "$ref": "#/definitions/a~1b"
+    },
+    "y": {
+     "$ref": "#/definitions/c~0d"
+    },
+    "z": {
+     "$ref": "#/definitions/e%25f"
+    }
+   }
+  },
+  "data": {
+   "x": "s",
+   "y": 1,
+   "z": 1
+  }
+ },
+ {
+  "name": "ref into array",
+  "schema": {
+   "definitions": {
+    "list": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "integer"
+     }
+    ]
+   },
+   "properties": {
+    "x": {
+     "$ref": "#/definitions/list/1"
+    }
+   }
+  },
+  "data": {
+   "x": "s"
+  }
+ },
+ {
+  "name": "ref siblings ignored",
+  "schema": {
+   "definitions": {
+    "s": {
+     "type": "string"
+    }
+   },
+   "properties": {
+    "a": {
+     "$ref": "#/definitions/s",
+     "minLength": 10
+    }
+   }
+  },
+  "data": {
+   "a": "abc"
+  }
+ },
+ {
+  "name": "ref in items and anyOf",
+  "schema": {
+   "definitions": {
+    "i": {
+     "type": "integer"
+    }
+   },
+   "items": {
+    "anyOf": [
+     {
+      "$ref": "#/definitions/i"
+     },
+     {
+      "type": "null"
+     }
+    ]
+   }
+  },
+  "data": [
+   1,
+   null,
+   "x"
+  ]
+ },
+ {
+  "name": "ref enum not expanded",
+  "schema": {
+   "properties": {
+    "a": {
+     "enum": [
+      {
+       "$ref": "#/x"
+      }
+     ]
+    }
+   }
+  },
+  "data": {
+   "a": {
+    "$ref": "#/x"
+   }
+  }
+ },
+ {
+  "name": "ref empty key unwrap",
+  "schema": {
+   "definitions": {
+    "w": {
+     "": {
+      "type": "string"
+     }
+    }
+   },
+   "properties": {
+    "a": {
+     "$ref": "#/definitions/w"
+    }
+   }
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "ref urlencoded",
+  "schema": {
+   "definitions": {
+    "a b": {
+     "type": "string"
+    }
+   },
+   "properties": {
+    "x": {
+     "$ref": "#/definitions/a%20b"
+    },
+    "y": {
+     "$ref": "#/definitions/a+b"
+    }
+   }
+  },
+  "data": {
+   "x": 1,
+   "y": 2
+  }
+ },
+ {
+  "name": "schema false",
+  "schema": false,
+  "data": 1
+ },
+ {
+  "name": "schema true",
+  "schema": true,
+  "data": 1
+ },
+ {
+  "name": "schema empty array",
+  "schema": [],
+  "data": 1
+ },
+ {
+  "name": "schema empty object",
+  "schema": {},
+  "data": {
+   "a": [
+    1
+   ]
+  }
+ },
+ {
+  "name": "schema null",
+  "schema": null,
+  "data": 1
+ },
+ {
+  "name": "schema id non string",
+  "schema": {
+   "id": 5
+  },
+  "data": 1
+ },
+ {
+  "name": "root array of errors order",
+  "schema": {
+   "type": "object",
+   "required": [
+    "a"
+   ],
+   "properties": {
+    "b": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "minProperties": 3
+  },
+  "data": {
+   "b": 1,
+   "c": 2
+  }
+ },
+ {
+  "name": "composer lax minimal",
+  "schema": "composer",
+  "data": {
+   "name": "vendor/pkg",
+   "description": "x"
+  }
+ },
+ {
+  "name": "composer lax empty",
+  "schema": "composer",
+  "data": {}
+ },
+ {
+  "name": "composer lax full valid",
+  "schema": "composer",
+  "data": {
+   "name": "laravel/laravel",
+   "type": "project",
+   "description": "The skeleton application for the Laravel framework.",
+   "keywords": [
+    "laravel",
+    "framework"
+   ],
+   "license": "MIT",
+   "authors": [
+    {
+     "name": "Taylor",
+     "email": "taylor@example.com",
+     "homepage": "https://example.com",
+     "role": "Developer"
+    }
+   ],
+   "support": {
+    "issues": "https://github.com/x/y/issues",
+    "email": "support@example.com"
+   },
+   "require": {
+    "php": "^8.2",
+    "laravel/framework": "^11.31"
+   },
+   "require-dev": {
+    "fakerphp/faker": "^1.23"
+   },
+   "autoload": {
+    "psr-4": {
+     "App\\": "app/",
+     "Database\\Factories\\": "database/factories/"
+    },
+    "files": [
+     "helpers.php"
+    ],
+    "classmap": [
+     "lib"
+    ],
+    "exclude-from-classmap": [
+     "/tests/"
+    ]
+   },
+   "autoload-dev": {
+    "psr-4": {
+     "Tests\\": "tests/"
+    }
+   },
+   "scripts": {
+    "post-autoload-dump": [
+     "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+     "@php artisan package:discover --ansi"
+    ],
+    "test": "phpunit"
+   },
+   "extra": {
+    "laravel": {
+     "dont-discover": []
+    }
+   },
+   "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+     "pestphp/pest-plugin": true,
+     "php-http/discovery": true
+    },
+    "platform": {
+     "php": "8.2.0"
+    },
+    "process-timeout": 600
+   },
+   "repositories": [
+    {
+     "type": "vcs",
+     "url": "https://github.com/x/y"
+    },
+    {
+     "type": "composer",
+     "url": "https://repo.example.org"
+    },
+    {
+     "type": "path",
+     "url": "../pkg",
+     "options": {
+      "symlink": true
+     }
+    },
+    {
+     "packagist.org": false
+    }
+   ],
+   "minimum-stability": "stable",
+   "prefer-stable": true,
+   "funding": [
+    {
+     "type": "github",
+     "url": "https://github.com/sponsors/x"
+    }
+   ],
+   "bin": [
+    "bin/tool"
+   ],
+   "archive": {
+    "exclude": [
+     "/tests"
+    ]
+   }
+  }
+ },
+ {
+  "name": "composer strict full valid",
+  "schema": "composer-strict",
+  "data": {
+   "name": "laravel/laravel",
+   "type": "project",
+   "description": "The skeleton application for the Laravel framework.",
+   "keywords": [
+    "laravel",
+    "framework"
+   ],
+   "license": "MIT",
+   "authors": [
+    {
+     "name": "Taylor",
+     "email": "taylor@example.com",
+     "homepage": "https://example.com",
+     "role": "Developer"
+    }
+   ],
+   "support": {
+    "issues": "https://github.com/x/y/issues",
+    "email": "support@example.com"
+   },
+   "require": {
+    "php": "^8.2",
+    "laravel/framework": "^11.31"
+   },
+   "require-dev": {
+    "fakerphp/faker": "^1.23"
+   },
+   "autoload": {
+    "psr-4": {
+     "App\\": "app/",
+     "Database\\Factories\\": "database/factories/"
+    },
+    "files": [
+     "helpers.php"
+    ],
+    "classmap": [
+     "lib"
+    ],
+    "exclude-from-classmap": [
+     "/tests/"
+    ]
+   },
+   "autoload-dev": {
+    "psr-4": {
+     "Tests\\": "tests/"
+    }
+   },
+   "scripts": {
+    "post-autoload-dump": [
+     "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+     "@php artisan package:discover --ansi"
+    ],
+    "test": "phpunit"
+   },
+   "extra": {
+    "laravel": {
+     "dont-discover": []
+    }
+   },
+   "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+     "pestphp/pest-plugin": true,
+     "php-http/discovery": true
+    },
+    "platform": {
+     "php": "8.2.0"
+    },
+    "process-timeout": 600
+   },
+   "repositories": [
+    {
+     "type": "vcs",
+     "url": "https://github.com/x/y"
+    },
+    {
+     "type": "composer",
+     "url": "https://repo.example.org"
+    },
+    {
+     "type": "path",
+     "url": "../pkg",
+     "options": {
+      "symlink": true
+     }
+    },
+    {
+     "packagist.org": false
+    }
+   ],
+   "minimum-stability": "stable",
+   "prefer-stable": true,
+   "funding": [
+    {
+     "type": "github",
+     "url": "https://github.com/sponsors/x"
+    }
+   ],
+   "bin": [
+    "bin/tool"
+   ],
+   "archive": {
+    "exclude": [
+     "/tests"
+    ]
+   }
+  }
+ },
+ {
+  "name": "composer strict missing name",
+  "schema": "composer-strict",
+  "data": {
+   "require": {
+    "php": ">=8"
+   }
+  }
+ },
+ {
+  "name": "composer strict unknown keys",
+  "schema": "composer-strict",
+  "data": {
+   "name": "a/b",
+   "description": "d",
+   "foo": 1,
+   "requires": {},
+   "$schema": "x"
+  }
+ },
+ {
+  "name": "composer lax unknown keys",
+  "schema": "composer",
+  "data": {
+   "name": "a/b",
+   "foo": 1
+  }
+ },
+ {
+  "name": "composer bad names",
+  "schema": "composer",
+  "data": {
+   "name": "Vendor/Pkg"
+  }
+ },
+ {
+  "name": "composer bad name no slash",
+  "schema": "composer-strict",
+  "data": {
+   "name": "vendor",
+   "description": "x"
+  }
+ },
+ {
+  "name": "composer name not string",
+  "schema": "composer",
+  "data": {
+   "name": [
+    "a/b"
+   ]
+  }
+ },
+ {
+  "name": "composer require list",
+  "schema": "composer",
+  "data": {
+   "require": [
+    "a/b"
+   ]
+  }
+ },
+ {
+  "name": "composer require value int",
+  "schema": "composer",
+  "data": {
+   "require": {
+    "php": 8,
+    "a/b": null,
+    "c/d": "^1"
+   }
+  }
+ },
+ {
+  "name": "composer require empty object",
+  "schema": "composer",
+  "data": {
+   "require": {},
+   "require-dev": {}
+  }
+ },
+ {
+  "name": "composer require empty object assoc",
+  "schema": "composer",
+  "data": {
+   "require": {},
+   "require-dev": {},
+   "extra": {},
+   "config": {}
+  },
+  "assoc": true
+ },
+ {
+  "name": "composer require list-like assoc",
+  "schema": "composer",
+  "data": {
+   "require": {
+    "0": "x",
+    "1": "y"
+   }
+  },
+  "assoc": true
+ },
+ {
+  "name": "composer autoload psr4 int",
+  "schema": "composer",
+  "data": {
+   "autoload": {
+    "psr-4": {
+     "App\\": 5
+    }
+   }
+  }
+ },
+ {
+  "name": "composer autoload psr4 string",
+  "schema": "composer",
+  "data": {
+   "autoload": {
+    "psr-4": "src"
+   }
+  }
+ },
+ {
+  "name": "composer autoload classmap string",
+  "schema": "composer",
+  "data": {
+   "autoload": {
+    "classmap": "src",
+    "files": [
+     1
+    ]
+   }
+  }
+ },
+ {
+  "name": "composer autoload psr0 array",
+  "schema": "composer",
+  "data": {
+   "autoload": {
+    "psr-0": {
+     "Foo": [
+      "src",
+      5
+     ]
+    },
+    "psr-4": {
+     "Bar\\": [
+      "a",
+      "b"
+     ]
+    }
+   }
+  }
+ },
+ {
+  "name": "composer autoload not object",
+  "schema": "composer",
+  "data": {
+   "autoload": [
+    "src"
+   ]
+  }
+ },
+ {
+  "name": "composer autoload unknown key",
+  "schema": "composer",
+  "data": {
+   "autoload": {
+    "psr4": {
+     "a": "b"
+    }
+   }
+  }
+ },
+ {
+  "name": "composer repos missing url",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    {
+     "type": "vcs"
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer repos composer url int",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    {
+     "type": "composer",
+     "url": 5
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer repos object packagist false",
+  "schema": "composer",
+  "data": {
+   "repositories": {
+    "packagist.org": false
+   }
+  }
+ },
+ {
+  "name": "composer repos object packagist true",
+  "schema": "composer",
+  "data": {
+   "repositories": {
+    "packagist.org": true
+   }
+  }
+ },
+ {
+  "name": "composer repos list packagist false",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    {
+     "packagist": false
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer repos int",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    1
+   ]
+  }
+ },
+ {
+  "name": "composer repos string",
+  "schema": "composer",
+  "data": {
+   "repositories": "x"
+  }
+ },
+ {
+  "name": "composer repos unknown type",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    {
+     "type": "foo",
+     "url": "x"
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer repos package",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    {
+     "type": "package",
+     "package": {
+      "name": "a/b",
+      "version": "1.0.0",
+      "dist": {
+       "url": "https://x/y.zip",
+       "type": "zip"
+      }
+     }
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer repos package bad",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    {
+     "type": "package",
+     "package": {
+      "name": "a/b"
+     }
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer repos path options",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    {
+     "type": "path",
+     "url": "../x",
+     "options": {
+      "symlink": "yes"
+     }
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer repos only filter",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    {
+     "type": "composer",
+     "url": "https://r.example",
+     "only": [
+      "a/*"
+     ],
+     "exclude": "b/*"
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer config process-timeout string",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "process-timeout": "x"
+   }
+  }
+ },
+ {
+  "name": "composer config process-timeout negative",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "process-timeout": -1
+   }
+  }
+ },
+ {
+  "name": "composer config allow-plugins string",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "allow-plugins": "yes"
+   }
+  }
+ },
+ {
+  "name": "composer config allow-plugins map",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "allow-plugins": {
+     "a/b": "yes",
+     "c/*": true
+    }
+   }
+  }
+ },
+ {
+  "name": "composer config preferred-install",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "preferred-install": "bad"
+   }
+  }
+ },
+ {
+  "name": "composer config preferred-install map",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "preferred-install": {
+     "a/*": "source",
+     "*": "nope"
+    }
+   }
+  }
+ },
+ {
+  "name": "composer config platform int",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "platform": {
+     "php": 7,
+     "ext-foo": false
+    }
+   }
+  }
+ },
+ {
+  "name": "composer config sort-packages string",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "sort-packages": "true"
+   }
+  }
+ },
+ {
+  "name": "composer config cache ttl",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "cache-files-ttl": "1",
+    "cache-files-maxsize": 5,
+    "cache-ttl": 1.5
+   }
+  }
+ },
+ {
+  "name": "composer config audit",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "audit": {
+     "ignore": {
+      "CVE-1": "reason",
+      "GHSA-x": 5
+     },
+     "abandoned": "nope",
+     "ignore-severity": [
+      "low"
+     ],
+     "ignore-unreachable": "x"
+    }
+   }
+  }
+ },
+ {
+  "name": "composer config audit list",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "audit": {
+     "ignore": [
+      "CVE-1",
+      5
+     ]
+    }
+   }
+  }
+ },
+ {
+  "name": "composer config policy",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "policy": {
+     "ignore": {
+      "x": 1
+     },
+     "package": 5,
+     "maintenance": "x",
+     "other": 1
+    }
+   }
+  }
+ },
+ {
+  "name": "composer config github-protocols",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "github-protocols": [
+     "https",
+     "ftp"
+    ],
+    "github-domains": "x"
+   }
+  }
+ },
+ {
+  "name": "composer config lock and platform-check",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "lock": "no",
+    "platform-check": "maybe",
+    "discard-changes": "stash",
+    "bin-compat": "bad"
+   }
+  }
+ },
+ {
+  "name": "composer config unknown key",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "unknown-option": 1
+   }
+  }
+ },
+ {
+  "name": "composer config not object",
+  "schema": "composer",
+  "data": {
+   "config": []
+  }
+ },
+ {
+  "name": "composer config custom-headers",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "custom-headers": {
+     "repo.example.org": [
+      "X-A: b",
+      5
+     ]
+    }
+   }
+  }
+ },
+ {
+  "name": "composer authors bad",
+  "schema": "composer",
+  "data": {
+   "authors": [
+    {
+     "name": 1,
+     "email": "bad",
+     "homepage": "not a uri",
+     "role": []
+    },
+    "x"
+   ]
+  }
+ },
+ {
+  "name": "composer authors string",
+  "schema": "composer",
+  "data": {
+   "authors": "me"
+  }
+ },
+ {
+  "name": "composer authors missing name",
+  "schema": "composer",
+  "data": {
+   "authors": [
+    {
+     "email": "a@b.co"
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer homepage and support bad",
+  "schema": "composer",
+  "data": {
+   "homepage": "not-a-url",
+   "support": {
+    "email": "bad",
+    "issues": "nope",
+    "source": "https://ok.example"
+   }
+  }
+ },
+ {
+  "name": "composer license",
+  "schema": "composer",
+  "data": {
+   "license": 5
+  }
+ },
+ {
+  "name": "composer license array",
+  "schema": "composer",
+  "data": {
+   "license": [
+    "MIT",
+    5
+   ]
+  }
+ },
+ {
+  "name": "composer type pattern",
+  "schema": "composer",
+  "data": {
+   "type": "Library",
+   "keywords": [
+    1,
+    "ok"
+   ]
+  }
+ },
+ {
+  "name": "composer scripts",
+  "schema": "composer",
+  "data": {
+   "scripts": {
+    "test": 5,
+    "lint": [
+     "a",
+     1
+    ],
+    "post-install-cmd": {}
+   }
+  }
+ },
+ {
+  "name": "composer scripts list",
+  "schema": "composer",
+  "data": {
+   "scripts": [
+    "a"
+   ]
+  }
+ },
+ {
+  "name": "composer misc types",
+  "schema": "composer",
+  "data": {
+   "extra": 5,
+   "bin": 5,
+   "minimum-stability": "foo",
+   "prefer-stable": "yes",
+   "abandoned": 5,
+   "archive": {
+    "exclude": 5
+   },
+   "time": 2021,
+   "readme": 1
+  }
+ },
+ {
+  "name": "composer versions",
+  "schema": "composer",
+  "data": {
+   "version": "1.0.0-foo"
+  }
+ },
+ {
+  "name": "composer version ok",
+  "schema": "composer",
+  "data": {
+   "version": "v1.2.3-beta.1"
+  }
+ },
+ {
+  "name": "composer version dev",
+  "schema": "composer",
+  "data": {
+   "version": "dev-master"
+  }
+ },
+ {
+  "name": "composer version newline",
+  "schema": "composer",
+  "data": {
+   "version": "1.0.0\n"
+  }
+ },
+ {
+  "name": "composer funding bad",
+  "schema": "composer",
+  "data": {
+   "funding": [
+    {
+     "type": "github",
+     "url": "bad"
+    },
+    5
+   ]
+  }
+ },
+ {
+  "name": "composer php-ext",
+  "schema": "composer",
+  "data": {
+   "php-ext": {
+    "extension-name": 5,
+    "priority": "x",
+    "support-zts": "no",
+    "configure-options": [
+     {
+      "name": "with-foo"
+     },
+     {
+      "needs-value": true
+     },
+     {
+      "name": "bad name!"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "name": "composer php-ext os",
+  "schema": "composer",
+  "data": {
+   "php-ext": {
+    "os-families": [
+     "linux",
+     "dos"
+    ],
+    "os-families-exclude": [
+     "windows"
+    ]
+   }
+  }
+ },
+ {
+  "name": "composer source dist",
+  "schema": "composer",
+  "data": {
+   "source": {
+    "type": "git",
+    "url": "x"
+   },
+   "dist": {
+    "type": "zip"
+   }
+  }
+ },
+ {
+  "name": "composer suggest conflict replace provide",
+  "schema": "composer",
+  "data": {
+   "suggest": {
+    "a/b": 1
+   },
+   "conflict": {
+    "c/d": []
+   },
+   "replace": {
+    "e/f": true
+   },
+   "provide": {
+    "g/h": null
+   }
+  }
+ },
+ {
+  "name": "composer non-feature-branches",
+  "schema": "composer",
+  "data": {
+   "non-feature-branches": "x",
+   "default-branch": "yes"
+  }
+ },
+ {
+  "name": "composer include-path target-dir",
+  "schema": "composer",
+  "data": {
+   "include-path": "x",
+   "target-dir": 5,
+   "_comment": 5
+  }
+ },
+ {
+  "name": "composer scripts-descriptions aliases",
+  "schema": "composer",
+  "data": {
+   "scripts-descriptions": {
+    "a": 1
+   },
+   "scripts-aliases": {
+    "a": "b"
+   }
+  }
+ },
+ {
+  "name": "composer root not object",
+  "schema": "composer",
+  "data": []
+ },
+ {
+  "name": "composer root string",
+  "schema": "composer",
+  "data": "x"
+ },
+ {
+  "name": "composer root null",
+  "schema": "composer",
+  "data": null
+ },
+ {
+  "name": "composer strict root list",
+  "schema": "composer-strict",
+  "data": [
+   1
+  ]
+ },
+ {
+  "name": "composer assoc root empty",
+  "schema": "composer-strict",
+  "data": {},
+  "assoc": true
+ },
+ {
+  "name": "auth valid",
+  "schema": "composer-auth",
+  "data": {
+   "github-oauth": {
+    "github.com": "token"
+   },
+   "http-basic": {
+    "repo.example.org": {
+     "username": "u",
+     "password": "p"
+    }
+   },
+   "bearer": {
+    "x.org": "t"
+   },
+   "gitlab-token": {
+    "gitlab.com": "t"
+   }
+  }
+ },
+ {
+  "name": "auth github int",
+  "schema": "composer-auth",
+  "data": {
+   "github-oauth": {
+    "github.com": 5
+   }
+  }
+ },
+ {
+  "name": "auth http-basic missing password",
+  "schema": "composer-auth",
+  "data": {
+   "http-basic": {
+    "repo.example.org": {
+     "username": "x"
+    }
+   }
+  }
+ },
+ {
+  "name": "auth bitbucket",
+  "schema": "composer-auth",
+  "data": {
+   "bitbucket-oauth": {
+    "bitbucket.org": {
+     "consumer-key": "a"
+    }
+   }
+  }
+ },
+ {
+  "name": "auth gitlab-token object",
+  "schema": "composer-auth",
+  "data": {
+   "gitlab-token": {
+    "gitlab.com": {
+     "username": "a"
+    },
+    "other.com": {
+     "username": "a",
+     "token": "b"
+    }
+   }
+  }
+ },
+ {
+  "name": "auth client-certificate",
+  "schema": "composer-auth",
+  "data": {
+   "client-certificate": {
+    "x.org": {
+     "local_pk": "x"
+    },
+    "y.org": "cert.pem"
+   }
+  }
+ },
+ {
+  "name": "auth unknown key",
+  "schema": "composer-auth",
+  "data": {
+   "foo": 1
+  }
+ },
+ {
+  "name": "auth not object",
+  "schema": "composer-auth",
+  "data": [
+   "x"
+  ]
+ },
+ {
+  "name": "auth forgejo",
+  "schema": "composer-auth",
+  "data": {
+   "forgejo-token": {
+    "codeberg.org": {
+     "username": "u"
+    }
+   }
+  }
+ },
+ {
+  "name": "auth custom headers",
+  "schema": "composer-auth",
+  "data": {
+   "custom-headers": {
+    "x.org": "X-A: b"
+   }
+  }
+ },
+ {
+  "name": "lock valid",
+  "schema": "lock",
+  "data": {
+   "_readme": [
+    "x"
+   ],
+   "content-hash": "abc",
+   "packages": [
+    {
+     "name": "a/b",
+     "version": "1.0.0",
+     "type": "library",
+     "require": {
+      "php": ">=7"
+     }
+    }
+   ],
+   "packages-dev": [],
+   "aliases": [],
+   "minimum-stability": "stable",
+   "stability-flags": {},
+   "prefer-stable": false,
+   "prefer-lowest": false,
+   "platform": {
+    "php": "^8"
+   },
+   "platform-dev": {},
+   "plugin-api-version": "2.6.0"
+  }
+ },
+ {
+  "name": "lock missing keys",
+  "schema": "lock",
+  "data": {
+   "packages": []
+  }
+ },
+ {
+  "name": "lock package bad",
+  "schema": "lock",
+  "data": {
+   "content-hash": "x",
+   "packages": [
+    {
+     "name": "Bad/Name",
+     "require": {
+      "x/y": 1
+     }
+    },
+    {
+     "version": 1
+    },
+    "s"
+   ],
+   "packages-dev": 5
+  }
+ },
+ {
+  "name": "lock aliases bad",
+  "schema": "lock",
+  "data": {
+   "content-hash": 1,
+   "packages": [],
+   "packages-dev": [],
+   "aliases": [
+    {
+     "package": "a/b"
+    }
+   ],
+   "stability-flags": {
+    "a/b": "x"
+   },
+   "platform": {
+    "php": 7
+   },
+   "_readme": "x",
+   "prefer-stable": "no"
+  }
+ },
+ {
+  "name": "lock assoc empty objects",
+  "schema": "lock",
+  "data": {
+   "content-hash": "x",
+   "packages": [],
+   "packages-dev": [],
+   "platform": {},
+   "stability-flags": {}
+  },
+  "assoc": true
+ },
+ {
+  "name": "lock not object",
+  "schema": "lock",
+  "data": []
+ },
+ {
+  "name": "lock package with unknown keys",
+  "schema": "lock",
+  "data": {
+   "content-hash": "x",
+   "packages": [
+    {
+     "name": "a/b",
+     "version": "1.0",
+     "notification-url": "https://packagist.org/downloads/",
+     "installation-source": "dist",
+     "foo": 1
+    }
+   ],
+   "packages-dev": []
+  }
+ },
+ {
+  "name": "composer require platform valid",
+  "schema": "composer",
+  "data": {
+   "require": {
+    "php": ">=7",
+    "ext-json": "*",
+    "lib-pcre": "*"
+   },
+   "autoload": {
+    "psr-4": {
+     "": "src/"
+    }
+   }
+  }
+ },
+ {
+  "name": "composer conflict string",
+  "schema": "composer",
+  "data": {
+   "conflict": "x",
+   "keywords": "x"
+  }
+ },
+ {
+  "name": "composer autoload-dev files string",
+  "schema": "composer",
+  "data": {
+   "autoload-dev": {
+    "files": "x",
+    "psr-0": "y"
+   }
+  }
+ },
+ {
+  "name": "composer scripts event string",
+  "schema": "composer",
+  "data": {
+   "scripts": {
+    "post-update-cmd": "x",
+    "pre-autoload-dump": 1
+   }
+  }
+ },
+ {
+  "name": "composer config misc 1",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "vendor-dir": 5,
+    "github-oauth": {
+     "github.com": 1
+    },
+    "http-basic": "x",
+    "bearer": {
+     "a": 1
+    },
+    "secure-http": "no"
+   }
+  }
+ },
+ {
+  "name": "composer config misc 2",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "cafile": 5,
+    "archive-format": 1,
+    "bump-after-update": "maybe",
+    "apcu-autoloader": "yes",
+    "update-with-minimal-changes": 1
+   }
+  }
+ },
+ {
+  "name": "composer config misc 3",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "allow-missing-requirements": "x",
+    "store-auths": "maybe",
+    "gitlab-protocol": "ftp",
+    "use-github-api": 1,
+    "notify-on-install": "x"
+   }
+  }
+ },
+ {
+  "name": "composer config misc 4",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "use-include-path": "x",
+    "use-parent-dir": "always",
+    "source-fallback": 1,
+    "htaccess-protect": "x",
+    "autoloader-suffix": 5,
+    "classmap-authoritative": "x"
+   }
+  }
+ },
+ {
+  "name": "composer config misc 5",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "disable-tls": "x",
+    "secure-svn-domains": "x",
+    "capath": 1,
+    "data-dir": [],
+    "cache-read-only": 1,
+    "github-expose-hostname": "x",
+    "gitlab-domains": [
+     1
+    ],
+    "archive-dir": {}
+   }
+  }
+ },
+ {
+  "name": "composer repos vcs extras",
+  "schema": "composer",
+  "data": {
+   "repositories": [
+    {
+     "type": "vcs",
+     "url": "https://x",
+     "no-api": "yes"
+    },
+    {
+     "type": "composer",
+     "url": "https://x",
+     "canonical": "no"
+    },
+    {
+     "type": "artifact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "composer repos keyed object",
+  "schema": "composer",
+  "data": {
+   "repositories": {
+    "foo": {
+     "type": "vcs",
+     "url": "x"
+    },
+    "bar": 5,
+    "baz": {
+     "type": "git"
+    }
+   }
+  }
+ },
+ {
+  "name": "composer authors empty ok",
+  "schema": "composer",
+  "data": {
+   "authors": []
+  }
+ },
+ {
+  "name": "composer kitchen sink broken",
+  "schema": "composer-strict",
+  "data": {
+   "name": "My Vendor/Pkg",
+   "description": 1,
+   "license": {
+    "x": 1
+   },
+   "type": "",
+   "require": {
+    "a/b": [
+     "1.0"
+    ]
+   },
+   "autoload": {
+    "psr-4": {
+     "A\\": [
+      1
+     ]
+    }
+   },
+   "repositories": [
+    {
+     "type": "composer"
+    }
+   ],
+   "config": {
+    "process-timeout": 1.5,
+    "platform": [],
+    "sort-packages": null
+   },
+   "minimum-stability": "Stable",
+   "extra": "x",
+   "homepage": "",
+   "support": {
+    "email": "x@"
+   },
+   "bogus": true
+  }
+ },
+ {
+  "name": "composer floats integral",
+  "schema": "composer",
+  "data": {
+   "config": {
+    "process-timeout": 600.0,
+    "cache-files-maxsize": 1.0
+   }
+  }
+ },
+ {
+  "name": "composer email long",
+  "schema": "composer",
+  "data": {
+   "support": {
+    "email": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com"
+   }
+  }
+ },
+ {
+  "name": "composer email unicode domain label",
+  "schema": "composer",
+  "data": {
+   "authors": [
+    {
+     "name": "x",
+     "email": "user@sub.例え.jp"
+    },
+    {
+     "name": "y",
+     "email": "üser@example.com"
+    }
+   ]
+  }
+ },
+ {
+  "name": "properties null",
+  "schema": {
+   "properties": null,
+   "additionalProperties": false
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "items object on object data",
+  "schema": {
+   "items": {
+    "type": "string"
+   }
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "required string draft3 style",
+  "schema": {
+   "required": "a",
+   "type": "object"
+  },
+  "data": {
+   "b": 1
+  }
+ },
+ {
+  "name": "pattern hex escapes",
+  "schema": {
+   "items": {
+    "pattern": "^\\x41\\x{263A}\\u?$"
+   }
+  },
+  "data": [
+   "A☺",
+   "A☺u",
+   "a☺"
+  ]
+ },
+ {
+  "name": "pattern counted unicode",
+  "schema": {
+   "items": {
+    "pattern": "^.{2}$"
+   }
+  },
+  "data": [
+   "éé",
+   "ab",
+   "é"
+  ]
+ },
+ {
+  "name": "pattern anchors A z Z",
+  "schema": {
+   "items": {
+    "pattern": "\\Aab\\Z"
+   }
+  },
+  "data": [
+   "ab",
+   "ab\n",
+   "ab\n\n"
+  ]
+ },
+ {
+  "name": "pattern negated class newline",
+  "schema": {
+   "items": {
+    "pattern": "^[^a]+$"
+   }
+  },
+  "data": [
+   "\n",
+   "b\nc",
+   "a"
+  ]
+ },
+ {
+  "name": "pattern possessive atomic",
+  "schema": {
+   "items": {
+    "pattern": "^(?>a+)b$|^c++d$"
+   }
+  },
+  "data": [
+   "aab",
+   "ccd",
+   "ab"
+  ]
+ },
+ {
+  "name": "pattern escaped tilde in json",
+  "schema": {
+   "pattern": "a\\~b"
+  },
+  "data": "a~b"
+ },
+ {
+  "name": "pattern named group",
+  "schema": {
+   "items": {
+    "pattern": "^(?<x>a)(?P<y>b)\\k<x>$"
+   }
+  },
+  "data": [
+   "aba",
+   "abb"
+  ]
+ },
+ {
+  "name": "pattern unknown escape",
+  "schema": {
+   "pattern": "\\i"
+  },
+  "data": "i"
+ },
+ {
+  "name": "pattern unicode literal",
+  "schema": {
+   "items": {
+    "pattern": "^ü+$"
+   }
+  },
+  "data": [
+   "üü",
+   "u"
+  ]
+ },
+ {
+  "name": "pattern caseless unicode literal",
+  "schema": {
+   "items": {
+    "pattern": "(?i)^ü$"
+   }
+  },
+  "data": [
+   "Ü",
+   "u"
+  ]
+ },
+ {
+  "name": "enum mixed message",
+  "schema": {
+   "enum": [
+    1.0,
+    2.5,
+    1e+20,
+    0.1,
+    -0.0,
+    100000000000000000000
+   ]
+  },
+  "data": "x"
+ },
+ {
+  "name": "const float message",
+  "schema": {
+   "const": 1.5e-07
+  },
+  "data": 1
+ },
+ {
+  "name": "multipleOf message float",
+  "schema": {
+   "multipleOf": 0.25
+  },
+  "data": 1.1
+ },
+ {
+  "name": "minimum float data",
+  "schema": {
+   "minimum": 2
+  },
+  "data": 1.999
+ },
+ {
+  "name": "maxLength float schema",
+  "schema": {
+   "maxLength": 2.5
+  },
+  "data": "abc"
+ },
+ {
+  "name": "minItems string schema",
+  "schema": {
+   "minItems": "2"
+  },
+  "data": [
+   1
+  ]
+ },
+ {
+  "name": "type error double nested",
+  "schema": {
+   "properties": {
+    "a": {
+     "properties": {
+      "b": {
+       "items": {
+        "type": "integer"
+       }
+      }
+     }
+    }
+   }
+  },
+  "data": {
+   "a": {
+    "b": [
+     1,
+     "x",
+     2.5
+    ]
+   }
+  }
+ },
+ {
+  "name": "additionalProperties false nested in items",
+  "schema": {
+   "items": {
+    "additionalProperties": false,
+    "properties": {
+     "k": {}
+    }
+   }
+  },
+  "data": [
+   {
+    "k": 1,
+    "x": 2
+   },
+   {
+    "y": 3
+   }
+  ]
+ },
+ {
+  "name": "anyOf with refs and required",
+  "schema": {
+   "definitions": {
+    "a": {
+     "required": [
+      "a"
+     ]
+    },
+    "b": {
+     "required": [
+      "b"
+     ]
+    }
+   },
+   "anyOf": [
+    {
+     "$ref": "#/definitions/a"
+    },
+    {
+     "$ref": "#/definitions/b"
+    }
+   ]
+  },
+  "data": {
+   "c": 1
+  }
+ },
+ {
+  "name": "oneOf inside items",
+  "schema": {
+   "items": {
+    "oneOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "integer"
+     }
+    ]
+   }
+  },
+  "data": [
+   "a",
+   1,
+   null,
+   2.5
+  ]
+ },
+ {
+  "name": "not with required",
+  "schema": {
+   "not": {
+    "required": [
+     "a"
+    ]
+   }
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "allOf nested errors kept",
+  "schema": {
+   "allOf": [
+    {
+     "properties": {
+      "a": {
+       "type": "string"
+      }
+     }
+    },
+    {
+     "properties": {
+      "a": {
+       "minLength": 3
+      }
+     }
+    }
+   ]
+  },
+  "data": {
+   "a": 1
+  }
+ },
+ {
+  "name": "dependencies schema errors",
+  "schema": {
+   "dependencies": {
+    "a": {
+     "properties": {
+      "b": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  },
+  "data": {
+   "a": 1,
+   "b": 2
+  }
+ }
+]

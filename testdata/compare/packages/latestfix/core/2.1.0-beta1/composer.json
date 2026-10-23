@@ -1,0 +1,1 @@
+{"name":"latestfix/core","description":"Core library for the latest checks","type":"library","license":"MIT","homepage":"https://example.org/core","require":{"latestfix/dep":"^1.0"}}

@@ -1,0 +1,30 @@
+{
+    "manifests": {
+        "flexfix/hello-bundle": {
+            "manifest": {
+                "bundles": {
+                    "Flexfix\\HelloBundle\\FlexfixHelloBundle": [
+                        "all"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/"
+                },
+                "env": {
+                    "HELLO_GREETING": "hello"
+                }
+            },
+            "files": {
+                "config/packages/hello.yaml": {
+                    "contents": [
+                        "hello:",
+                        "    greeting: '%env(HELLO_GREETING)%'",
+                        "    version: 2"
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "3a3b3c3d3e3f404142434445464748494a4b4c4d"
+        }
+    }
+}

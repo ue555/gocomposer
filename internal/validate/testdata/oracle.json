@@ -1,0 +1,370 @@
+{
+    "emails": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+    ],
+    "urls": [
+        [
+            true,
+            false
+        ],
+        [
+            true,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            true
+        ],
+        [
+            false,
+            true
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            true,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            true,
+            false
+        ],
+        [
+            true,
+            false
+        ],
+        [
+            true,
+            true
+        ]
+    ],
+    "packages": [
+        {
+            "errors": [],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "name : Acme/Foo is invalid, it should not contain uppercase characters. We suggest using acme/foo instead."
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "name : acme is invalid, it should have a vendor name, a forward slash, and a package name. The vendor and package name can be words separated by -, . or _. The complete name should match \"^[a-z0-9]([_.-]?[a-z0-9]+)*/[a-z0-9](([_.]?|-{0,2})[a-z0-9]+)*$\"."
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "name : acme/con is reserved, package and vendor names can not match any of: nul, con, prn, aux, com1, com2, com3, com4, com5, com6, com7, com8, com9, lpt1, lpt2, lpt3, lpt4, lpt5, lpt6, lpt7, lpt8, lpt9."
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "name : acme/foo.json is invalid, package names can not end in .json, consider renaming it or perhaps using a -json suffix instead."
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "version : invalid value (1.0.0-wtf): Invalid version string \"1.0.0-wtf\""
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [],
+            "warnings": []
+        },
+        {
+            "errors": [],
+            "warnings": [
+                "type : invalid value (my_type), must match [A-Za-z0-9-]+"
+            ]
+        },
+        {
+            "errors": [
+                "type : should be a string, int given"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "bin.1 : invalid value (../evil), must not contain a \"..\" path component",
+                "bin.2 : invalid value (bin/$(rm)), must not contain any of the characters *$`\"&^|<>()%!; nor control characters"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "bin : invalid value (bin/a b;c), must not contain any of the characters *$`\"&^|<>()%!; nor control characters"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [],
+            "warnings": [
+                "homepage : invalid value (example.com), must be an http/https URL"
+            ]
+        },
+        {
+            "errors": [],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "keywords.4 : must be a string or int, bool given"
+            ],
+            "warnings": [
+                "keywords.1 : invalid value (bad!), must match [\\p{N}\\p{L} ._-]+"
+            ]
+        },
+        {
+            "errors": [],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "time : invalid value (not a date): Failed to parse time string (not a date) at position 0 (n): The timezone could not be found in the database"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [],
+            "warnings": []
+        },
+        {
+            "errors": [],
+            "warnings": [
+                "License \"Foo\" is not a valid SPDX license identifier, see https://spdx.org/licenses/ if you use an open license.\nIf the software is closed-source, you may use \"proprietary\" as license."
+            ]
+        },
+        {
+            "errors": [],
+            "warnings": [
+                "License \" MIT \" must not contain extra spaces, make sure to trim it."
+            ]
+        },
+        {
+            "errors": [],
+            "warnings": [
+                "License 5 should be a string."
+            ]
+        },
+        {
+            "errors": [],
+            "warnings": [
+                "License must be a string or array of strings, got 5."
+            ]
+        },
+        {
+            "errors": [
+                "authors.1 : should be an array, string given",
+                "authors.2.name : invalid value, must be a string"
+            ],
+            "warnings": [
+                "authors.0.homepage : invalid value (nope), must be an http/https URL",
+                "authors.0.email : invalid value (bad), must be a valid email address"
+            ]
+        },
+        {
+            "errors": [
+                "support.rss : invalid value, must be a string"
+            ],
+            "warnings": [
+                "support.email : invalid value (x), must be a valid email address",
+                "support.irc : invalid value (http://x), must be a irc://<server>/<channel> or ircs:// URL",
+                "support.issues : invalid value (nope), must be an http/https URL"
+            ]
+        },
+        {
+            "errors": [
+                "funding.2 : should be an array, string given"
+            ],
+            "warnings": [
+                "funding.1.url : invalid value (bad), must be an http/https URL"
+            ]
+        },
+        {
+            "errors": [
+                "require.acme/qux : invalid value, must be a string containing a version constraint",
+                "require.acme/nope : invalid version constraint (Could not parse version constraint ~>1: Invalid operator \"~>\", you probably meant to use the \"~\" operator)",
+                "require.acme/foo : a package cannot set a require on itself"
+            ],
+            "warnings": [
+                "require.acme/bar : unbound version constraints (*) should be avoided",
+                "require.Acme/Baz is invalid, it should not contain uppercase characters. Please use acme/baz instead.",
+                "require.bad name! is invalid, it should have a vendor name, a forward slash, and a package name. The vendor and package name can be words separated by -, . or _. The complete name should match \"^[a-z0-9]([_.-]?[a-z0-9]+)*/[a-z0-9](([_.]?|-{0,2})[a-z0-9]+)*$\".",
+                "require.bad name! : exact version constraints (1.0) should be avoided if the package follows semantic versioning",
+                "require.acme/x : exact version constraints (==1.0.0) should be avoided if the package follows semantic versioning",
+                "require.acme/none : this version constraint cannot possibly match anything (>2 <1)"
+            ]
+        },
+        {
+            "errors": [
+                "conflict.acme/r : you cannot conflict with a package that is also replaced, as replace already creates an implicit conflict rule"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "suggest.acme/y : invalid value, must be a string describing why the package is suggested"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "minimum-stability : invalid value (rc), must be one of stable, RC, beta, alpha, dev"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "minimum-stability : invalid value (bogus), must be one of stable, RC, beta, alpha, dev"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "autoload.psr-4 : invalid value (Acme), namespaces must end with a namespace separator, should be Acme\\\\",
+                "autoload : invalid value (weird), must be one of psr-0, psr-4, classmap, files, exclude-from-classmap"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "target-dir : this can not be used together with the autoload.psr-4 setting, remove target-dir to upgrade to psr-4"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "source.url : must be present",
+                "source.reference : must be present",
+                "dist.type : should be a string, int given",
+                "dist.reference : must not start with a \"-\", \"-r\" given",
+                "dist.url : must not start with a \"-\", \"-x\" given"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "source.url : invalid Perforce port (\"rsh:cmd\"), it must be of the form [tcp|ssl:][host:]port"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [],
+            "warnings": [
+                "extra.branch-alias.dev-a : the target branch (1.0) must end in -dev",
+                "extra.branch-alias.dev-b : the target branch (5) must be a string, \"int\" received.",
+                "extra.branch-alias.dev-c : the target branch (foo-dev) must be a parseable number like 2.0-dev",
+                "extra.branch-alias.2.0.x-dev : the target branch (1.0.x-dev) is not a valid numeric alias for this version"
+            ]
+        },
+        {
+            "errors": [
+                "extra.branch-alias : must be an array of versions => aliases"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "config.platform.ext-y : invalid value (bool true): expected string or false",
+                "config.platform.ext-z : invalid value (nope): Invalid version string \"nope\""
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "include-path.1 : must be a string or int, array given"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "php-ext can only be set by packages of type \"php-ext\" or \"php-ext-zend\" which must be C extensions"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "php-ext.priority : should be an integer, string given",
+                "php-ext.support-zts : should be a boolean, string given",
+                "php-ext.os-families.1 : invalid value (beos), must be one of windows, bsd, darwin, solaris, linux, unknown",
+                "php-ext.configure-options.1.name : must be present",
+                "php-ext.configure-options.2 : should be an array, string given"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [
+                "extra : should be an array, string given",
+                "scripts : should be an array, string given"
+            ],
+            "warnings": []
+        },
+        {
+            "errors": [],
+            "warnings": []
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+{"name":"acme/conflicter","description":"Conflicts with acme/log 2","conflict":{"acme/log":">=2.0"}}

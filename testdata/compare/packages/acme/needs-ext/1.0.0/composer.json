@@ -1,0 +1,1 @@
+{"name":"acme/needs-ext","description":"Needs an extension that is missing","require":{"ext-imaginary":"*"}}

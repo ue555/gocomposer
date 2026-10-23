@@ -1,0 +1,239 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "e6a0d9e271a6c37be9ff2fc01112d5a4100a720c732e083e4299efe54a079240",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T182209Z",
+  "results": [
+    {
+      "scenario": "bump-basic",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-dry-run",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-dev-only",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-no-dev-only",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-library",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nComposer could not detect the root package (test/project) version, defaulting to '1.0.0'. See https://getcomposer.org/root-version\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-library-dev-only",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nComposer could not detect the root package (test/project) version, defaulting to '1.0.0'. See https://getcomposer.org/root-version\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-untyped",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nComposer could not detect the root package (test/project) version, defaulting to '1.0.0'. See https://getcomposer.org/root-version\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-filter",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-filter-wildcard",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-nothing",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-nothing-dry-run",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-lock-outdated",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-lock-disabled",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-installed-only",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-not-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-branch-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-no-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "bump-after-update-flag",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "bump-after-update-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "bump-after-update-no-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "bump-after-update-dry-run",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "bump-after-update-config",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "bump-after-update-config-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "bump-after-update-untyped",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "bump-after-update-partial",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress --with acme/log:1.0.0 --with acme/http:1.0.0\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0].\n    - acme/http 1.0.0 requires psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-nothing",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "bump-after-update-lock",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ~1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, but the following packages provide it:\n      - acme/log-impl Provides psr/log-implementation\n      Consider requiring one of these to satisfy the psr/log-implementation requirement.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

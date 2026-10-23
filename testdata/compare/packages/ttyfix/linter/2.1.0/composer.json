@@ -1,0 +1,1 @@
+{"name":"ttyfix/linter","description":"Static analysis linter","keywords":["static analysis","dev"],"license":"MIT","autoload":{"psr-4":{"Ttyfix\\":"src/"}},"bin":["bin/lint"]}

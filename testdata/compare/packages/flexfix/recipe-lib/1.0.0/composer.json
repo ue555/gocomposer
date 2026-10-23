@@ -1,0 +1,1 @@
+{"name":"flexfix/recipe-lib","description":"Fixture library with a recipe copying a binary and adding an auto-script","license":"MIT","autoload":{"psr-4":{"Flexfix\\RecipeLib\\":"src/"}}}

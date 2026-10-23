@@ -1,0 +1,1 @@
+{"name":"acme/new","description":"Replaces acme/old","replace":{"acme/old":"self.version"},"autoload":{"psr-4":{"Acme\\Old\\":"src/","Acme\\New\\":"src2/"}}}

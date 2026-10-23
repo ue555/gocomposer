@@ -1,0 +1,289 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "2f3d75915ee647f1248ac02751714cfced68e424ac5ee6799bbada66e1524e96",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T183040Z",
+  "results": [
+    {
+      "scenario": "fund-text",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "fund-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "fund-json-short",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "fund-bad-format",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "fund-v2",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "fund-none",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "fund-none-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "fund-not-installed",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Warning: Accessing 127.0.0.1 over http which is an insecure protocol."
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "fund-no-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "search-fulltext",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-multi-token",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-keyword",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-only-name",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-only-name-long",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-only-vendor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-only-vendor-long",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-name-and-vendor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "search-type",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n- (oracle) fundco/beta     ! Abandoned ! Beta package of the fund c..."
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-type-other",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) fundco/beta ! Abandoned ! Beta package of the fund compa...\n- (oracle) fundco/alpha    Alpha package with funding\n- (oracle) fundco/beta     ! Abandoned ! Beta package of the fund c...\n- (oracle) fundco/plain    No funding here\n- (oracle) otherfund/gamma Gamma"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-type-vendor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-json-vendor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-json-empty",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-bad-format",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "search-no-results",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-regex-chars",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-regex-chars-name",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-no-tokens",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=1 go=0",
+        "stdout:\n+ (go) composer               Composer package\n+ (go) composer-plugin-api    The Composer Plugin API\n+ (go) composer-runtime-api   The Composer Runtime API\n+ (go) php                    The PHP interpreter\n+ (go) php-64bit              The PHP interpreter, 64bit\n+ (go) php-ipv6               The PHP interpreter, with IPv6 support\n+ (go) ext-date               The date PHP extension\n+ (go) ext-libxml             The libxml PHP extension\n+ (go) ext-openssl            The openssl PHP extension\n+ (go) ext-pcre               The pcre PHP extension\n+ (go) ext-sqlite3            The sqlite3 PHP extension\n+ (go) ext-zlib               The zlib PHP extension\n+ (go) ext-ctype              The ctype PHP extension\n+ (go) ext-curl               The curl PHP extension\n+ (go) ext-dom                The dom PHP extension\n+ (go) ext-fileinfo           The fileinfo PHP extension\n+ (go) ext-filter             The filter PHP extension\n+ (go) ext-hash               The hash PHP extension\n+ (go) ext-iconv              The iconv PHP extension\n+ (go) ext-json               The json PHP extension\n+ (go) ext-mbstring           The mbstring PHP extension\n+ (go) ext-spl                The SPL PHP extension\n+ (go) ext-session            The session PHP extension\n+ (go) ext-pdo                The PDO PHP extension\n+ (go) ext-pdo_sqlite         The pdo_sqlite PHP extension\n+ (go) ext-posix              The posix PHP extension\n+ (go) ext-random             The random PHP extension\n+ (go) ext-readline           The readline PHP extension\n+ (go) ext-reflection         The Reflection PHP extension\n+ (go) ext-phar               The Phar PHP extension\n+ (go) ext-simplexml          The SimpleXML PHP extension\n+ (go) ext-tokenizer          The tokenizer PHP extension\n+ (go) ext-xml                The xml PHP extension\n+ (go) ext-xmlreader          The xmlreader PHP extension\n+ (go) ext-xmlwriter          The xmlwriter PHP extension\n+ (go) ext-mysqlnd            The mysqlnd PHP extension (actual version: mysqlnd 8...\n+ (go) ext-sodium             The sodium PHP extension\n+ (go) ext-zend-opcache       The Zend OPcache PHP extension\n+ (go) lib-date-timelib       date timelib version\n+ (go) lib-date-zoneinfo      zoneinfo (\"Olson\") database for date\n+ (go) lib-libxml             libxml library version\n+ (go) lib-openssl            OpenSSL 3.5.7 9 Jun 2026\n+ (go) lib-pcre               The pcre library\n+ (go) lib-pcre-unicode       PCRE Unicode version support\n+ (go) lib-sqlite3-sqlite     The sqlite3-sqlite library\n+ (go) lib-zlib               The zlib library\n+ (go) lib-curl               The curl library\n+ (go) lib-curl-openssl       curl OpenSSL version (3.5.7)\n+ (go) lib-curl-libssh2       curl libssh2 version\n+ (go) lib-curl-zlib          curl zlib version\n+ (go) lib-fileinfo-libmagic  fileinfo libmagic version\n+ (go) lib-iconv              The iconv library\n+ (go) lib-mbstring-libmbfl   mbstring libmbfl version\n+ (go) lib-mbstring-oniguruma mbstring oniguruma version\n+ (go) lib-pdo_sqlite-sqlite  The pdo_sqlite-sqlite library\n+ (go) lib-libsodium          The libsodium library\n+ (go) acme/badsum            Dist checksum is wrong\n+ (go) acme/beta              Has betas\n+ (go) acme/broken            Dist archive is corrupt\n+ (go) acme/cli               CLI tool\n+ (go) acme/conflicter        Conflicts with acme/log 2\n+ (go) acme/devtools          Dev tools\n+ (go) acme/edge              Branch only\n+ (go) acme/evil              Archive with path traversal\n+ (go) acme/http              HTTP client\n+ (go) acme/log               Logging\n+ (go) acme/log-impl          Provides psr/log-implementation\n+ (go) acme/missing           Dist returns 404\n+ (go) acme/needs-ext         Needs an extension that is missing\n+ (go) acme/needs-php9        Needs a future PHP\n+ (go) acme/new               Replaces acme/old\n+ (go) acme/old               Old package\n+ (go) acme/util              Utilities\n+ (go) fundco/alpha           Alpha package with funding\n+ (go) fundco/beta            ! Abandoned ! Beta package of the...\n+ (go) fundco/plain           No funding here\n+ (go) latestfix/aband        Abandoned in its latest release\n+ (go) latestfix/core         Core library for the latest checks\n+ (go) latestfix/dep          Transitive dependency\n+ (go) latestfix/devtool      A dev tool with a very long description that will ne...\n+ (go) latestfix/gone         ! Abandoned ! Abandoned without r...\n+ (go) latestfix/platneed     Newer release needs a future PHP\n+ (go) latestfix/platonly     Only release needs a future PHP\n+ (go) latestfix/stable       Already up to date\n+ (go) latestfix/zero         Zero major package\n+ (go) otherfund/gamma        Gamma",
+        "stderr:\n+ (go) Warning: Accessing 127.0.0.1 over http which is an insecure protocol.\n- (oracle)                                              \n- (oracle)   Not enough arguments (missing: \"tokens\").  \n- (oracle)                                              \n- (oracle) \n- (oracle) search [-N|--only-name] [-O|--only-vendor] [-t|--type TYPE] [-f|--format FORMAT] [--] \u003ctokens\u003e...\n- (oracle) \n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-very-verbose",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) Searched composite repo (installed array repo (defining 0 package), platform repo), found 0 result(s)\n- (oracle) Searched installed array repo (defining 0 package), found 0 result(s)\n- (oracle) Searched platform repo, found 0 result(s)"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-columns",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-installed-vv",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) Searched composite repo (installed array repo (defining 1 package), platform repo), found 1 result(s)\n- (oracle) Searched installed array repo (defining 1 package), found 1 result(s)\n- (oracle) Searched platform repo, found 0 result(s)"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-v2",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-v2-vendor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-v2-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-wide",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "search-filtered-repo",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

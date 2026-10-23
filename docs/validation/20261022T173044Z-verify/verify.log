@@ -1,0 +1,847 @@
+?   	gocomposer/cmd/gocomposer	[no test files]
+?   	gocomposer/internal/autoload	[no test files]
+?   	gocomposer/internal/cache	[no test files]
+ok  	gocomposer/internal/cio	(cached)
+?   	gocomposer/internal/cli	[no test files]
+ok  	gocomposer/internal/composer	10.245s
+?   	gocomposer/internal/config	[no test files]
+ok  	gocomposer/internal/configsource	(cached)
+?   	gocomposer/internal/fsutil	[no test files]
+?   	gocomposer/internal/httpdl	[no test files]
+?   	gocomposer/internal/installed	[no test files]
+ok  	gocomposer/internal/jsonfile	(cached)
+ok  	gocomposer/internal/jsonlint	(cached)
+ok  	gocomposer/internal/jsonmanip	(cached)
+ok  	gocomposer/internal/jsonschema	(cached)
+?   	gocomposer/internal/locker	[no test files]
+ok  	gocomposer/internal/pcre	(cached)
+ok  	gocomposer/internal/phpjson	(cached)
+?   	gocomposer/internal/pkg	[no test files]
+ok  	gocomposer/internal/platform	(cached)
+ok  	gocomposer/internal/policy	0.679s
+?   	gocomposer/internal/repo	[no test files]
+?   	gocomposer/internal/res	[no test files]
+ok  	gocomposer/internal/semver	(cached)
+ok  	gocomposer/internal/solver	0.242s
+ok  	gocomposer/internal/spdx	(cached)
+ok  	gocomposer/internal/validate	(cached)
+?   	gocomposer/tools/compare	[no test files]
+?   	gocomposer/tools/integration	[no test files]
+?   	gocomposer/cmd/gocomposer	[no test files]
+?   	gocomposer/internal/autoload	[no test files]
+?   	gocomposer/internal/cache	[no test files]
+ok  	gocomposer/internal/cio	1.241s
+?   	gocomposer/internal/cli	[no test files]
+ok  	gocomposer/internal/composer	24.240s
+?   	gocomposer/internal/config	[no test files]
+ok  	gocomposer/internal/configsource	12.383s
+?   	gocomposer/internal/fsutil	[no test files]
+?   	gocomposer/internal/httpdl	[no test files]
+?   	gocomposer/internal/installed	[no test files]
+ok  	gocomposer/internal/jsonfile	1.220s
+ok  	gocomposer/internal/jsonlint	1.571s
+ok  	gocomposer/internal/jsonmanip	8.262s
+ok  	gocomposer/internal/jsonschema	2.200s
+?   	gocomposer/internal/locker	[no test files]
+ok  	gocomposer/internal/pcre	66.695s
+ok  	gocomposer/internal/phpjson	1.576s
+?   	gocomposer/internal/pkg	[no test files]
+ok  	gocomposer/internal/platform	1.574s
+ok  	gocomposer/internal/policy	1.778s
+?   	gocomposer/internal/repo	[no test files]
+?   	gocomposer/internal/res	[no test files]
+ok  	gocomposer/internal/semver	1.437s
+ok  	gocomposer/internal/solver	1.397s
+ok  	gocomposer/internal/spdx	1.251s
+ok  	gocomposer/internal/validate	1.284s
+?   	gocomposer/tools/compare	[no test files]
+?   	gocomposer/tools/integration	[no test files]
+== update-basic
+   MATCH
+== update-basic-progress
+   MATCH
+== update-v2-metadata
+   MATCH
+== install-from-lock
+   MATCH
+== install-no-dev
+   MATCH
+== install-twice
+   MATCH
+== dry-run-update
+   MATCH
+== dump-autoload-optimized
+   MATCH
+== dump-autoload-authoritative
+   MATCH
+== replace
+   MATCH
+== conflict-unresolvable
+   MATCH
+== conflict-resolves-lower
+   MATCH
+== platform-php-too-low
+   MATCH
+== missing-extension
+   MATCH
+== ignore-platform-reqs
+   MATCH
+== config-platform-php
+   MATCH
+== not-found-package
+   MATCH
+== stability-beta-flag
+   MATCH
+== stability-too-low
+   MATCH
+== dev-branch-alias
+   MATCH
+== root-alias
+   MATCH
+== partial-update
+   MATCH
+== partial-update-with-deps
+   MATCH
+== broken-archive
+   MATCH
+== checksum-mismatch
+   MATCH
+== download-404
+   MATCH
+== path-traversal-archive
+   MATCH
+== failure-keeps-vendor
+   MATCH
+== no-lock-install
+   MATCH
+== check-platform-reqs-ok
+   MATCH
+== check-platform-reqs-fail
+   MATCH
+== check-platform-reqs-json
+   MATCH
+== check-platform-reqs-lock
+   MATCH
+== validate-basic
+   MATCH
+== validate-clean
+   MATCH
+== validate-warnings
+   MATCH
+== validate-strict-warnings
+   MATCH
+== validate-no-check
+   MATCH
+== validate-missing-file
+   MATCH
+== validate-invalid-json
+   MATCH
+== validate-duplicate-key
+   MATCH
+== validate-lock-stale
+   MATCH
+== validate-lock-stale-no-check
+   MATCH
+== validate-with-dependencies
+   MATCH
+== validate-bad-constraint
+   MATCH
+== show-list
+   MATCH
+== show-json
+   MATCH
+== show-name-only
+   MATCH
+== show-direct
+   MATCH
+== show-no-dev
+   MATCH
+== show-path
+   MATCH
+== show-package
+   MATCH
+== show-package-json
+   MATCH
+== show-tree
+   MATCH
+== show-tree-json
+   MATCH
+== show-package-tree
+   MATCH
+== show-locked
+   MATCH
+== show-self
+   MATCH
+== show-self-json
+   MATCH
+== show-platform-php
+   MATCH
+== show-wildcard
+   MATCH
+== show-not-found
+   MATCH
+== show-version-arg
+   MATCH
+== show-self-name-only
+   MATCH
+== show-locked-package
+   MATCH
+== show-platform-list-json
+   MATCH
+== show-bad-format
+   MATCH
+== show-tree-latest
+   MATCH
+== show-nothing-installed
+   MATCH
+== depends-basic
+   MATCH
+== depends-recursive
+   MATCH
+== depends-tree
+   MATCH
+== depends-php
+   MATCH
+== depends-notfound
+   MATCH
+== depends-locked
+   MATCH
+== prohibits-basic
+   MATCH
+== prohibits-installed
+   MATCH
+== prohibits-php
+   MATCH
+== prohibits-tree
+   MATCH
+== why-alias
+   MATCH
+== depends-nothing-installed
+   MATCH
+== licenses-text
+   MATCH
+== licenses-json
+   MATCH
+== licenses-summary
+   MATCH
+== licenses-no-dev
+   MATCH
+== licenses-locked
+   MATCH
+== licenses-bad-format
+   MATCH
+== suggests-default
+   MATCH
+== suggests-all
+   MATCH
+== suggests-list
+   MATCH
+== suggests-by-suggestion
+   MATCH
+== suggests-both
+   MATCH
+== suggests-missing
+   MATCH
+== suggests-filter
+   MATCH
+== validate-publish-errors
+   MATCH
+== validate-lax-fail
+   KNOWN-DIFF
+   - stderr:
+     + (go)                                                                      
+     + (go)   "./composer.json" does not match the expected JSON schema:         
+     + (go)    - require.acme/log : Array value found, but a string is required  
+     + (go)                                                                      
+     - (oracle)                                                                                
+     - (oracle)   [TypeError]                                                                  
+     - (oracle)   Composer\Pcre\Preg::isMatch(): Argument #2 ($subject) must be of type strin  
+     - (oracle)   g, array given, called in /oracle-source/src/Composer/Util/ConfigValidator.  
+     - (oracle)   php on line 179                                                              
+     - (oracle)                                                                                
+     - (oracle) Exception trace:
+     ... (12 more lines)
+== validate-lax-fail-update
+   MATCH
+== composer-auth-invalid
+   KNOWN-DIFF
+   - exit code: oracle=255 go=0
+   - stderr:
+     + (go) ./composer.json is valid, but with a few warnings
+     + (go) See https://getcomposer.org/doc/04-schema.md for details on the schema
+     + (go) # General warnings
+     + (go) - No license specified, it is recommended to do so. For closed-source software you may use "proprietary" as license.
+     - (oracle) Fatal error: Uncaught TypeError: Composer\IO\BaseIO::checkAndSetAuthentication(): Argument #2 ($username) must be of type string, int given, called in /oracle-source/src/Composer/IO/BaseIO.php on line 175 and defined in /oracle-source/src/Composer/IO/BaseIO.php:95
+     - (oracle) Stack trace:
+     - (oracle) #0 /oracle-source/src/Composer/IO/BaseIO.php(175): Composer\IO\BaseIO->checkAndSetAuthentication('example.org', 5, NULL)
+     - (oracle) #1 /oracle-source/src/Composer/Factory.php(357): Composer\IO\BaseIO->loadConfiguration(Object(Composer\Config))
+     - (oracle) #2 /oracle-source/src/Composer/Factory.php(627): Composer\Factory->createComposer(Object(Composer\IO\ConsoleIO), Array, true, '/work/project', true, false)
+     - (oracle) #3 /oracle-source/src/Composer/Console/Application.php(676): Composer\Factory::create(Object(Composer\IO\ConsoleIO), NULL, true, false)
+     - (oracle) #4 /oracle-source/src/Composer/Console/Application.php(585): Composer\Console\Application->getComposer(false, true)
+     ... (7 more lines)
+== composer-auth-malformed
+   MATCH
+== policy-advisory-blocks
+   MATCH
+== policy-advisory-blocks-vv
+   MATCH
+== policy-advisory-only-vulnerable
+   MATCH
+== policy-no-blocking-audit
+   MATCH
+== policy-env-no-blocking
+   MATCH
+== policy-audit-install
+   MATCH
+== policy-audit-install-table
+   MATCH
+== policy-audit-install-json
+   MATCH
+== policy-audit-plain
+   MATCH
+== policy-abandoned
+   MATCH
+== policy-abandoned-ignore
+   MATCH
+== policy-ignore-advisory
+   MATCH
+== policy-disabled
+   MATCH
+== policy-cooldown-all
+   MATCH
+== policy-cooldown-none
+   MATCH
+== policy-cooldown-no-cooldown
+   MATCH
+== policy-locked-vulnerable-install
+   MATCH
+== policy-partial-update-vulnerable
+   MATCH
+== require-guess-version
+   MATCH
+== require-explicit
+   MATCH
+== require-dev
+   MATCH
+== require-no-update
+   MATCH
+== require-dry-run
+   MATCH
+== require-first-no-lock
+   MATCH
+== require-no-composer-json
+   MATCH
+== require-not-found
+   MATCH
+== require-min-stability
+   MATCH
+== require-platform-incompatible
+   MATCH
+== require-fails-reverts
+   MATCH
+== require-move-from-dev
+   MATCH
+== require-sort-packages
+   MATCH
+== require-too-strict
+   MATCH
+== require-self
+   MATCH
+== require-ext-missing
+   MATCH
+== require-alias-arg
+   MATCH
+== require-fixed-library
+   MATCH
+== require-fixed-project
+   MATCH
+== require-update-with-deps
+   MATCH
+== require-crlf-file
+   MATCH
+== require-tabs-file
+   MATCH
+== remove-basic
+   MATCH
+== remove-dev
+   MATCH
+== remove-wrong-section
+   MATCH
+== remove-not-required
+   MATCH
+== remove-wildcard
+   MATCH
+== remove-no-update
+   MATCH
+== remove-dry-run
+   MATCH
+== remove-still-required
+   MATCH
+== remove-unused
+   MATCH
+== remove-no-args
+   MATCH
+== remove-mixed-case
+   MATCH
+== remove-allow-plugins
+   MATCH
+== config-no-args
+   MATCH
+== config-get-vendor-dir
+   MATCH
+== config-get-bin-dir
+   MATCH
+== config-get-bin-dir-absolute
+   MATCH
+== config-get-bin-dir-source
+   MATCH
+== config-get-set-in-json
+   MATCH
+== config-get-bin-dir-custom-vendor
+   MATCH
+== config-get-process-timeout
+   MATCH
+== config-get-bool
+   MATCH
+== config-get-bool-default
+   MATCH
+== config-get-allow-plugins-empty
+   MATCH
+== config-get-platform-empty
+   MATCH
+== config-get-secure-svn-domains
+   MATCH
+== config-get-github-protocols
+   MATCH
+== config-get-github-protocols-secure
+   MATCH
+== config-get-github-protocols-git-first
+   MATCH
+== config-get-gitlab-domains-dedupe
+   MATCH
+== config-get-audit
+   MATCH
+== config-get-audit-nested
+   MATCH
+== config-get-nested-missing
+   MATCH
+== config-get-extra-nested
+   MATCH
+== config-get-extra-object
+   MATCH
+== config-get-extra
+   MATCH
+== config-get-extra-list-index
+   MATCH
+== config-get-suggest
+   MATCH
+== config-get-name
+   MATCH
+== config-get-license
+   MATCH
+== config-get-homepage-default
+   MATCH
+== config-get-min-stability-default
+   MATCH
+== config-get-prefer-stable-default
+   MATCH
+== config-get-keywords
+   MATCH
+== config-get-repositories
+   MATCH
+== config-get-repositories-default
+   MATCH
+== config-get-repo-index
+   MATCH
+== config-get-repo-missing
+   MATCH
+== config-get-repo-prefix
+   MATCH
+== config-get-undefined
+   MATCH
+== config-get-undefined-dotted
+   MATCH
+== config-get-leading-dot
+   MATCH
+== config-get-cache-files-maxsize
+   MATCH
+== config-get-cache-dir-env
+   MATCH
+== config-get-env-vendor-dir
+   MATCH
+== config-get-home
+   MATCH
+== config-get-data-dir
+   MATCH
+== config-get-cafile-empty
+   MATCH
+== config-get-gitlab-protocol-null
+   MATCH
+== config-get-preferred-install-map
+   MATCH
+== config-get-policy
+   MATCH
+== config-get-policy-nested
+   MATCH
+== config-get-auth-file
+   MATCH
+== config-get-unicode-slashes
+   MATCH
+== config-get-scalar-unicode
+   MATCH
+== config-get-scalar-float
+   MATCH
+== config-list
+   MATCH
+== config-list-source
+   MATCH
+== config-list-plain
+   MATCH
+== config-list-custom
+   MATCH
+== config-list-named-repos
+   MATCH
+== config-list-env
+   MATCH
+== config-list-bad-maxsize
+   MATCH
+== config-list-global
+   MATCH
+== config-list-auth
+   MATCH
+== config-set-sort-packages
+   MATCH
+== config-set-bool-invalid
+   MATCH
+== config-set-process-timeout
+   MATCH
+== config-set-process-timeout-invalid
+   MATCH
+== config-set-too-many
+   MATCH
+== config-set-vendor-dir
+   MATCH
+== config-set-preferred-install
+   MATCH
+== config-set-preferred-install-invalid
+   MATCH
+== config-set-preferred-install-pkg
+   MATCH
+== config-set-preferred-install-pkg-invalid
+   MATCH
+== config-set-store-auths
+   MATCH
+== config-set-store-auths-false
+   MATCH
+== config-set-discard-changes
+   MATCH
+== config-set-bump-after-update
+   MATCH
+== config-set-platform-check
+   MATCH
+== config-set-use-parent-dir
+   MATCH
+== config-set-cache-maxsize
+   MATCH
+== config-set-cache-maxsize-invalid
+   MATCH
+== config-set-bin-compat-invalid
+   MATCH
+== config-set-gitlab-protocol
+   MATCH
+== config-set-autoloader-suffix-null
+   MATCH
+== config-set-cafile-missing
+   MATCH
+== config-set-cafile
+   MATCH
+== config-set-capath-invalid
+   MATCH
+== config-set-github-protocols
+   MATCH
+== config-set-github-protocols-invalid
+   MATCH
+== config-set-github-domains
+   MATCH
+== config-set-disable-tls
+   MATCH
+== config-set-disable-tls-off
+   MATCH
+== config-unset-disable-tls
+   MATCH
+== config-unset-key
+   MATCH
+== config-unset-with-value
+   MATCH
+== config-set-unknown
+   MATCH
+== config-set-allow-plugins-bool
+   MATCH
+== config-set-lock-false
+   MATCH
+== config-set-audit-abandoned
+   MATCH
+== config-set-audit-abandoned-invalid
+   MATCH
+== config-set-audit-block-insecure
+   MATCH
+== config-set-audit-ignore
+   MATCH
+== config-set-audit-ignore-json
+   MATCH
+== config-set-audit-ignore-json-scalar
+   MATCH
+== config-set-audit-ignore-merge
+   MATCH
+== config-set-audit-ignore-merge-mixed
+   MATCH
+== config-set-audit-ignore-severity
+   MATCH
+== config-set-audit-ignore-severity-invalid
+   MATCH
+== config-unset-audit
+   MATCH
+== config-unset-audit-ignore
+   MATCH
+== config-set-policy-block
+   MATCH
+== config-set-policy-audit
+   MATCH
+== config-set-policy-audit-invalid
+   MATCH
+== config-set-policy-block-scope
+   MATCH
+== config-set-policy-block-scope-invalid
+   MATCH
+== config-set-policy-cooldown-period
+   MATCH
+== config-set-policy-cooldown-period-int
+   MATCH
+== config-set-policy-cooldown-period-null
+   MATCH
+== config-set-policy-cooldown-period-invalid
+   MATCH
+== config-set-policy-list-off
+   MATCH
+== config-set-policy-list-invalid
+   MATCH
+== config-set-policy-custom-block
+   MATCH
+== config-set-policy-custom-scope
+   MATCH
+== config-set-policy-custom-scope-invalid
+   MATCH
+== config-set-policy-custom-audit-invalid
+   MATCH
+== config-set-policy-custom-ignore
+   MATCH
+== config-set-policy-reserved
+   MATCH
+== config-set-policy-reserved-name
+   MATCH
+== config-set-policy-reserved-ignore
+   MATCH
+== config-set-policy-sources
+   MATCH
+== config-set-policy-unknown-field
+   MATCH
+== config-set-policy-ignore-unreachable
+   MATCH
+== config-set-policy-ignore-unreachable-bad
+   MATCH
+== config-set-policy-ignore-unreachable-json
+   MATCH
+== config-set-policy-ignore-unreachable-json-bool
+   MATCH
+== config-set-policy-ignore-unreachable-bool
+   MATCH
+== config-set-policy-ignore-id-json
+   MATCH
+== config-set-policy-ignore-merge
+   MATCH
+== config-set-policy-ignore-merge-mixed
+   MATCH
+== config-set-policy-ignore-severity
+   MATCH
+== config-set-policy-ignore-source
+   MATCH
+== config-unset-policy-nested
+   MATCH
+== config-unset-policy
+   MATCH
+== config-repo-add
+   MATCH
+== config-repo-add-append
+   MATCH
+== config-repo-add-plain
+   MATCH
+== config-repo-disable-packagist
+   MATCH
+== config-repo-add-json
+   MATCH
+== config-repo-add-invalid-json
+   MATCH
+== config-repo-add-true
+   MATCH
+== config-repo-add-three
+   MATCH
+== config-repo-remove
+   MATCH
+== config-repo-remove-assoc
+   MATCH
+== config-repo-get-named
+   MATCH
+== config-extra-set
+   MATCH
+== config-extra-set-new
+   MATCH
+== config-extra-json
+   MATCH
+== config-extra-json-merge-list
+   MATCH
+== config-extra-json-merge-object
+   MATCH
+== config-extra-json-merge-mixed
+   MATCH
+== config-extra-json-invalid
+   MATCH
+== config-extra-unset
+   MATCH
+== config-extra-unset-all
+   MATCH
+== config-suggest-set
+   MATCH
+== config-suggest-unset
+   MATCH
+== config-scripts-set
+   MATCH
+== config-scripts-set-one
+   MATCH
+== config-scripts-unset
+   MATCH
+== config-prop-name
+   MATCH
+== config-prop-description
+   MATCH
+== config-prop-min-stability
+   MATCH
+== config-prop-min-stability-invalid
+   MATCH
+== config-prop-prefer-stable
+   MATCH
+== config-prop-keywords
+   MATCH
+== config-prop-license
+   MATCH
+== config-prop-unset
+   MATCH
+== config-prop-unset-other
+   MATCH
+== config-prop-type-too-many
+   MATCH
+== config-platform-set
+   MATCH
+== config-platform-set-false
+   MATCH
+== config-platform-unset
+   MATCH
+== config-platform-unset-all
+   MATCH
+== config-allow-plugins-set
+   MATCH
+== config-allow-plugins-wildcard
+   MATCH
+== config-allow-plugins-invalid
+   MATCH
+== config-allow-plugins-unset
+   MATCH
+== config-auth-github-local
+   MATCH
+== config-auth-github-global
+   MATCH
+== config-auth-github-too-many
+   MATCH
+== config-auth-http-basic
+   MATCH
+== config-auth-http-basic-missing
+   MATCH
+== config-auth-bitbucket
+   MATCH
+== config-auth-bitbucket-missing
+   MATCH
+== config-auth-gitlab-token-pair
+   MATCH
+== config-auth-gitlab-token-three
+   MATCH
+== config-auth-gitlab-oauth
+   MATCH
+== config-auth-bearer
+   MATCH
+== config-auth-forgejo
+   MATCH
+== config-auth-forgejo-missing
+   MATCH
+== config-auth-custom-headers
+   MATCH
+== config-auth-custom-headers-invalid
+   MATCH
+== config-auth-unset
+   MATCH
+== config-auth-unset-missing-file
+   MATCH
+== config-auth-existing-in-json
+   MATCH
+== config-global-set
+   MATCH
+== config-global-set-modes
+   MATCH
+== config-global-get-existing
+   MATCH
+== config-global-list-existing
+   MATCH
+== config-global-merged-in-local
+   MATCH
+== config-global-dir-absolute
+   MATCH
+== config-global-property
+   MATCH
+== config-global-extra
+   MATCH
+== config-global-repo
+   MATCH
+== config-global-unset
+   MATCH
+== config-global-with-file
+   MATCH
+== config-global-no-json
+   MATCH
+== config-file-get
+   MATCH
+== config-file-set
+   MATCH
+== config-file-missing
+   MATCH
+== config-no-composer-json
+   MATCH
+== config-invalid-json
+   MATCH
+== config-composer-env
+   MATCH
+== config-editor
+   MATCH
+== config-editor-auth
+   MATCH
+results: /Users/kouji/dev/gocomposer/docs/validation/20261022T173213Z-compare
+== library-symfony-console
+   install                      MATCH
+   update-no-install            MATCH
+== cli-app
+   install                      MATCH
+   update-no-install            MATCH
+== laravel
+   install                      MATCH
+   update-no-install            MATCH
+== live-psr
+   install                      MATCH
+   update-no-install            MATCH
+results: /Users/kouji/dev/gocomposer/docs/validation/20261022T173713Z-integration

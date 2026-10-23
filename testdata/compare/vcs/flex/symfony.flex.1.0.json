@@ -1,0 +1,26 @@
+{
+    "manifests": {
+        "symfony/flex": {
+            "manifest": {
+                "copy-from-recipe": {
+                    ".env": ".env"
+                },
+                "env": {
+                    "#1": "fixture variables of the flex recipe",
+                    "FLEXFIX_APP_ENV": "dev"
+                }
+            },
+            "files": {
+                ".env": {
+                    "contents": [
+                        "# In all environments, the following files are loaded if they exist,",
+                        "# the latter taking precedence over the former.",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "1f1e0a0c1d2e3f405162738495a6b7c8d9e0f101"
+        }
+    }
+}

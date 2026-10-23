@@ -1,0 +1,25 @@
+== library-symfony-console
+   install                      MATCH
+   update-no-install            MATCH
+== cli-app
+   install                      MATCH
+   update-no-install            MATCH
+== laravel
+   install                      MATCH
+   update-no-install            MATCH
+== live-psr
+   install                      MATCH
+   update-no-install            MATCH
+== plugin-installers
+   install                      MATCH
+   update-no-install            MATCH
+== plugin-php-http-discovery
+   install                      MATCH
+   update-no-install            MATCH
+== plugin-phpcs
+   install                      MATCH
+   update-no-install            MATCH
+== plugin-pest
+   install                      MATCH
+   update-no-install            MATCH
+results: /Users/kouji/dev/gocomposer/docs/validation/20261023T045753Z-integration

@@ -1,0 +1,354 @@
+{
+  "all_match": true,
+  "environment": {
+    "gocomposer_sha256": "c0002892352c26301aacdce924ba7a47d2f220270ad588f412c73edab23450f8",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "oracle_zip_image": "localhost/gocomposer-oracle:8.4-zip",
+    "oracle_zip_image_digest": "sha256:cd7f1f040bba14a1974d175df2110347c2be1d880834ad6a106a3578bfd929fa",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261023T085026Z",
+  "results": [
+    {
+      "scenario": "tty-auth-basic-store-yes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "tty-auth-basic-store-no",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "tty-auth-basic-store-default",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "tty-auth-basic-store-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "tty-auth-basic-store-true",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "tty-auth-basic-store-false",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "tty-auth-basic-403",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "tty-auth-basic-wrong",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "tty-auth-basic-empty",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "tty-auth-basic-eof",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-basic-eof-password",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-basic-vv",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "tty-auth-basic-local-authjson",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "tty-auth-basic-no-interaction",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "tty-auth-github-token",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-github-token-vv",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-github-empty-token",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "tty-auth-github-invalid-token",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "tty-auth-github-eof",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-github-local-yes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-github-local-no",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-github-ratelimit",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "tty-auth-github-no-interaction",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-gitlab-password",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-gitlab-bad-then-good",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-gitlab-local-yes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-gitlab-eof",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-gitlab-no-interaction",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-gitlab-refresh",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-gitlab-refresh-vv",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-gitlab-refresh-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-gitlab-refresh-rejected",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-bitbucket-consumer",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-bitbucket-consumer-vv",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-bitbucket-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "tty-auth-bitbucket-no-key",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "tty-auth-bitbucket-no-secret",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "tty-auth-git-store-yes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-git-store-no",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-git-store-true-v",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-git-wrong",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-git-default-user",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-git-eof",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-git-no-interaction",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-git-github",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-git-github-no-token",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "tty-auth-git-gitlab",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "tty-auth-git-bitbucket",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

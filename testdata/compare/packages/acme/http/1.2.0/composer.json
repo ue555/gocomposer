@@ -1,0 +1,1 @@
+{"name":"acme/http","description":"HTTP client","require":{"php":"^7.4 || ^8.0","acme/util":"^1.0","psr/log-implementation":"^1.0"},"autoload":{"psr-4":{"Acme\\Http\\":"src/"}},"funding":[{"type":"github","url":"https://github.com/sponsors/acme"}]}

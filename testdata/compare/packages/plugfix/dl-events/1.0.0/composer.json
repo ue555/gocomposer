@@ -1,0 +1,1 @@
+{"name":"plugfix/dl-events","description":"Fixture plugin for the download and pool events","type":"composer-plugin","license":"MIT","require":{"composer-plugin-api":"^2.0"},"autoload":{"psr-4":{"Plugfix\\DlEvents\\":"src/"}},"extra":{"class":"Plugfix\\DlEvents\\Plugin"}}

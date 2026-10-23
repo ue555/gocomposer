@@ -1,0 +1,18 @@
+The repository at "/src" does not have the correct ownership and git refuses to use it:
+
+fatal: detected dubious ownership in repository at '/src'
+To add an exception for this directory, call:
+
+git config --global --add safe.directory /src
+
+Composer could not detect the root package (composer/composer) version, defaulting to '1.0.0'. See https://getcomposer.org/root-version
+Installing dependencies from lock file
+Verifying lock file contents can be installed on current platform.
+Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. It is recommended that you run `composer update` or `composer update <package name>`.
+Nothing to install, update or remove
+Generating autoload files
+24 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+Composer version 2.11.999-dev+source @release_date@
+PHP version 8.4.27 (/usr/local/bin/php)
+Run the "diagnose" command to get more detailed diagnostics output.

@@ -1,0 +1,157 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "fd048fa49815cb3c1c5d8b9207c064eb118eea9b2acbd7705ab159533ba8697b",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T164212Z",
+  "results": [
+    {
+      "scenario": "policy-advisory-blocks",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "policy-advisory-blocks-vv",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n- (oracle) Pool optimizer completed in N seconds\n- (oracle) Found 61 package versions referenced in your dependency graph. 1 (2%) were optimized away.",
+        "stderr:\n- (oracle) Dependency resolution completed in N seconds"
+      ],
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "policy-advisory-only-vulnerable",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "policy-no-blocking-audit",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "policy-env-no-blocking",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "policy-audit-install",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress --no-blocking --no-install\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ^1.2 -\u003e satisfiable by acme/http[1.2.0].\n    - acme/http 1.2.0 requires psr/log-implementation ^1.0 -\u003e could not be found in any version, there may be a typo in the package name.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-audit-install-table",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress --no-blocking --no-install\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ^1.2 -\u003e satisfiable by acme/http[1.2.0].\n    - acme/http 1.2.0 requires psr/log-implementation ^1.0 -\u003e could not be found in any version, there may be a typo in the package name.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-audit-install-json",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress --no-blocking --no-install\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ^1.2 -\u003e satisfiable by acme/http[1.2.0].\n    - acme/http 1.2.0 requires psr/log-implementation ^1.0 -\u003e could not be found in any version, there may be a typo in the package name.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-audit-plain",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress --no-blocking --no-install\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ^1.2 -\u003e satisfiable by acme/http[1.2.0].\n    - acme/http 1.2.0 requires psr/log-implementation ^1.0 -\u003e could not be found in any version, there may be a typo in the package name.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-abandoned",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-abandoned-ignore",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-ignore-advisory",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "policy-disabled",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "policy-cooldown-all",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "policy-cooldown-none",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "policy-cooldown-no-cooldown",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-locked-vulnerable-install",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress --no-blocking --no-install\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ^1.2 -\u003e satisfiable by acme/http[1.2.0].\n    - acme/http 1.2.0 requires psr/log-implementation ^1.0 -\u003e could not be found in any version, there may be a typo in the package name.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-partial-update-vulnerable",
+      "status": "ERROR",
+      "differences": [
+        "setup failed: update --no-progress --no-blocking --no-install\nLoading composer repositories with package information\nWarning: Accessing 127.0.0.1 over http which is an insecure protocol.\nUpdating dependencies\nYour requirements could not be resolved to an installable set of packages.\n\n  Problem 1\n    - Root composer.json requires acme/http ^1.0 -\u003e satisfiable by acme/http[1.0.0, 1.2.0].\n    - acme/http[1.0.0, ..., 1.2.0] require psr/log-implementation ^1.0 -\u003e could not be found in any version, there may be a typo in the package name.\n\nPotential causes:\n - A typo in the package name\n - The package is not available in a stable-enough version according to your minimum-stability setting\n   see \u003chttps://getcomposer.org/doc/04-schema.md#minimum-stability-root-only\u003e for more details.\n - It's a private package and you forgot to add a custom repository to find it\n\nRead \u003chttps://getcomposer.org/doc/articles/troubleshooting.md\u003e for further common problems.\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

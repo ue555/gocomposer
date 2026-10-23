@@ -1,0 +1,1 @@
+{"name":"cproj/nodeps","description":"Create-project fixture with a binary","type":"project","license":"MIT","bin":["bin/tool"],"repositories":[{"packagist.org":false}],"require":{"php":">=7.4"},"require-dev":{}}

@@ -1,0 +1,6 @@
+symfony/skeleton v7.4.99 (https://github.com/symfony/skeleton, tag v7.4.99,
+commit bf1abda299403468285fd4fa0514d916991c9120), MIT license. composer.json
+is the skeleton's with what symfony/flex does on create-project applied
+(flex-require merged into require with "7.4.*" for the symfony/* packages,
+license proprietary, name/description removed). The lock file
+(../locks/symfony-skeleton.lock) is generated once with the official Composer.

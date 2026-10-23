@@ -1,0 +1,56 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "cd65130634f94e65b31efa557c48ee6c044582a544ee79e94ad851b939fa05de",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T163429Z",
+  "results": [
+    {
+      "scenario": "validate-publish-errors",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "validate-lax-fail",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go)                                                                      \n+ (go)   \"./composer.json\" does not match the expected JSON schema:         \n+ (go)    - require.acme/log : Array value found, but a string is required  \n+ (go)                                                                      \n- (oracle)                                                                                \n- (oracle)   [TypeError]                                                                  \n- (oracle)   Composer\\Pcre\\Preg::isMatch(): Argument #2 ($subject) must be of type strin  \n- (oracle)   g, array given, called in /oracle-source/src/Composer/Util/ConfigValidator.  \n- (oracle)   php on line 179                                                              \n- (oracle)                                                                                \n- (oracle) Exception trace:\n- (oracle)   at /oracle-source/vendor/composer/pcre/src/Preg.php:289\n- (oracle)  Composer\\Pcre\\Preg::isMatch() at /oracle-source/src/Composer/Util/ConfigValidator.php:179\n- (oracle)  Composer\\Util\\ConfigValidator-\u003evalidate() at /oracle-source/src/Composer/Command/ValidateCommand.php:89\n- (oracle)  Composer\\Command\\ValidateCommand-\u003eexecute() at /oracle-source/vendor/symfony/console/Command/Command.php:298\n- (oracle)  Symfony\\Component\\Console\\Command\\Command-\u003erun() at /oracle-source/vendor/symfony/console/Application.php:1040\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRunCommand() at /oracle-source/vendor/symfony/console/Application.php:301\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRun() at /oracle-source/src/Composer/Console/Application.php:504\n- (oracle)  Composer\\Console\\Application-\u003edoRunComposer() at /oracle-source/src/Composer/Console/Application.php:169\n- (oracle)  Composer\\Console\\Application-\u003edoRun() at /oracle-source/vendor/symfony/console/Application.php:171\n- (oracle)  Symfony\\Component\\Console\\Application-\u003erun() at /oracle-source/src/Composer/Console/Application.php:142\n- (oracle)  Composer\\Console\\Application-\u003erun() at /oracle-source/bin/composer:113\n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "validate-lax-fail-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "composer-auth-invalid",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=255 go=0",
+        "stderr:\n+ (go) ./composer.json is valid, but with a few warnings\n+ (go) See https://getcomposer.org/doc/04-schema.md for details on the schema\n+ (go) # General warnings\n+ (go) - No license specified, it is recommended to do so. For closed-source software you may use \"proprietary\" as license.\n- (oracle) Fatal error: Uncaught TypeError: Composer\\IO\\BaseIO::checkAndSetAuthentication(): Argument #2 ($username) must be of type string, int given, called in /oracle-source/src/Composer/IO/BaseIO.php on line 175 and defined in /oracle-source/src/Composer/IO/BaseIO.php:95\n- (oracle) Stack trace:\n- (oracle) #0 /oracle-source/src/Composer/IO/BaseIO.php(175): Composer\\IO\\BaseIO-\u003echeckAndSetAuthentication('example.org', 5, NULL)\n- (oracle) #1 /oracle-source/src/Composer/Factory.php(357): Composer\\IO\\BaseIO-\u003eloadConfiguration(Object(Composer\\Config))\n- (oracle) #2 /oracle-source/src/Composer/Factory.php(627): Composer\\Factory-\u003ecreateComposer(Object(Composer\\IO\\ConsoleIO), Array, true, '/work/project', true, false)\n- (oracle) #3 /oracle-source/src/Composer/Console/Application.php(676): Composer\\Factory::create(Object(Composer\\IO\\ConsoleIO), NULL, true, false)\n- (oracle) #4 /oracle-source/src/Composer/Console/Application.php(585): Composer\\Console\\Application-\u003egetComposer(false, true)\n- (oracle) #5 /oracle-source/src/Composer/Console/Application.php(532): Composer\\Console\\Application-\u003ehintCommonErrors(Object(ErrorException), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n- (oracle) #6 /oracle-source/src/Composer/Console/Application.php(169): Composer\\Console\\Application-\u003edoRunComposer(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Composer\\IO\\ConsoleIO))\n- (oracle) #7 /oracle-source/vendor/symfony/console/Application.php(171): Composer\\Console\\Application-\u003edoRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n- (oracle) #8 /oracle-source/src/Composer/Console/Application.php(142): Symfony\\Component\\Console\\Application-\u003erun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n- (oracle) #9 /oracle-source/bin/composer(113): Composer\\Console\\Application-\u003erun()\n- (oracle) #10 {main}\n- (oracle)   thrown in /oracle-source/src/Composer/IO/BaseIO.php on line 95"
+      ],
+      "oracle_exit": 255,
+      "go_exit": 0
+    },
+    {
+      "scenario": "composer-auth-malformed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    }
+  ]
+}

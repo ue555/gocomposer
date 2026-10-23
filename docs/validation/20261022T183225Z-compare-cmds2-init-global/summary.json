@@ -1,0 +1,397 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "9e970177a636b81c8bd3854b020cf951f27da0fb7db8f03a233eef6c8ced4ad8",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T183225Z",
+  "results": [
+    {
+      "scenario": "init-full",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-full-reordered",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-require",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-require-pair-args",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-require-no-version",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-require-dev-no-version",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-autoload",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-autoload-nested",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-autoload-with-deps",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-autoload-dev-deps",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-git-defaults",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-git-defaults-description",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-env-defaults",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-env-overrides-git",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-user-env",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-no-defaults",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-camel-dir",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-invalid-name",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-invalid-name-noslash",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-invalid-author",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-invalid-email",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-empty-author",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-author-name-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-existing-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-existing-git",
+      "status": "ERROR",
+      "differences": [
+        "podman run failed: exit status 128\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-repository",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-repository-invalid",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-repository-bad-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-repository-composer-file",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-repository-filesystem-file",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-repository-missing-file",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) In \u003clocation\u003e:\n- (oracle)                                                                                \n- (oracle)   The \"missing.json\" file could not be downloaded: Failed to open stream: No   \n- (oracle)   such file or directory                                                       \n- (oracle)                                                                                \n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-bad-stability",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-bad-type-schema",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "init-bad-license",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-composer-env",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-composer-env-subdir",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "init-unicode",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-require",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-show",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-show-abbrev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-options-first",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-remove",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-no-args",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "global-unknown-option-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "global-unknown-command",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) global \u003ccommand-name\u003e [\u003cargs\u003e...]\n+ (go) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "global-config-quoted",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-config-equals",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-new-home",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-composer-env",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-validate",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "global-dump-autoload",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "global-help",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=0 go=1",
+        "stdout:\n- (oracle) Description:\n- (oracle)   Allows running commands in the global composer dir ($COMPOSER_HOME)\n- (oracle) Usage:\n- (oracle)   global \u003ccommand-name\u003e [\u003cargs\u003e...]\n- (oracle) \n- (oracle) Arguments:\n- (oracle)   command-name                   \n- (oracle)   args                           \n- (oracle) \n- (oracle) Options:\n- (oracle)   -h, --help                     Display help for the given command. When no command is given display help for the list command\n- (oracle)   -q, --quiet                    Do not output any message\n- (oracle)   -V, --version                  Display this application version\n- (oracle)       --ansi|--no-ansi           Force (or disable --no-ansi) ANSI output\n- (oracle)   -n, --no-interaction           Do not ask any interactive question\n- (oracle)       --profile                  Display timing and memory usage information\n- (oracle)       --no-plugins               Whether to disable plugins.\n- (oracle)       --no-scripts               Skips the execution of all scripts defined in composer.json file.\n- (oracle)   -d, --working-dir=WORKING-DIR  If specified, use the given directory as working directory.\n- (oracle)       --no-cache                 Prevent use of the cache\n- (oracle)   -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug\n- (oracle) \n- (oracle) Help:\n- (oracle)   Use this command as a wrapper to run other Composer commands\n- (oracle)   within the global context of COMPOSER_HOME.\n- (oracle)   \n- (oracle)   You can use this to install CLI utilities globally, all you need\n- (oracle)   is to add the COMPOSER_HOME/vendor/bin dir to your PATH env var.\n- (oracle)   \n- (oracle)   COMPOSER_HOME is c:\\Users\u003cuser\u003e\\AppData\\Roaming\\Composer on Windows\n- (oracle)   and /home/\u003cuser\u003e/.composer on unix systems.\n- (oracle)   \n- (oracle)   If your system uses freedesktop.org standards, then it will first check\n- (oracle)   XDG_CONFIG_HOME or default to /home/\u003cuser\u003e/.config/composer\n- (oracle)   \n- (oracle)   Note: This path may vary depending on customizations to bin-dir in\n- (oracle)   composer.json or the environmental variable COMPOSER_BIN_DIR.\n- (oracle)   \n- (oracle)   Read more at https://getcomposer.org/doc/03-cli.md#global\n- (oracle) ",
+        "stderr:\n+ (go)                                                    \n+ (go)   Not enough arguments (missing: \"command-name\").  \n+ (go)                                                    \n+ (go) \n+ (go) global \u003ccommand-name\u003e [\u003cargs\u003e...]\n+ (go) \n+ (go) "
+      ],
+      "oracle_exit": 0,
+      "go_exit": 1
+    }
+  ]
+}

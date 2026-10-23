@@ -1,0 +1,104 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "275660250c9286fd7d3ab03b95ceb956884427c47667e92fd8c970a5db48e5c7",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T162807Z",
+  "results": [
+    {
+      "scenario": "depends-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-recursive",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) test/project  -     requires    acme/cli (^1.0)         \n+ (go) test/project  -     requires    acme/http (^1.0)        \n+ (go) test/project  -     devRequires acme/devtools (^1.0)    \n+ (go) test/project  -     requires    acme/log-impl (^1.0)    \n+ (go) acme/cli      1.0.0 requires    acme/util (^1.0)        \n+ (go) acme/http     1.2.0 requires    acme/util (^1.0)        \n+ (go) acme/devtools 1.0.0 requires    acme/log (^1.0 || ^2.0) \n+ (go) acme/log-impl 1.0.0 requires    acme/log (^1.0)         \n+ (go) acme/util     1.1.0 requires    acme/log (^1.1)         \n- (oracle) test/project  -     requires                   acme/cli (^1.0)         \n- (oracle) test/project  -     requires                   acme/http (^1.0)        \n- (oracle) test/project  -     requires (for development) acme/devtools (^1.0)    \n- (oracle) test/project  -     requires                   acme/log-impl (^1.0)    \n- (oracle) acme/cli      1.0.0 requires                   acme/util (^1.0)        \n- (oracle) acme/http     1.2.0 requires                   acme/util (^1.0)        \n- (oracle) acme/devtools 1.0.0 requires                   acme/log (^1.0 || ^2.0) \n- (oracle) acme/log-impl 1.0.0 requires                   acme/log (^1.0)         \n- (oracle) acme/util     1.1.0 requires                   acme/log (^1.1)         "
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-tree",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) |  `--test/project (devRequires acme/devtools ^1.0)\n- (oracle) |  `--test/project (requires (for development) acme/devtools ^1.0)"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-php",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-notfound",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "depends-locked",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "prohibits-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "prohibits-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "prohibits-php",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "prohibits-tree",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "why-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "depends-nothing-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    }
+  ]
+}

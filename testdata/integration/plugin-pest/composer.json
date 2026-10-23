@@ -1,0 +1,19 @@
+{
+    "name": "gocomposer/integration-plugin-pest",
+    "description": "Integration fixture: pestphp/pest-plugin dumping the plugin cache (post-autoload-dump plugin)",
+    "type": "project",
+    "license": "MIT",
+    "require-dev": {
+        "pestphp/pest-plugin": "^5.0"
+    },
+    "extra": {
+        "pest": {
+            "plugins": ["Gocomposer\\Integration\\PestPlugin"]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "name": "gocomposer/integration-plugin-installers",
+    "description": "Integration fixture: composer/installers with installer-paths",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "composer/installers": "^2.3",
+        "roots/soil": "^4.1",
+        "yoast/duplicate-post": "^4.6"
+    },
+    "extra": {
+        "installer-paths": {
+            "web/app/mu-plugins/{$name}/": ["roots/soil"],
+            "web/app/plugins/{$name}/": ["type:wordpress-plugin"]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}

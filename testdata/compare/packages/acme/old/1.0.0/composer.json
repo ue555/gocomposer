@@ -1,0 +1,1 @@
+{"name":"acme/old","description":"Old package","autoload":{"psr-4":{"Acme\\Old\\":"src/"}}}

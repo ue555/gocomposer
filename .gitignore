@@ -1,0 +1,13 @@
+/.cache/
+/bin/
+/vendor/
+/auth.json
+/.env
+/.claude/settings.local.json
+/tools/compare/compare
+/tools/integration/integration
+# 検証ログはサマリーとログだけを管理し、シナリオごとの生データ（約1GB）は含めない
+/docs/validation/*/*
+!/docs/validation/*/summary.md
+!/docs/validation/*/summary.json
+!/docs/validation/*/*.log

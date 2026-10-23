@@ -1,0 +1,1 @@
+{"name":"plugfix/asset-a","description":"Fixture package of the asset installer","type":"plugfix-asset","license":"MIT","require":{"plugfix/custom-installers":"^1.0"}}

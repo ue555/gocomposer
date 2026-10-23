@@ -1,0 +1,1 @@
+{"name":"plugfix/lib-a","description":"Fixture package of the hook installer","type":"plugfix-lib","license":"MIT","require":{"plugfix/custom-installers":"^1.0"},"autoload":{"psr-4":{"Plugfix\\LibA\\":"src/"}}}

@@ -1,0 +1,21 @@
+{
+  "upstream_identity_and_license": "PASS",
+  "upstream_unchanged": "PASS",
+  "shell_syntax": "PASS",
+  "unimplemented_verify": {
+    "exit_code": 2,
+    "stderr": "未実装: Go moduleとcmd/gocomposerが必要です",
+    "expected": true
+  },
+  "launcher_initial_and_resume": "PASS using stub; real Claude session not started",
+  "skill_validator": "PASS",
+  "tools": {
+    "claude": "/Users/kouji/.local/bin/claude",
+    "go": "/opt/homebrew/bin/go",
+    "php": null,
+    "podman": "/opt/homebrew/bin/podman",
+    "docker": null
+  },
+  "go_implementation": "NOT STARTED; Claude development environment only",
+  "official_composer_comparison": "NOT RUN"
+}

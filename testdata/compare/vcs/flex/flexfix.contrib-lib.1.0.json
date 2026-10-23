@@ -1,0 +1,13 @@
+{
+    "manifests": {
+        "flexfix/contrib-lib": {
+            "manifest": {
+                "env": {
+                    "CONTRIB_LIB": "1"
+                }
+            },
+            "files": {},
+            "ref": "5a5b5c5d5e5f606162636465666768696a6b6c6d"
+        }
+    }
+}

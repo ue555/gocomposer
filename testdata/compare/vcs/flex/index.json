@@ -1,0 +1,50 @@
+{
+    "recipes": {
+        "symfony/flex": [
+            "1.0"
+        ],
+        "flexfix/hello-bundle": [
+            "1.0",
+            "2.0"
+        ],
+        "flexfix/recipe-lib": [
+            "1.0"
+        ]
+    },
+    "recipe-conflicts": {},
+    "versions": {
+        "lts": "1.0",
+        "previous": "1.0",
+        "stable": "1.1",
+        "next": "2.0",
+        "dev": "2.0",
+        "dev-name": "2.0",
+        "splits": {
+            "flexfix/split-a": [
+                "1.0",
+                "1.1",
+                "2.0"
+            ],
+            "flexfix/split-b": [
+                "1.0",
+                "1.1",
+                "2.0"
+            ]
+        }
+    },
+    "aliases": {
+        "hello": "flexfix/hello-bundle",
+        "rlib": "flexfix/recipe-lib",
+        "fpack": "flexfix/pack"
+    },
+    "branch": "main",
+    "is_contrib": false,
+    "_links": {
+        "repository": "github.com/gocomposer/flex-recipes",
+        "origin_template": "{package}:{version}@github.com/gocomposer/flex-recipes:main",
+        "recipe_template": "https://127.0.0.1/flex/{package_dotted}.{version}.json",
+        "recipe_template_relative": "{package_dotted}.{version}.json",
+        "archived_recipes_template": "https://127.0.0.1/flex/archived/{package_dotted}/{ref}.json",
+        "archived_recipes_template_relative": "archived/{package_dotted}/{ref}.json"
+    }
+}

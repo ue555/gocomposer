@@ -1,0 +1,1 @@
+{"name":"flexfix/pack","description":"Fixture Symfony pack","type":"symfony-pack","license":"MIT","require":{"flexfix/recipe-lib":"^1.0","flexfix/auto-bundle":"^1.0"}}

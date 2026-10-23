@@ -1,0 +1,1 @@
+{"name":"ttyfix/oldlib","description":"Old library","license":"MIT","abandoned":"ttyfix/lib","autoload":{"psr-4":{"Ttyfix\\":"src/"}}}

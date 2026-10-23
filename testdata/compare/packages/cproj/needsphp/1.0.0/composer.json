@@ -1,0 +1,1 @@
+{"name":"cproj/needsphp","description":"Create-project fixture needing a future PHP","type":"project","license":"MIT","require":{"php":">=99.0"}}

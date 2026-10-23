@@ -1,0 +1,1 @@
+{"name":"fundco/alpha","description":"Alpha package with funding","type":"library","keywords":["money","sponsor"],"homepage":"https://example.org/alpha","support":{"source":"https://example.org/alpha/src"},"funding":[{"type":"github","url":"https://github.com/fundco"},{"type":"custom","url":"https://example.org/donate"}]}

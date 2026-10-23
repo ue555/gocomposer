@@ -1,0 +1,1 @@
+{"name":"acme/needs-php9","description":"Needs a future PHP","require":{"php":"^9.0"}}

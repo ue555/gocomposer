@@ -1,0 +1,107 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "6705ff9e4c994bee49b11d8652d41ef7971cd948af242b445b91da6d2d607807",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T161821Z",
+  "results": [
+    {
+      "scenario": "validate-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-clean",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-warnings",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=1 go=0",
+        "stderr:\n+ (go) ./composer.json is valid, but with a few warnings\n+ (go) See https://getcomposer.org/doc/04-schema.md for details on the schema\n+ (go) # General warnings\n+ (go) - License \"GPL-2.0\" is a deprecated SPDX license identifier, use \"GPL-2.0-only\" or \"GPL-2.0-or-later\" instead\n+ (go) - The version field is present, it is recommended to leave it out if the package is published on Packagist.\n+ (go) - acme/cli is required both in require and require-dev, this can lead to unexpected behavior\n+ (go) - The package acme/cli in require is also listed in provide which satisfies the requirement. Remove it from provide if you wish to install it.\n+ (go) - The package acme/cli in require-dev is also listed in provide which satisfies the requirement. Remove it from provide if you wish to install it.\n+ (go) - The package \"acme/http\" is pointing to a commit-ref, this is bad practice and can cause unforeseen issues.\n+ (go) - Description for non-existent script \"b\" found in \"scripts-descriptions\"\n+ (go) - homepage : invalid value (example.com), must be an http/https URL\n+ (go) - keywords.1 : invalid value (bad!), must match [\\p{N}\\p{L} ._-]+\n+ (go) - License \"Foo-License\" is not a valid SPDX license identifier, see https://spdx.org/licenses/ if you use an open license.\n+ (go) If the software is closed-source, you may use \"proprietary\" as license.\n+ (go) - License \" MIT \" must not contain extra spaces, make sure to trim it.\n+ (go) - authors.0.email : invalid value (not-an-email), must be a valid email address\n+ (go) - require.acme/log : unbound version constraints (*) should be avoided\n+ (go) - require.acme/util : exact version constraints (1.0.0) should be avoided if the package follows semantic versioning\n- (oracle) In \u003clocation\u003e:\n- (oracle)                                                               \n- (oracle)   \"./composer.json\" does not match the expected JSON schema:  \n- (oracle)    - authors[0].email : Invalid email                         \n- (oracle)    - homepage : Invalid URL format                            \n- (oracle)                                                               \n- (oracle) \n- (oracle) validate [--no-check-all] [--check-lock] [--no-check-lock] [--no-check-publish] [--no-check-version] [-A|--with-dependencies] [--strict] [--] [\u003cfile\u003e]\n- (oracle) \n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-strict-warnings",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "validate-no-check",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-missing-file",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 3,
+      "go_exit": 3
+    },
+    {
+      "scenario": "validate-invalid-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "validate-duplicate-key",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Composer could not detect the root package (test/project) version, defaulting to '1.0.0'. See https://getcomposer.org/root-version"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-lock-stale",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "validate-lock-stale-no-check",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-with-dependencies",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "validate-bad-constraint",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) In \u003clocation\u003e:\n- (oracle)                                                                                \n- (oracle)   Could not parse version constraint ~\u003e1: Invalid operator \"~\u003e\", you probably  \n- (oracle)    meant to use the \"~\" operator                                               \n- (oracle)                                                                                \n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    }
+  ]
+}

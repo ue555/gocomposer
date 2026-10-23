@@ -1,0 +1,69 @@
+== go version
+go version go1.23.12 linux/arm64
+== gofmt
+== vet
+== test
+?   	gocomposer/cmd/gocomposer	[no test files]
+?   	gocomposer/internal/autoload	[no test files]
+ok  	gocomposer/internal/archiver	0.034s
+ok  	gocomposer/internal/cache	0.002s
+ok  	gocomposer/internal/cio	0.002s
+ok  	gocomposer/internal/cli	0.009s
+?   	gocomposer/internal/config	[no test files]
+?   	gocomposer/internal/fsutil	[no test files]
+?   	gocomposer/internal/installed	[no test files]
+?   	gocomposer/internal/locker	[no test files]
+?   	gocomposer/internal/pkg	[no test files]
+?   	gocomposer/internal/repo	[no test files]
+?   	gocomposer/internal/res	[no test files]
+?   	gocomposer/tools/compare	[no test files]
+?   	gocomposer/tools/integration	[no test files]
+ok  	gocomposer/internal/composer	3.105s
+ok  	gocomposer/internal/configsource	2.499s
+ok  	gocomposer/internal/httpdl	0.003s
+ok  	gocomposer/internal/jsonfile	0.001s
+ok  	gocomposer/internal/jsonlint	0.015s
+ok  	gocomposer/internal/jsonmanip	1.280s
+ok  	gocomposer/internal/jsonschema	0.218s
+ok  	gocomposer/internal/pcre	8.998s
+ok  	gocomposer/internal/phpjson	0.002s
+ok  	gocomposer/internal/platform	0.005s
+ok  	gocomposer/internal/policy	0.060s
+ok  	gocomposer/internal/semver	0.034s
+ok  	gocomposer/internal/solver	0.033s
+ok  	gocomposer/internal/spdx	0.003s
+ok  	gocomposer/internal/validate	0.010s
+ok  	gocomposer/internal/vcs	0.033s
+== race
+?   	gocomposer/cmd/gocomposer	[no test files]
+?   	gocomposer/internal/autoload	[no test files]
+ok  	gocomposer/internal/archiver	1.084s
+ok  	gocomposer/internal/cache	1.014s
+ok  	gocomposer/internal/cio	1.025s
+?   	gocomposer/internal/config	[no test files]
+?   	gocomposer/internal/fsutil	[no test files]
+ok  	gocomposer/internal/cli	1.123s
+?   	gocomposer/internal/installed	[no test files]
+?   	gocomposer/internal/locker	[no test files]
+?   	gocomposer/internal/pkg	[no test files]
+?   	gocomposer/internal/repo	[no test files]
+?   	gocomposer/internal/res	[no test files]
+?   	gocomposer/tools/compare	[no test files]
+?   	gocomposer/tools/integration	[no test files]
+ok  	gocomposer/internal/composer	25.572s
+ok  	gocomposer/internal/configsource	21.184s
+ok  	gocomposer/internal/httpdl	1.020s
+ok  	gocomposer/internal/jsonfile	1.009s
+ok  	gocomposer/internal/jsonlint	1.030s
+ok  	gocomposer/internal/jsonmanip	12.898s
+ok  	gocomposer/internal/jsonschema	3.527s
+ok  	gocomposer/internal/pcre	82.697s
+ok  	gocomposer/internal/phpjson	1.030s
+ok  	gocomposer/internal/platform	1.027s
+ok  	gocomposer/internal/policy	1.329s
+ok  	gocomposer/internal/semver	1.400s
+ok  	gocomposer/internal/solver	1.424s
+ok  	gocomposer/internal/spdx	1.039s
+ok  	gocomposer/internal/validate	1.096s
+ok  	gocomposer/internal/vcs	1.133s
+== build

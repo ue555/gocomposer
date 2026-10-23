@@ -1,0 +1,1 @@
+{"name":"flexfix/hello-bundle","description":"Fixture bundle with a recipe","type":"symfony-bundle","license":"MIT","require":{"php":">=7.4"},"autoload":{"psr-4":{"Flexfix\\HelloBundle\\":"src/"}}}

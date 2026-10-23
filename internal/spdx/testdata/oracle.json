@@ -1,0 +1,250 @@
+[
+    {
+        "valid": true,
+        "byId": [
+            "MIT License",
+            true,
+            "https://spdx.org/licenses/MIT.html#licenseText",
+            false
+        ]
+    },
+    {
+        "valid": true,
+        "byId": [
+            "MIT License",
+            true,
+            "https://spdx.org/licenses/MIT.html#licenseText",
+            false
+        ]
+    },
+    {
+        "valid": true,
+        "byId": [
+            "GNU General Public License v2.0 or later",
+            true,
+            "https://spdx.org/licenses/GPL-2.0+.html#licenseText",
+            true
+        ]
+    },
+    {
+        "valid": true,
+        "byId": [
+            "GNU General Public License v2.0 or later",
+            true,
+            "https://spdx.org/licenses/GPL-2.0-or-later.html#licenseText",
+            false
+        ]
+    },
+    {
+        "valid": true,
+        "byId": [
+            "GNU General Public License v3.0 only",
+            true,
+            "https://spdx.org/licenses/GPL-3.0.html#licenseText",
+            true
+        ]
+    },
+    {
+        "valid": true,
+        "byId": [
+            "GNU Lesser General Public License v2.1 only",
+            true,
+            "https://spdx.org/licenses/LGPL-2.1.html#licenseText",
+            true
+        ]
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": [
+            "GNU Affero General Public License v3.0",
+            true,
+            "https://spdx.org/licenses/AGPL-3.0.html#licenseText",
+            true
+        ]
+    },
+    {
+        "valid": true,
+        "byId": [
+            "BSD 2-Clause FreeBSD License",
+            false,
+            "https://spdx.org/licenses/BSD-2-Clause-FreeBSD.html#licenseText",
+            true
+        ]
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": [
+            "The Unlicense",
+            true,
+            "https://spdx.org/licenses/Unlicense.html#licenseText",
+            false
+        ]
+    },
+    {
+        "valid": true,
+        "byId": [
+            "Do What The F*ck You Want To Public License",
+            false,
+            "https://spdx.org/licenses/WTFPL.html#licenseText",
+            false
+        ]
+    },
+    {
+        "valid": true,
+        "byId": [
+            "Creative Commons Attribution 4.0 International",
+            false,
+            "https://spdx.org/licenses/CC-BY-4.0.html#licenseText",
+            false
+        ]
+    },
+    {
+        "valid": true,
+        "byId": [
+            "BSD Zero Clause License",
+            true,
+            "https://spdx.org/licenses/0BSD.html#licenseText",
+            false
+        ]
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    },
+    {
+        "valid": false,
+        "byId": null
+    },
+    {
+        "valid": true,
+        "byId": null
+    }
+]

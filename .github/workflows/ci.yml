@@ -1,0 +1,62 @@
+# CI for gocomposer. The same steps are reproduced locally by
+# scripts/ci-local.sh; see docs/progress.md for the verification record.
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: unit (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+      - name: gofmt
+        run: test -z "$(gofmt -l cmd internal tools)"
+      - name: vet
+        run: go vet ./...
+      - name: test
+        run: go test ./...
+      - name: race
+        run: go test -race ./...
+      - name: build
+        run: go build -o bin/gocomposer ./cmd/gocomposer
+
+  oracle:
+    # Differential comparison against the pinned official Composer and the
+    # fixed real-project integration (needs podman and network access).
+    name: compare + integration (linux)
+    runs-on: ubuntu-24.04
+    needs: unit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+      - name: prepare oracle (php 8.3/8.4/8.5 images, composer f83588392df4)
+        run: scripts/prepare-oracle.sh
+      - name: compare (PHP 8.4)
+        run: scripts/compare.sh
+      - name: compare (PHP 8.3)
+        run: scripts/compare.sh -image localhost/gocomposer-oracle:8.3
+      - name: compare (PHP 8.5)
+        run: scripts/compare.sh -image localhost/gocomposer-oracle:8.5
+      - name: integration
+        run: scripts/integration.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation
+          path: docs/validation/

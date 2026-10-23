@@ -1,0 +1,1 @@
+{"name":"ttyfix/tester","description":"Test runner","keywords":["Testing","runner"],"license":"MIT","autoload":{"psr-4":{"Ttyfix\\":"src/"}},"bin":["bin/tester"]}

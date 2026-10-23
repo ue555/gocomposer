@@ -1,0 +1,5 @@
+symfony/flex v2.11.0 (https://github.com/symfony/flex, tag v2.11.0,
+commit 4a6d98eea3ebc7f68d82810cb682eedca2649e99), MIT license (see LICENSE, (c) Fabien Potencier).
+The src/ directory and LICENSE are unmodified; composer.json is the package's
+own without "require-dev". Used as a fixture package by the gocomposer
+comparison scenarios (tools/compare/scenarios_plugin2.go, flex-*).

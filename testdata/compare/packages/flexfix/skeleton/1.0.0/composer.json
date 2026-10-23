@@ -1,0 +1,18 @@
+{
+    "name": "flexfix/skeleton",
+    "description": "Fixture skeleton project using Symfony Flex (flex-require, like symfony/skeleton)",
+    "type": "project",
+    "license": "MIT",
+    "repositories": [
+        {"type": "composer", "url": "http://127.0.0.1:8899"},
+        {"packagist.org": false}
+    ],
+    "config": {"secure-http": false, "cafile": "/fixtures/git/_api/ca.pem", "allow-plugins": {"symfony/flex": true}, "sort-packages": true},
+    "require": {"symfony/flex": "^2.11"},
+    "flex-require": {"flexfix/hello-bundle": "*", "flexfix/split-a": "*"},
+    "scripts": {"auto-scripts": {"echo auto-ok": "script"}, "post-install-cmd": ["@auto-scripts"], "post-update-cmd": ["@auto-scripts"]},
+    "extra": {
+        "symfony": {"endpoint": ["https://127.0.0.1/flex/index.json", "https://127.0.0.1/flex/contrib.json"], "allow-contrib": false, "require": "1.*"},
+        "branch-alias": {"dev-main": "1.0-dev"}
+    }
+}

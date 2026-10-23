@@ -1,0 +1,1 @@
+{"name":"acme/util","description":"Utilities","license":["MIT"],"require":{"acme/log":"^1.0","ext-json":"*"},"autoload":{"psr-4":{"Acme\\Util\\":"src/"},"files":["src/functions.php"],"classmap":["lib/"]},"authors":[{"name":"A. Dev","email":"dev@example.org"}]}

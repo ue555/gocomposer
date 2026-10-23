@@ -1,0 +1,25 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_linux_sha256": "c455b969f4f4c61d665f71c968418554a6397d8ecb9065ce28b79f8e274e7e0b",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T164629Z",
+  "results": [
+    {
+      "project": "cli-app",
+      "step": "setup",
+      "status": "ERROR",
+      "differences": [
+        "official composer update failed:\nLoading composer repositories with package information\nUpdating dependencies\nLock file operations: 27 installs, 0 updates, 0 removals\n  - Locking carbonphp/carbon-doctrine-types (3.2.1)\n  - Locking guzzlehttp/guzzle (7.16.0)\n  - Locking guzzlehttp/promises (2.6.0)\n  - Locking guzzlehttp/psr7 (2.13.2)\n  - Locking monolog/monolog (3.12.1)\n  - Locking nesbot/carbon (3.15.0)\n  - Locking psr/clock (1.0.0)\n  - Locking psr/container (2.0.2)\n  - Locking psr/http-client (1.0.3)\n  - Locking psr/http-factory (1.1.0)\n  - Locking psr/http-message (2.0)\n  - Locking psr/log (3.0.2)\n  - Locking ralouphie/getallheaders (3.0.3)\n  - Locking symfony/clock (v8.1.9)\n  - Locking symfony/console (v7.4.21)\n  - Locking symfony/deprecation-contracts (v3.7.1)\n  - Locking symfony/polyfill-ctype (v1.37.0)\n  - Locking symfony/polyfill-intl-grapheme (v1.43.0)\n  - Locking symfony/polyfill-intl-normalizer (v1.43.0)\n  - Locking symfony/polyfill-mbstring (v1.43.0)\n  - Locking symfony/polyfill-php80 (v1.43.0)\n  - Locking symfony/polyfill-time (v1.42.0)\n  - Locking symfony/service-contracts (v3.7.3)\n  - Locking symfony/string (v8.1.9)\n  - Locking symfony/translation (v8.1.5)\n  - Locking symfony/translation-contracts (v3.7.1)\n  - Locking symfony/var-dumper (v7.4.21)\nWriting lock file\n15 package suggestions were added by new dependencies, use `composer suggest` to see details.\n\u003e @php bin/app greet --name=update\nScript @php bin/app greet --name=update handling the post-update-cmd event returned with error code 255\n"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

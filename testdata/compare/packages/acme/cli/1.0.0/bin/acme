@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php
+
+require $GLOBALS["_composer_autoload_path"];
+echo acme_util_hello(), "\n";

@@ -1,0 +1,69 @@
+== go version
+go version go1.23.12 darwin/arm64
+== gofmt
+== vet
+== test
+?   	gocomposer/cmd/gocomposer	[no test files]
+?   	gocomposer/internal/autoload	[no test files]
+ok  	gocomposer/internal/archiver	(cached)
+ok  	gocomposer/internal/cache	(cached)
+ok  	gocomposer/internal/cio	(cached)
+ok  	gocomposer/internal/cli	(cached)
+?   	gocomposer/internal/config	[no test files]
+?   	gocomposer/internal/installed	[no test files]
+?   	gocomposer/internal/fsutil	[no test files]
+?   	gocomposer/internal/locker	[no test files]
+ok  	gocomposer/internal/composer	(cached)
+ok  	gocomposer/internal/configsource	(cached)
+ok  	gocomposer/internal/httpdl	(cached)
+ok  	gocomposer/internal/jsonfile	(cached)
+ok  	gocomposer/internal/jsonlint	(cached)
+ok  	gocomposer/internal/jsonmanip	(cached)
+ok  	gocomposer/internal/jsonschema	(cached)
+ok  	gocomposer/internal/pcre	(cached)
+ok  	gocomposer/internal/phpjson	(cached)
+?   	gocomposer/internal/pkg	[no test files]
+ok  	gocomposer/internal/platform	(cached)
+?   	gocomposer/internal/repo	[no test files]
+?   	gocomposer/internal/res	[no test files]
+ok  	gocomposer/internal/policy	(cached)
+ok  	gocomposer/internal/semver	(cached)
+ok  	gocomposer/internal/solver	(cached)
+ok  	gocomposer/internal/spdx	(cached)
+ok  	gocomposer/internal/validate	(cached)
+ok  	gocomposer/internal/vcs	(cached)
+?   	gocomposer/tools/integration	[no test files]
+ok  	gocomposer/tools/compare	0.293s
+== race
+?   	gocomposer/cmd/gocomposer	[no test files]
+?   	gocomposer/internal/autoload	[no test files]
+ok  	gocomposer/internal/archiver	(cached)
+ok  	gocomposer/internal/cache	(cached)
+ok  	gocomposer/internal/cio	(cached)
+ok  	gocomposer/internal/cli	(cached)
+?   	gocomposer/internal/config	[no test files]
+?   	gocomposer/internal/fsutil	[no test files]
+?   	gocomposer/internal/installed	[no test files]
+?   	gocomposer/internal/locker	[no test files]
+ok  	gocomposer/internal/composer	(cached)
+ok  	gocomposer/internal/configsource	(cached)
+ok  	gocomposer/internal/httpdl	(cached)
+ok  	gocomposer/internal/jsonfile	(cached)
+ok  	gocomposer/internal/jsonlint	(cached)
+ok  	gocomposer/internal/jsonmanip	(cached)
+ok  	gocomposer/internal/jsonschema	(cached)
+ok  	gocomposer/internal/pcre	(cached)
+?   	gocomposer/internal/pkg	[no test files]
+ok  	gocomposer/internal/phpjson	(cached)
+ok  	gocomposer/internal/platform	(cached)
+?   	gocomposer/internal/repo	[no test files]
+?   	gocomposer/internal/res	[no test files]
+ok  	gocomposer/internal/policy	(cached)
+ok  	gocomposer/internal/semver	(cached)
+ok  	gocomposer/internal/solver	(cached)
+ok  	gocomposer/internal/spdx	(cached)
+ok  	gocomposer/internal/validate	(cached)
+ok  	gocomposer/internal/vcs	(cached)
+?   	gocomposer/tools/integration	[no test files]
+ok  	gocomposer/tools/compare	1.248s
+== build

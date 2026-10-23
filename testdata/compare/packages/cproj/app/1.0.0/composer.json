@@ -1,0 +1,21 @@
+{
+    "name": "cproj/app",
+    "description": "Create-project fixture application",
+    "type": "project",
+    "license": "MIT",
+    "repositories": [
+        {"type": "composer", "url": "http://127.0.0.1:8899"},
+        {"packagist.org": false}
+    ],
+    "config": {"secure-http": false},
+    "require": {"acme/log": "^1.0", "cproj/lib": "self.version"},
+    "require-dev": {"acme/devtools": "^1.0"},
+    "autoload": {"psr-4": {"CprojApp\\": "src/"}},
+    "suggest": {"acme/util": "Utilities for the application"},
+    "scripts": {
+        "post-root-package-install": "echo ROOT-PACKAGE-INSTALL dev=$COMPOSER_DEV_MODE",
+        "post-create-project-cmd": ["echo CREATE-PROJECT-CMD", "@php -r \"echo getenv('COMPOSER_ROOT_VERSION'), PHP_EOL;\""],
+        "post-install-cmd": "echo POST-INSTALL",
+        "post-update-cmd": "echo POST-UPDATE"
+    }
+}

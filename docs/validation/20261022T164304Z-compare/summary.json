@@ -1,0 +1,142 @@
+{
+  "all_match": true,
+  "environment": {
+    "gocomposer_sha256": "c455b969f4f4c61d665f71c968418554a6397d8ecb9065ce28b79f8e274e7e0b",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T164304Z",
+  "results": [
+    {
+      "scenario": "policy-advisory-blocks",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-advisory-blocks-vv",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-advisory-only-vulnerable",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "policy-no-blocking-audit",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-env-no-blocking",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-audit-install",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 5,
+      "go_exit": 5
+    },
+    {
+      "scenario": "policy-audit-install-table",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 5,
+      "go_exit": 5
+    },
+    {
+      "scenario": "policy-audit-install-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 5,
+      "go_exit": 5
+    },
+    {
+      "scenario": "policy-audit-plain",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 5,
+      "go_exit": 5
+    },
+    {
+      "scenario": "policy-abandoned",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-abandoned-ignore",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-ignore-advisory",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-disabled",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-cooldown-all",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "policy-cooldown-none",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "policy-cooldown-no-cooldown",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-locked-vulnerable-install",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "policy-partial-update-vulnerable",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

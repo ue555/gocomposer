@@ -1,0 +1,1 @@
+{"name":"fundco/beta","description":"Beta package of the fund company, with a rather long description that will need to be truncated in the search output","type":"composer-plugin-like","abandoned":"fundco/alpha","funding":[{"type":"custom","url":"https://example.org/donate"},{"type":"github","url":"https://github.com/fundco"}]}

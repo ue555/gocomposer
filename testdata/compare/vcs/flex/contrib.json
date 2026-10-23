@@ -1,0 +1,17 @@
+{
+    "recipes": {
+        "flexfix/contrib-lib": [
+            "1.0"
+        ]
+    },
+    "branch": "main",
+    "is_contrib": true,
+    "_links": {
+        "repository": "github.com/gocomposer/flex-recipes-contrib",
+        "origin_template": "{package}:{version}@github.com/gocomposer/flex-recipes-contrib:main",
+        "recipe_template": "https://127.0.0.1/flex/{package_dotted}.{version}.json",
+        "recipe_template_relative": "{package_dotted}.{version}.json",
+        "archived_recipes_template": "https://127.0.0.1/flex/archived/{package_dotted}/{ref}.json",
+        "archived_recipes_template_relative": "archived/{package_dotted}/{ref}.json"
+    }
+}

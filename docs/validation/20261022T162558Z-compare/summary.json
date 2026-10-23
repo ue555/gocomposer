@@ -1,0 +1,192 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "f7ee911ed591d230174992213d6bcfea0de22767693817e00d68025daa153ce7",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261022T162558Z",
+  "results": [
+    {
+      "scenario": "show-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-name-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-direct",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-no-dev",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-path",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-package",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-package-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-tree",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) `--\u003cyellow\u003eacme/util\u003c/yellow\u003e ^1.0\n+ (go)    |--\u003ccyan\u003eacme/log\u003c/cyan\u003e ^1.1\n+ (go)    |  `--\u003cmagenta\u003ephp\u003c/magenta\u003e \u003e=7.4\n+ (go)    `--\u003ccyan\u003eext-json\u003c/cyan\u003e *\n- (oracle) `--acme/util ^1.0\n- (oracle)    |--acme/log ^1.1\n- (oracle)    |  `--php \u003e=7.4\n- (oracle)    `--ext-json *\n+ (go) `--\u003cyellow\u003eacme/log\u003c/yellow\u003e ^1.0 || ^2.0\n+ (go)    `--\u003ccyan\u003ephp\u003c/cyan\u003e \u003e=7.4\n- (oracle) `--acme/log ^1.0 || ^2.0\n- (oracle)    `--php \u003e=7.4\n+ (go) |--\u003cyellow\u003eacme/util\u003c/yellow\u003e ^1.0\n+ (go) |  |--\u003ccyan\u003eacme/log\u003c/cyan\u003e ^1.1\n+ (go) |  |  `--\u003cmagenta\u003ephp\u003c/magenta\u003e \u003e=7.4\n+ (go) |  `--\u003ccyan\u003eext-json\u003c/cyan\u003e *\n+ (go) |--\u003cyellow\u003ephp\u003c/yellow\u003e ^7.4 || ^8.0\n+ (go) `--\u003cyellow\u003epsr/log-implementation\u003c/yellow\u003e ^1.0\n- (oracle) |--acme/util ^1.0\n- (oracle) |  |--acme/log ^1.1\n- (oracle) |  |  `--php \u003e=7.4\n- (oracle) |  `--ext-json *\n- (oracle) |--php ^7.4 || ^8.0\n- (oracle) `--psr/log-implementation ^1.0\n+ (go) `--\u003cyellow\u003eacme/log\u003c/yellow\u003e ^1.0\n+ (go)    `--\u003ccyan\u003ephp\u003c/cyan\u003e \u003e=7.4\n- (oracle) `--acme/log ^1.0\n- (oracle)    `--php \u003e=7.4"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-tree-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-package-tree",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) |--\u003cyellow\u003eacme/util\u003c/yellow\u003e ^1.0\n+ (go) |  |--\u003ccyan\u003eacme/log\u003c/cyan\u003e ^1.1\n+ (go) |  |  `--\u003cmagenta\u003ephp\u003c/magenta\u003e \u003e=7.4\n+ (go) |  `--\u003ccyan\u003eext-json\u003c/cyan\u003e *\n+ (go) |--\u003cyellow\u003ephp\u003c/yellow\u003e ^7.4 || ^8.0\n+ (go) `--\u003cyellow\u003epsr/log-implementation\u003c/yellow\u003e ^1.0\n- (oracle) |--acme/util ^1.0\n- (oracle) |  |--acme/log ^1.1\n- (oracle) |  |  `--php \u003e=7.4\n- (oracle) |  `--ext-json *\n- (oracle) |--php ^7.4 || ^8.0\n- (oracle) `--psr/log-implementation ^1.0"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-locked",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-self",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) path     : /work/project/vendor/test/project\n- (oracle) path     : "
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-self-json",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go)     \"path\": \"/work/project/vendor/test/project\","
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-platform-php",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-wildcard",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-not-found",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-version-arg",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-self-name-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-locked-package",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-platform-list-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "show-bad-format",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-tree-latest",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "show-nothing-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

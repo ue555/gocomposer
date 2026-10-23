@@ -1,0 +1,1 @@
+{"name":"plugfix/legacy","description":"Legacy composer-installer fixture","type":"composer-installer","license":"MIT","autoload":{"psr-4":{"Plugfix\\Legacy\\":"src/"}},"extra":{"class":"Plugfix\\Legacy\\Installer"}}

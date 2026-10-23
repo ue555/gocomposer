@@ -1,0 +1,1 @@
+{"name":"plugfix/meta-a","description":"Fixture package of the metapackage-like installer","type":"plugfix-meta","license":"MIT","require":{"plugfix/custom-installers":"^1.0","acme/log":"^1.0"}}

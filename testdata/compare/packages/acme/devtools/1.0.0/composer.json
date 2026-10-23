@@ -1,0 +1,1 @@
+{"name":"acme/devtools","description":"Dev tools","require":{"acme/log":"^1.0 || ^2.0"},"autoload":{"psr-4":{"Acme\\DevTools\\":"src/"}}}

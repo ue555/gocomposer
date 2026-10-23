@@ -1,0 +1,1 @@
+{"name":"flexfix/needs-flex","description":"Fixture library requiring symfony/flex","license":"MIT","require":{"symfony/flex":"^2.11"}}

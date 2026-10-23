@@ -1,0 +1,1 @@
+{"name":"cproj/lib","description":"Create-project fixture library","type":"library","license":"MIT","autoload":{"psr-4":{"CprojLib\\":"src/"}}}

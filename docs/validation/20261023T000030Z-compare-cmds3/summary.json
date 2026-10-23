@@ -1,0 +1,222 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "9512f8d65cd3640152466542b9854ec146a8c53265384f3bbfcdf99805adeb95",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261023T000031Z",
+  "results": [
+    {
+      "scenario": "reinstall-basic",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-progress",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go)  0/2 [\u003e---------------------------]   0%\n+ (go)  2/2 [============================] 100%\n- (oracle)     0 [\u003e---------------------------]    0 [-\u003e--------------------------]\n- (oracle) Warning: Accessing 127.0.0.1 over http which is an insecure protocol.\n+ (go)  0/2 [\u003e---------------------------]   0%Warning: Accessing 127.0.0.1 over http which is an insecure protocol.\n+ (go) \n- (oracle)  0/2 [\u003e---------------------------]   0%"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-verbose",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Running 2.11.999-dev+source (@release_date@) with PHP 8.4.27 on Linux / 7.1.10-200.fc44.aarch64\n- (oracle) Reading ./composer.json (/work/project/composer.json)\n- (oracle) Loading config file ./composer.json (/work/project/composer.json)\n- (oracle) Checked CA file /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem does not exist or it is not a file.\n- (oracle) Checked directory /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem does not exist or it is not a directory.\n- (oracle) Checked CA file /etc/pki/tls/certs/ca-bundle.crt does not exist or it is not a file.\n- (oracle) Checked directory /etc/pki/tls/certs/ca-bundle.crt does not exist or it is not a directory.\n- (oracle) Checked CA file /etc/ssl/certs/ca-certificates.crt: valid\n- (oracle) Executing command (CWD): 'git' '--version'\n- (oracle) Executing command (/work/project): 'git' 'branch' '-a' '--no-color' '--no-abbrev' '-v'\n- (oracle) Executing command (/work/project): 'git' 'describe' '--exact-match' '--tags'\n- (oracle) Executing command (/work/project): 'git' 'rev-list' '--no-commit-header' '--format=%H' '-n1' 'HEAD' '--no-show-signature'\n- (oracle) Executing command (/work/project): 'hg' 'branch'\n- (oracle) Executing command (/work/project): 'fossil' 'branch' 'list'\n- (oracle) Executing command (/work/project): 'fossil' 'tag' 'list'\n- (oracle) Executing command (/work/project): 'svn' 'info' '--xml'\n- (oracle) Failed to initialize global composer: Composer could not find the config file: /work/home/composer.json\n- (oracle) \n- (oracle) Reading ./composer.lock (/work/project/composer.lock)\n- (oracle) Reading /work/project/vendor/composer/installed.json\n- (oracle) Executing async command (CWD): 'rm' '-rf' '/work/project/vendor/acme/log'\n- (oracle) Downloading http://127.0.0.1:8899/dists/acme-log-1.1.0.zip\n- (oracle) [200] http://127.0.0.1:8899/dists/acme-log-1.1.0.zip\n- (oracle) Writing /work/cache/files/acme/log/31e5146f9094134bf78a7c5baeb8e0a5b2e0e354.zip into cache from /work/project/vendor/composer/tmp-HASH.zip\n- (oracle) Executing async command (CWD): '/usr/bin/unzip' '-qq' '/work/project/vendor/composer/tmp-HASH.zip' '-d' '/work/project/vendor/composer/364670b0'\n- (oracle) Executing async command (CWD): 'rm' '-rf' '/work/project/vendor/composer/364670b0'"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-wildcard",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Warning: Accessing 127.0.0.1 over http which is an insecure protocol.\n+ (go) Warning: Accessing 127.0.0.1 over http which is an insecure protocol."
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-all-wildcard",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Warning: Accessing 127.0.0.1 over http which is an insecure protocol.\n+ (go) Warning: Accessing 127.0.0.1 over http which is an insecure protocol."
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-type",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Warning: Accessing 127.0.0.1 over http which is an insecure protocol.\n+ (go) Warning: Accessing 127.0.0.1 over http which is an insecure protocol."
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-type-none",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "reinstall-type-and-names",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "reinstall-no-args",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "reinstall-no-match",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "reinstall-partial-match",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-not-installed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "reinstall-lock-only",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "reinstall-no-autoloader",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-optimize",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-restores-files",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-no-dev-mode",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-scripts",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-no-scripts",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-no-json",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "reinstall-prefer-source",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-prefer-install-source",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-source-to-dist",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-source-default",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-prefer-conflict",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "reinstall-git",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "reinstall-git-changes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "reinstall-git-discard",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

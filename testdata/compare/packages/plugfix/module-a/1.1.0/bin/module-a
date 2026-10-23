@@ -1,0 +1,3 @@
+#!/usr/bin/env php
+<?php
+echo "module-a 1.1.0\n";

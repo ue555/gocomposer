@@ -1,0 +1,10 @@
+{
+  "source_path": "/Users/kouji/oss/composer",
+  "repository": "https://github.com/composer/composer",
+  "commit": "f83588392df43d4fd027d84d26de459946ef4e80",
+  "source_dirty": false,
+  "license": "MIT",
+  "license_sha256": "7855ac293067aebe7e51afdd23b9dea54b8be24187dbecc9b9142581c37f596c",
+  "composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+  "prepared_date": "2026-10-22"
+}

@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(//Users/kouji/oss/composer/**)",
+      "Write(//Users/kouji/oss/composer/**)",
+      "Edit(~/.composer/**)",
+      "Write(~/.composer/**)",
+      "Edit(~/.config/composer/**)",
+      "Write(~/.config/composer/**)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git tag:*)",
+      "Bash(gh repo create:*)",
+      "Bash(gh release:*)",
+      "Bash(gh workflow run:*)",
+      "Bash(go install:*)",
+      "Bash(sudo:*)",
+      "Bash(brew uninstall:*)",
+      "Bash(podman machine rm:*)",
+      "Bash(podman system reset:*)"
+    ]
+  }
+}

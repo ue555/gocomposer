@@ -1,0 +1,1 @@
+{"name":"plugfix/module-a","description":"Fixture module installed by the custom installer","type":"plugfix-module","license":"MIT","require":{"plugfix/installer-plugin":"^1.0"},"autoload":{"psr-4":{"Plugfix\\ModuleA\\":"src/"}},"bin":["bin/module-a"]}

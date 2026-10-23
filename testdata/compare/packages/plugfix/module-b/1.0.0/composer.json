@@ -1,0 +1,1 @@
+{"name":"plugfix/module-b","description":"Fixture module with a custom module name","type":"plugfix-module","license":"MIT","require":{"plugfix/installer-plugin":"^1.0"},"autoload":{"classmap":["src/"]},"extra":{"module-name":"bee"}}
