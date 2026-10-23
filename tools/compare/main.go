@@ -208,7 +208,7 @@ func environmentInfo(root, gobin string) map[string]string {
 		info["oracle_zip_image"] = oracleImage + zipImageSuffix
 		info["oracle_zip_image_digest"] = strings.TrimSpace(string(out))
 	}
-	if out, err := exec.Command("podman", "run", "--rm", "--network=none", oracleImage, "php", "-r", "echo PHP_VERSION;").Output(); err == nil {
+	if out, err := exec.Command("podman", podmanRun("--network=none", oracleImage, "php", "-r", "echo PHP_VERSION;")...).Output(); err == nil {
 		info["php_version"] = strings.TrimSpace(string(out))
 	}
 	if b, err := os.ReadFile(filepath.Join(gobin, "gocomposer")); err == nil {
@@ -380,12 +380,12 @@ cd /work/project
 `
 	}
 	script += gitStateScript
-	args := []string{"run", "--rm", "--network=none",
-		"-v", fixtures + ":/fixtures:ro",
-		"-v", filepath.Join(root, ".cache", "oracle-source") + ":/oracle-source:ro",
-		"-v", gobin + ":/gobin:ro",
-		"-v", dir + ":/work",
-	}
+	args := podmanRun("--network=none",
+		"-v", fixtures+":/fixtures:ro",
+		"-v", filepath.Join(root, ".cache", "oracle-source")+":/oracle-source:ro",
+		"-v", gobin+":/gobin:ro",
+		"-v", dir+":/work",
+	)
 	if gitfx := filepath.Join(filepath.Dir(dir), "gitfx"); isDirPath(gitfx) {
 		args = append(args, "-v", gitfx+":/fixtures/git:ro")
 		if isDirPath(filepath.Join(gitfx, "_api")) {

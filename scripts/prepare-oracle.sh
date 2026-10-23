@@ -58,7 +58,14 @@ if [[ "$actual" != "$bootstrap_sha256" ]]; then
   exit 1
 fi
 cp "$phar" .cache/oracle-source/composer-bootstrap.phar
-podman run --rm -v "$PWD/.cache/oracle-source:/src" -w /src -e COMPOSER_HOME=/tmp/home -e COMPOSER_CACHE_DIR=/tmp/cache \
+# Rootless podman on Linux (GitHub Actions): map the host user to the image's
+# "oracle" user (uid/gid 1000) so the bind mount is writable and owned by it.
+# podman machine on macOS needs no mapping (same as tools/*/userns.go).
+userns=()
+if [[ "$(uname -s)" == Linux && "$(id -u)" != 0 ]]; then
+  userns=(--userns=keep-id:uid=1000,gid=1000)
+fi
+podman run --rm ${userns[@]+"${userns[@]}"} -v "$PWD/.cache/oracle-source:/src" -w /src -e COMPOSER_HOME=/tmp/home -e COMPOSER_CACHE_DIR=/tmp/cache \
   localhost/gocomposer-oracle:8.4 php composer-bootstrap.phar install --no-dev --no-interaction --no-progress
 rm -f .cache/oracle-source/composer-bootstrap.phar
-podman run --rm -v "$PWD/.cache/oracle-source:/oracle-source:ro" localhost/gocomposer-oracle:8.4 php /oracle-source/bin/composer --version
+podman run --rm ${userns[@]+"${userns[@]}"} -v "$PWD/.cache/oracle-source:/oracle-source:ro" localhost/gocomposer-oracle:8.4 php /oracle-source/bin/composer --version

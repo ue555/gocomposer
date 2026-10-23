@@ -456,10 +456,10 @@ func runTool(root, dir, gobin string, t tool, command string, p project, withRun
 			script += "if [ -f vendor/autoload.php ]; then " + shellJoin(r) + fmt.Sprintf(" >/work/out/run%d 2>&1; echo \"exit=$?\" >>/work/out/run%d; fi\n", i, i)
 		}
 	}
-	args := []string{"run", "--rm",
-		"-v", filepath.Join(root, ".cache", "oracle-source") + ":/oracle-source:ro",
-		"-v", gobin + ":/gobin:ro",
-		"-v", dir + ":/work",
+	args := podmanRun(
+		"-v", filepath.Join(root, ".cache", "oracle-source")+":/oracle-source:ro",
+		"-v", gobin+":/gobin:ro",
+		"-v", dir+":/work",
 		"-e", "COMPOSER_HOME=/work/home",
 		"-e", "COMPOSER_CACHE_DIR=/work/cache",
 		"-e", "COMPOSER_NO_INTERACTION=1",
@@ -468,7 +468,7 @@ func runTool(root, dir, gobin string, t tool, command string, p project, withRun
 		"-e", "GIT_CONFIG_COUNT=1",
 		"-e", "GIT_CONFIG_KEY_0=safe.directory",
 		"-e", "GIT_CONFIG_VALUE_0=*",
-		oracleImage, "sh", "-c", script}
+		oracleImage, "sh", "-c", script)
 	cmd := exec.Command("podman", args...)
 	var stderr bytes.Buffer
 	cmd.Stderr = &stderr

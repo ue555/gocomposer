@@ -43,10 +43,10 @@ func runGitFixtureScript(root, base, script string) error {
 		return err
 	}
 	full := ". /vcsdefs/lib.sh\n" + script
-	args := []string{"run", "--rm", "--network=none",
-		"-v", filepath.Join(root, "testdata", "compare", "vcs") + ":/vcsdefs:ro",
-		"-v", gitfx + ":/fixtures/git",
-		oracleImage, "sh", "-c", full}
+	args := podmanRun("--network=none",
+		"-v", filepath.Join(root, "testdata", "compare", "vcs")+":/vcsdefs:ro",
+		"-v", gitfx+":/fixtures/git",
+		oracleImage, "sh", "-c", full)
 	cmd := exec.Command("podman", args...)
 	var out bytes.Buffer
 	cmd.Stdout = &out
