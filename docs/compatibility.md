@@ -64,7 +64,7 @@
 
   | PHP | ベースイメージ | oracle イメージ（`oracle/Containerfile`） | ext-zip 版（`oracle/Containerfile.zip`） |
   |---|---|---|---|
-  | 8.4.27（主比較） | `php@sha256:05c3a54f57053f6d9bb2a32e32d6ddbd7f5a443672385de37a2a8736a6ebbfd5` | `localhost/gocomposer-oracle:8.4`（`sha256:7c3d8598…3607`） | `:8.4-zip`（`sha256:cd7f1f04…29fa`） |
+  | 8.4.27（主比較） | `php@sha256:a4ae1f57e22b89a0a69c5e085b3010ee727d094e1542d249e48a01bec3c44810`（multi-arch index。arm64: `05c3a54f…bfd5`、amd64: `a007a658…5a98`） | `localhost/gocomposer-oracle:8.4`（`sha256:7c3d8598…3607`） | `:8.4-zip`（`sha256:cd7f1f04…29fa`） |
   | 8.3.36 | `php@sha256:f1b772b8a2cc9ba2ba7415d21422f2c002c6f5789b53bcac2ababc5e5d89fb47` | `:8.3`（`sha256:91789a66…5fce`） | `:8.3-zip`（`sha256:08e40da7…6bf9`） |
   | 8.5.12 | `php@sha256:361f9916dee86b0c0b67dfd196ce5cd8ebcecb089724d867a57f564fa94909fd` | `:8.5`（`sha256:8f997f44…92e2`） | `:8.5-zip`（`sha256:c0ec954e…4528`） |
 

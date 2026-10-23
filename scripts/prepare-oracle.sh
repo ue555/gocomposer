@@ -14,7 +14,8 @@ cd "$(dirname "$0")/.."
 commit=$(python3 -c 'import json;print(json.load(open("docs/upstream.json"))["commit"])')
 lock_sha=$(python3 -c 'import json;print(json.load(open("docs/upstream.json"))["composer_lock_sha256"])')
 src="${1:-https://github.com/composer/composer.git}"
-php84_digest="sha256:05c3a54f57053f6d9bb2a32e32d6ddbd7f5a443672385de37a2a8736a6ebbfd5"
+# multi-arch index of php:8.4.27-cli (arm64 entry sha256:05c3a54f5705…, amd64 entry sha256:a007a658…)
+php84_digest="sha256:a4ae1f57e22b89a0a69c5e085b3010ee727d094e1542d249e48a01bec3c44810"
 bootstrap_version="2.10.3"
 bootstrap_sha256="7a2d379d5b8ffdaa028580ef26494c36d2feef4b178d3dd1473a4dbc5e17c8d6"
 

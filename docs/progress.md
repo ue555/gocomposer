@@ -4,7 +4,7 @@
 
 ## 比較環境（oracle）
 
-- 公式PHP: `docker.io/library/php:8.4-cli` digest `sha256:05c3a54f57053f6d9bb2a32e32d6ddbd7f5a443672385de37a2a8736a6ebbfd5`（PHP 8.4.27）を主比較。回帰用に php:8.3-cli（`sha256:f1b772b8…fb47`、PHP 8.3.36）と php:8.5-cli（`sha256:361f9916…09fd`、PHP 8.5.12）。`oracle/Containerfile` で git/unzip を追加した `localhost/gocomposer-oracle:{8.3,8.4,8.5}` と、ext-zip を追加した `-zip` 版（artifact リポジトリ用）。digest の一覧は compatibility.md の「検証環境」。再作成は `scripts/prepare-oracle.sh`。
+- 公式PHP: `docker.io/library/php:8.4-cli` digest `sha256:a4ae1f57e22b89a0a69c5e085b3010ee727d094e1542d249e48a01bec3c44810`（php:8.4.27-cli の multi-arch index。macOS では arm64 の `05c3a54f…bfd5`、GitHub Actions の amd64 では `a007a658…5a98` が選ばれる。PHP 8.4.27）を主比較。回帰用に php:8.3-cli（`sha256:f1b772b8…fb47`、PHP 8.3.36）と php:8.5-cli（`sha256:361f9916…09fd`、PHP 8.5.12）。`oracle/Containerfile` で git/unzip を追加した `localhost/gocomposer-oracle:{8.3,8.4,8.5}` と、ext-zip を追加した `-zip` 版（artifact リポジトリ用）。digest の一覧は compatibility.md の「検証環境」。再作成は `scripts/prepare-oracle.sh`。
 - Composer: 参照元とは別の `.cache/oracle-source`（基準SHAのclone）。依存は同梱 `composer.lock`（sha256 `7e7ed6af…34c`）から composer.phar 2.10.3（sha256 `7a2d379d5b8ffdaa028580ef26494c36d2feef4b178d3dd1473a4dbc5e17c8d6`、公式sha256sumと一致）で `install --no-dev`。
 - 参照元 `/Users/kouji/oss/composer` には書き込んでいない。
 
