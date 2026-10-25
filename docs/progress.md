@@ -19,7 +19,7 @@
 | upstream installer fixture | `go test ./internal/composer -run TestUpstreamInstallerFixtures` | Composer `tests/Composer/Test/Fixtures/installer` の227件×(pool optimizer 0/1)=454件すべて通過（期待値は無修正。PHPのplatformはoracle PHP 8.4.27のスナップショット＋Composer本体のテスト環境と同じくext-intlを追加）。過程で update mirrors の参照保持（LockTransaction::updateMirrorAndUrls）を修正 |
 | 全体ゲート | `scripts/verify.sh` | exit 0（gofmt・go test（installer fixture 454件含む）・go test -race・go vet・build・compare・integration）。ログ docs/validation/20261024T145526Z-verify/verify.log |
 | CI ローカル実行 | `scripts/ci-local.sh` | .github/workflows/ci.yml（PHP 版ごとの compare matrix と integration ジョブ）の全ステップ PASS（20261024T161151Z-ci-local）: unit macOS（go1.23.12）・unit Linux（podman golang:1.23 digest sha256:ac2b6b75…）・prepare/compare 8.4・8.3・8.5・integration |
-| CI GitHub Actions | push 起動 | 分割前のワークフローが run 39983736909（commit 479e793、push 起動、linux/amd64）で全ジョブ成功（unit ubuntu-24.04 3分5秒・unit macos-14 2分46秒・compare + integration (linux) 1時間49分6秒、ワークフロー全体約1時間52分） |
+| CI GitHub Actions | push 起動 | PHP 版ごとの matrix に分けたワークフローが run 40159150856（commit bb876ee、push 起動、linux/amd64）で全ジョブ成功（unit ubuntu-24.04 3分20秒・unit macos-14 3分30秒・compare PHP 8.4 51分43秒・8.3 65分22秒・8.5 70分53秒・integration 3分58秒、ワークフロー全体約1時間15分）。compare は 3 版とも 1926 中 MATCH 1916・KNOWN-DIFF 10・DIFF 0（root-* も全 MATCH）、integration 28 ステップ全 MATCH（artifact の summary.json で確認）。分割前は run 39983736909（commit 479e793）で全ジョブ成功 |
 
 ## 実装済み（Go、主なもの）
 
@@ -71,9 +71,9 @@
 | 7. ResponseWarnings | 完了 | warnings-* 11 |
 | 8. 端末表示 | 完了 | OSC 8、ProgressBar 上書き、curl エラー番号 1/6/7/18/28/35/52/55/56/60。term-* 29・curl-* 19 |
 | 9. プラグイン | 完了 | サービス差し替え・リポジトリクラス・ダウンローダ置換・AutoloadGenerator・Factory/Config/Installer API、post-file-download の完了順。plugin3-* 47。残る明示エラーは compatibility.md |
-| 10. root 確認 | 完了 | `--user 0` のシナリオ（root-* 19）。Linux rootless での実行は未確認 |
+| 10. root 確認 | 完了 | `--user 0` のシナリオ（root-* 19）。macOS の podman machine に加え、GitHub Actions の Linux rootless podman（run 40159150856）でも 3 版とも全 MATCH |
 | 11. 統合テスト | 完了 | update-no-install-no-scripts ステップを追加、9 件全 MATCH（20261023T190639Z-integration） |
-| 12. CI の matrix | 完了 | oracle を PHP 版ごとの compare ジョブと integration ジョブに分割（prepare-oracle.sh の ORACLE_VERSIONS）、ci-local.sh も同構成。GitHub 上は未実行（push は範囲外） |
+| 12. CI の matrix | 完了 | oracle を PHP 版ごとの compare ジョブと integration ジョブに分割（prepare-oracle.sh の ORACLE_VERSIONS）、ci-local.sh も同構成。GitHub Actions run 40159150856 で全ジョブ成功（最長の compare PHP 8.5 で 70分53秒） |
 | 最終検証 | 完了 | `scripts/verify.sh` exit 0（20261024T145526Z-verify）、`scripts/ci-local.sh` exit 0（20261024T161151Z-ci-local）。compare は 3 版とも 1926 中 MATCH 1916・KNOWN-DIFF 10・DIFF 0、integration 28 ステップ全 MATCH |
 
 ## 未実装・未比較
@@ -87,4 +87,4 @@
 
 gocomposer-remaining の対象 1〜7 はすべて実装・比較・記録済み。残る差は docs/compatibility.md に明示エラーまたは KNOWN-DIFF として列挙した仕様差のみ。
 gocomposer-next の対象 1〜3 も実装・比較済み（最終検証は第2段階の表を参照）。
-今後の候補: compatibility.md に残る明示エラー（プラグインの一部 API、ext-rar 展開、forgejo）と Perforce 実サーバーでの比較。GitHub Actions は run 39983736909 で全ジョブ成功済み。
+今後の候補: compatibility.md に残る明示エラー（プラグインの一部 API、ext-rar 展開、forgejo）と Perforce 実サーバーでの比較。GitHub Actions は分割後のワークフローが run 40159150856 で全ジョブ成功済み。

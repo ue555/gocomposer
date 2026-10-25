@@ -58,7 +58,7 @@ bash scripts/verify.sh
 - `scripts/compare.sh`: 公式 PHP 8.4（`-image` で 8.3/8.5 も可）と固定 SHA の Composer を podman コンテナで動かし、loopback の fixture リポジトリ（composer、git bare リポジトリ、フォージ API の HTTPS スタブ）に対して 1926 シナリオ（疑似端末での対話・端末表示を含む）で gocomposer と出力・終了コード・lock・プロジェクトツリー・autoload を比較します（`--network=none`）。最新結果は PHP 8.3/8.4/8.5 とも MATCH 1916・KNOWN-DIFF 10（理由は compatibility.md）・DIFF 0 です。
 - `scripts/integration.sh`: symfony/console（ライブラリ）、CLI アプリ、laravel/laravel、小規模なライブダウンロード、主要プラグイン（composer/installers、php-http/discovery、dealerdirect/phpcodesniffer-composer-installer、pestphp/pest-plugin）、symfony/skeleton（symfony/flex の recipe 適用まで）を使うプロジェクトを公式 Composer と gocomposer で独立に導入し、vendor・autoload・`artisan about/list` を比較します（計 9 プロジェクト、ネットワーク必須）。
 
-`scripts/ci-local.sh` は `.github/workflows/ci.yml` の全ステップを macOS（Go 1.23）と podman の Linux コンテナ（golang:1.23）でローカル実行します。GitHub Actions では、PHP 版ごとの matrix に分ける前のワークフローが run 39983736909（commit 479e793）で全ジョブ成功しています（分割後は未実行）。
+`scripts/ci-local.sh` は `.github/workflows/ci.yml` の全ステップを macOS（Go 1.23）と podman の Linux コンテナ（golang:1.23）でローカル実行します。GitHub Actions では、PHP 版ごとの matrix に分けたワークフローが run 40159150856（commit bb876ee）で全ジョブ成功しています（compare は 3 版とも MATCH 1916・KNOWN-DIFF 10・DIFF 0、integration 28 ステップ全 MATCH）。
 
 前提の oracle 環境（公式 PHP イメージ、Composer の独立コピーと依存）は `scripts/prepare-oracle.sh` で作成します。結果は `docs/validation/<UTC時刻>-{compare,integration}/` に生ログ付きで保存されます。
 
