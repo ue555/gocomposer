@@ -25,6 +25,9 @@ type Config struct {
 	warn func(string)
 	// sources is Config::$sourceOfConfigValue.
 	sources map[string]string
+	// debug writes the IOInterface::DEBUG messages of Factory (config files
+	// loaded, COMPOSER_AUTH); nil without an IO.
+	debug func(string)
 }
 
 func defaultConfig() *phpjson.Map {
@@ -646,7 +649,15 @@ func ReadJSONFile(path string) (*phpjson.Map, error) {
 // config.json and auth.json, COMPOSER_AUTH. It writes the .htaccess files
 // Composer writes when htaccess-protect is enabled.
 func CreateConfig(cwd string, warn func(string)) (*Config, error) {
+	return CreateConfigDebug(cwd, warn, nil)
+}
+
+// CreateConfigDebug is Factory::createConfig($io): debug receives the
+// messages Composer writes at IOInterface::DEBUG verbosity ("Loading config
+// file ..."); it is kept for Factory::loadComposerAuthEnv.
+func CreateConfigDebug(cwd string, warn func(string), debug func(string)) (*Config, error) {
 	c := New(true, cwd)
+	c.debug = debug
 	home := HomeDir(c.Getenv)
 	base := phpjson.NewMap()
 	cfg := phpjson.NewMap()
@@ -657,6 +668,7 @@ func CreateConfig(cwd string, warn func(string)) (*Config, error) {
 	c.MergeSource(base, SourceDefault)
 	globalFile := c.GetString("home") + "/config.json"
 	if _, err := os.Stat(globalFile); err == nil {
+		c.debugf("Loading config file " + globalFile)
 		if err := ValidateSchemaWarn(warn, globalFile, nil, jsonschema.LaxSchema); err != nil {
 			return nil, err
 		}
@@ -676,6 +688,7 @@ func CreateConfig(cwd string, warn func(string)) (*Config, error) {
 	}
 	authFile := c.GetString("home") + "/auth.json"
 	if _, err := os.Stat(authFile); err == nil {
+		c.debugf("Loading config file " + authFile)
 		if err := ValidateSchemaWarn(warn, authFile, nil, jsonschema.AuthSchema); err != nil {
 			return nil, err
 		}
@@ -734,6 +747,7 @@ func (c *Config) LoadAuthEnv() error {
 	if err != nil {
 		return &EnvError{"COMPOSER_AUTH environment variable is malformed, should be a valid JSON object"}
 	}
+	c.debugf("Loading auth config from COMPOSER_AUTH")
 	if err := ValidateSchemaWarn(c.warn, "COMPOSER_AUTH", decoded, jsonschema.AuthSchema); err != nil {
 		return err
 	}

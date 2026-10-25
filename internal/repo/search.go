@@ -80,6 +80,7 @@ func (r *Composer) search(query string) ([]SearchResult, error) {
 		if err != nil {
 			return nil, err
 		}
+		r.responseWarnings(v)
 		var out []SearchResult
 		if res, ok := phpjson.AsMap(v).Get("results"); ok {
 			if list, ok := res.([]phpjson.Value); ok {
@@ -98,7 +99,11 @@ func (r *Composer) search(query string) ([]SearchResult, error) {
 	if r.hasProviders || r.lazyProvidersURL != "" {
 		re := searchRegex(query, false)
 		var out []SearchResult
-		for _, n := range r.packageNames() {
+		names, err := r.PackageNames("")
+		if err != nil {
+			return nil, err
+		}
+		for _, n := range names {
 			if re.MatchString(n) {
 				out = append(out, SearchResult{Name: n})
 			}
@@ -110,22 +115,6 @@ func (r *Composer) search(query string) ([]SearchResult, error) {
 		return nil, err
 	}
 	return searchPackages(ps, query), nil
-}
-
-// packageNames is getPackageNames() without a filter for the cases gocomposer
-// supports (available-packages lists and partial packages).
-func (r *Composer) packageNames() []string {
-	if r.availablePackages != nil {
-		return r.availableNames
-	}
-	if r.partialByName != nil {
-		var out []string
-		for _, k := range r.partialOrder {
-			out = append(out, k)
-		}
-		return out
-	}
-	return nil
 }
 
 func mustGet(m *phpjson.Map, k string) phpjson.Value { v, _ := m.Get(k); return v }

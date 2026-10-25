@@ -9,10 +9,8 @@ import (
 )
 
 // PackageNames is ComposerRepository::getPackageNames($packageFilter).
-// Repositories that only expose their names through a "list" API or through
-// v1 providers are not supported and fail explicitly.
 func (r *Composer) PackageNames(filter string) ([]string, error) {
-	data, err := r.loadRootServerFile()
+	_, err := r.loadRootServerFile()
 	if err != nil {
 		return nil, err
 	}
@@ -34,8 +32,9 @@ func (r *Composer) PackageNames(filter string) ([]string, error) {
 		if r.availablePackages != nil {
 			return apply(r.availableNames), nil
 		}
-		if data.Has("list") {
-			return nil, &UnsupportedError{"Listing package names through the repository list API is not supported by gocomposer yet."}
+		if r.listURL != "" {
+			// the filter is applied by the list API itself
+			return r.loadPackageList(filter)
 		}
 		hasPartial, err := r.partialPackages()
 		if err != nil {
@@ -47,7 +46,11 @@ func (r *Composer) PackageNames(filter string) ([]string, error) {
 		return nil, nil
 	}
 	if r.hasProviders {
-		return nil, &UnsupportedError{"Listing package names of provider-based (v1 providers) Composer repositories is not supported by gocomposer yet."}
+		names, err := r.providerNames()
+		if err != nil {
+			return nil, err
+		}
+		return apply(names), nil
 	}
 	ps, err := r.Packages()
 	if err != nil {

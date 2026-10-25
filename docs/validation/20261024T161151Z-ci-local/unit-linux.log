@@ -1,0 +1,71 @@
+== go version
+go version go1.23.12 linux/arm64
+== gofmt
+== vet
+== test
+?   	gocomposer/cmd/gocomposer	[no test files]
+?   	gocomposer/internal/autoload	[no test files]
+ok  	gocomposer/internal/archiver	0.089s
+ok  	gocomposer/internal/cache	0.008s
+ok  	gocomposer/internal/cio	0.004s
+?   	gocomposer/internal/config	[no test files]
+?   	gocomposer/internal/fsutil	[no test files]
+ok  	gocomposer/internal/cli	0.029s
+?   	gocomposer/internal/installed	[no test files]
+?   	gocomposer/internal/locker	[no test files]
+?   	gocomposer/internal/pkg	[no test files]
+?   	gocomposer/internal/res	[no test files]
+?   	gocomposer/tools/compare/ptyrun	[no test files]
+?   	gocomposer/tools/integration	[no test files]
+ok  	gocomposer/internal/composer	32.068s
+ok  	gocomposer/internal/configsource	4.432s
+ok  	gocomposer/internal/httpdl	1.016s
+ok  	gocomposer/internal/jsonfile	0.002s
+ok  	gocomposer/internal/jsonlint	0.007s
+ok  	gocomposer/internal/jsonmanip	2.083s
+ok  	gocomposer/internal/jsonschema	0.399s
+ok  	gocomposer/internal/pcre	14.876s
+ok  	gocomposer/internal/phpjson	0.007s
+ok  	gocomposer/internal/platform	0.009s
+ok  	gocomposer/internal/policy	0.053s
+ok  	gocomposer/internal/repo	0.213s
+ok  	gocomposer/internal/semver	0.058s
+ok  	gocomposer/internal/solver	0.059s
+ok  	gocomposer/internal/spdx	0.010s
+ok  	gocomposer/internal/validate	0.009s
+ok  	gocomposer/internal/vcs	0.039s
+ok  	gocomposer/tools/compare	0.004s
+== race
+?   	gocomposer/cmd/gocomposer	[no test files]
+?   	gocomposer/internal/autoload	[no test files]
+ok  	gocomposer/internal/archiver	1.146s
+ok  	gocomposer/internal/cache	1.022s
+ok  	gocomposer/internal/cio	1.018s
+?   	gocomposer/internal/config	[no test files]
+?   	gocomposer/internal/fsutil	[no test files]
+ok  	gocomposer/internal/cli	1.104s
+?   	gocomposer/internal/installed	[no test files]
+?   	gocomposer/internal/locker	[no test files]
+?   	gocomposer/internal/pkg	[no test files]
+?   	gocomposer/internal/res	[no test files]
+?   	gocomposer/tools/compare/ptyrun	[no test files]
+?   	gocomposer/tools/integration	[no test files]
+ok  	gocomposer/internal/composer	52.559s
+ok  	gocomposer/internal/configsource	20.204s
+ok  	gocomposer/internal/httpdl	2.077s
+ok  	gocomposer/internal/jsonfile	1.008s
+ok  	gocomposer/internal/jsonlint	1.025s
+ok  	gocomposer/internal/jsonmanip	11.626s
+ok  	gocomposer/internal/jsonschema	2.857s
+ok  	gocomposer/internal/pcre	85.838s
+ok  	gocomposer/internal/phpjson	1.018s
+ok  	gocomposer/internal/platform	1.027s
+ok  	gocomposer/internal/policy	1.427s
+ok  	gocomposer/internal/repo	1.382s
+ok  	gocomposer/internal/semver	1.491s
+ok  	gocomposer/internal/solver	1.342s
+ok  	gocomposer/internal/spdx	1.029s
+ok  	gocomposer/internal/validate	1.046s
+ok  	gocomposer/internal/vcs	1.104s
+ok  	gocomposer/tools/compare	1.019s
+== build

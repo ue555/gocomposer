@@ -1,12 +1,15 @@
 package repo
 
 import (
+	sha256pkg "crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
 	"sync"
+	"time"
 
 	"gocomposer/internal/cache"
 	"gocomposer/internal/httpdl"
@@ -17,8 +20,8 @@ import (
 )
 
 // Composer is ComposerRepository for the v1 inline/includes format and the
-// v2 metadata-url protocol. Provider-hash (v1 providers-url) repositories are
-// reported as unsupported.
+// v2 metadata-url protocol, and the v1 providers-url / provider-includes /
+// providers-lazy-url protocol (composer_providers.go).
 type Composer struct {
 	*Array
 	url                string
@@ -35,6 +38,8 @@ type Composer struct {
 	lazyProvidersURL   string
 	providersURL       string
 	providersAPIURL    string
+	listURL            string
+	providers          *providerListing
 	hasProviders       bool
 	hasPartialPackages bool
 	partialByName      map[string][]*phpjson.Map
@@ -295,6 +300,9 @@ func (r *Composer) loadRootServerFile() (*phpjson.Map, error) {
 	if p, ok := data.Get("providers-includes"); ok && phpjson.Truthy(p) {
 		r.hasProviders = true
 	}
+	if s := data.Str("list"); s != "" {
+		r.listURL = r.canonicalizeURL(s)
+	}
 	if s := data.Str("providers-api"); s != "" {
 		r.providersAPIURL = r.canonicalizeURL(s)
 	}
@@ -308,26 +316,33 @@ type UnsupportedError struct{ Msg string }
 
 func (e *UnsupportedError) Error() string { return e.Msg }
 
-func (r *Composer) checkSupported() error {
-	if r.hasProviders && r.lazyProvidersURL == "" {
-		return &UnsupportedError{"gocomposer does not support Composer v1 provider repositories (providers-url/provider-includes) used by " + r.RepoName() + "; use a repository with metadata-url (Composer v2 protocol)"}
-	}
-	if r.hasProviders && r.lazyProvidersURL != "" && r.providersURL == "" && r.rootData != nil && !r.rootData.Isset("metadata-url") {
-		return &UnsupportedError{"gocomposer does not support providers-lazy-url repositories without metadata-url (" + r.RepoName() + ")"}
-	}
-	return nil
-}
+// checkSupported reports repository protocols gocomposer does not implement
+// (none left: v1 providers are handled by whatProvides).
+func (r *Composer) checkSupported() error { return nil }
 
 func (r *Composer) fetchFile(u, cacheKey, sha256 string, storeLastModified bool) (*phpjson.Map, error) {
 	if i := strings.IndexByte(u, '$'); i > 0 && regexp.MustCompile(`(?i)^https?://`).MatchString(u) {
 		u = u[:i] + "%24" + u[i+1:]
 	}
-	q, err := r.preDownload(u)
-	if err != nil {
-		return nil, err
+	var resp *httpdl.Response
+	var q *metaReq
+	var err error
+	for retries := 2; ; retries-- {
+		q, err = r.preDownload(u)
+		if err != nil {
+			return nil, err
+		}
+		resp, err = r.dl.Get(q.url, q.headers...)
+		if err != nil || sha256 == "" || sha256Hex(resp.Body) == sha256 {
+			break
+		}
+		if retries > 0 {
+			time.Sleep(100 * time.Millisecond)
+			continue
+		}
+		return nil, &RepositorySecurityError{"The contents of " + httpdl.Sanitize(q.url) + " do not match its signature. This could indicate a man-in-the-middle attack or e.g. antivirus software corrupting files. Try running composer again and report this if you think it is a mistake."}
 	}
 	u = q.url
-	resp, err := r.dl.Get(u, q.headers...)
 	if err != nil {
 		if te, ok := err.(*httpdl.TransportError); ok && te.StatusCode == 404 {
 			return nil, err
@@ -357,6 +372,7 @@ func (r *Composer) fetchFile(u, cacheKey, sha256 string, storeLastModified bool)
 	if err != nil {
 		return nil, err
 	}
+	r.responseWarnings(v)
 	data := phpjson.ToMap(v)
 	if data == nil {
 		data = phpjson.NewMap()
@@ -403,6 +419,7 @@ func (r *Composer) fetchFileIfLastModified(u, cacheKey, lastModified string) (*p
 	if err != nil {
 		return nil, err
 	}
+	r.responseWarnings(v)
 	data := phpjson.ToMap(v)
 	body := resp.Body
 	if lm := resp.Header.Get("Last-Modified"); lm != "" {
@@ -656,7 +673,7 @@ func (r *Composer) LoadPackages(names []NameConstraint, acceptable, flags map[st
 					continue
 				}
 			}
-			candidates, err := r.whatProvidesPartial(nc.Name, acceptable, flags, alreadyLoaded)
+			candidates, err := r.whatProvides(nc.Name, acceptable, flags, alreadyLoaded)
 			if err != nil {
 				return LoadResult{}, err
 			}
@@ -1134,6 +1151,7 @@ func (r *Composer) asyncFetchFileReq(u, cacheKey, lastModified string, q *metaRe
 	if err != nil {
 		return nil, false, err
 	}
+	r.responseWarnings(v)
 	data := phpjson.ToMap(v)
 	if data == nil {
 		data = phpjson.NewMap()
@@ -1185,6 +1203,22 @@ func (r *Composer) FindPackages(name string, c semver.Constraint) ([]*pkg.Packag
 		}
 		return res.Packages, nil
 	}
+	if r.hasProviders {
+		names, err := r.providerNames()
+		if err != nil {
+			return nil, err
+		}
+		for _, n := range names {
+			if n == name {
+				cands, err := r.whatProvides(n, nil, nil, nil)
+				if err != nil {
+					return nil, err
+				}
+				return filterByConstraint(cands, c), nil
+			}
+		}
+		return nil, nil
+	}
 	return r.Array.FindPackages(name, c)
 }
 
@@ -1234,6 +1268,9 @@ func (r *Composer) Packages() ([]*pkg.Package, error) {
 		}
 		return nil, &UnsupportedError{"Composer repositories that have lazy providers and no available-packages list can not load the complete list of packages, use getPackageNames instead."}
 	}
+	if r.hasProviders {
+		return nil, &UnsupportedError{"Composer repositories that have providers can not load the complete list of packages, use getPackageNames instead."}
+	}
 	return r.Array.Packages()
 }
 
@@ -1254,6 +1291,7 @@ func (r *Composer) Providers(name string) ([]ProviderInfo, error) {
 		if err != nil {
 			return nil, err
 		}
+		r.responseWarnings(v)
 		var out []ProviderInfo
 		idx := map[string]int{}
 		phpjson.Each(phpjson.ToMap(v).Map("providers"), func(_ string, pv phpjson.Value) {})
@@ -1293,7 +1331,7 @@ func (r *Composer) Providers(name string) ([]ProviderInfo, error) {
 			}
 		}
 	}
-	if r.lazyProvidersURL == "" {
+	if r.lazyProvidersURL == "" && !r.hasProviders {
 		pkgs, err := r.Array.Packages()
 		if err != nil {
 			return nil, err
@@ -1385,4 +1423,9 @@ func (r *Composer) SecurityAdvisories(names []NameConstraint, allowPartial bool)
 		return nil, &UnsupportedError{"gocomposer does not query the security-advisories API of " + r.RepoName() + " (only metadata advisories are supported)"}
 	}
 	return out, nil
+}
+
+func sha256Hex(b []byte) string {
+	sum := sha256pkg.Sum256(b)
+	return hex.EncodeToString(sum[:])
 }

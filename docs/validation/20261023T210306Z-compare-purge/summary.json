@@ -1,0 +1,120 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "8a8f8d5fb28828fbc3b57432e29d52bc8926fe3ba0db114d8ba3b1345571d910",
+    "host_os": "darwin/arm64",
+    "oracle_arch_image": "localhost/gocomposer-oracle:8.4-arch",
+    "oracle_arch_image_digest": "sha256:93bc04d027eaeb74edeb8ea07a247c5f17cb2e91d4d17fe97681f949f96116e7",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:9cf420cd931841442e55100b424e04a60af91810d670826961c6583bd372308b",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "oracle_zip_image": "localhost/gocomposer-oracle:8.4-zip",
+    "oracle_zip_image_digest": "sha256:e3a99ff1ce724bd01dbd722f202bf4afa98eec9bde0789c99ad6f76b266e6f22",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261023T210307Z",
+  "results": [
+    {
+      "scenario": "purge-install",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) Nothing to install, update or remove\n- (oracle) Package operations: 1 install, 0 updates, 0 removals\n- (oracle)   - Downloading acme/cli (1.0.0)\n- (oracle)   - Installing acme/cli (1.0.0): Extracting archive\n- (oracle)     Skipped installation of bin bin/acme for package acme/cli: name conflicts with an existing file\n- (oracle)     Skipped installation of bin bin/acme-sh for package acme/cli: name conflicts with an existing file\n+ (go)     Skipped installation of bin bin/acme for package acme/cli: file not found in package\n+ (go)     Skipped installation of bin bin/acme-sh for package acme/cli: file not found in package",
+        "project tree:\n- (oracle) D vendor/acme/cli\n- (oracle) D vendor/acme/cli/bin\n- (oracle) D vendor/acme/cli/lib\n- (oracle) D vendor/acme/cli/lib/AcmeCli\n- (oracle) F vendor/acme/cli/bin/acme 755 802bc66258c986f2\n- (oracle) F vendor/acme/cli/bin/acme-sh 755 9f2574ae8fe83002\n- (oracle) F vendor/acme/cli/composer.json 644 382e59b9dededdc3\n- (oracle) F vendor/acme/cli/lib/AcmeCli/Runner.php 644 da07eeda61fd87ba",
+        "autoload probe:\n- (oracle) class AcmeCli_Runner: autoloaded\n+ (go)   exit=0 out= | Warning: include(/work/project/vendor/bin/../acme/cli/bin/acme): Failed to open stream: No such file or directory in /work/project/vendor/bin/acme on line 119 |  | Warning: include(): Failed opening '/work/project/vendor/bin/../acme/cli/bin/acme' for inclusion (include_path='.:/usr/local/lib/php') in /work/project/vendor/bin/acme on line 119\n- (oracle)   exit=0 out=hello from acme/util\n+ (go)   exit=127 out=vendor/bin/acme-sh: 15: cd: can't cd to ../acme/cli/bin | vendor/bin/acme-sh: 37: exec: /acme-sh: not found\n- (oracle)   exit=0 out=acme-sh says hi"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "purge-install-all",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=0 go=1",
+        "stderr:\n+ (go) Nothing to install, update or remove\n- (oracle) Package operations: 5 installs, 0 updates, 0 removals\n- (oracle)   - Downloading acme/log (1.1.0)\n- (oracle)   - Downloading acme/util (1.1.0)\n- (oracle)   - Downloading acme/cli (1.0.0)\n- (oracle)   - Downloading acme/log-impl (1.0.0)\n- (oracle)   - Downloading acme/http (1.2.0)\n- (oracle)   - Installing acme/log (1.1.0): Extracting archive\n- (oracle)   - Installing acme/util (1.1.0): Extracting archive\n- (oracle)   - Installing acme/cli (1.0.0): Extracting archive\n- (oracle)   - Installing acme/log-impl (1.0.0): Extracting archive\n- (oracle)   - Installing acme/http (1.2.0): Extracting archive\n- (oracle)     Skipped installation of bin bin/acme for package acme/cli: name conflicts with an existing file\n- (oracle)     Skipped installation of bin bin/acme-sh for package acme/cli: name conflicts with an existing file\n+ (go) \n+ (go) In \u003clocation\u003e:\n+ (go)                                                                                \n+ (go)   Could not scan for classes inside \"/work/project/vendor/acme/util/lib/\" whi  \n+ (go)   ch does not appear to be a file nor a folder                                 \n+ (go)                                                                                \n+ (go) \n+ (go) install [--prefer-source] [--prefer-dist] [--prefer-install PREFER-INSTALL] [--dry-run] [--download-only] [--dev] [--no-suggest] [--no-dev] [--no-security-blocking] [--no-blocking] [--no-autoloader] [--no-progress] [--no-install] [--audit] [--audit-format AUDIT-FORMAT] [-v|vv|vvv|--verbose] [-o|--optimize-autoloader] [-a|--classmap-authoritative] [--strict-psr-autoloader] [--apcu-autoloader] [--apcu-autoloader-prefix APCU-AUTOLOADER-PREFIX] [--ignore-platform-req IGNORE-PLATFORM-REQ] [--ignore-platform-reqs] [--] [\u003cpackages\u003e...]\n+ (go) \n- (oracle) 1 package you are using is looking for funding.\n- (oracle) Use the `composer fund` command to find out more!",
+        "project tree:\n- (oracle) D vendor/acme\n- (oracle) D vendor/acme/cli\n- (oracle) D vendor/acme/cli/bin\n- (oracle) D vendor/acme/cli/lib\n- (oracle) D vendor/acme/cli/lib/AcmeCli\n- (oracle) D vendor/acme/http\n- (oracle) D vendor/acme/http/src\n- (oracle) D vendor/acme/log\n- (oracle) D vendor/acme/log-impl\n- (oracle) D vendor/acme/log-impl/src\n- (oracle) D vendor/acme/log/src\n- (oracle) D vendor/acme/util\n- (oracle) D vendor/acme/util/lib\n- (oracle) D vendor/acme/util/src\n- (oracle) F vendor/acme/cli/bin/acme 755 802bc66258c986f2\n- (oracle) F vendor/acme/cli/bin/acme-sh 755 9f2574ae8fe83002\n- (oracle) F vendor/acme/cli/composer.json 644 382e59b9dededdc3\n- (oracle) F vendor/acme/cli/lib/AcmeCli/Runner.php 644 da07eeda61fd87ba\n- (oracle) F vendor/acme/http/composer.json 644 dff053c25f488c21\n- (oracle) F vendor/acme/http/src/Client.php 644 138fee57b895c83e\n- (oracle) F vendor/acme/log-impl/composer.json 644 bd9c251ce1f7b2fc\n- (oracle) F vendor/acme/log-impl/src/Impl.php 644 fd59a8b43f5299f1\n- (oracle) F vendor/acme/log/composer.json 644 b83d42805152f028\n- (oracle) F vendor/acme/log/src/Logger.php 644 13ef68bda8291625\n- (oracle) F vendor/acme/log/src/LoggerInterface.php 644 beb8d938c4444c81\n- (oracle) F vendor/acme/util/composer.json 644 ed976ef852108f1f\n- (oracle) F vendor/acme/util/lib/legacy.php 644 aa94d8c20c2ac438\n- (oracle) F vendor/acme/util/src/Str.php 644 bd3cbab92c3b093f\n- (oracle) F vendor/acme/util/src/functions.php 644 f00c9f042b8e0674",
+        "autoload probe:\n+ (go) \n+ (go) Warning: require(/work/project/vendor/composer/../acme/util/src/functions.php): Failed to open stream: No such file or directory in /work/project/vendor/composer/autoload_real.php on line 41\n+ (go) \n+ (go) Fatal error: Uncaught Error: Failed opening required '/work/project/vendor/composer/../acme/util/src/functions.php' (include_path='.:/usr/local/lib/php') in /work/project/vendor/composer/autoload_real.php:41\n+ (go) Stack trace:\n+ (go) #0 /work/project/vendor/composer/autoload_real.php(45): {closure:ComposerAutoloaderInit43054bc41b61d0247ad104e2c7c26012::getLoader():37}('571dbb8238a79d3...', '/work/project/v...')\n+ (go) #1 /work/project/vendor/autoload.php(22): ComposerAutoloaderInit43054bc41b61d0247ad104e2c7c26012::getLoader()\n+ (go) #2 /gobin/probe.php(3): require('/work/project/v...')\n+ (go) #3 {main}\n+ (go)   thrown in /work/project/vendor/composer/autoload_real.php on line 41\n- (oracle) class AcmeAbstractThing: autoloaded\n- (oracle) class AcmeCli_Runner: autoloaded\n- (oracle) class AcmeSuit: autoloaded\n- (oracle) class AcmeThingInterface: autoloaded\n- (oracle) class AcmeThingTrait: autoloaded\n- (oracle) class Acme\\Http\\Client: autoloaded\n- (oracle) class Acme\\LogImpl\\Impl: autoloaded\n- (oracle) class Acme\\Log\\Logger: autoloaded\n- (oracle) class Acme\\Log\\LoggerInterface: autoloaded\n- (oracle) class Acme\\Util\\Str: autoloaded\n- (oracle) class Acme_Legacy_Helper: autoloaded\n- (oracle) class App\\Kernel: autoloaded\n- (oracle) function acme_util_hello: hello from acme/util\n- (oracle) root: test/project 1.0.0+no-version-set dev=true\n- (oracle) installed: acme/cli '1.0.0' '94cee099e231284142446146f8f9844a40206270' dev=true\n- (oracle) installed: acme/http '1.2.0' 'ce7601587b04bbcb0a274777c6c4a15fe82a9467' dev=true\n- (oracle) installed: acme/log '1.1.0' '58b0f69fc5f96981e5f7fae32d592232a36012c2' dev=true\n- (oracle) installed: acme/log-impl '1.0.0' 'be55dcec40f479aa52942c4aaa3f393405333530' dev=true\n- (oracle) installed: acme/util '1.1.0' '010715fb4511de3a64a1da0e47aa42e3b0104c1c' dev=true\n- (oracle) installed: psr/log-implementation NULL NULL dev=true\n- (oracle) installed: test/project '1.0.0+no-version-set' NULL dev=true\n- (oracle) bin acme mode=0755\n- (oracle)   exit=0 out=hello from acme/util\n- (oracle) bin acme-sh mode=0755\n- (oracle)   exit=0 out=acme-sh says hi"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 1
+    },
+    {
+      "scenario": "purge-show",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) acme/cli      1.0.0 CLI tool"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "purge-show-name",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=1 go=0",
+        "stdout:\n+ (go) name     : acme/cli\n+ (go) descrip. : CLI tool\n+ (go) keywords : \n+ (go) versions : * 1.0.0\n+ (go) released : 2024-01-02, 2 years ago\n+ (go) type     : library\n+ (go) homepage : \n+ (go) source   : []  \n+ (go) dist     : [zip] http://127.0.0.1:8899/dists/acme-cli-1.0.0.zip 94cee099e231284142446146f8f9844a40206270\n+ (go) path     : \n+ (go) names    : acme/cli\n+ (go) autoload\n+ (go) psr-0\n+ (go) AcmeCli_ =\u003e lib/\n+ (go) \n+ (go) requires\n+ (go) acme/util ^1.0\n+ (go) ",
+        "stderr:\n- (oracle) In \u003clocation\u003e:\n- (oracle)                                                                                \n- (oracle)   Package \"acme/cli\" not found, try using --available (-a) to show all availa  \n- (oracle)   ble packages.                                                                \n- (oracle)                                                                                \n- (oracle) \n- (oracle) show [--all] [--locked] [-i|--installed] [-p|--platform] [-a|--available] [-s|--self] [-N|--name-only] [-P|--path] [-t|--tree] [-l|--latest] [-o|--outdated] [--ignore IGNORE] [-M|--major-only] [-m|--minor-only] [--patch-only] [-A|--sort-by-age] [--cooldown-period COOLDOWN-PERIOD] [-D|--direct] [--strict] [-f|--format FORMAT] [--no-dev] [--ignore-platform-req IGNORE-PLATFORM-REQ] [--ignore-platform-reqs] [--] [\u003cpackage\u003e [\u003cversion\u003e]]\n- (oracle) \n- (oracle) "
+      ],
+      "oracle_exit": 1,
+      "go_exit": 0
+    },
+    {
+      "scenario": "purge-update",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) Nothing to install, update or remove\n- (oracle) Package operations: 1 install, 0 updates, 0 removals\n- (oracle)   - Downloading acme/cli (1.0.0)\n- (oracle)   - Installing acme/cli (1.0.0): Extracting archive\n- (oracle)     Skipped installation of bin bin/acme for package acme/cli: name conflicts with an existing file\n- (oracle)     Skipped installation of bin bin/acme-sh for package acme/cli: name conflicts with an existing file\n+ (go)     Skipped installation of bin bin/acme for package acme/cli: file not found in package\n+ (go)     Skipped installation of bin bin/acme-sh for package acme/cli: file not found in package",
+        "project tree:\n- (oracle) D vendor/acme/cli\n- (oracle) D vendor/acme/cli/bin\n- (oracle) D vendor/acme/cli/lib\n- (oracle) D vendor/acme/cli/lib/AcmeCli\n- (oracle) F vendor/acme/cli/bin/acme 755 802bc66258c986f2\n- (oracle) F vendor/acme/cli/bin/acme-sh 755 9f2574ae8fe83002\n- (oracle) F vendor/acme/cli/composer.json 644 382e59b9dededdc3\n- (oracle) F vendor/acme/cli/lib/AcmeCli/Runner.php 644 da07eeda61fd87ba",
+        "autoload probe:\n- (oracle) class AcmeCli_Runner: autoloaded\n+ (go)   exit=0 out= | Warning: include(/work/project/vendor/bin/../acme/cli/bin/acme): Failed to open stream: No such file or directory in /work/project/vendor/bin/acme on line 119 |  | Warning: include(): Failed opening '/work/project/vendor/bin/../acme/cli/bin/acme' for inclusion (include_path='.:/usr/local/lib/php') in /work/project/vendor/bin/acme on line 119\n- (oracle)   exit=0 out=hello from acme/util\n+ (go)   exit=127 out=vendor/bin/acme-sh: 15: cd: can't cd to ../acme/cli/bin | vendor/bin/acme-sh: 37: exec: /acme-sh: not found\n- (oracle)   exit=0 out=acme-sh says hi"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "purge-dump-autoload",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=0 go=1",
+        "stdout:\n+ (go) Not all dependencies are installed. Make sure to run a \"composer install\" to install missing dependencies",
+        "project tree:\n+ (go) F vendor/composer/autoload_namespaces.php 644 7f8af46ba6702f8f\n- (oracle) F vendor/composer/autoload_namespaces.php 644 ede505407590638a\n+ (go) F vendor/composer/autoload_static.php 644 6d9175620c62440e\n- (oracle) F vendor/composer/autoload_static.php 644 0bcf0f386273271e",
+        "vendor/composer/autoload_static.php:\n+ (go)     public static $prefixesPsr0 = array (\n+ (go)         'A' =\u003e\n+ (go)         array (\n+ (go)             'AcmeCli_' =\u003e\n+ (go)             array (\n+ (go)                 0 =\u003e __DIR__ . '/..' . '/acme/cli/lib',\n+ (go)             ),\n+ (go)         ),\n+ (go)     );\n+ (go) \n+ (go)             $loader-\u003eprefixesPsr0 = ComposerStaticInit43054bc41b61d0247ad104e2c7c26012::$prefixesPsr0;"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 1
+    },
+    {
+      "scenario": "purge-depends",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "purge-licenses",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) acme/cli      1.0.0   none     "
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "purge-status",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "purge-remove",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n+ (go) Package operations: 0 installs, 0 updates, 1 removal\n+ (go)   - Removing acme/cli (1.0.0)\n- (oracle) Nothing to install, update or remove",
+        "project tree:\n- (oracle) D vendor/bin\n- (oracle) F vendor/bin/acme 755 0ec11a39f30b01c4\n- (oracle) F vendor/bin/acme-sh 755 9a2820eb637c9499",
+        "autoload probe:\n- (oracle) bin acme mode=0755\n- (oracle)   exit=0 out= | Warning: include(/work/project/vendor/bin/../acme/cli/bin/acme): Failed to open stream: No such file or directory in /work/project/vendor/bin/acme on line 119 |  | Warning: include(): Failed opening '/work/project/vendor/bin/../acme/cli/bin/acme' for inclusion (include_path='.:/usr/local/lib/php') in /work/project/vendor/bin/acme on line 119\n- (oracle) bin acme-sh mode=0755\n- (oracle)   exit=127 out=vendor/bin/acme-sh: 15: cd: can't cd to ../acme/cli/bin | vendor/bin/acme-sh: 37: exec: /acme-sh: not found"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

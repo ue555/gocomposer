@@ -163,7 +163,9 @@ final class Api
         $im = new \Composer\Installer\InstallationManager();
         $im->gcInst = $inst;
         $composer->setInstallationManager($im);
-        $composer->setEventDispatcher(new \GocomposerPluginHost\NestedEventDispatcher($composer, Host::$io));
+        $dispatcher = new \GocomposerPluginHost\NestedEventDispatcher($composer, Host::$io);
+        $dispatcher->setRunScripts(empty($desc['disableScripts']));
+        $composer->setEventDispatcher($dispatcher);
         $locker = new \Composer\Package\Locker();
         $locker->gcInst = $inst;
         $composer->setLocker($locker);
@@ -363,6 +365,9 @@ final class Api
             case 'installed':
                 $repo = self::composer((int) ($desc['inst'] ?? 0))->getRepositoryManager()->getLocalRepository();
                 break;
+            case 'php':
+                $repo = Services::repoObject((int) $desc['id']);
+                break;
             case 'root':
                 $repo = new RootPackageRepository(self::composer((int) ($desc['inst'] ?? 0))->getPackage());
                 break;
@@ -423,6 +428,7 @@ final class Api
         $io = Host::$io;
         $config = $composer->getConfig();
         $dm = new GoDownloadManager($io, false);
+        $dm->gcInst = $composer->gcInst;
         $preferred = $config->get('preferred-install');
         switch ($preferred) {
             case 'dist':
@@ -504,31 +510,70 @@ final class Api
         return \React\Promise\resolve(null);
     }
 
-    /** @var list<\React\Promise\Deferred> */
-    private static $deferred = [];
+    /** @var array<int, array{d: \React\Promise\Deferred, started: bool}> background steps by job id */
+    private static $jobs = [];
+    /** @var int */
+    private static $jobSeq = 0;
+    /** @var int */
+    private static $runningJobs = 0;
 
     /**
-     * A promise settled by the next wait of the loop (in creation order).
+     * A promise standing for a step Composer runs in a background process
+     * (ProcessExecutor::executeAsync): gocomposer did the work already, the
+     * promise settles when the loop waits, in the order Composer's
+     * ProcessExecutor completes its jobs (at most
+     * COMPOSER_MAX_PARALLEL_PROCESSES started at a time, a job created while
+     * a slot is free starts at once, queued ones start on the next tick).
      */
     public static function defer(): PromiseInterface
     {
         $deferred = new \React\Promise\Deferred();
-        self::$deferred[] = $deferred;
+        $id = self::$jobSeq++;
+        self::$jobs[$id] = ['d' => $deferred, 'started' => false];
+        if (self::$runningJobs < self::maxJobs()) {
+            self::$jobs[$id]['started'] = true;
+            self::$runningJobs++;
+        }
 
         return $deferred->promise();
     }
 
+    private static function maxJobs(): int
+    {
+        $maxJobs = \Composer\Util\Platform::getEnv('COMPOSER_MAX_PARALLEL_PROCESSES');
+        if (is_numeric($maxJobs)) {
+            return max(1, min(50, (int) $maxJobs));
+        }
+
+        return 10;
+    }
+
     /**
-     * Settles the deferred steps (also those queued meanwhile); returns
-     * whether there were any.
+     * Settles the background steps (also those queued meanwhile) like
+     * ProcessExecutor::wait (countActiveJobs ticks; every started job is
+     * complete by the next tick); returns whether there were any.
      */
     public static function drainDeferred(): bool
     {
         $any = false;
-        while (self::$deferred !== []) {
+        while (self::$jobs !== []) {
             $any = true;
-            $deferred = array_shift(self::$deferred);
-            $deferred->resolve(null);
+            foreach (array_keys(self::$jobs) as $id) {
+                if (!isset(self::$jobs[$id])) {
+                    continue;
+                }
+                if (self::$jobs[$id]['started']) {
+                    $deferred = self::$jobs[$id]['d'];
+                    unset(self::$jobs[$id]);
+                    self::$runningJobs--;
+                    $deferred->resolve(null);
+                    continue;
+                }
+                if (self::$runningJobs < self::maxJobs()) {
+                    self::$jobs[$id]['started'] = true;
+                    self::$runningJobs++;
+                }
+            }
         }
 
         return $any;
@@ -536,14 +581,15 @@ final class Api
 
     /**
      * The downloader a plugin registered for a package type gocomposer does
-     * not know (DownloadManager::setDownloader()).
+     * not know, or registered in place of a built-in one
+     * (DownloadManager::setDownloader()).
      *
      * @return array<string, mixed>|null
      */
     public static function downloaderFor(string $type): ?array
     {
         $dm = Host::$composer->gcExistingDownloadManager();
-        if ($dm === null) {
+        if (!$dm instanceof GoDownloadManager || (in_array(strtolower($type), GoDownloadManager::BUILTIN, true) && !isset($dm->gcReplaced[strtolower($type)]))) {
             return null;
         }
         try {
@@ -564,7 +610,7 @@ final class Api
      */
     public static function downloaderOp(array $a)
     {
-        $dm = Host::$composer->getDownloadManager();
+        $dm = Host::$composer->gcExistingDownloadManager() ?? Host::$composer->getDownloadManager();
         $downloader = $dm->getDownloader($a['type']);
         $p = Host::pkg($a['p']);
         $i = isset($a['i']) ? Host::pkg($a['i']) : null;
@@ -628,21 +674,33 @@ final class Api
 
 /**
  * The DownloadManager of a Composer instance: gocomposer's downloaders handle
- * the package types it knows, plugins may add downloaders for other types
- * (replacing one of gocomposer's is not supported).
+ * the package types it knows, plugins may add downloaders for other types or
+ * replace the built-in ones; gocomposer then calls the plugin's downloader
+ * for the operations of that type (see plugin_services.go).
  */
 class GoDownloadManager extends DownloadManager
 {
+    public const BUILTIN = ['git', 'svn', 'fossil', 'hg', 'perforce', 'zip', 'rar', 'tar', 'gzip', 'xz', 'phar', 'file', 'path'];
+
     /** @var bool */
     public $gcReady = false;
+    /** @var int gocomposer instance id */
+    public $gcInst = 0;
+    /** @var array<string, true> built-in types replaced by plugins */
+    public $gcReplaced = [];
 
     public function setDownloader(string $type, DownloaderInterface $downloader): DownloadManager
     {
-        if ($this->gcReady && in_array(strtolower($type), ['git', 'svn', 'fossil', 'hg', 'perforce', 'zip', 'rar', 'tar', 'gzip', 'xz', 'phar', 'file', 'path'], true)) {
-            Unsupported::fail(DownloadManager::class.'::setDownloader() replacing the "'.$type.'" downloader');
+        parent::setDownloader($type, $downloader);
+        $type = strtolower($type);
+        if ($this->gcReady && in_array($type, self::BUILTIN, true) && !isset($this->gcReplaced[$type])) {
+            $this->gcReplaced[$type] = true;
+            if ($this === Api::composer($this->gcInst)->gcExistingDownloadManager() && $this->gcInst === 0) {
+                Host::cb('dlReplaced', ['inst' => $this->gcInst, 'type' => $type]);
+            }
         }
 
-        return parent::setDownloader($type, $downloader);
+        return $this;
     }
 }
 
@@ -708,19 +766,35 @@ class ProxyCommand extends \Composer\Command\BaseCommand
 
 /**
  * The event dispatcher of a Composer instance created with Factory::create():
- * its plugins run in their own gocomposer plugin host, so events can not be
- * dispatched from here.
+ * gocomposer dispatches the events with that instance (its root scripts and
+ * the listeners of its plugins, which run in their own gocomposer plugin
+ * host). Listeners can not be added from here (they would have to join the
+ * listeners of the other host).
  */
 class NestedEventDispatcher extends \Composer\EventDispatcher\EventDispatcher
 {
     public function dispatch(?string $eventName, ?Event $event = null): int
     {
-        Unsupported::fail(__METHOD__.' on a Composer instance created by a plugin');
+        if (null === $event) {
+            if (null === $eventName) {
+                throw new \InvalidArgumentException('If no $event is passed in to '.__METHOD__.' you have to pass in an $eventName, got null.');
+            }
+            $event = new Event($eventName);
+        }
+
+        return Host::dispatchFromPlugin($event, $this->composer->gcInst, $this->runScripts);
     }
 
     public function dispatchScript(string $eventName, bool $devMode = false, array $additionalArgs = [], array $flags = []): int
     {
-        Unsupported::fail(__METHOD__.' on a Composer instance created by a plugin');
+        assert($this->composer instanceof Composer, new \LogicException('This should only be reached with a fully loaded Composer'));
+
+        return Host::dispatchFromPlugin(new \Composer\Script\Event($eventName, $this->composer, $this->io, $devMode, $additionalArgs, $flags), $this->composer->gcInst, $this->runScripts);
+    }
+
+    public function hasEventListeners(Event $event): bool
+    {
+        return (bool) Host::cb('nestedHasListeners', ['inst' => $this->composer->gcInst, 'name' => $event->getName(), 'runScripts' => $this->runScripts]);
     }
 
     public function addListener(string $eventName, $listener, int $priority = 0): void
@@ -821,6 +895,9 @@ class GoRepository extends ArrayRepository
 
     public function findPackage(string $name, $constraint)
     {
+        if ($this->gcMaterialized) {
+            return parent::findPackage($name, $constraint);
+        }
         $found = $this->gcPackages($this->gcOp('find', ['name' => $name, 'c' => Api::constraintString($constraint), 'one' => true]));
 
         return $found[0] ?? null;
@@ -828,16 +905,25 @@ class GoRepository extends ArrayRepository
 
     public function findPackages(string $name, $constraint = null)
     {
+        if ($this->gcMaterialized) {
+            return parent::findPackages($name, $constraint);
+        }
         return $this->gcPackages($this->gcOp('find', ['name' => $name, 'c' => Api::constraintString($constraint), 'one' => false]));
     }
 
     public function getPackages()
     {
+        if ($this->gcMaterialized) {
+            return parent::getPackages();
+        }
         return $this->gcPackages($this->gcOp('packages'));
     }
 
     public function loadPackages(array $packageNameMap, array $acceptableStabilities, array $stabilityFlags, array $alreadyLoaded = [])
     {
+        if ($this->gcMaterialized) {
+            return parent::loadPackages($packageNameMap, $acceptableStabilities, $stabilityFlags, $alreadyLoaded);
+        }
         $names = [];
         foreach ($packageNameMap as $name => $constraint) {
             $names[] = ['name' => (string) $name, 'c' => Api::constraintString($constraint)];
@@ -849,16 +935,25 @@ class GoRepository extends ArrayRepository
 
     public function search(string $query, int $mode = 0, ?string $type = null)
     {
+        if ($this->gcMaterialized) {
+            return parent::search($query, $mode, $type);
+        }
         return $this->gcOp('search', ['query' => $query, 'mode' => $mode, 'type' => $type]);
     }
 
     public function getProviders(string $packageName)
     {
+        if ($this->gcMaterialized) {
+            return parent::getProviders($packageName);
+        }
         return $this->gcOp('providers', ['name' => $packageName]);
     }
 
     public function hasPackage(PackageInterface $package)
     {
+        if ($this->gcMaterialized) {
+            return parent::hasPackage($package);
+        }
         foreach ($this->findPackages($package->getName(), new \Composer\Semver\Constraint\Constraint('==', $package->getVersion())) as $p) {
             if ($p->getUniqueName() === $package->getUniqueName()) {
                 return true;
@@ -870,17 +965,52 @@ class GoRepository extends ArrayRepository
 
     public function count(): int
     {
+        if ($this->gcMaterialized) {
+            return parent::count();
+        }
         return count($this->getPackages());
+    }
+
+    /** @var bool the object keeps the packages: a plugin added or removed some */
+    protected $gcMaterialized = false;
+
+    public function gcIsMaterialized(): bool
+    {
+        return $this->gcMaterialized;
+    }
+
+    /**
+     * The repository becomes an ArrayRepository holding its packages, which
+     * gocomposer asks from then on (the repositories built on Composer's
+     * ArrayRepository: package, path, vcs, artifact).
+     */
+    protected function gcMaterialize(string $method): void
+    {
+        if ($this->gcMaterialized) {
+            return;
+        }
+        if (static::GC_TYPE === 'composer' || static::GC_TYPE === '') {
+            Unsupported::fail(static::class.'::'.$method);
+        }
+        $packages = $this->getPackages();
+        $this->packages = [];
+        foreach ($packages as $package) {
+            parent::addPackage($package);
+        }
+        $this->gcMaterialized = true;
+        Host::cb('repoOverlay', ['rid' => $this->gcRid, 'php' => Services::registerRepo($this)]);
     }
 
     public function addPackage(PackageInterface $package)
     {
-        Unsupported::fail(static::class.'::addPackage');
+        $this->gcMaterialize('addPackage');
+        parent::addPackage($package);
     }
 
     public function removePackage(PackageInterface $package): void
     {
-        Unsupported::fail(static::class.'::removePackage');
+        $this->gcMaterialize('removePackage');
+        parent::removePackage($package);
     }
 }
 

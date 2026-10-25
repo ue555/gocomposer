@@ -5,7 +5,10 @@
 // Jordi Boggiano). The operations (pre/post-file-download events, cache,
 // checksums, extraction, removal) are performed by gocomposer's Go port of
 // the downloader the class stands for; subclasses written by plugins can
-// override them and call parent:: like with Composer.
+// override them and call parent:: like with Composer. update() (removing,
+// then installing through $this), processUrl() and the appendix of the
+// operation line are Composer's code; getFileName() and getLocalChanges()
+// answer with gocomposer's file names and change detection.
 
 namespace Composer\Downloader;
 
@@ -17,12 +20,18 @@ use Composer\Package\PackageInterface;
 use Composer\Util\Filesystem;
 use Composer\Util\HttpDownloader;
 use Composer\Util\ProcessExecutor;
+use Composer\Util\Url as UrlUtil;
+use Composer\DependencyResolver\Operation\UpdateOperation;
+use GocomposerPluginHost\Api;
 use GocomposerPluginHost\GoDownloader;
-use GocomposerPluginHost\Unsupported;
+use GocomposerPluginHost\Host;
+use React\Promise\PromiseInterface;
 
 class FileDownloader implements DownloaderInterface, ChangeReportInterface
 {
-    use GoDownloader;
+    use GoDownloader {
+        update as gcGoUpdate;
+    }
 
     /** @var array<string, int|string> */
     public static $downloadMetadata = [];
@@ -60,14 +69,48 @@ class FileDownloader implements DownloaderInterface, ChangeReportInterface
         return 'dist';
     }
 
+    /**
+     * The temporary file the package is downloaded to (gocomposer's, named
+     * like Composer's vendor/composer/tmp-<hash>.<extension>).
+     */
     protected function getFileName(PackageInterface $package, string $path): string
     {
-        Unsupported::fail(__METHOD__);
+        return (string) Host::cb('dlFileName', ['p' => Host::ref($package), 'path' => $path]);
     }
 
     protected function processUrl(PackageInterface $package, string $url): string
     {
-        Unsupported::fail(__METHOD__);
+        if (!extension_loaded('openssl') && 0 === strpos($url, 'https:')) {
+            throw new \RuntimeException('You must enable the openssl extension to download files via https');
+        }
+
+        if ($package->getDistReference() !== null) {
+            $url = UrlUtil::updateDistReference($this->config, $url, $package->getDistReference());
+        }
+
+        return $url;
+    }
+
+    /**
+     * Gets appendix message to add to the "- Upgrading x" string being output on update
+     */
+    protected function getInstallOperationAppendix(PackageInterface $package, string $path): string
+    {
+        return '';
+    }
+
+    public function update(PackageInterface $initial, PackageInterface $target, string $path): PromiseInterface
+    {
+        if (!in_array(Api::downloaderKind($this), ['zip', 'rar', 'tar', 'gzip', 'xz', 'phar', 'file'], true)) {
+            return $this->gcGoUpdate($initial, $target, $path);
+        }
+        $this->io->writeError("  - " . UpdateOperation::format($initial, $target) . $this->getInstallOperationAppendix($target, $path));
+
+        $promise = $this->remove($initial, $path, false);
+
+        return $promise->then(function () use ($target, $path): PromiseInterface {
+            return $this->install($target, $path, false);
+        });
     }
 
     protected function clearLastCacheWrite(PackageInterface $package): void
@@ -84,6 +127,6 @@ class FileDownloader implements DownloaderInterface, ChangeReportInterface
 
     public function getLocalChanges(PackageInterface $package, string $path): ?string
     {
-        Unsupported::fail(__METHOD__);
+        return Host::cb('dlLocalChanges', ['kind' => Api::downloaderKind($this), 'p' => Host::ref($package), 'path' => $path]);
     }
 }

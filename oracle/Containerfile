@@ -1,9 +1,12 @@
 # Official-PHP oracle for gocomposer comparisons. The base is pinned by digest
-# (recorded in docs/validation); only tools Composer itself shells out to are added.
+# (recorded in docs/validation); only tools Composer itself shells out to are added:
+# git and unzip, and the subversion, mercurial and fossil clients used by
+# SvnDriver/HgDriver/FossilDriver and their downloaders (svnserve, hg serve and
+# fossil server also provide the loopback servers of the vcs3 scenarios).
 ARG PHP_IMAGE
 FROM ${PHP_IMAGE}
 RUN apt-get update \
- && apt-get install -y --no-install-recommends git unzip ca-certificates \
+ && apt-get install -y --no-install-recommends git unzip ca-certificates subversion mercurial fossil \
  && rm -rf /var/lib/apt/lists/*
 RUN useradd -m -u 1000 oracle
 USER oracle

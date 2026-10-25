@@ -27,4 +27,4 @@
 調査（Composer ソースの読解、既存 Go コードの所在確認）は並列のサブエージェントに任せてよい。同じファイルを複数のエージェントが同時に編集しないこと。実装と検証の最終判断は親セッションが行う。
 
 ## 終了時
-セッションを終える直前に、使っているスキルが指定する状態ファイルを書く（`gocomposer-remaining` は `.cache/remaining/status`、`gocomposer-next` は `.cache/next/status`）。1行目は `DONE` / `CONTINUE` / `BLOCKED`、2行目以降に理由と再開地点。`DONE` は対象項目すべての実装・比較・記録が済み、スキルが指定する最終検証が exit 0 のときだけ。
+セッションを終える直前に、使っているスキルが指定する状態ファイルを書く（`gocomposer-remaining` は `.cache/remaining/status`、`gocomposer-next` は `.cache/next/status`、`gocomposer-final` は `.cache/final/status`）。1行目は `DONE` / `CONTINUE` / `BLOCKED`、2行目以降に理由と再開地点。`DONE` は対象項目すべての実装・比較・記録が済み、スキルが指定する最終検証が exit 0 のときだけ。

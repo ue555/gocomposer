@@ -15,6 +15,13 @@ import (
 // FETCH_HEAD, packs) are not deterministic and are dropped from the compared
 // tree by comparableTree; the raw tree stays in the result JSON.
 const gitStateScript = `for g in $(find . -name .git -type d 2>/dev/null | sort); do d=$(dirname "$g"); echo "== $d"; (cd "$d" && echo "HEAD $(git rev-parse HEAD 2>&1)"; echo "ref $(git symbolic-ref -q HEAD)"; git status --porcelain --untracked-files=all; git remote -v; git config --get-all remote.origin.pushurl; git branch -a --no-color; git stash list) 2>&1; done >/work/out/gitstate
+` + vcs3StateScript
+
+// vcs3StateScript records the svn, hg and fossil checkouts the same way
+// (scenarios_vcs3.go); it prints nothing when there are none.
+const vcs3StateScript = `for g in $(find . -name .svn -type d 2>/dev/null | sort); do d=$(dirname "$g"); echo "== svn $d"; (cd "$d" && svn info --show-item url; svn info --show-item revision; svn status) 2>&1; done >>/work/out/gitstate
+for g in $(find . -name .hg -type d 2>/dev/null | sort); do d=$(dirname "$g"); echo "== hg $d"; (cd "$d" && hg id -i -b -t; hg status; hg paths) 2>&1; done >>/work/out/gitstate
+for g in $(find . -name .fslckout -type f 2>/dev/null | sort); do d=$(dirname "$g"); echo "== fossil $d"; (cd "$d" && fossil status | grep -v -e '^repository:' -e '^local-root:' -e '^config-db:'; fossil changes) 2>&1; done >>/work/out/gitstate
 `
 
 // comparableTree drops entries inside .git directories (the directory entry
@@ -24,6 +31,15 @@ func comparableTree(tree []string) []string {
 	for _, l := range tree {
 		if strings.Contains(l, "/.git/") || strings.HasPrefix(l, "F .git/") || strings.HasPrefix(l, "D .git/") {
 			continue
+		}
+		// svn and hg metadata (timestamps, uuids) are compared through
+		// vcs3StateScript; fossil repository/checkout databases hold random
+		// server ids, so only their presence and mode are compared
+		if strings.Contains(l, "/.svn/") || strings.Contains(l, "/.hg/") {
+			continue
+		}
+		if f := strings.Fields(l); len(f) == 4 && f[0] == "F" && (strings.HasSuffix(f[1], ".fossil") || strings.HasSuffix(f[1], "/.fslckout") || strings.HasSuffix(f[1], "/_FOSSIL_")) {
+			l = "F " + f[1] + " " + f[2] + " *"
 		}
 		out = append(out, l)
 	}
@@ -63,7 +79,8 @@ func runGitFixtureScript(root, base, script string) error {
 // forge host names mapped by forgePodmanArgs.
 const apiStubScript = `if [ -f /fixtures/git/_api/forge-stub.php ]; then php -S 127.0.0.1:8900 /fixtures/git/_api/forge-stub.php >/dev/null 2>&1 &
 php /fixtures/git/_api/forge-stub.php tls 443 >/dev/null 2>&1 &
-i=0; while ! php -r 'exit(@fsockopen("127.0.0.1", 8900) && @fsockopen("127.0.0.1", 443) ? 0 : 1);' 2>/dev/null; do i=$((i+1)); [ $i -gt 50 ] && break; sleep 0.1; done; fi`
+i=0; while ! php -r 'exit(@fsockopen("127.0.0.1", 8900) && @fsockopen("127.0.0.1", 443) ? 0 : 1);' 2>/dev/null; do i=$((i+1)); [ $i -gt 50 ] && break; sleep 0.1; done; fi
+for f in /fixtures/git/_serve/*.sh; do [ -f "$f" ] && sh "$f"; done`
 
 // forgePodmanArgs resolve the public forge host names to the loopback stub
 // (the container has no network) and let the unprivileged container user

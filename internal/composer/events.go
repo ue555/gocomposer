@@ -390,7 +390,12 @@ func (d *EventDispatcher) dispatch(ev *ScriptEvent) (int, error) {
 			}
 			ret = r
 		case isCommandClass(callable):
-			return 0, &UserError{Msg: "Script " + callable + " is a Symfony Console command class; running command classes from scripts is not supported by gocomposer", Code: 1}
+			// a Symfony Console command class (scriptcmd.go)
+			r, err := d.runCommandClass(ev, callable, additional)
+			if err != nil {
+				return 0, err
+			}
+			ret = r
 		default:
 			if callable == "" {
 				continue
@@ -505,6 +510,8 @@ func (d *EventDispatcher) ensureBinDirIsInPath() {
 }
 
 func (d *EventDispatcher) executeShell(line string) (int, error) {
+	// ProcessExecutor::outputCommandRun (-vvv)
+	scriptCommandDebug(d.c.IO, line)
 	cmd := exec.Command("/bin/sh", "-c", line)
 	// Symfony Process runs the command line through "sh -c"
 	cmd.Args[0] = "sh"

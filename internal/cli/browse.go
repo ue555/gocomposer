@@ -2,8 +2,8 @@ package cli
 
 // Port of Composer\Command\HomeCommand (composer/composer
 // f83588392df43d4fd027d84d26de459946ef4e80, MIT, (c) Nils Adermann, Jordi Boggiano).
-// Without a composer.json Composer looks packages up on packagist.org;
-// gocomposer fails explicitly there.
+// Without a composer.json the packages are looked up in the default
+// repositories (RepositoryFactory::defaultReposWithDefaultManager).
 
 import (
 	"net/url"
@@ -12,7 +12,6 @@ import (
 	"runtime"
 	"strings"
 
-	"gocomposer/internal/composer"
 	"gocomposer/internal/phpjson"
 	"gocomposer/internal/pkg"
 	"gocomposer/internal/repo"
@@ -38,20 +37,27 @@ func runBrowse(ctx *Context) (int, error) {
 		c = rc
 		packages = []string{c.Root().Name}
 	}
+	var finders []func(name string) ([]*pkg.Package, error)
 	if c == nil {
-		return 1, &composer.UserError{Msg: "gocomposer browse needs a composer.json: looking packages up in the default repositories (packagist.org) is not supported", Code: 1}
-	}
-	finders := []func(name string) ([]*pkg.Package, error){
-		func(name string) ([]*pkg.Package, error) {
-			return repo.FindInList([]*pkg.Package{c.Package}, name, nil), nil
-		},
-		func(name string) ([]*pkg.Package, error) {
-			ps, err := c.LocalRepo.Packages()
-			if err != nil {
-				return nil, err
-			}
-			return repo.FindInList(ps, name, nil), nil
-		},
+		// HomeCommand::initializeRepos without a composer.json
+		dc, err := defaultReposComposer(ctx)
+		if err != nil {
+			return 1, err
+		}
+		c = dc
+	} else {
+		finders = append(finders,
+			func(name string) ([]*pkg.Package, error) {
+				return repo.FindInList([]*pkg.Package{c.Package}, name, nil), nil
+			},
+			func(name string) ([]*pkg.Package, error) {
+				ps, err := c.LocalRepo.Packages()
+				if err != nil {
+					return nil, err
+				}
+				return repo.FindInList(ps, name, nil), nil
+			},
+		)
 	}
 	for _, r := range c.Repositories {
 		r := r

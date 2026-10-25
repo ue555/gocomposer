@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 // gocomposer plugin runtime: copied from Composer f83588392df43d4fd027d84d26de459946ef4e80
 // src/Composer/Json/JsonFile.php (MIT license, (c) Nils Adermann, Jordi Boggiano),
-// unchanged except validateJsonSchema(), which uses gocomposer's validator.
+// unchanged except validateJsonSchema(), which uses gocomposer's validator
+// (with Composer's schema files or the given one).
 
 /*
  * This file is part of Composer.
@@ -234,12 +235,9 @@ class JsonFile
     public static function validateJsonSchema(string $source, $data, int $schema, ?string $schemaFile = null): bool
     {
         // gocomposer: validated by gocomposer's port of the JSON schema
-        // validator with Composer's schema files (the validator library is
-        // not part of the plugin runtime)
-        if (null !== $schemaFile) {
-            \GocomposerPluginHost\Unsupported::fail(__METHOD__.' with a custom schema file');
-        }
-        $errors = \GocomposerPluginHost\Host::cb('validateSchema', ['json' => (string) json_encode($data), 'schema' => $schema]);
+        // validator with Composer's schema files or the given one (the
+        // validator library is not part of the plugin runtime)
+        $errors = \GocomposerPluginHost\Host::cb('validateSchema', ['json' => (string) json_encode($data), 'schema' => $schema, 'schemaFile' => $schemaFile]);
         if (is_array($errors) && $errors !== []) {
             throw new JsonValidationException('"'.$source.'" does not match the expected JSON schema', $errors);
         }

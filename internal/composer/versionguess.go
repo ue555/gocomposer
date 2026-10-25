@@ -15,13 +15,14 @@ import (
 	"gocomposer/internal/semver"
 )
 
-// GuessVersion ports VersionGuesser::guessVersion for git working copies.
-// Mercurial, Fossil and Subversion detection are not implemented and yield
-// no version (as when those tools are absent).
+// GuessVersion ports VersionGuesser::guessVersion: git working copies, then
+// Mercurial, Fossil and Subversion ones (versionguess_vcs3.go).
 func GuessVersion(dir string, conf *phpjson.Map, cfg *config.Config) (string, string, bool) {
 	version, pretty, ok := guessGitVersion(dir, conf)
 	if !ok || version == "" {
-		return "", "", false
+		if version, pretty, ok = guessOtherVcsVersion(dir, conf); !ok || version == "" {
+			return "", "", false
+		}
 	}
 	if strings.HasSuffix(version, "-dev") && regexp.MustCompile(`\.9{7}`).MatchString(version) {
 		pretty = regexp.MustCompile(`(\.9{7})+`).ReplaceAllString(version, ".x")

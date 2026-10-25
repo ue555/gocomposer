@@ -7,8 +7,10 @@
 #                    via GOTOOLCHAIN (downloaded into .cache/gomod)
 #   unit (linux)   : podman, docker.io/library/golang:1.23 (Debian based;
 #                    stands in for ubuntu-24.04 + setup-go 1.23)
-#   oracle (linux) : the workflow's steps run on the host; podman executes the
-#                    Linux oracle containers inside the podman machine VM
+#   oracle (linux) : the workflow's compare matrix (PHP 8.4/8.3/8.5) and
+#                    integration jobs run in sequence on the host; podman
+#                    executes the Linux oracle containers inside the podman
+#                    machine VM
 set -uo pipefail
 cd "$(dirname "$0")/.."
 root=$PWD
@@ -64,11 +66,15 @@ podman run --rm -v "$work:/src" -w /src -e GOFLAGS=-buildvcs=false "$linux_image
 record "unit (linux, $linux_image)" $? "$log"
 rm -rf "$work"
 
-# oracle (linux)
-for step in "prepare|scripts/prepare-oracle.sh" \
-  "compare-8.4|scripts/compare.sh" \
+# oracle (linux): the workflow's per-PHP matrix jobs and the integration job,
+# each preparing only the images it needs (ORACLE_VERSIONS), run in sequence
+for step in "prepare-8.4|ORACLE_VERSIONS=8.4 scripts/prepare-oracle.sh" \
+  "compare-8.4|scripts/compare.sh -image localhost/gocomposer-oracle:8.4" \
+  "prepare-8.3|ORACLE_VERSIONS=8.3 scripts/prepare-oracle.sh" \
   "compare-8.3|scripts/compare.sh -image localhost/gocomposer-oracle:8.3" \
+  "prepare-8.5|ORACLE_VERSIONS=8.5 scripts/prepare-oracle.sh" \
   "compare-8.5|scripts/compare.sh -image localhost/gocomposer-oracle:8.5" \
+  "integration-prepare|ORACLE_VERSIONS=8.4 scripts/prepare-oracle.sh" \
   "integration|scripts/integration.sh"; do
   name=${step%%|*}
   cmd=${step#*|}

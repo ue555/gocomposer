@@ -9,12 +9,11 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/base64"
-	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"net"
 	"net/http"
+	"net/http/httptrace"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -36,6 +35,10 @@ type TransportError struct {
 	Header http.Header
 	// body is the response body of a failed POST (getResponse()).
 	body []byte
+	// curlErrno and curlMsg are the libcurl error of a failed transfer
+	// (curlerr.go).
+	curlErrno int
+	curlMsg   string
 }
 
 func (e *TransportError) Error() string { return e.Msg }
@@ -86,6 +89,9 @@ func New(cfg *config.Config) (*Downloader, error) {
 	d := &Downloader{cfg: cfg, auths: map[string]Auth{}, warned: map[string]bool{}, MaxParallel: 12}
 	transport := http.DefaultTransport.(*http.Transport).Clone()
 	transport.Proxy = http.ProxyFromEnvironment
+	// CURLOPT_CONNECTTIMEOUT (curlerr.go)
+	transport.DialContext = (&net.Dialer{Timeout: curlConnectTimeout, KeepAlive: 30 * time.Second}).DialContext
+	transport.TLSHandshakeTimeout = curlConnectTimeout
 	if cafile := cfg.GetString("cafile"); cafile != "" {
 		pem, err := os.ReadFile(cafile)
 		if err != nil {
@@ -98,10 +104,8 @@ func New(cfg *config.Config) (*Downloader, error) {
 	if !cfg.GetBool("secure-http") && cfg.GetBool("disable-tls") {
 		transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true} //nolint:gosec // explicit disable-tls config
 	}
-	timeout := time.Duration(300) * time.Second
-	if t, ok := cfg.Get("process-timeout").(int64); ok && t > 0 {
-		timeout = time.Duration(t) * time.Second
-	}
+	// CURLOPT_TIMEOUT; process-timeout only applies to processes
+	timeout := curlTimeout
 	d.Timeout = timeout
 	d.client = &http.Client{Transport: transport, Timeout: timeout, CheckRedirect: func(req *http.Request, via []*http.Request) error {
 		if len(via) >= 20 {
@@ -360,6 +364,7 @@ func (d *Downloader) Download(rawURL, dest string, extraHeaders ...string) (*Res
 // (HttpDownloader::get($url, $options)): http.method, http.header (string or
 // list) and http.content are honoured.
 func (d *Downloader) Request(rawURL string, options *phpjson.Map) (*Response, error) {
+	ctx := context.Background()
 	method := http.MethodGet
 	var headers []string
 	var body []byte
@@ -387,15 +392,32 @@ func (d *Downloader) Request(rawURL string, options *phpjson.Map) (*Response, er
 					body = []byte(s)
 				}
 			}
+			// http.timeout replaces CURLOPT_TIMEOUT for this request
+			if t, ok := hm.Get("timeout"); ok {
+				if secs := timeoutSeconds(t); secs > 0 {
+					c, cancel := context.WithTimeout(ctx, time.Duration(secs*float64(time.Second)))
+					defer cancel()
+					ctx = c
+				}
+			}
 		}
 	}
 	if method == http.MethodGet && body == nil {
-		return d.get(context.Background(), rawURL, "", headers)
+		return d.get(ctx, rawURL, "", headers)
 	}
 	if err := d.ProhibitURL(rawURL); err != nil {
 		return nil, err
 	}
-	resp, err, _ := d.doMethod(context.Background(), method, rawURL, "", headers, body)
+	resp, err, retry := d.doMethod(ctx, method, rawURL, "", headers, body)
+	// CURLE_SEND_ERROR is retried whatever the method
+	for retries := 1; err != nil && retry && retries <= curlMaxRetries; retries++ {
+		if te, ok := err.(*TransportError); !ok || te.curlErrno != 55 {
+			break
+		}
+		d.debugRetry(rawURL, retries, err)
+		time.Sleep(curlRetryDelay(retries))
+		resp, err, retry = d.doMethod(ctx, method, rawURL, "", headers, body)
+	}
 	return resp, err
 }
 
@@ -409,13 +431,15 @@ func (d *Downloader) get(ctx context.Context, rawURL, dest string, extraHeaders 
 	var lastErr error
 	authRetries := 0
 	var storeAuth any = false
-	for attempt := 0; attempt < 3; attempt++ {
+	// CurlDownloader: a failed GET is restarted at most $maxRetries times,
+	// after 0, 0.1 and 0.5 seconds
+	for retries := 0; ; retries++ {
 		resp, err, retry := d.doRequest(ctx, rawURL, dest, extraHeaders)
 		if again, store, aerr := d.checkAuthFailure(ctx, rawURL, dest, resp, err, authRetries); aerr != nil {
 			return nil, aerr
 		} else if again {
 			authRetries++
-			attempt--
+			retries--
 			storeAuth = store
 			continue
 		}
@@ -430,12 +454,27 @@ func (d *Downloader) get(ctx context.Context, rawURL, dest string, extraHeaders 
 			return resp, nil
 		}
 		lastErr = err
-		if !retry {
+		if !retry || retries >= curlMaxRetries {
 			break
 		}
-		time.Sleep(time.Duration(attempt+1) * 500 * time.Millisecond)
+		d.debugRetry(rawURL, retries+1, err)
+		time.Sleep(curlRetryDelay(retries + 1))
 	}
 	return nil, lastErr
+}
+
+// debugRetry writes CurlDownloader's "Retrying (N) <url> due to ..." line.
+func (d *Downloader) debugRetry(rawURL string, retries int, err error) {
+	if d.IO == nil {
+		return
+	}
+	te, _ := err.(*TransportError)
+	switch {
+	case te != nil && te.curlErrno != 0:
+		d.IO.WriteErrorV(fmt.Sprintf("Retrying (%d) %s due to curl error %d", retries, Sanitize(rawURL), te.curlErrno), true, cio.Debug)
+	case te != nil && te.StatusCode != 0:
+		d.IO.WriteErrorV(fmt.Sprintf("Retrying (%d) %s due to status code %d", retries, Sanitize(rawURL), te.StatusCode), true, cio.Debug)
+	}
 }
 
 func (d *Downloader) doRequest(ctx context.Context, rawURL, dest string, extraHeaders []string) (*Response, error, bool) {
@@ -462,6 +501,8 @@ func (d *Downloader) doMethod(ctx context.Context, method, rawURL, dest string, 
 		}
 	}
 	d.addAuth(req)
+	tr := newTransfer()
+	req = req.WithContext(httptrace.WithClientTrace(req.Context(), tr.trace()))
 	res, err := d.client.Do(req)
 	if err != nil {
 		var te *TransportError
@@ -473,15 +514,11 @@ func (d *Downloader) doMethod(ctx context.Context, method, rawURL, dest string, 
 		if te != nil {
 			return nil, te, false
 		}
-		retry := false
-		if ne, ok := err.(net.Error); ok && ne.Timeout() {
-			retry = true
-		} else if strings.Contains(err.Error(), "connection reset") || strings.Contains(err.Error(), "EOF") {
-			retry = true
-		}
-		return nil, &TransportError{Msg: curlMessage(rawURL, err)}, retry
+		te = tr.transportError(rawURL, err, false)
+		return nil, te, curlRetryable(method, te.curlErrno, te.curlMsg)
 	}
 	defer res.Body.Close()
+	tr.size = res.ContentLength
 	out := &Response{URL: res.Request.URL.String(), StatusCode: res.StatusCode, Status: res.Status, Proto: res.Proto, Header: res.Header}
 	if res.StatusCode >= 300 && res.StatusCode != 304 {
 		body, _ := io.ReadAll(io.LimitReader(res.Body, 1<<20))
@@ -491,7 +528,19 @@ func (d *Downloader) doMethod(ctx context.Context, method, rawURL, dest string, 
 		if proto == "2.0" {
 			proto = "2"
 		}
-		msg := fmt.Sprintf(`The "%s" file could not be downloaded (HTTP/%s %d %s)`, Sanitize(rawURL), proto, res.StatusCode, reason) + jsonFailureDetails(res.Header.Get("Content-Type"), body)
+		details := ""
+		// CurlDownloader: the warnings/infos of a JSON error response are
+		// shown (ResponseWarnings) instead of dumping the raw body
+		warned := false
+		if isJSONContentType(res.Header.Get("Content-Type")) {
+			if v, derr := phpjson.Decode(body); derr == nil {
+				warned = d.OutputResponseWarnings(d.Origin(rawURL), v)
+			}
+		}
+		if !warned {
+			details = jsonFailureDetails(res.Header.Get("Content-Type"), body)
+		}
+		msg := fmt.Sprintf(`The "%s" file could not be downloaded (HTTP/%s %d %s)`, Sanitize(rawURL), proto, res.StatusCode, reason) + details
 		return out, &TransportError{Msg: msg, StatusCode: res.StatusCode, Header: res.Header}, res.StatusCode >= 500
 	}
 	if dest != "" && res.StatusCode == 200 {
@@ -503,14 +552,15 @@ func (d *Downloader) doMethod(ctx context.Context, method, rawURL, dest string, 
 		if err != nil {
 			return nil, &TransportError{Msg: `The "` + Sanitize(rawURL) + `" file could not be written to ` + dest + `: ` + err.Error()}, false
 		}
-		n, err := io.Copy(f, res.Body)
+		n, err := io.Copy(countingWriter{f, tr}, res.Body)
 		cerr := f.Close()
 		if err != nil || cerr != nil {
 			os.Remove(tmp)
 			if err == nil {
 				err = cerr
 			}
-			return nil, &TransportError{Msg: "curl error while downloading " + Sanitize(rawURL) + ": " + err.Error()}, true
+			te := tr.transportError(rawURL, err, true)
+			return nil, te, curlRetryable(method, te.curlErrno, te.curlMsg)
 		}
 		if res.ContentLength >= 0 && n != res.ContentLength {
 			os.Remove(tmp)
@@ -522,9 +572,12 @@ func (d *Downloader) doMethod(ctx context.Context, method, rawURL, dest string, 
 		}
 		return out, nil, false
 	}
-	respBody, err := io.ReadAll(res.Body)
+	var buf bytes.Buffer
+	_, err = io.Copy(countingWriter{&buf, tr}, res.Body)
+	respBody := buf.Bytes()
 	if err != nil {
-		return nil, &TransportError{Msg: "curl error while downloading " + Sanitize(rawURL) + ": " + err.Error()}, true
+		te := tr.transportError(rawURL, err, true)
+		return nil, te, curlRetryable(method, te.curlErrno, te.curlMsg)
 	}
 	out.Body = respBody
 	return out, nil, false
@@ -567,21 +620,11 @@ func (d *Downloader) getFile(rawURL, dest string) (*Response, error) {
 
 // jsonFailureDetails is the body excerpt CurlDownloader::failResponse appends
 // to the message of a failed JSON response (Composer
-// f83588392df43d4fd027d84d26de459946ef4e80). A body carrying repository
-// warnings/infos is presented by ResponseWarnings instead, which gocomposer
-// does not print, so no excerpt is added for it either.
+// f83588392df43d4fd027d84d26de459946ef4e80). It is not added when
+// ResponseWarnings presented the body's warnings/infos (see doMethod).
 func jsonFailureDetails(contentType string, body []byte) string {
-	ct := strings.ToLower(contentType)
-	if ct != "application/json" && ct != "application/json; charset=utf-8" {
+	if !isJSONContentType(contentType) {
 		return ""
-	}
-	var data map[string]any
-	if json.Unmarshal(body, &data) == nil {
-		for _, k := range []string{"warning", "info", "warnings", "infos"} {
-			if _, ok := data[k]; ok {
-				return ""
-			}
-		}
 	}
 	if len(body) > 200 {
 		return ":\n" + string(body[:200]) + "..."
@@ -625,29 +668,4 @@ func (d *Downloader) GetAll(jobs []Job) []Result {
 	}
 	wg.Wait()
 	return results
-}
-
-// curlMessage renders a Go network error like CurlDownloader does:
-// "curl error <errno> while downloading <url>: <curl_error()>".
-func curlMessage(rawURL string, err error) string {
-	host := ""
-	if u, perr := url.Parse(rawURL); perr == nil {
-		host = u.Hostname()
-	}
-	var dnsErr *net.DNSError
-	if errors.As(err, &dnsErr) {
-		return "curl error 6 while downloading " + Sanitize(rawURL) + ": Could not resolve host: " + host
-	}
-	var opErr *net.OpError
-	if errors.As(err, &opErr) && opErr.Op == "dial" && strings.Contains(err.Error(), "connection refused") {
-		port := ""
-		if u, perr := url.Parse(rawURL); perr == nil {
-			port = u.Port()
-			if port == "" {
-				port = map[string]string{"http": "80", "https": "443"}[u.Scheme]
-			}
-		}
-		return "curl error 7 while downloading " + Sanitize(rawURL) + ": Failed to connect to " + host + " port " + port + " after 0 ms: Could not connect to server"
-	}
-	return "curl error while downloading " + Sanitize(rawURL) + ": " + Sanitize(err.Error())
 }

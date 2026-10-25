@@ -116,11 +116,20 @@ class Installer
         } elseif ($filter instanceof \Composer\Filter\PlatformRequirementFilter\IgnoreNothingPlatformRequirementFilter) {
             $opts['platformFilter'] = false;
         } else {
-            Unsupported::fail(__METHOD__.' with a '.get_class($filter).' platform requirement filter');
+            // a filter implemented by plugin code: gocomposer asks it
+            $opts['platformFilter'] = \GocomposerPluginHost\Services::filterSpec($filter);
+        }
+        if ($this->gcAuditConfig !== null) {
+            // getAuditConfig(): the AuditConfig set, else one made of audit/auditFormat
+            $opts['audit'] = $this->gcAuditConfig->audit;
+            $opts['auditFormat'] = $this->gcAuditConfig->auditFormat;
         }
 
-        return (int) Host::cb('installerRun', ['base' => $this->gcId, 'inst' => $this->gcInst, 'opts' => (object) $opts]);
+        return (int) Host::cb('installerRun', ['base' => $this->gcId, 'inst' => $this->gcInst, 'obj' => spl_object_id($this), 'opts' => (object) $opts]);
     }
+
+    /** @var \Composer\Advisory\AuditConfig|null */
+    private $gcAuditConfig = null;
 
     /**
      * @param mixed $value
@@ -145,7 +154,8 @@ class Installer
 
     public function setAdditionalFixedRepository(RepositoryInterface $additionalFixedRepository): self
     {
-        Unsupported::fail(__METHOD__);
+        // gocomposer resolves with the repository (plugin_repos.go)
+        return $this->gcSet('additionalFixed', \GocomposerPluginHost\Services::repoSpec($additionalFixedRepository));
     }
 
     public function setTemporaryConstraints(array $constraints): self
@@ -314,6 +324,8 @@ class Installer
 
     public function setAudit(bool $audit): self
     {
+        $this->gcAuditConfig = null; // Invalidate cached config
+
         return $this->gcSet('audit', $audit);
     }
 
@@ -324,12 +336,16 @@ class Installer
 
     public function setAuditFormat(string $auditFormat): self
     {
+        $this->gcAuditConfig = null; // Invalidate cached config
+
         return $this->gcSet('auditFormat', $auditFormat);
     }
 
-    public function setAuditConfig($auditConfig): self
+    public function setAuditConfig(\Composer\Advisory\AuditConfig $auditConfig): self
     {
-        Unsupported::fail(__METHOD__);
+        $this->gcAuditConfig = $auditConfig;
+
+        return $this;
     }
 
     public function setPolicyConfig($policyConfig): self
@@ -357,8 +373,14 @@ class Installer
         return $this->gcSet('silentSuggestions', $silent);
     }
 
-    public function getLockTransaction()
+    /**
+     * The lock transaction of the last update run() made (null when it did
+     * not update).
+     */
+    public function getLockTransaction(): ?\Composer\DependencyResolver\LockTransaction
     {
-        Unsupported::fail(__METHOD__);
+        $data = Host::cb('lockTx', ['base' => $this->gcId, 'obj' => spl_object_id($this)]);
+
+        return $data === null ? null : \Composer\DependencyResolver\LockTransaction::gcCreate($data);
     }
 }

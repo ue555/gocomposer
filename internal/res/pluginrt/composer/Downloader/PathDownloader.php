@@ -10,6 +10,6 @@ class PathDownloader extends FileDownloader implements VcsCapableDownloaderInter
 {
     public function getVcsReference(\Composer\Package\PackageInterface $package, string $path): ?string
     {
-        \GocomposerPluginHost\Unsupported::fail(__METHOD__);
+        return \GocomposerPluginHost\Host::cb('dlVcsReference', ['p' => \GocomposerPluginHost\Host::ref($package), 'path' => $path]);
     }
 }

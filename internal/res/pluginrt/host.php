@@ -96,6 +96,7 @@
 require_once __DIR__.'/composer/Autoload/ClassLoader.php';
 require_once __DIR__.'/lib.php';
 require_once __DIR__.'/api.php';
+require_once __DIR__.'/services.php';
 
 set_error_handler([\GocomposerPluginHost\Host::class, 'errorHandler']);
 error_reporting(E_ALL);

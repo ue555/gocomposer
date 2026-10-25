@@ -5,15 +5,17 @@
 // Adermann, Jordi Boggiano). The repositories are gocomposer's (composer,
 // vcs, path, artifact, package): the objects returned here answer queries
 // through the Go implementation, and repositories created or added by
-// plugins are added to gocomposer's repository list. Custom repository
-// classes (setRepositoryClass) are not supported.
+// plugins are added to gocomposer's repository list. Repository classes
+// registered by plugins (setRepositoryClass) are created like Composer
+// does; gocomposer asks the repository objects of plugin code (and the
+// ones it changed) when resolving.
 
 namespace Composer\Repository;
 
 use Composer\Package\PackageInterface;
 use GocomposerPluginHost\Api;
 use GocomposerPluginHost\Host;
-use GocomposerPluginHost\Unsupported;
+use GocomposerPluginHost\Services;
 
 class RepositoryManager
 {
@@ -21,6 +23,8 @@ class RepositoryManager
     private $localRepository;
     /** @var int gocomposer instance id */
     public $gcInst = 0;
+    /** @var array<string, class-string<RepositoryInterface>> classes registered by plugins */
+    private $gcClasses = [];
 
     public function __construct($io = null, $config = null, $httpDownloader = null, $eventDispatcher = null, $process = null)
     {
@@ -72,24 +76,9 @@ class RepositoryManager
 
     private function gcAdd(RepositoryInterface $repository, bool $prepend): void
     {
-        $rid = Api::repoId($repository);
-        if ($rid !== null) {
-            Host::cb('repoAdd', ['inst' => $this->gcInst, 'rid' => $rid, 'prepend' => $prepend]);
-
-            return;
-        }
-        if (in_array(get_class($repository), [ArrayRepository::class, WritableArrayRepository::class], true)) {
-            // a fixed set of packages built by the plugin
-            $refs = [];
-            foreach ($repository->getPackages() as $package) {
-                $refs[] = Host::ref($package);
-            }
-            Host::cb('repoAdd', ['inst' => $this->gcInst, 'pkgs' => $refs, 'name' => $repository->getRepoName(), 'prepend' => $prepend]);
-
-            return;
-        }
-
-        Unsupported::fail(__METHOD__.' with a '.get_class($repository).' repository');
+        // one of gocomposer's repositories, or an object of plugin code
+        // gocomposer asks (plugin_repos.go)
+        Host::cb('repoAdd', ['inst' => $this->gcInst, 'prepend' => $prepend] + Services::repoSpec($repository));
     }
 
     /**
@@ -97,6 +86,9 @@ class RepositoryManager
      */
     public function createRepository(string $type, array $config, ?string $name = null): RepositoryInterface
     {
+        if (isset($this->gcClasses[$type])) {
+            return Services::createRepository($this->gcInst, $this->gcClasses[$type], $config, $name);
+        }
         $desc = Host::cb('repoCreate', ['inst' => $this->gcInst, 'type' => $type, 'config' => $config, 'name' => $name]);
 
         return Api::repo($desc);
@@ -107,7 +99,7 @@ class RepositoryManager
      */
     public function setRepositoryClass(string $type, $class): void
     {
-        Unsupported::fail(__METHOD__);
+        $this->gcClasses[$type] = $class;
     }
 
     /**

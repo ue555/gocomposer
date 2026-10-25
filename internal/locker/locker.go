@@ -30,6 +30,9 @@ type Locker struct {
 	virtual     bool
 	// PackageTime returns commit time for dev packages installed from source.
 	PackageTime func(p *pkg.Package) string
+	// ReadLog is called before the lock file is read (JsonFile::read's
+	// -vvv "Reading" line); nil: no output.
+	ReadLog func(path string)
 }
 
 // New creates a locker for lockFile from the raw composer.json contents.
@@ -100,6 +103,9 @@ func (l *Locker) LockData() (*phpjson.Map, error) {
 	if !l.Exists() {
 		return nil, fmt.Errorf("No lockfile found. Unable to read locked packages")
 	}
+	if l.ReadLog != nil {
+		l.ReadLog(l.File)
+	}
 	raw, err := os.ReadFile(l.File)
 	if err != nil {
 		return nil, err
@@ -130,6 +136,10 @@ func (l *Locker) IsLocked() (bool, error) {
 
 // IsFresh is Locker::isFresh.
 func (l *Locker) IsFresh() bool {
+	if l.data != nil && l.ReadLog != nil && l.Exists() {
+		// Locker::isFresh reads the lock file again (not the cached data)
+		l.ReadLog(l.File)
+	}
 	data, err := l.LockData()
 	if err != nil {
 		return false

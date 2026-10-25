@@ -1,0 +1,29 @@
+# Archive-tools variant of an oracle image (built on its -zip variant), only
+# for the archive3-* scenarios (tools/compare/scenarios_repo3.go) that need
+# the commands Composer's ZipDownloader / RarDownloader shell out to:
+#  - /usr/bin/unzip is removed, so ZipDownloader falls back to 7z (7zip);
+#  - 7z/7za/7zr and unrar (RARLAB unrar from Debian non-free) live in
+#    /opt/arch/bin, which is only on PATH when a scenario puts it there
+#    (without it neither unzip nor 7z is found: the "commands are both
+#    missing" / ZipArchive paths);
+#  - /opt/arch/conf.d-nozip is the ini scan dir without ext-zip
+#    (PHP_INI_SCAN_DIR), for the paths that require ZipArchive to be missing.
+# Build: podman build --build-arg BASE=localhost/gocomposer-oracle:8.4-zip \
+#          -t localhost/gocomposer-oracle:8.4-arch -f oracle/Containerfile.arch oracle
+ARG BASE=localhost/gocomposer-oracle:8.4-zip
+FROM ${BASE}
+USER root
+RUN sed -i 's/^Components: main$/Components: main non-free/' /etc/apt/sources.list.d/debian.sources \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends 7zip unrar \
+ && rm -rf /var/lib/apt/lists/* \
+ && mkdir -p /opt/arch/bin /opt/arch/conf.d-nozip \
+ && cp /usr/bin/7z /usr/bin/7za /usr/bin/7zr /opt/arch/bin/ \
+ && cp "$(readlink -f /usr/bin/unrar-nonfree)" /opt/arch/bin/unrar \
+ && rm -f /usr/bin/7z /usr/bin/7za /usr/bin/7zr /usr/bin/unrar /usr/bin/unrar-nonfree /usr/bin/unzip \
+ && for f in /usr/local/etc/php/conf.d/*.ini; do \
+      case "$f" in *docker-php-ext-zip.ini) ;; *) cp "$f" /opt/arch/conf.d-nozip/ ;; esac; \
+    done \
+ && ls -l /opt/arch/bin /opt/arch/conf.d-nozip
+USER oracle
+WORKDIR /work

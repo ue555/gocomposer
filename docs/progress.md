@@ -12,13 +12,14 @@
 
 | 検証 | コマンド | 最新結果 |
 |---|---|---|
-| 公式差分比較 PHP 8.4 | `scripts/compare.sh` | 1386シナリオ中 MATCH 1377・KNOWN-DIFF 9・DIFF 0（20261023T093500Z-compare、最終 verify.sh 内） |
-| 公式差分比較 PHP 8.3 | `scripts/compare.sh -image localhost/gocomposer-oracle:8.3` | MATCH 1377・KNOWN-DIFF 9・DIFF 0（20261023T101132Z-compare） |
-| 公式差分比較 PHP 8.5 | `scripts/compare.sh -image localhost/gocomposer-oracle:8.5` | MATCH 1377・KNOWN-DIFF 9・DIFF 0（20261023T104618Z-compare） |
-| 固定実プロジェクト統合 | `scripts/integration.sh` | symfony/console v7.4.9、CLIアプリ、laravel/laravel v13.9.0、live-psr、プラグイン 4 件（composer/installers、php-http/discovery、dealerdirect/phpcodesniffer-composer-installer、pestphp/pest-plugin）、symfony/skeleton v7.4.99（recipes:install を含む）の 9 プロジェクトの全ステップが MATCH（20261023T100947Z-integration） |
+| 公式差分比較 PHP 8.4 | `scripts/compare.sh` | 1926シナリオ中 MATCH 1916・KNOWN-DIFF 10・DIFF 0（20261024T145619Z-compare（最終 verify.sh 内）、20261024T161600Z-compare（ci-local 内）） |
+| 公式差分比較 PHP 8.3 | `scripts/compare.sh -image localhost/gocomposer-oracle:8.3` | MATCH 1916・KNOWN-DIFF 10・DIFF 0（20261024T172303Z-compare） |
+| 公式差分比較 PHP 8.5 | `scripts/compare.sh -image localhost/gocomposer-oracle:8.5` | MATCH 1916・KNOWN-DIFF 10・DIFF 0（20261024T182306Z-compare） |
+| 固定実プロジェクト統合 | `scripts/integration.sh` | symfony/console v7.4.9、CLIアプリ、laravel/laravel v13.9.0、live-psr、プラグイン 4 件（composer/installers、php-http/discovery、dealerdirect/phpcodesniffer-composer-installer、pestphp/pest-plugin）、symfony/skeleton v7.4.99 の 9 プロジェクト × install / update --no-install / update --no-install --no-scripts（skeleton は recipes-install も）の 28 ステップ全 MATCH（20261024T160904Z-integration、20261024T191929Z-integration） |
 | upstream installer fixture | `go test ./internal/composer -run TestUpstreamInstallerFixtures` | Composer `tests/Composer/Test/Fixtures/installer` の227件×(pool optimizer 0/1)=454件すべて通過（期待値は無修正。PHPのplatformはoracle PHP 8.4.27のスナップショット＋Composer本体のテスト環境と同じくext-intlを追加）。過程で update mirrors の参照保持（LockTransaction::updateMirrorAndUrls）を修正 |
-| 全体ゲート | `scripts/verify.sh` | exit 0（gofmt・go test（installer fixture 454件含む）・go test -race・go vet・build・compare・integration）。ログ docs/validation/20261023T060217Z-verify/verify.log |
-| CI ローカル実行 | `scripts/ci-local.sh` | .github/workflows/ci.yml の全ステップ PASS（最新 20261023T112150Z-ci-local、第2段階の 1386 シナリオで実行）: unit macOS（go1.23.12）・unit Linux（podman golang:1.23 digest sha256:ac2b6b75…）・prepare・compare 8.4/8.3/8.5・integration。GitHub Actions 上は push が必要なため範囲外で未実行 |
+| 全体ゲート | `scripts/verify.sh` | exit 0（gofmt・go test（installer fixture 454件含む）・go test -race・go vet・build・compare・integration）。ログ docs/validation/20261024T145526Z-verify/verify.log |
+| CI ローカル実行 | `scripts/ci-local.sh` | .github/workflows/ci.yml（PHP 版ごとの compare matrix と integration ジョブ）の全ステップ PASS（20261024T161151Z-ci-local）: unit macOS（go1.23.12）・unit Linux（podman golang:1.23 digest sha256:ac2b6b75…）・prepare/compare 8.4・8.3・8.5・integration |
+| CI GitHub Actions | push 起動 | 分割前のワークフローが run 39983736909（commit 479e793、push 起動、linux/amd64）で全ジョブ成功（unit ubuntu-24.04 3分5秒・unit macos-14 2分46秒・compare + integration (linux) 1時間49分6秒、ワークフロー全体約1時間52分） |
 
 ## 実装済み（Go、主なもの）
 
@@ -57,17 +58,33 @@
 | 3. 対話プロンプト（pty 比較） | 完了 | tools/compare に疑似端末実行（ptyrun、入力列、生バイト保存）を追加。internal/cio に QuestionHelper を移植。init/require/remove/update -i/run-script/exec/create-project/allow-plugins/親ディレクトリ確認（tty-* 81）、認証入力・discard-changes（tty-auth-* 48、tty-discard-* 12）を追加し全 MATCH（20261023T084145Z-compare-tty-full、20261023T085613Z-compare-tty2-full）。-n/非端末入力の既存シナリオは不変 |
 | 最終検証 | 完了 | `scripts/verify.sh` exit 0（20261023T093500Z-verify、compare 8.4 20261023T093500Z、integration 20261023T100947Z）、compare 8.3 20261023T101132Z・8.5 20261023T104618Z（いずれも 1386 中 MATCH 1377・KNOWN-DIFF 9・DIFF 0）、`scripts/ci-local.sh` 全 PASS（20261023T112150Z-ci-local） |
 
+## 第3段階（2026-10-23〜24、gocomposer-final）
+
+| 項目 | 状態 | 備考 |
+|---|---|---|
+| 1. 文書の更新 | 完了 | GitHub Actions run 39983736909（commit 479e793、全ジョブ成功）を反映。端末表示節の OSC 9;4 の矛盾を解消 |
+| 2. completion | 完了 | completion（bash。基準の symfony/console v5.4 は zsh/fish 非対応で公式と同じエラー）、_complete と各コマンドの補完候補。completion-*・complete-* |
+| 3. 細部の移植 | 完了 | config/Factory の -vvv ログ、bin-compat 警告、validate/reinstall の command イベント、Symfony Command クラスを指す script、composer.json なしの fund/search/browse（packagist.org の loopback スタブ）。cli3-*。親セッションで Factory::purgePackages（purge-*）、zip の非同期展開後の bin インストール順、composer.json なしの show -a/--available（show3-*）、list/help の Descriptor 移植（misc-* 74）を追加 |
+| 4. VCS svn/hg/fossil/perforce | 完了 | oracle/Containerfile に subversion 1.14.5・mercurial 7.0.1・fossil 2.26 を追加。vcs3 119 シナリオ（PHP 8.3/8.4/8.5）。Perforce は p4d が再配布不可のため偽 p4 で比較（実サーバー未比較）。source-svn-update-v は Composer 自身の不具合で KNOWN-DIFF |
+| 5. v1 providers-url | 完了 | providers-* 30 |
+| 6. rar/xz/7z | 完了 | archive3-* 16、oracle/Containerfile.arch（7z・unrar、`-arch` イメージ）。ext-rar 経路は明示エラー |
+| 7. ResponseWarnings | 完了 | warnings-* 11 |
+| 8. 端末表示 | 完了 | OSC 8、ProgressBar 上書き、curl エラー番号 1/6/7/18/28/35/52/55/56/60。term-* 29・curl-* 19 |
+| 9. プラグイン | 完了 | サービス差し替え・リポジトリクラス・ダウンローダ置換・AutoloadGenerator・Factory/Config/Installer API、post-file-download の完了順。plugin3-* 47。残る明示エラーは compatibility.md |
+| 10. root 確認 | 完了 | `--user 0` のシナリオ（root-* 19）。Linux rootless での実行は未確認 |
+| 11. 統合テスト | 完了 | update-no-install-no-scripts ステップを追加、9 件全 MATCH（20261023T190639Z-integration） |
+| 12. CI の matrix | 完了 | oracle を PHP 版ごとの compare ジョブと integration ジョブに分割（prepare-oracle.sh の ORACLE_VERSIONS）、ci-local.sh も同構成。GitHub 上は未実行（push は範囲外） |
+| 最終検証 | 完了 | `scripts/verify.sh` exit 0（20261024T145526Z-verify）、`scripts/ci-local.sh` exit 0（20261024T161151Z-ci-local）。compare は 3 版とも 1926 中 MATCH 1916・KNOWN-DIFF 10・DIFF 0、integration 28 ステップ全 MATCH |
+
 ## 未実装・未比較
 
-- config: キー名補完・-vvv 読込ログ・bin-compat symlink 警告は未移植。
-- 対話: root 実行時の確認はシナリオなし（コンテナが uid 1000）。discard 確認の EOF は Composer と同じく無限再質問のため比較なし。
+- 対話: discard 確認の EOF は Composer と同じく無限再質問のため比較なし。
 - self-update は明示失敗、diagnose の Composer 自身の監査行のみ差（KNOWN-DIFF）。
 - plugin: サービス差し替え（set*、getArchiveManager）、setRepositoryClass、組込みダウンローダの置換などは明示エラー（compatibility.md）。post-file-download の並列時の発火順は操作順（既知の差）。
-- VCS: svn/hg/fossil/perforce ドライバ本体、v1 providers-url は明示エラー。
-- CI: GitHub Actions 上は未実行（push が範囲外）。ローカル再現のみ。
+- VCS: Perforce は実サーバー（p4d）で未比較（偽 p4 で比較）。forgejo ドライバは明示エラー。Locker::getPackageTime（source の dev パッケージの time 上書き）は未接続。
 
 ## 次の作業
 
 gocomposer-remaining の対象 1〜7 はすべて実装・比較・記録済み。残る差は docs/compatibility.md に明示エラーまたは KNOWN-DIFF として列挙した仕様差のみ。
 gocomposer-next の対象 1〜3 も実装・比較済み（最終検証は第2段階の表を参照）。
-今後の候補: svn/hg ドライバ本体、v1 providers-url、残るプラグイン API（compatibility.md の明示エラー一覧）、GitHub Actions 上での CI 実行（push 後）。
+今後の候補: compatibility.md に残る明示エラー（プラグインの一部 API、ext-rar 展開、forgejo）と Perforce 実サーバーでの比較。GitHub Actions は run 39983736909 で全ジョブ成功済み。

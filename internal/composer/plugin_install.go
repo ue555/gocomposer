@@ -398,6 +398,12 @@ func (im *InstallationManager) pluginRecordInstallers(ops []*solver.Operation) e
 // the cleanup of the installer chosen at download time (errors ignored).
 func (im *InstallationManager) cleanupAfterFailure(op *solver.Operation) {
 	if pm := pluginManagerOf(im.c); pm.active() {
+		// the cleanup of a downloader replaced by a plugin
+		if handled, _ := im.replacedStage(op, "cleanup"); handled {
+			pm.lastCallbackErr = nil
+			im.cleanup(op.MainPackage())
+			return
+		}
 		if info, ok := pm.cleanupInstaller(op.MainPackage()); ok && info != nil && info.customFlow("cleanup") {
 			var initial *pkg.Package
 			if op.Type == solver.OpUpdate {
@@ -419,6 +425,10 @@ type pendingOp struct {
 	op        *solver.Operation
 	devMode   bool
 	goCleanup bool
+	// replaced: the operation of a downloader replaced by a plugin
+	// (plugin_services.go): its cleanup ran in the chain, gocomposer only
+	// removes its own temporary files
+	replaced bool
 }
 
 // pluginStartOp starts an operation of a plugin installer like
@@ -492,6 +502,9 @@ func (pm *PluginManager) opDone(key string) error {
 		if err := im.cleanupOp(po.op); err != nil {
 			return err
 		}
+		im.cleanup(po.op.MainPackage())
+	}
+	if po.replaced {
 		im.cleanup(po.op.MainPackage())
 	}
 	return im.writeRepo(po.repo, po.devMode)

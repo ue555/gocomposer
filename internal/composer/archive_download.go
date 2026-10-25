@@ -39,7 +39,7 @@ func (im *InstallationManager) DownloadTo(p *pkg.Package, target string) error {
 		return nil
 	case "path":
 		err = im.pathInstall(p, stage, true)
-	case "zip", "tar", "gzip":
+	case "zip", "tar", "gzip", "xz", "rar":
 		err = im.archiveInstall(p, stage, true)
 	case "file", "phar":
 		err = im.fileInstall(p, stage, true)

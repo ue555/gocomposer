@@ -79,8 +79,11 @@ type Installer struct {
 	SuggestionsFromInstall []*pkg.Package
 	fixedRootPackage       *pkg.Package
 	lockTransaction        *solver.LockTransaction
-	suggestions            *SuggestedPackagesReporter
-	localRepo              *installed.Repository
+	// AdditionalFixedRepository is Installer::setAdditionalFixedRepository:
+	// its packages take part in the resolution as fixed packages.
+	AdditionalFixedRepository repo.Repository
+	suggestions               *SuggestedPackagesReporter
+	localRepo                 *installed.Repository
 }
 
 // NewInstaller is Installer::create with Composer's defaults.
@@ -327,10 +330,21 @@ type AutoloadOptions struct {
 	DryRun                bool
 	StrictAmbiguous       bool
 	Suffix                string
+	// TargetDir is the target directory below the vendor dir ("" for
+	// "composer")
+	TargetDir string
 }
 
 // RunAutoloadDump wraps AutoloadGenerator::dump with its script events.
 func RunAutoloadDump(c *Composer, events *EventDispatcher, localRepo *installed.Repository, o AutoloadOptions) (*autoload.Result, error) {
+	// an autoload generator replaced by a plugin (plugin_services.go)
+	if res, handled, err := pluginAutoloadDump(c, events, localRepo, o); handled {
+		return res, err
+	}
+	return runAutoloadDump(c, events, localRepo, o)
+}
+
+func runAutoloadDump(c *Composer, events *EventDispatcher, localRepo *installed.Repository, o AutoloadOptions) (*autoload.Result, error) {
 	devMode := false
 	if o.DevMode != nil {
 		devMode = *o.DevMode
@@ -389,6 +403,7 @@ func RunAutoloadDump(c *Composer, events *EventDispatcher, localRepo *installed.
 		StrictAmbiguous:       o.StrictAmbiguous,
 		DryRun:                o.DryRun,
 		Warn:                  func(s string) { c.IO.WriteError(s) },
+		TargetDir:             o.TargetDir,
 	}
 	result, err := autoload.Dump(opts, c.Root(), localRepo.CanonicalPackages(), im.InstallPath, localRepo.DevPackageNames)
 	if err != nil {
@@ -495,6 +510,14 @@ func (in *Installer) createRepositorySet(forUpdate bool, platformRepo *platform.
 	rs := solver.NewRepositorySet(minimumStability, stabilityFlags, rootAliases, root.References, rootRequires, in.TemporaryConstraints)
 	rs.AddRepository(repo.NewRootPackageRepository(fixed))
 	rs.AddRepository(platformRepo)
+	if r := in.AdditionalFixedRepository; r != nil {
+		// allow using installed repos if needed to avoid warnings about
+		// installed repositories being used in the RepositorySet
+		if r.Kind() == repo.KindInstalled {
+			rs.AllowInstalledRepositories()
+		}
+		rs.AddRepository(r)
+	}
 	return rs
 }
 
@@ -554,6 +577,14 @@ func (in *Installer) createRequest(root *pkg.Package, platformRepo *platform.Rep
 		l := provided.Get(p.Name)
 		if l == nil || !l.Constraint.Matches(semver.NewConstraint("=", p.Version())) {
 			req.FixPackage(p)
+		}
+	}
+	// the packages of the additional fixed repository are fixed too
+	if r := in.AdditionalFixedRepository; r != nil {
+		if ps, err := r.Packages(); err == nil {
+			for _, p := range ps {
+				req.FixPackage(p)
+			}
 		}
 	}
 	return req

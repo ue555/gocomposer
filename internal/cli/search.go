@@ -2,11 +2,12 @@ package cli
 
 // Port of Composer\Command\SearchCommand (composer/composer
 // f83588392df43d4fd027d84d26de459946ef4e80, MIT, (c) Nils Adermann, Jordi Boggiano).
-// Without a composer.json Composer searches the default repositories
-// (packagist.org); gocomposer fails explicitly there.
+// Without a composer.json the default repositories (packagist.org) are
+// searched (createComposerInstance with an empty configuration).
 
 import (
 	"fmt"
+	"os"
 	"regexp"
 	"strings"
 
@@ -31,7 +32,12 @@ func runSearch(ctx *Context) (int, error) {
 	}
 	c := ctx.cache
 	if c == nil {
-		return 1, &composer.UserError{Msg: "gocomposer search needs a composer.json: searching the default repositories without one (packagist.org) is not supported", Code: 1}
+		// createComposerInstance($input, $io, []): the default repositories
+		nc, err := defaultReposComposer(ctx)
+		if err != nil {
+			return 1, err
+		}
+		c = nc
 	}
 	localPkgs, err := c.LocalRepo.Packages()
 	if err != nil {
@@ -165,4 +171,24 @@ func phpSubstr(s string, n int) string {
 // escapeFormatter is OutputFormatter::escape.
 func escapeFormatter(s string) string {
 	return regexp.MustCompile(`([^\\]|^)([<>])`).ReplaceAllString(s, `$1\$2`)
+}
+
+// defaultReposComposer is a Composer instance created from an empty
+// configuration (Factory::create($io, [])), whose repositories are the
+// default ones of the (global) configuration: packagist.org unless disabled.
+func defaultReposComposer(ctx *Context) (*composer.Composer, error) {
+	cwd, err := os.Getwd()
+	if err != nil {
+		return nil, err
+	}
+	c, err := composer.NewProjectComposer(ctx.IO, phpjson.NewMap(), cwd, composer.Options{DisablePlugins: true, DisableScripts: ctx.In.Bool("no-scripts")})
+	if err != nil {
+		return nil, err
+	}
+	repos, err := c.DefaultRepositories()
+	if err != nil {
+		return nil, err
+	}
+	c.Repositories = repos
+	return c, nil
 }

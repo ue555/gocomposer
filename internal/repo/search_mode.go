@@ -127,6 +127,7 @@ func (r *Composer) searchMode(query string, mode int, typ *string) ([]SearchEntr
 		if err != nil {
 			return nil, err
 		}
+		r.responseWarnings(v)
 		var out []SearchEntry
 		if res, ok := phpjson.AsMap(v).Get("results"); ok {
 			phpjson.Each(res, func(_ string, e phpjson.Value) {
@@ -168,9 +169,16 @@ func (r *Composer) searchMode(query string, mode int, typ *string) ([]SearchEntr
 		return out, nil
 	}
 	if r.hasProviders || r.lazyProvidersURL != "" {
+		if res, ok, err := r.searchListAPI(query); ok {
+			return res, err
+		}
 		re := searchRegex(query, false)
 		var out []SearchEntry
-		for _, n := range r.packageNames() {
+		names, err := r.PackageNames("")
+		if err != nil {
+			return nil, err
+		}
+		for _, n := range names {
 			if re.MatchString(n) {
 				out = append(out, SearchEntry{Name: n, Description: strp("")})
 			}
@@ -191,7 +199,7 @@ func (r *Composer) allPackageNames() ([]string, error) {
 		return nil, err
 	}
 	if r.lazyProvidersURL != "" || r.hasProviders {
-		return r.packageNames(), nil
+		return r.PackageNames("")
 	}
 	ps, err := r.Packages()
 	if err != nil {

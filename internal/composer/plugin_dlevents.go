@@ -190,14 +190,6 @@ func distCacheKey(p *pkg.Package, key string) string {
 // pluginPreFileDownload dispatches pre-file-download for a package file and
 // returns the URL and cache key to use.
 func (im *InstallationManager) pluginPreFileDownload(p *pkg.Package, processed, cacheKey string) (string, string, error) {
-	// the deferred post-file-download events follow the download order
-	postMu.Lock()
-	postSeq++
-	if postOrder[im] == nil {
-		postOrder[im] = map[*pkg.Package]int{}
-	}
-	postOrder[im][p] = postSeq
-	postMu.Unlock()
 	pm := pluginManagerOf(im.c)
 	if pm == nil || pm.closed {
 		return processed, cacheKey, nil
@@ -225,8 +217,9 @@ func (im *InstallationManager) pluginPreFileDownload(p *pkg.Package, processed, 
 	return u, cacheKey, nil
 }
 
-// retryMu serializes the pre-file-download events of retried transfers
-// (they run concurrently; nothing else uses the plugin host meanwhile).
+// retryMu serializes the events dispatched by transfers (pre-file-download
+// of retried transfers, post-file-download of completed ones): they run
+// concurrently and nothing else uses the plugin host meanwhile.
 var retryMu sync.Mutex
 
 // pluginPreFileDownloadRetry is the pre-file-download event FileDownloader
@@ -237,33 +230,23 @@ func (im *InstallationManager) pluginPreFileDownloadRetry(p *pkg.Package, proces
 	return im.pluginPreFileDownload(p, processed, cacheKey)
 }
 
-type pendingPost struct {
-	seq                     int
-	p                       *pkg.Package
-	fileName, checksum, url string
-}
-
-var (
-	postMu      sync.Mutex
-	postSeq     int
-	postPending = map[*InstallationManager][]pendingPost{}
-	postOrder   = map[*InstallationManager]map[*pkg.Package]int{}
-)
-
 // pluginPostFileDownload dispatches post-file-download for a package file
-// (deferred: the transfers run concurrently; Composer dispatches the events
-// as the downloads complete, they are dispatched in operation order once the
-// transfers are done, like with COMPOSER_MAX_PARALLEL_HTTP=1).
+// (deferred: called by a transfer running concurrently with others, as it
+// completes: the events follow the completion order like in Composer, where
+// the loop dispatches them when it sees a transfer finish; with
+// COMPOSER_MAX_PARALLEL_HTTP=1 that is the download order). A listener
+// failing rejects the download (the "Failed to download" warning is printed
+// by the transfer's caller).
 func (im *InstallationManager) pluginPostFileDownload(p *pkg.Package, fileName, checksum, u string, deferred bool) error {
 	pm := pluginManagerOf(im.c)
 	if pm == nil || pm.closed {
 		return nil
 	}
 	if deferred {
-		postMu.Lock()
-		postPending[im] = append(postPending[im], pendingPost{postOrder[im][p], p, fileName, checksum, u})
-		postMu.Unlock()
-		return nil
+		// dispatched from the transfer's goroutine as it completes, like
+		// Composer's loop does; the plugin host serves one at a time
+		retryMu.Lock()
+		defer retryMu.Unlock()
 	}
 	d := pm.eventDispatcherFor()
 	if !wantsEvent(d, "post-file-download") {
@@ -281,22 +264,6 @@ func (im *InstallationManager) pluginPostFileDownload(p *pkg.Package, fileName, 
 	}
 	_, err := pm.dispatchStateful(d, &ScriptEvent{Name: "post-file-download", Kind: "postfiledl"}, extra)
 	return err
-}
-
-// flushPluginPostDownloads dispatches the deferred post-file-download events.
-func (im *InstallationManager) flushPluginPostDownloads() error {
-	postMu.Lock()
-	list := postPending[im]
-	delete(postPending, im)
-	delete(postOrder, im)
-	postMu.Unlock()
-	sort.Slice(list, func(i, j int) bool { return list[i].seq < list[j].seq })
-	for _, e := range list {
-		if err := im.pluginPostFileDownload(e.p, e.fileName, e.checksum, e.url, false); err != nil {
-			return err
-		}
-	}
-	return nil
 }
 
 // pool creation (PoolBuilder::buildPool)

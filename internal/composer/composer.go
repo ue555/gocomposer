@@ -105,6 +105,10 @@ type Options struct {
 	// SkipSchemaValidation mirrors Factory::createComposer being given the
 	// configuration as an array (no file, so no LAX schema check).
 	SkipSchemaValidation bool
+	// SkipPurge leaves the local repository as loaded: the upstream
+	// installer fixtures' InstallationManagerMock::isPackageInstalled only
+	// checks the repository, so Factory::purgePackages never drops anything
+	SkipPurge bool
 	// Cwd is Factory::createComposer's $cwd (default: the working directory).
 	Cwd string
 }
@@ -150,17 +154,28 @@ func Create(io *cio.IO, opts Options) (*Composer, error) {
 			return nil, err
 		}
 	}
-	cfg, err := config.CreateConfig(cwd, func(m string) { io.WriteError(m) })
+	// -vvv: JsonFile::read and the config files Factory loads (factorylog.go)
+	if !opts.SkipSchemaValidation {
+		ReadingLog(io, composerFile)
+	}
+	cfg, err := config.CreateConfigDebug(cwd, func(m string) { io.WriteError(m) }, debugLogger(io))
 	if err != nil {
 		return nil, err
 	}
 	cfg.Merge(data)
+	if log := debugLogger(io); log != nil && !opts.SkipSchemaValidation {
+		log("Loading config file " + composerFile + " (" + phpRealpath(composerFile) + ")")
+	}
 	// local auth.json next to composer.json
 	authFile := filepath.Join(filepath.Dir(absPath(composerFile)), "auth.json")
 	if _, err := os.Stat(authFile); err == nil {
+		if log := debugLogger(io); log != nil {
+			log("Loading config file " + authFile)
+		}
 		if err := config.ValidateSchemaWarn(func(m string) { io.WriteError(m) }, authFile, nil, jsonschema.AuthSchema); err != nil {
 			return nil, err
 		}
+		ReadingLog(io, authFile)
 		m, err := config.ReadJSONFile(authFile)
 		if err != nil {
 			return nil, err
@@ -176,6 +191,7 @@ func Create(io *cio.IO, opts Options) (*Composer, error) {
 	if err != nil {
 		return nil, err
 	}
+	tlsDefaultsDebug(io, cfg)
 	dl.Warn = func(s string) { io.WriteError(s) }
 	// interactive credential prompts and the config sources they write to
 	dl.IO = io
@@ -205,6 +221,9 @@ func Create(io *cio.IO, opts Options) (*Composer, error) {
 			return nil, err
 		}
 	}
+	// Factory::createDefaultInstallers reads bin-compat for the
+	// BinaryInstaller (its deprecation notice is triggered there)
+	_, _ = cfg.GetFlags("bin-compat", 0)
 	lockFile := LockFileName(composerFile)
 	if !cfg.GetBool("lock") {
 		if _, err := os.Stat(lockFile); err == nil {
@@ -217,6 +236,21 @@ func Create(io *cio.IO, opts Options) (*Composer, error) {
 		return nil, err
 	}
 	c.Locker = l
+	if io.IsDebug() {
+		l.ReadLog = func(p string) { ReadingLog(io, p) }
+	}
+	if opts.FullLoad {
+		if !c.isGlobal() {
+			// Factory::createGlobalComposer (debug output only)
+			globalComposerDebug(io, cfg)
+		}
+		// a custom composer.json path makes its directory Factory's cwd
+		factoryCwd := ""
+		if opts.ComposerFile != "" && opts.Cwd == "" && isFile(composerFile) {
+			factoryCwd = filepath.Dir(composerFile)
+		}
+		pluginManagerDebug(io, c, factoryCwd)
+	}
 	if opts.FullLoad {
 		if err := c.LocalRepo.Load(); err != nil {
 			return nil, err
@@ -225,6 +259,9 @@ func Create(io *cio.IO, opts Options) (*Composer, error) {
 	// PluginManager::loadInstalledPlugins and the init event (plugin.go)
 	if err := c.initPlugins(opts.FullLoad); err != nil {
 		return nil, err
+	}
+	if opts.FullLoad && !opts.SkipPurge {
+		c.purgePackages()
 	}
 	return c, nil
 }

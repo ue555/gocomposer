@@ -14,7 +14,9 @@ import (
 	"sync"
 
 	"gocomposer/internal/autoload"
+	"gocomposer/internal/config"
 	"gocomposer/internal/configsource"
+	"gocomposer/internal/httpdl"
 	"gocomposer/internal/installed"
 	"gocomposer/internal/phpjson"
 	"gocomposer/internal/pkg"
@@ -88,6 +90,22 @@ type PluginManager struct {
 	// txResult/txPresent are the packages of the LocalRepoTransaction of
 	// pre-operations-exec
 	txResult, txPresent []*pkg.Package
+	// services replaced by plugins (plugin_services.go)
+	dlReplaced map[string]bool
+	alReplaced bool
+	alCtx      *autoloadCtx
+	// repositories implemented by plugin code (plugin_repos.go)
+	phpRepos map[int64]*phpRepository
+	// lock transactions of Installer objects of plugin code
+	lockTxs map[int64]*solver.LockTransaction
+	// configurations of Config objects of plugin code, instances created
+	// from a configuration array (plugin_services.go)
+	detachedCfgs map[int64]*config.Config
+	cfgSeq       int64
+	arrayConfigs map[*Composer]bool
+	// HTTP clients for the TLS options of plugin requests (plugin_http.go)
+	tlsClients map[string]*httpdl.Downloader
+	sslWarned  map[string]bool
 }
 
 var (

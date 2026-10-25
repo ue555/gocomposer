@@ -369,6 +369,9 @@ func (c *Config) GetFlags(key string, flags int) (phpjson.Value, error) {
 		if !valid {
 			return nil, &RuntimeError{"Invalid value for 'bin-compat': " + PHPString(value) + ". Expected auto, full or proxy"}
 		}
+		if value == "symlink" && Deprecation != nil {
+			Deprecation(`config.bin-compat "symlink" is deprecated since Composer 2.2, use auto, full (for Windows compatibility) or proxy instead.`)
+		}
 		return value, nil
 	case "discard-changes":
 		if env, ok := c.env("COMPOSER_DISCARD_CHANGES"); ok {

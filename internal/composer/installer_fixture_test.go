@@ -262,7 +262,7 @@ func runInstallerFixture(t *testing.T, file, fixturesDir string, facts *platform
 	}
 	var out bytes.Buffer
 	io := &cio.IO{Out: &out, Err: &out, Verbosity: cio.Normal, SymfonyStylesOnly: true}
-	c, err := Create(io, Options{FullLoad: true, PlatformFacts: facts, DisablePlugins: true, SkipSchemaValidation: true})
+	c, err := Create(io, Options{FullLoad: true, PlatformFacts: facts, DisablePlugins: true, SkipSchemaValidation: true, SkipPurge: true})
 	expectException := strings.TrimSpace(data["EXPECT-EXCEPTION"]) != ""
 	if err != nil {
 		if expectException && strings.Contains(err.Error(), strings.TrimRight(data["EXPECT"], " \n")) {

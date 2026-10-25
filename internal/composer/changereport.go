@@ -50,7 +50,7 @@ func (im *InstallationManager) FileLocalChanges(p *pkg.Package, path string) (st
 			if err := qim.pathDownload(p); err != nil {
 				return err
 			}
-		case "zip", "tar", "gzip", "file", "phar":
+		case "zip", "tar", "gzip", "file", "phar", "xz", "rar":
 			transfer, err := qim.fileDownload(p)
 			if err != nil {
 				return err
@@ -67,7 +67,7 @@ func (im *InstallationManager) FileLocalChanges(p *pkg.Package, path string) (st
 		switch typ {
 		case "path":
 			err = qim.pathInstall(p, cmp, false)
-		case "zip", "tar", "gzip":
+		case "zip", "tar", "gzip", "xz", "rar":
 			err = qim.archiveInstall(p, cmp, false)
 		default:
 			err = qim.fileInstall(p, cmp, false)

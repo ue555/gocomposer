@@ -1,0 +1,439 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "b4d097afa1494f053879aa919f01faa68de52a74e496d24e5ebbed790115a086",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.3",
+    "oracle_image_digest": "sha256:91789a6658a5075533a2b26cfbdb2a264ab6051e638872129021bccc27665fce",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "oracle_zip_image": "localhost/gocomposer-oracle:8.3-zip",
+    "oracle_zip_image_digest": "sha256:08e40da7145cf527bf595df929ce3394a5ae7bcfd43a8e4bac8ec1243e406bf9",
+    "php_version": "8.3.36",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261023T192720Z",
+  "results": [
+    {
+      "scenario": "providers-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-update-verbose",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-install-lock",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-update-cached",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-root-listing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-dev-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-virtual",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "providers-not-found",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "providers-bad-hash",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "providers-bad-hash-other",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-require",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-require-missing",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "providers-show-available",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-show-all",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-show-all-names",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-outdated",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-update-one",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-depends",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-search",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-search-name",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-search-vendor",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-search-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-search-list-other",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-lazy-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-lazy-not-found",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "providers-lazy-show",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-lazy-search",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "providers-lazy-cached",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "archive3-xz",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "archive3-xz-status",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "archive3-xz-reinstall",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "archive3-xz-remove",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "archive3-rar-status",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "archive3-xz-broken",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "archive3-rar-no-unrar",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "archive3-rar",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "archive3-rar-broken",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "archive3-zip-7z",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "archive3-zip-7z-zipext",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "archive3-zip-7z-crc",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "archive3-zip-7z-crc-zipext",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=0 go=1",
+        "stdout:\n- (oracle) No security vulnerability advisories found.",
+        "stderr:\n+ (go)     Install of archfix/zipcrc failed\n+ (go) \n+ (go) In \u003clocation\u003e:\n+ (go)                                                                                \n+ (go)   The archive for \"archfix/zipcrc\" may contain identical file names with diff  \n+ (go)   erent capitalization (which fails on case insensitive filesystems): ZipArch  \n+ (go)   ive::extractTo(): Cannot extract \"archfix-zipcrc-1.0.0/composer.json\": \"CRC  \n+ (go)    error\"                                                                      \n+ (go)                                                                                \n+ (go) \n+ (go) In \u003clocation\u003e:\n+ (go)                                                                                \n+ (go)   ZipArchive::extractTo(): Cannot extract \"archfix-zipcrc-1.0.0/composer.json  \n+ (go)   \": \"CRC error\"                                                               \n+ (go)                                                                                \n+ (go) \n+ (go) update [--with WITH] [--prefer-source] [--prefer-dist] [--prefer-install PREFER-INSTALL] [--dry-run] [--dev] [--no-dev] [--lock] [--no-install] [--no-audit] [--audit-format AUDIT-FORMAT] [--no-security-blocking] [--no-blocking] [--no-cooldown] [--no-autoloader] [--no-suggest] [--no-progress] [-w|--with-dependencies] [-W|--with-all-dependencies] [-v|vv|vvv|--verbose] [-o|--optimize-autoloader] [-a|--classmap-authoritative] [--strict-psr-autoloader] [--apcu-autoloader] [--apcu-autoloader-prefix APCU-AUTOLOADER-PREFIX] [--ignore-platform-req IGNORE-PLATFORM-REQ] [--ignore-platform-reqs] [--prefer-stable] [--prefer-lowest] [-m|--minimal-changes] [--patch-only] [-i|--interactive] [--root-reqs] [--bump-after-update [BUMP-AFTER-UPDATE]] [--] [\u003cpackages\u003e...]\n+ (go) \n- (oracle) Generating autoload files",
+        "project tree:\n- (oracle) D vendor\n- (oracle) D vendor/archfix\n- (oracle) D vendor/archfix/zipcrc\n- (oracle) D vendor/archfix/zipcrc/bin\n- (oracle) D vendor/archfix/zipcrc/src\n- (oracle) D vendor/bin\n- (oracle) D vendor/composer\n- (oracle) F vendor/archfix/zipcrc/bin/archtool 755 63e5cd20333a2449\n- (oracle) F vendor/archfix/zipcrc/composer.json 644 eabbb5b5ab82f5c6\n- (oracle) F vendor/archfix/zipcrc/src/Zipcrc.php 644 717fa4118cb95c22\n- (oracle) F vendor/autoload.php 644 e4df171b3ebd67ad\n- (oracle) F vendor/bin/archtool 755 4973c40d2f80670e\n- (oracle) F vendor/composer/ClassLoader.php 644 d4b2313e562edf94\n- (oracle) F vendor/composer/InstalledVersions.php 644 1e4525198301d1ed\n- (oracle) F vendor/composer/LICENSE 644 7855ac293067aebe\n- (oracle) F vendor/composer/autoload_classmap.php 644 375085d0d6690301\n- (oracle) F vendor/composer/autoload_namespaces.php 644 ede505407590638a\n- (oracle) F vendor/composer/autoload_psr4.php 644 d5274594f6204537\n- (oracle) F vendor/composer/autoload_real.php 644 a18af7b42f2a3a7a\n- (oracle) F vendor/composer/autoload_static.php 644 584da5c998a0b31c\n- (oracle) F vendor/composer/installed.json 644 f9604e5fba77b64b\n- (oracle) F vendor/composer/installed.php 644 a980ee71a4a0a74b",
+        "vendor/composer/autoload_classmap.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_classmap.php @generated by Composer\n- (oracle) \n- (oracle) $vendorDir = dirname(__DIR__);\n- (oracle) $baseDir = dirname($vendorDir);\n- (oracle) \n- (oracle) return array(\n- (oracle)     'Composer\\\\InstalledVersions' =\u003e $vendorDir . '/composer/InstalledVersions.php',\n- (oracle) );\n- (oracle) ",
+        "vendor/composer/autoload_psr4.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_psr4.php @generated by Composer\n- (oracle) \n- (oracle) $vendorDir = dirname(__DIR__);\n- (oracle) $baseDir = dirname($vendorDir);\n- (oracle) \n- (oracle) return array(\n- (oracle)     'Archfix\\\\' =\u003e array($vendorDir . '/archfix/zipcrc/src'),\n- (oracle)     'App\\\\' =\u003e array($baseDir . '/src'),\n- (oracle) );\n- (oracle) ",
+        "vendor/composer/autoload_real.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_real.php @generated by Composer\n- (oracle) \n- (oracle) class ComposerAutoloaderInit8fbfb2363b8aeecb805302f10d456dd9\n- (oracle) {\n- (oracle)     private static $loader;\n- (oracle) \n- (oracle)     public static function loadClassLoader($class)\n- (oracle)     {\n- (oracle)         if ('Composer\\Autoload\\ClassLoader' === $class) {\n- (oracle)             require __DIR__ . '/ClassLoader.php';\n- (oracle)         }\n- (oracle)     }\n- (oracle) \n- (oracle)     /**\n- (oracle)      * @return \\Composer\\Autoload\\ClassLoader\n- (oracle)      */\n- (oracle)     public static function getLoader()\n- (oracle)     {\n- (oracle)         if (null !== self::$loader) {\n- (oracle)             return self::$loader;\n- (oracle)         }\n- (oracle) \n- (oracle)         spl_autoload_register(array('ComposerAutoloaderInit8fbfb2363b8aeecb805302f10d456dd9', 'loadClassLoader'), true, true);\n- (oracle)         self::$loader = $loader = new \\Composer\\Autoload\\ClassLoader(\\dirname(__DIR__));\n- (oracle)         spl_autoload_unregister(array('ComposerAutoloaderInit8fbfb2363b8aeecb805302f10d456dd9', 'loadClassLoader'));\n- (oracle) \n- (oracle)         require __DIR__ . '/autoload_static.php';\n- (oracle)         call_user_func(\\Composer\\Autoload\\ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9::getInitializer($loader));\n- (oracle) \n- (oracle)         $loader-\u003eregister(true);\n- (oracle) \n- (oracle)         return $loader;\n- (oracle)     }\n- (oracle) }\n- (oracle) ",
+        "vendor/composer/autoload_static.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_static.php @generated by Composer\n- (oracle) \n- (oracle) namespace Composer\\Autoload;\n- (oracle) \n- (oracle) class ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9\n- (oracle) {\n- (oracle)     public static $prefixLengthsPsr4 = array (\n- (oracle)         'A' =\u003e\n- (oracle)         array (\n- (oracle)             'Archfix\\\\' =\u003e 8,\n- (oracle)             'App\\\\' =\u003e 4,\n- (oracle)         ),\n- (oracle)     );\n- (oracle) \n- (oracle)     public static $prefixDirsPsr4 = array (\n- (oracle)         'Archfix\\\\' =\u003e\n- (oracle)         array (\n- (oracle)             0 =\u003e __DIR__ . '/..' . '/archfix/zipcrc/src',\n- (oracle)         ),\n- (oracle)         'App\\\\' =\u003e\n- (oracle)         array (\n- (oracle)             0 =\u003e __DIR__ . '/../..' . '/src',\n- (oracle)         ),\n- (oracle)     );\n- (oracle) \n- (oracle)     public static $classMap = array (\n- (oracle)         'Composer\\\\InstalledVersions' =\u003e __DIR__ . '/..' . '/composer/InstalledVersions.php',\n- (oracle)     );\n- (oracle) \n- (oracle)     public static function getInitializer(ClassLoader $loader)\n- (oracle)     {\n- (oracle)         return \\Closure::bind(function () use ($loader) {\n- (oracle)             $loader-\u003eprefixLengthsPsr4 = ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9::$prefixLengthsPsr4;\n- (oracle)             $loader-\u003eprefixDirsPsr4 = ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9::$prefixDirsPsr4;\n- (oracle)             $loader-\u003eclassMap = ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9::$classMap;\n- (oracle) \n- (oracle)         }, null, ClassLoader::class);\n- (oracle)     }\n- (oracle) }\n- (oracle) ",
+        "vendor/composer/installed.json:\n- (oracle) {\n- (oracle)     \"packages\": [\n- (oracle)         {\n- (oracle)             \"name\": \"archfix/zipcrc\",\n- (oracle)             \"version\": \"1.0.0\",\n- (oracle)             \"version_normalized\": \"1.0.0.0\",\n- (oracle)             \"dist\": {\n- (oracle)                 \"type\": \"zip\",\n- (oracle)                 \"url\": \"http://127.0.0.1:8899/git/repo3/arch/dists/archfix-zipcrc-1.0.0.zip\",\n- (oracle)                 \"reference\": \"718127c0f5bd7429bbd699b5d2aece2f60ed5687\",\n- (oracle)                 \"shasum\": \"d60bf86d31591f2bd15e27698649bd400b8cfa1b\"\n- (oracle)             },\n- (oracle)             \"time\": \"2024-01-02T03:04:05+00:00\",\n- (oracle)             \"bin\": [\n- (oracle)                 \"bin/archtool\"\n- (oracle)             ],\n- (oracle)             \"type\": \"library\",\n- (oracle)             \"installation-source\": \"dist\",\n- (oracle)             \"autoload\": {\n- (oracle)                 \"psr-4\": {\n- (oracle)                     \"Archfix\\\\\": \"src/\"\n- (oracle)                 }\n- (oracle)             },\n- (oracle)             \"install-path\": \"../archfix/zipcrc\"\n- (oracle)         }\n- (oracle)     ],\n- (oracle)     \"dev\": true,\n- (oracle)     \"dev-package-names\": []\n- (oracle) }",
+        "vendor/composer/installed.php:\n- (oracle) \u003c?php return array(\n- (oracle)     'root' =\u003e array(\n- (oracle)         'name' =\u003e 'test/project',\n- (oracle)         'pretty_version' =\u003e '1.0.0+no-version-set',\n- (oracle)         'version' =\u003e '1.0.0.0',\n- (oracle)         'reference' =\u003e null,\n- (oracle)         'type' =\u003e 'project',\n- (oracle)         'install_path' =\u003e __DIR__ . '/../../',\n- (oracle)         'aliases' =\u003e array(),\n- (oracle)         'dev' =\u003e true,\n- (oracle)     ),\n- (oracle)     'versions' =\u003e array(\n- (oracle)         'archfix/zipcrc' =\u003e array(\n- (oracle)             'pretty_version' =\u003e '1.0.0',\n- (oracle)             'version' =\u003e '1.0.0.0',\n- (oracle)             'reference' =\u003e '718127c0f5bd7429bbd699b5d2aece2f60ed5687',\n- (oracle)             'type' =\u003e 'library',\n- (oracle)             'install_path' =\u003e __DIR__ . '/../archfix/zipcrc',\n- (oracle)             'aliases' =\u003e array(),\n- (oracle)             'dev_requirement' =\u003e false,\n- (oracle)         ),\n- (oracle)         'test/project' =\u003e array(\n- (oracle)             'pretty_version' =\u003e '1.0.0+no-version-set',\n- (oracle)             'version' =\u003e '1.0.0.0',\n- (oracle)             'reference' =\u003e null,\n- (oracle)             'type' =\u003e 'project',\n- (oracle)             'install_path' =\u003e __DIR__ . '/../../',\n- (oracle)             'aliases' =\u003e array(),\n- (oracle)             'dev_requirement' =\u003e false,\n- (oracle)         ),\n- (oracle)     ),\n- (oracle) );"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 1
+    },
+    {
+      "scenario": "archive3-zip-no-command",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "archive3-zip-no-command-zipext",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "archive3-zip-no-command-crc-zipext",
+      "status": "DIFF",
+      "differences": [
+        "exit code: oracle=0 go=1",
+        "stdout:\n- (oracle) No security vulnerability advisories found.",
+        "stderr:\n+ (go)     Install of archfix/zipcrc failed\n+ (go) \n+ (go) In \u003clocation\u003e:\n+ (go)                                                                                \n+ (go)   The archive for \"archfix/zipcrc\" may contain identical file names with diff  \n+ (go)   erent capitalization (which fails on case insensitive filesystems): ZipArch  \n+ (go)   ive::extractTo(): Cannot extract \"archfix-zipcrc-1.0.0/composer.json\": \"CRC  \n+ (go)    error\"                                                                      \n+ (go)                                                                                \n+ (go) \n+ (go) In \u003clocation\u003e:\n+ (go)                                                                                \n+ (go)   ZipArchive::extractTo(): Cannot extract \"archfix-zipcrc-1.0.0/composer.json  \n+ (go)   \": \"CRC error\"                                                               \n+ (go)                                                                                \n+ (go) \n+ (go) update [--with WITH] [--prefer-source] [--prefer-dist] [--prefer-install PREFER-INSTALL] [--dry-run] [--dev] [--no-dev] [--lock] [--no-install] [--no-audit] [--audit-format AUDIT-FORMAT] [--no-security-blocking] [--no-blocking] [--no-cooldown] [--no-autoloader] [--no-suggest] [--no-progress] [-w|--with-dependencies] [-W|--with-all-dependencies] [-v|vv|vvv|--verbose] [-o|--optimize-autoloader] [-a|--classmap-authoritative] [--strict-psr-autoloader] [--apcu-autoloader] [--apcu-autoloader-prefix APCU-AUTOLOADER-PREFIX] [--ignore-platform-req IGNORE-PLATFORM-REQ] [--ignore-platform-reqs] [--prefer-stable] [--prefer-lowest] [-m|--minimal-changes] [--patch-only] [-i|--interactive] [--root-reqs] [--bump-after-update [BUMP-AFTER-UPDATE]] [--] [\u003cpackages\u003e...]\n+ (go) \n- (oracle) Generating autoload files",
+        "project tree:\n- (oracle) D vendor\n- (oracle) D vendor/archfix\n- (oracle) D vendor/archfix/zipcrc\n- (oracle) D vendor/archfix/zipcrc/bin\n- (oracle) D vendor/archfix/zipcrc/src\n- (oracle) D vendor/bin\n- (oracle) D vendor/composer\n- (oracle) F vendor/archfix/zipcrc/bin/archtool 755 63e5cd20333a2449\n- (oracle) F vendor/archfix/zipcrc/composer.json 644 eabbb5b5ab82f5c6\n- (oracle) F vendor/archfix/zipcrc/src/Zipcrc.php 644 717fa4118cb95c22\n- (oracle) F vendor/autoload.php 644 e4df171b3ebd67ad\n- (oracle) F vendor/bin/archtool 755 4973c40d2f80670e\n- (oracle) F vendor/composer/ClassLoader.php 644 d4b2313e562edf94\n- (oracle) F vendor/composer/InstalledVersions.php 644 1e4525198301d1ed\n- (oracle) F vendor/composer/LICENSE 644 7855ac293067aebe\n- (oracle) F vendor/composer/autoload_classmap.php 644 375085d0d6690301\n- (oracle) F vendor/composer/autoload_namespaces.php 644 ede505407590638a\n- (oracle) F vendor/composer/autoload_psr4.php 644 d5274594f6204537\n- (oracle) F vendor/composer/autoload_real.php 644 a18af7b42f2a3a7a\n- (oracle) F vendor/composer/autoload_static.php 644 584da5c998a0b31c\n- (oracle) F vendor/composer/installed.json 644 f9604e5fba77b64b\n- (oracle) F vendor/composer/installed.php 644 a980ee71a4a0a74b",
+        "vendor/composer/autoload_classmap.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_classmap.php @generated by Composer\n- (oracle) \n- (oracle) $vendorDir = dirname(__DIR__);\n- (oracle) $baseDir = dirname($vendorDir);\n- (oracle) \n- (oracle) return array(\n- (oracle)     'Composer\\\\InstalledVersions' =\u003e $vendorDir . '/composer/InstalledVersions.php',\n- (oracle) );\n- (oracle) ",
+        "vendor/composer/autoload_psr4.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_psr4.php @generated by Composer\n- (oracle) \n- (oracle) $vendorDir = dirname(__DIR__);\n- (oracle) $baseDir = dirname($vendorDir);\n- (oracle) \n- (oracle) return array(\n- (oracle)     'Archfix\\\\' =\u003e array($vendorDir . '/archfix/zipcrc/src'),\n- (oracle)     'App\\\\' =\u003e array($baseDir . '/src'),\n- (oracle) );\n- (oracle) ",
+        "vendor/composer/autoload_real.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_real.php @generated by Composer\n- (oracle) \n- (oracle) class ComposerAutoloaderInit8fbfb2363b8aeecb805302f10d456dd9\n- (oracle) {\n- (oracle)     private static $loader;\n- (oracle) \n- (oracle)     public static function loadClassLoader($class)\n- (oracle)     {\n- (oracle)         if ('Composer\\Autoload\\ClassLoader' === $class) {\n- (oracle)             require __DIR__ . '/ClassLoader.php';\n- (oracle)         }\n- (oracle)     }\n- (oracle) \n- (oracle)     /**\n- (oracle)      * @return \\Composer\\Autoload\\ClassLoader\n- (oracle)      */\n- (oracle)     public static function getLoader()\n- (oracle)     {\n- (oracle)         if (null !== self::$loader) {\n- (oracle)             return self::$loader;\n- (oracle)         }\n- (oracle) \n- (oracle)         spl_autoload_register(array('ComposerAutoloaderInit8fbfb2363b8aeecb805302f10d456dd9', 'loadClassLoader'), true, true);\n- (oracle)         self::$loader = $loader = new \\Composer\\Autoload\\ClassLoader(\\dirname(__DIR__));\n- (oracle)         spl_autoload_unregister(array('ComposerAutoloaderInit8fbfb2363b8aeecb805302f10d456dd9', 'loadClassLoader'));\n- (oracle) \n- (oracle)         require __DIR__ . '/autoload_static.php';\n- (oracle)         call_user_func(\\Composer\\Autoload\\ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9::getInitializer($loader));\n- (oracle) \n- (oracle)         $loader-\u003eregister(true);\n- (oracle) \n- (oracle)         return $loader;\n- (oracle)     }\n- (oracle) }\n- (oracle) ",
+        "vendor/composer/autoload_static.php:\n- (oracle) \u003c?php\n- (oracle) // autoload_static.php @generated by Composer\n- (oracle) \n- (oracle) namespace Composer\\Autoload;\n- (oracle) \n- (oracle) class ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9\n- (oracle) {\n- (oracle)     public static $prefixLengthsPsr4 = array (\n- (oracle)         'A' =\u003e\n- (oracle)         array (\n- (oracle)             'Archfix\\\\' =\u003e 8,\n- (oracle)             'App\\\\' =\u003e 4,\n- (oracle)         ),\n- (oracle)     );\n- (oracle) \n- (oracle)     public static $prefixDirsPsr4 = array (\n- (oracle)         'Archfix\\\\' =\u003e\n- (oracle)         array (\n- (oracle)             0 =\u003e __DIR__ . '/..' . '/archfix/zipcrc/src',\n- (oracle)         ),\n- (oracle)         'App\\\\' =\u003e\n- (oracle)         array (\n- (oracle)             0 =\u003e __DIR__ . '/../..' . '/src',\n- (oracle)         ),\n- (oracle)     );\n- (oracle) \n- (oracle)     public static $classMap = array (\n- (oracle)         'Composer\\\\InstalledVersions' =\u003e __DIR__ . '/..' . '/composer/InstalledVersions.php',\n- (oracle)     );\n- (oracle) \n- (oracle)     public static function getInitializer(ClassLoader $loader)\n- (oracle)     {\n- (oracle)         return \\Closure::bind(function () use ($loader) {\n- (oracle)             $loader-\u003eprefixLengthsPsr4 = ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9::$prefixLengthsPsr4;\n- (oracle)             $loader-\u003eprefixDirsPsr4 = ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9::$prefixDirsPsr4;\n- (oracle)             $loader-\u003eclassMap = ComposerStaticInit8fbfb2363b8aeecb805302f10d456dd9::$classMap;\n- (oracle) \n- (oracle)         }, null, ClassLoader::class);\n- (oracle)     }\n- (oracle) }\n- (oracle) ",
+        "vendor/composer/installed.json:\n- (oracle) {\n- (oracle)     \"packages\": [\n- (oracle)         {\n- (oracle)             \"name\": \"archfix/zipcrc\",\n- (oracle)             \"version\": \"1.0.0\",\n- (oracle)             \"version_normalized\": \"1.0.0.0\",\n- (oracle)             \"dist\": {\n- (oracle)                 \"type\": \"zip\",\n- (oracle)                 \"url\": \"http://127.0.0.1:8899/git/repo3/arch/dists/archfix-zipcrc-1.0.0.zip\",\n- (oracle)                 \"reference\": \"718127c0f5bd7429bbd699b5d2aece2f60ed5687\",\n- (oracle)                 \"shasum\": \"d60bf86d31591f2bd15e27698649bd400b8cfa1b\"\n- (oracle)             },\n- (oracle)             \"time\": \"2024-01-02T03:04:05+00:00\",\n- (oracle)             \"bin\": [\n- (oracle)                 \"bin/archtool\"\n- (oracle)             ],\n- (oracle)             \"type\": \"library\",\n- (oracle)             \"installation-source\": \"dist\",\n- (oracle)             \"autoload\": {\n- (oracle)                 \"psr-4\": {\n- (oracle)                     \"Archfix\\\\\": \"src/\"\n- (oracle)                 }\n- (oracle)             },\n- (oracle)             \"install-path\": \"../archfix/zipcrc\"\n- (oracle)         }\n- (oracle)     ],\n- (oracle)     \"dev\": true,\n- (oracle)     \"dev-package-names\": []\n- (oracle) }",
+        "vendor/composer/installed.php:\n- (oracle) \u003c?php return array(\n- (oracle)     'root' =\u003e array(\n- (oracle)         'name' =\u003e 'test/project',\n- (oracle)         'pretty_version' =\u003e '1.0.0+no-version-set',\n- (oracle)         'version' =\u003e '1.0.0.0',\n- (oracle)         'reference' =\u003e null,\n- (oracle)         'type' =\u003e 'project',\n- (oracle)         'install_path' =\u003e __DIR__ . '/../../',\n- (oracle)         'aliases' =\u003e array(),\n- (oracle)         'dev' =\u003e true,\n- (oracle)     ),\n- (oracle)     'versions' =\u003e array(\n- (oracle)         'archfix/zipcrc' =\u003e array(\n- (oracle)             'pretty_version' =\u003e '1.0.0',\n- (oracle)             'version' =\u003e '1.0.0.0',\n- (oracle)             'reference' =\u003e '718127c0f5bd7429bbd699b5d2aece2f60ed5687',\n- (oracle)             'type' =\u003e 'library',\n- (oracle)             'install_path' =\u003e __DIR__ . '/../archfix/zipcrc',\n- (oracle)             'aliases' =\u003e array(),\n- (oracle)             'dev_requirement' =\u003e false,\n- (oracle)         ),\n- (oracle)         'test/project' =\u003e array(\n- (oracle)             'pretty_version' =\u003e '1.0.0+no-version-set',\n- (oracle)             'version' =\u003e '1.0.0.0',\n- (oracle)             'reference' =\u003e null,\n- (oracle)             'type' =\u003e 'project',\n- (oracle)             'install_path' =\u003e __DIR__ . '/../../',\n- (oracle)             'aliases' =\u003e array(),\n- (oracle)             'dev_requirement' =\u003e false,\n- (oracle)         ),\n- (oracle)     ),\n- (oracle) );"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 1
+    },
+    {
+      "scenario": "warnings-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-update-ansi",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-show",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-search-api",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-search-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-show-names-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-audit-api",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "warnings-update-audit-api",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-filter-audit",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-providers",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-two-repos",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "warnings-http-403",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "warnings-http-404-metadata",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    }
+  ]
+}

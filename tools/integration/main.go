@@ -290,6 +290,9 @@ func runProject(root, work, outDir, gobin string, p project, genLocks bool) ([]c
 	}{
 		{"install", "install --no-progress --no-interaction", true, true},
 		{"update-no-install", "update --no-progress --no-install --no-interaction", true, false},
+		// post-update-cmd needs vendor/, so the step above ends in 255 for
+		// projects with such scripts; this one checks the update itself
+		{"update-no-install-no-scripts", "update --no-progress --no-install --no-scripts --no-interaction", true, false},
 	}
 	for _, cs := range p.Steps {
 		steps = append(steps, struct {

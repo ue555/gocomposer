@@ -5,7 +5,8 @@ package cli
 // composer/composer f83588392df43d4fd027d84d26de459946ef4e80).
 // Composer is MIT licensed, Copyright (c) Nils Adermann, Jordi Boggiano.
 //
-// Shell completion of setting keys (suggestSettingKeys) is not ported.
+// Shell completion of setting keys (suggestSettingKeys) is in
+// completion_suggest.go.
 
 import (
 	"errors"
@@ -74,6 +75,22 @@ func readJSON(path string) (phpjson.Value, error) {
 	return jsonfile.Parse([]byte(sb.String()), path)
 }
 
+// readFile is JsonFile::read() of the config/auth file JsonFile, which is
+// created with the IO (-vvv "Reading" line).
+func (c *configCmd) readFile(path string) (phpjson.Value, error) {
+	if fileExists(path) {
+		composer.ReadingLog(c.io, path)
+	}
+	return readJSON(path)
+}
+
+func (c *configCmd) readFileMap(path string) (*phpjson.Map, error) {
+	if fileExists(path) {
+		composer.ReadingLog(c.io, path)
+	}
+	return readJSONMap(path)
+}
+
 func readJSONMap(path string) (*phpjson.Map, error) {
 	v, err := readJSON(path)
 	if err != nil {
@@ -109,7 +126,12 @@ func (c *configCmd) initialize() error {
 		return configErr("--file and --global can not be combined")
 	}
 	cwd, _ := os.Getwd()
-	cfg, err := config.CreateConfig(cwd, func(m string) { c.io.WriteError(m) })
+	// Factory::createConfig($io): its -vvv "Loading config file" lines
+	var debug func(string)
+	if c.io.IsDebug() {
+		debug = func(m string) { c.io.WriteErrorV(m, true, cio.Debug) }
+	}
+	cfg, err := config.CreateConfigDebug(cwd, func(m string) { c.io.WriteError(m) }, debug)
 	if err != nil {
 		return err
 	}
@@ -235,14 +257,14 @@ func (c *configCmd) execute() (int, error) {
 	}
 
 	if !in.Bool("global") {
-		data, err := readJSONMap(c.configFile)
+		data, err := c.readFileMap(c.configFile)
 		if err != nil {
 			return 1, err
 		}
 		c.cfg.MergeSource(data, c.configFile)
 		authData := phpjson.NewMap()
 		if fileExists(c.authConfigFile) {
-			a, err := readJSONMap(c.authConfigFile)
+			a, err := c.readFileMap(c.authConfigFile)
 			if err != nil {
 				return 1, err
 			}
@@ -312,7 +334,7 @@ func (c *configCmd) showValue(settingKey string) (int, error) {
 	propertiesDefaults.Set("suggest", []phpjson.Value{})
 	propertiesDefaults.Set("extra", []phpjson.Value{})
 
-	rawData, err := readJSON(c.configFile)
+	rawData, err := c.readFile(c.configFile)
 	if err != nil {
 		return 1, err
 	}
@@ -975,7 +997,7 @@ func (c *configCmd) setValue(settingKey string, values []string) error {
 			value = v
 		}
 		if in.Bool("merge") {
-			current, err := readJSON(c.configFile)
+			current, err := c.readFile(c.configFile)
 			if err != nil {
 				return err
 			}
@@ -1175,7 +1197,7 @@ func (c *configCmd) setValue(settingKey string, values []string) error {
 			}
 			value = v
 			if in.Bool("merge") {
-				current, err := readJSON(c.configFile)
+				current, err := c.readFile(c.configFile)
 				if err != nil {
 					return err
 				}
@@ -1243,7 +1265,7 @@ func (c *configCmd) setValue(settingKey string, values []string) error {
 			value = v
 		}
 		if in.Bool("merge") {
-			current, err := readJSON(c.configFile)
+			current, err := c.readFile(c.configFile)
 			if err != nil {
 				return err
 			}

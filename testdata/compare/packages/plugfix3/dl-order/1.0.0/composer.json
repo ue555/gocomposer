@@ -1,0 +1,1 @@
+{"name":"plugfix3/dl-order","description":"Fixture plugin logging the order of the download events","type":"composer-plugin","license":"MIT","require":{"composer-plugin-api":"^2.1"},"autoload":{"psr-4":{"Plugfix3\\DlOrder\\":"src/"}},"extra":{"class":"Plugfix3\\DlOrder\\Plugin"}}

@@ -2,8 +2,11 @@
 // gocomposer plugin runtime: Composer\Composer for plugins, based on
 // Composer f83588392df43d4fd027d84d26de459946ef4e80 src/Composer/Composer.php
 // (MIT license, (c) Nils Adermann, Jordi Boggiano). The loop, download
-// manager and autoload generator are gocomposer-backed stubs; the archive
-// manager and replacing services fail explicitly.
+// manager and autoload generator are gocomposer-backed stubs. Plugins may
+// replace the services (set*()): like with Composer, the replacement is what
+// the getters return from then on; gocomposer calls a replaced autoload
+// generator where Composer's commands get it from the Composer object
+// (Installer::create, dump-autoload, reinstall).
 
 namespace Composer;
 
@@ -69,6 +72,8 @@ class Composer extends PartialComposer
     private $downloadManager;
     /** @var \Composer\Autoload\AutoloadGenerator|null */
     private $autoloadGenerator;
+    /** @var \Composer\Package\Archiver\ArchiveManager|null */
+    private $archiveManager;
 
     public function getLoop()
     {
@@ -83,18 +88,24 @@ class Composer extends PartialComposer
     public function getDownloadManager()
     {
         if ($this->downloadManager === null) {
-            $this->downloadManager = \GocomposerPluginHost\Api::downloadManager($this);
+            $this->downloadManager = $this->gcInstallerDownloadManager = \GocomposerPluginHost\Api::downloadManager($this);
         }
 
         return $this->downloadManager;
     }
 
+    /** @var \Composer\Downloader\DownloadManager|null */
+    private $gcInstallerDownloadManager;
+
     /**
-     * @internal the download manager when a plugin already used it
+     * @internal the download manager of the installers (created with the
+     * Composer instance, the one a plugin replacing it with
+     * setDownloadManager() leaves to the installers), when a plugin already
+     * used it
      */
     public function gcExistingDownloadManager(): ?\Composer\Downloader\DownloadManager
     {
-        return $this->downloadManager;
+        return $this->gcInstallerDownloadManager;
     }
 
     public function getAutoloadGenerator()
@@ -109,26 +120,41 @@ class Composer extends PartialComposer
 
     public function getArchiveManager()
     {
-        Unsupported::fail(__METHOD__);
+        if ($this->archiveManager === null) {
+            $this->archiveManager = \GocomposerPluginHost\Services::archiveManager($this);
+        }
+
+        return $this->archiveManager;
     }
 
-    public function setLoop($loop): void
+    public function setLoop(\Composer\Util\Loop $loop): void
     {
-        Unsupported::fail(__METHOD__);
+        $this->loop = $loop;
     }
 
-    public function setDownloadManager($manager): void
+    public function setDownloadManager(\Composer\Downloader\DownloadManager $manager): void
     {
-        Unsupported::fail(__METHOD__);
+        $this->downloadManager = $manager;
+        \GocomposerPluginHost\Host::cb('serviceSet', ['inst' => $this->gcInst, 'name' => 'downloadManager']);
     }
 
-    public function setArchiveManager($manager): void
+    public function setArchiveManager(\Composer\Package\Archiver\ArchiveManager $manager): void
     {
-        Unsupported::fail(__METHOD__);
+        $this->archiveManager = $manager;
+        \GocomposerPluginHost\Host::cb('serviceSet', ['inst' => $this->gcInst, 'name' => 'archiveManager']);
     }
 
-    public function setAutoloadGenerator($autoloadGenerator): void
+    public function setAutoloadGenerator(\Composer\Autoload\AutoloadGenerator $autoloadGenerator): void
     {
-        Unsupported::fail(__METHOD__);
+        $this->autoloadGenerator = $autoloadGenerator;
+        \GocomposerPluginHost\Host::cb('serviceSet', ['inst' => $this->gcInst, 'name' => 'autoloadGenerator']);
+    }
+
+    /**
+     * @internal the archive manager when a plugin already used it
+     */
+    public function gcExistingArchiveManager(): ?\Composer\Package\Archiver\ArchiveManager
+    {
+        return $this->archiveManager;
     }
 }

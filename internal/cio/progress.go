@@ -155,8 +155,9 @@ var rePlaceholder = regexp.MustCompile(`(?i)%([a-z\-_]+)(?::([^%]+))?%`)
 
 func (b *ProgressBar) buildLine() string {
 	line := b.render()
-	if w := len([]rune(line)); w > b.terminalWidth {
-		b.barWidth = b.barWidth - w + b.terminalWidth
+	if w := Width(StripTags(line)); w > b.terminalWidth {
+		// setBarWidth: max(1, $size)
+		b.barWidth = max(1, b.barWidth-w+b.terminalWidth)
 		line = b.render()
 	}
 	return line
@@ -170,11 +171,12 @@ func (b *ProgressBar) render() string {
 		case "bar":
 			text = b.bar()
 		case "elapsed":
-			text = formatTime(int64(time.Since(b.start).Seconds()))
+			// time() - $startTime: whole seconds of the wall clock
+			text = formatTime(time.Now().Unix() - b.start.Unix())
 		case "estimated":
 			est := 0.0
 			if b.step > 0 {
-				est = math.Round(time.Since(b.start).Seconds() / float64(b.step) * float64(b.max))
+				est = math.Round(float64(time.Now().Unix()-b.start.Unix()) / float64(b.step) * float64(b.max))
 			}
 			text = formatTime(int64(est))
 		case "memory":

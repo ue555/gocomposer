@@ -1,0 +1,526 @@
+{
+  "all_match": false,
+  "environment": {
+    "gocomposer_sha256": "3796dd581cbda81f9318b778b10829f14d7da44dbb0972afb8fe48fdfef2ad0d",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "oracle_zip_image": "localhost/gocomposer-oracle:8.4-zip",
+    "oracle_zip_image_digest": "sha256:cd7f1f040bba14a1974d175df2110347c2be1d880834ad6a106a3578bfd929fa",
+    "php_version": "8.4.27",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261023T194053Z",
+  "results": [
+    {
+      "scenario": "root-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-show",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-show-name",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-show-latest",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-licenses",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-fund",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-search",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-depends",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-config-list",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-audit",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) |\\e[32m Advisory ID       \\e[39m| \\e]8;;https://packagist.org/security-advisories/pksa-test-0001\\e\\PKSA-test-0001\\e]8;;\\e\\                                                                   |\n+ (go) |\\e[32m CVE               \\e[39m| \\e]8;;https://www.cve.org/cverecord?id=cve-2024-0001\\e\\CVE-2024-0001\\e]8;;\\e\\                                                                    |\n- (oracle) |\\e[32m Advisory ID       \\e[39m| \\e]8;;https://packagist.org/security-advisories/PKSA-test-0001\\e\\PKSA-test-0001\\e]8;;\\e\\                                                                   |\n- (oracle) |\\e[32m CVE               \\e[39m| \\e]8;;https://www.cve.org/CVERecord?id=CVE-2024-0001\\e\\CVE-2024-0001\\e]8;;\\e\\                                                                    |\n+ (go) |\\e[32m Advisory ID       \\e[39m| \\e]8;;https://packagist.org/security-advisories/pksa-test-0002\\e\\PKSA-test-0002\\e]8;;\\e\\                                                                   |\n- (oracle) |\\e[32m Advisory ID       \\e[39m| \\e]8;;https://packagist.org/security-advisories/PKSA-test-0002\\e\\PKSA-test-0002\\e]8;;\\e\\                                                                   |"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "term-href-audit-plain",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go) Advisory ID: \\e]8;;https://packagist.org/security-advisories/pksa-test-0001\\e\\PKSA-test-0001\\e]8;;\\e\\\n+ (go) CVE: \\e]8;;https://www.cve.org/cverecord?id=cve-2024-0001\\e\\CVE-2024-0001\\e]8;;\\e\\\n- (oracle) Advisory ID: \\e]8;;https://packagist.org/security-advisories/PKSA-test-0001\\e\\PKSA-test-0001\\e]8;;\\e\\\n- (oracle) CVE: \\e]8;;https://www.cve.org/CVERecord?id=CVE-2024-0001\\e\\CVE-2024-0001\\e]8;;\\e\\\n+ (go) Advisory ID: \\e]8;;https://packagist.org/security-advisories/pksa-test-0002\\e\\PKSA-test-0002\\e]8;;\\e\\\n- (oracle) Advisory ID: \\e]8;;https://packagist.org/security-advisories/PKSA-test-0002\\e\\PKSA-test-0002\\e]8;;\\e\\"
+      ],
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "term-href-jetbrains",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-konsole-old",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-konsole-new",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-konsole-zero",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-idea",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-no-ansi",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-ansi-pipe",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-href-ansi-pipe-fund",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-install",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go)  0/6 [\u003e---------------------------]   0%\\e]7501;state=working:app=composer:progress=0\\e\\\\e[1G\\e[2K 6/6 [============================] 100%\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32mGenerating autoload files\\e[39m\n- (oracle)  0/6 [\u003e---------------------------]   0%\\e[1G\\e[2K 6/6 [============================] 100%\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32mGenerating autoload files\\e[39m"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-update",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go)  0/6 [\u003e---------------------------]   0%\\e]7501;state=working:app=composer:progress=0\\e\\\\e[1G\\e[2K 6/6 [============================] 100%\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32m1 package suggestions were added by new dependencies, use `composer suggest` to see details.\\e[39m\n- (oracle)  0/6 [\u003e---------------------------]   0%\\e[1G\\e[2K 6/6 [============================] 100%\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32m1 package suggestions were added by new dependencies, use `composer suggest` to see details.\\e[39m"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-require",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-verbose",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go)  0/6 [\u003e---------------------------]   0% \u003celapsed\u003e\\e]7501;state=working:app=composer:progress=0\\e\\\\e[1G\\e[2K 6/6 [============================] 100% \u003celapsed\u003e\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32mGenerating autoload files\\e[39m\n- (oracle)  0/6 [\u003e---------------------------]   0% \u003celapsed\u003e\\e[1G\\e[2K 6/6 [============================] 100% \u003celapsed\u003e\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32mGenerating autoload files\\e[39m"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-very-verbose",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-narrow",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go)  0/6 [\u003e-----------------]   0%\\e]7501;state=working:app=composer:progress=0\\e\\\\e[1G\\e[2K 6/6 [==================] 100%\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32mGenerating autoload files\\e[39m\n- (oracle)  0/6 [\u003e-----------------]   0%\\e[1G\\e[2K 6/6 [==================] 100%\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32mGenerating autoload files\\e[39m"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-tiny",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go)  0/6 [\u003e]   0%\\e]7501;state=working:app=composer:progress=0\\e\\\\e[1G\\e[2K 6/6 [=] 100%\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32mGenerating autoload files\\e[39m\n- (oracle)  0/6 [\u003e]   0%\\e[1G\\e[2K 6/6 [=] 100%\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer:progress=100\\e\\\\e]7501;state=working:app=composer\\e\\\\e[1G\\e[2K\\e[32mGenerating autoload files\\e[39m"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-no-progress",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-no-ansi",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-ci",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "term-progress-ansi-pipe",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "curl-refused",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-empty-reply",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-reset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-reset-debug",
+      "status": "DIFF",
+      "differences": [
+        "stderr:\n- (oracle) Executing command (CWD): 'git' '--version'\n- (oracle) Executing command (/work/project): 'git' 'branch' '-a' '--no-color' '--no-abbrev' '-v'\n- (oracle) Executing command (/work/project): 'git' 'describe' '--exact-match' '--tags'\n- (oracle) Executing command (/work/project): 'git' 'rev-list' '--no-commit-header' '--format=%H' '-n1' 'HEAD' '--no-show-signature'\n- (oracle) Executing command (/work/project): 'hg' 'branch'\n- (oracle) Executing command (/work/project): 'fossil' 'branch' 'list'\n- (oracle) Executing command (/work/project): 'fossil' 'tag' 'list'\n- (oracle) Executing command (/work/project): 'svn' 'info' '--xml'\n- (oracle) Downloading http://127.0.0.1:9203/packages.json\n- (oracle)   [Composer\\Downloader\\TransportException (100)]                               \n- (oracle) Exception trace:\n- (oracle)   at /oracle-source/src/Composer/Util/Http/CurlDownloader.php:498\n- (oracle)  Composer\\Util\\Http\\CurlDownloader-\u003etick() at /oracle-source/src/Composer/Util/HttpDownloader.php:406\n- (oracle)  Composer\\Util\\HttpDownloader-\u003ecountActiveJobs() at /oracle-source/src/Composer/Util/HttpDownloader.php:379\n- (oracle)  Composer\\Util\\HttpDownloader-\u003ewait() at /oracle-source/src/Composer/Util/HttpDownloader.php:112\n- (oracle)  Composer\\Util\\HttpDownloader-\u003eget() at /oracle-source/src/Composer/Repository/ComposerRepository.php:1808\n- (oracle)  Composer\\Repository\\ComposerRepository-\u003efetchFile() at /oracle-source/src/Composer/Repository/ComposerRepository.php:1514\n- (oracle)  Composer\\Repository\\ComposerRepository-\u003eloadRootServerFile() at /oracle-source/src/Composer/Repository/ComposerRepository.php:1136\n- (oracle)  Composer\\Repository\\ComposerRepository-\u003ehasProviders() at /oracle-source/src/Composer/Repository/ComposerRepository.php:571\n- (oracle)  Composer\\Repository\\ComposerRepository-\u003eloadPackages() at /oracle-source/src/Composer/DependencyResolver/PoolBuilder.php:458\n- (oracle)  Composer\\DependencyResolver\\PoolBuilder-\u003eloadPackagesMarkedForLoading() at /oracle-source/src/Composer/DependencyResolver/PoolBuilder.php:294\n- (oracle)  Composer\\DependencyResolver\\PoolBuilder-\u003ebuildPool() at /oracle-source/src/Composer/Repository/RepositorySet.php:379\n- (oracle)  Composer\\Repository\\RepositorySet-\u003ecreatePool() at /oracle-source/src/Composer/Installer.php:537\n- (oracle)  Composer\\Installer-\u003edoUpdate() at /oracle-source/src/Composer/Installer.php:327\n- (oracle)  Composer\\Installer-\u003erun() at /oracle-source/src/Composer/Command/UpdateCommand.php:308\n- (oracle)  Composer\\Command\\UpdateCommand-\u003eexecute() at /oracle-source/vendor/symfony/console/Command/Command.php:298\n- (oracle)  Symfony\\Component\\Console\\Command\\Command-\u003erun() at /oracle-source/vendor/symfony/console/Application.php:1040\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRunCommand() at /oracle-source/vendor/symfony/console/Application.php:301\n- (oracle)  Symfony\\Component\\Console\\Application-\u003edoRun() at /oracle-source/src/Composer/Console/Application.php:504\n- (oracle)  Composer\\Console\\Application-\u003edoRunComposer() at /oracle-source/src/Composer/Console/Application.php:169\n- (oracle)  Composer\\Console\\Application-\u003edoRun() at /oracle-source/vendor/symfony/console/Application.php:171\n- (oracle)  Symfony\\Component\\Console\\Application-\u003erun() at /oracle-source/src/Composer/Console/Application.php:142\n- (oracle)  Composer\\Console\\Application-\u003erun() at /oracle-source/bin/composer:113\n- (oracle) "
+      ],
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-http09",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-partial",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-eof",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-wrong-version",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-reset",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-self-signed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-self-signed-system-ca",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-wrong-host",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-expired",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-unknown-ca",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-good",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 2,
+      "go_exit": 2
+    },
+    {
+      "scenario": "curl-tls-show",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-timeout",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-tls-timeout",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-post-empty-reply",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 100,
+      "go_exit": 100
+    },
+    {
+      "scenario": "curl-post-timeout-ignored",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-validate",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-validate-allowed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-validate-allowed-zero",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-validate-no-plugins",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-update",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-unknown-command",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "root-unknown-command-allowed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "root-help",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "root-script-alias",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "root-tty-validate-yes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-tty-validate-default",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-tty-validate-no",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "root-tty-validate-n",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-tty-validate-allowed",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-tty-unknown-command-yes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "root-tty-unknown-command-no",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 1,
+      "go_exit": 1
+    },
+    {
+      "scenario": "root-tty-help-yes",
+      "status": "DIFF",
+      "differences": [
+        "stdout:\n+ (go)   validate [options] [\u003cfile\u003e]\n- (oracle)   validate [options] [--] [\u003cfile\u003e]\n+ (go)   \\e[32mfile                        \\e[39m path to composer.json file\n- (oracle)   \\e[32mfile\\e[39m                           path to composer.json file\n+ (go)   \\e[32m    --no-check-all          \\e[39m Do not validate requires for overly strict/loose constraints\n+ (go)   \\e[32m    --check-lock            \\e[39m Check if lock file is up to date (even when config.lock is false)\n+ (go)   \\e[32m    --no-check-lock         \\e[39m Do not check if lock file is up to date\n+ (go)   \\e[32m    --no-check-publish      \\e[39m Do not check for publish errors\n+ (go)   \\e[32m    --no-check-version      \\e[39m Do not report a warning if the version field is present\n+ (go)   \\e[32m-A, --with-dependencies     \\e[39m Also validate the composer.json of all installed dependencies\n+ (go)   \\e[32m    --strict                \\e[39m Return a non-zero exit code for warnings as well as errors\n+ (go)   \\e[32m-h, --help                  \\e[39m Display help for the given command. When no command is given display help for the \\e[32mlist\\e[39m command\n+ (go)   \\e[32m-q, --quiet                 \\e[39m Do not output any message\n+ (go)   \\e[32m-v|-vv|-vvv, --verbose      \\e[39m Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug\n+ (go)   \\e[32m-V, --version               \\e[39m Display this application version\n+ (go)   \\e[32m    --ansi                  \\e[39m Force (or disable --no-ansi) ANSI output\n+ (go)   \\e[32m-n, --no-interaction        \\e[39m Do not ask any interactive question\n+ (go)   \\e[32m    --profile               \\e[39m Display timing and memory usage information\n+ (go)   \\e[32m    --no-plugins            \\e[39m Whether to disable plugins.\n+ (go)   \\e[32m    --no-scripts            \\e[39m Skips the execution of all scripts defined in composer.json file.\n+ (go)   \\e[32m-d, --working-dir=WORKING-DIR\\e[39m If specified, use the given directory as working directory.\n+ (go)   \\e[32m    --no-cache              \\e[39m Prevent use of the cache\n- (oracle)   \\e[32m    --no-check-all\\e[39m             Do not validate requires for overly strict/loose constraints\n- (oracle)   \\e[32m    --check-lock\\e[39m               Check if lock file is up to date (even when config.lock is false)\n- (oracle)   \\e[32m    --no-check-lock\\e[39m            Do not check if lock file is up to date\n- (oracle)   \\e[32m    --no-check-publish\\e[39m         Do not check for publish errors\n- (oracle)   \\e[32m    --no-check-version\\e[39m         Do not report a warning if the version field is present\n- (oracle)   \\e[32m-A, --with-dependencies\\e[39m        Also validate the composer.json of all installed dependencies\n- (oracle)   \\e[32m    --strict\\e[39m                   Return a non-zero exit code for warnings as well as errors\n- (oracle)   \\e[32m-h, --help\\e[39m                     Display help for the given command. When no command is given display help for the \\e[32mlist\\e[39m command\n- (oracle)   \\e[32m-q, --quiet\\e[39m                    Do not output any message\n- (oracle)   \\e[32m-V, --version\\e[39m                  Display this application version\n- (oracle)   \\e[32m    --ansi|--no-ansi\\e[39m           Force (or disable --no-ansi) ANSI output\n- (oracle)   \\e[32m-n, --no-interaction\\e[39m           Do not ask any interactive question\n- (oracle)   \\e[32m    --profile\\e[39m                  Display timing and memory usage information\n- (oracle)   \\e[32m    --no-plugins\\e[39m               Whether to disable plugins.\n- (oracle)   \\e[32m    --no-scripts\\e[39m               Skips the execution of all scripts defined in composer.json file.\n- (oracle)   \\e[32m-d, --working-dir=WORKING-DIR\\e[39m  If specified, use the given directory as working directory.\n- (oracle)   \\e[32m    --no-cache\\e[39m                 Prevent use of the cache\n- (oracle)   \\e[32m-v|vv|vvv, --verbose\\e[39m           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug\n- (oracle) \n- (oracle) \\e[33mHelp:\\e[39m\n- (oracle)   The validate command validates a given composer.json and composer.lock\n- (oracle)   \n- (oracle)   Exit codes in case of errors are:\n- (oracle)   1 validation warning(s), only when --strict is given\n- (oracle)   2 validation error(s)\n- (oracle)   3 file unreadable or missing\n- (oracle)   \n- (oracle)   Read more at https://getcomposer.org/doc/03-cli.md#validate"
+      ],
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-tty-script-alias-yes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-tty-update-yes",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "scenario": "root-tty-no-plugins",
+      "status": "MATCH",
+      "differences": null,
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

@@ -2,8 +2,8 @@
 // gocomposer plugin runtime: Composer\Downloader\VcsDownloader, standing in
 // for Composer f83588392df43d4fd027d84d26de459946ef4e80
 // src/Composer/Downloader/VcsDownloader.php (MIT license, (c) Nils Adermann,
-// Jordi Boggiano). The VCS operations are performed by gocomposer (git; the
-// other VCS fail like gocomposer's own downloaders).
+// Jordi Boggiano). The VCS operations, the local changes and the reference
+// of an installed package are answered by gocomposer.
 
 namespace Composer\Downloader;
 
@@ -12,8 +12,9 @@ use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 use Composer\Util\Filesystem;
 use Composer\Util\ProcessExecutor;
+use GocomposerPluginHost\Api;
 use GocomposerPluginHost\GoDownloader;
-use GocomposerPluginHost\Unsupported;
+use GocomposerPluginHost\Host;
 
 abstract class VcsDownloader implements DownloaderInterface, ChangeReportInterface, VcsCapableDownloaderInterface
 {
@@ -45,11 +46,11 @@ abstract class VcsDownloader implements DownloaderInterface, ChangeReportInterfa
 
     public function getLocalChanges(PackageInterface $package, string $path): ?string
     {
-        Unsupported::fail(__METHOD__);
+        return Host::cb('dlLocalChanges', ['kind' => Api::downloaderKind($this), 'p' => Host::ref($package), 'path' => $path]);
     }
 
     public function getVcsReference(PackageInterface $package, string $path): ?string
     {
-        Unsupported::fail(__METHOD__);
+        return Host::cb('dlVcsReference', ['p' => Host::ref($package), 'path' => $path]);
     }
 }

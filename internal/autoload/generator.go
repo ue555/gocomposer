@@ -38,6 +38,9 @@ type Options struct {
 	StrictAmbiguous       bool
 	DryRun                bool
 	Warn                  func(string)
+	// TargetDir is the dump's target directory below the vendor dir
+	// (AutoloadGenerator::dump's $targetDir, "" for "composer").
+	TargetDir string
 }
 
 // PackageEntry pairs a package with its install path ("" for root, nil = not installed).
@@ -80,6 +83,9 @@ func Dump(opts Options, root *pkg.Package, packages []*pkg.Package, installPath 
 	basePath := fsutil.NormalizePath(fsutil.Realpath(opts.Cwd))
 	vendorPath := fsutil.NormalizePath(fsutil.Realpath(opts.VendorDir))
 	targetDir := vendorPath + "/composer"
+	if opts.TargetDir != "" {
+		targetDir = vendorPath + "/" + opts.TargetDir
+	}
 	if err := os.MkdirAll(targetDir, 0o777); err != nil {
 		return nil, err
 	}

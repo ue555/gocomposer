@@ -370,6 +370,14 @@ final class Host
                 return self::installerFor($a['type']);
             case 'installPath':
                 return self::$composer->getInstallationManager()->getInstallPath(self::pkg($a['p']));
+            case 'isInstalled':
+                // Factory::purgePackages asking a plugin installer
+                $installer = self::$installerIds[$a['id']] ?? null;
+                if ($installer === null) {
+                    throw new \LogicException('Unknown installer');
+                }
+
+                return $installer->isInstalled(self::$composer->getRepositoryManager()->getLocalRepository(), self::pkg($a['p']));
             case 'installerOp':
                 return self::framed($a['frames'] ?? null, static function () use ($a) {
                     return self::installerOp($a);
@@ -387,6 +395,26 @@ final class Host
             case 'downloaderOp':
                 return self::framed($a['frames'] ?? null, static function () use ($a) {
                     return Api::downloaderOp($a);
+                });
+            case 'replacedOp':
+                return self::framed($a['frames'] ?? null, static function () use ($a) {
+                    return Services::replacedOp($a);
+                });
+            case 'autoloadVia':
+                return self::framed($a['frames'] ?? null, static function () use ($a) {
+                    return Services::autoloadVia($a);
+                });
+            case 'filterCall':
+                return Services::filterCall($a);
+            case 'archiveChanged':
+                return Services::archiveManagerChanged();
+            case 'archiveVia':
+                return self::framed($a['frames'] ?? null, static function () use ($a) {
+                    return Services::archiveVia($a);
+                });
+            case 'phpRepoOp':
+                return self::framed($a['frames'] ?? null, static function () use ($a) {
+                    return Services::phpRepoOp($a);
                 });
             case 'installerStub':
                 Api::installerStub((int) $a['id'], $a['opts'] ?? []);
@@ -873,6 +901,14 @@ final class Host
         return self::$opsCache[$key];
     }
 
+    /**
+     * @param array<string, mixed> $spec
+     */
+    public static function opFromSpec(array $spec): \Composer\DependencyResolver\Operation\OperationInterface
+    {
+        return self::op($spec);
+    }
+
     private static function op(array $spec): \Composer\DependencyResolver\Operation\OperationInterface
     {
         switch ($spec['type']) {
@@ -972,7 +1008,7 @@ final class Host
      * Dispatches an event a plugin dispatched itself through gocomposer
      * (script listeners and plugin listeners alike).
      */
-    public static function dispatchFromPlugin(Event $event): int
+    public static function dispatchFromPlugin(Event $event, int $inst = 0, ?bool $runScripts = null): int
     {
         $eid = 'p'.spl_object_id($event).'-'.(++self::$listenerSeq);
         self::$events[$eid] = $event;
@@ -992,6 +1028,12 @@ final class Host
             $spec['kind'] = 'plain';
         }
         try {
+            if ($inst !== 0) {
+                // the event dispatcher of a Composer instance created with
+                // Factory::create(): gocomposer dispatches with that instance
+                return (int) self::cb('nestedDispatch', $spec + ['inst' => $inst, 'runScripts' => $runScripts]);
+            }
+
             return (int) self::cb('dispatch', $spec);
         } finally {
             unset(self::$events[$eid]);

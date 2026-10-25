@@ -166,6 +166,12 @@ func NewTransaction(present, result []*pkg.Package) *Transaction {
 
 func (t *Transaction) Operations() []*Operation { return t.operations }
 
+// PresentPackages are the packages the transaction starts from.
+func (t *Transaction) PresentPackages() []*pkg.Package { return t.present }
+
+// ResultPackages are the packages the transaction results in.
+func (t *Transaction) ResultPackages() []*pkg.Package { return t.resultPackages }
+
 func (t *Transaction) providersInResult(l *pkg.Link) []*pkg.Package {
 	return t.resultPackagesByName[l.Target]
 }
@@ -373,7 +379,10 @@ type LockTransaction struct {
 
 func newLockTransaction(pool *Pool, present []*pkg.Package, unlockable map[int]*pkg.Package, d *Decisions) (*LockTransaction, error) {
 	lt := &LockTransaction{presentList: present, unlockableMap: unlockable}
-	for _, dec := range d.queue {
+	// Decisions iterates its queue from the last decision to the first
+	// (Decisions::rewind() is end(), next() is prev())
+	for i := len(d.queue) - 1; i >= 0; i-- {
+		dec := d.queue[i]
 		if dec.literal > 0 {
 			p := pool.LiteralToPackage(dec.literal)
 			// setResultPackages validates every result package

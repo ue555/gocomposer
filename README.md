@@ -42,7 +42,7 @@ Composer の全コマンドを受け付け、オプション・ヘルプも Comp
 対応できない部分は、成功を装わず明示的なエラーで終了します。主なものは次のとおりです。
 
 - `self-update`（gocomposer は phar ではないため）
-- svn/hg/perforce のドライバ本体
+- forgejo ドライバ、ext-rar による rar 展開
 - Composer のサービス自体を差し替えるなど、スタブにない API を使うプラグイン
 
 一覧は [docs/compatibility.md](docs/compatibility.md) にあります。
@@ -55,10 +55,10 @@ bash scripts/verify.sh
 
 `gofmt`・`go vet`・`go test`（upstream の installer fixture 227件×2ほか、公式 PHP で生成した各種コーパスとの照合を含む）・`go test -race`・ビルドに続けて、次の 2 つを実行します。
 
-- `scripts/compare.sh`: 公式 PHP 8.4（`-image` で 8.3/8.5 も可）と固定 SHA の Composer を podman コンテナで動かし、loopback の fixture リポジトリ（composer、git bare リポジトリ、フォージ API の HTTPS スタブ）に対して 1386 シナリオ（疑似端末での対話 141 を含む）で gocomposer と出力・終了コード・lock・プロジェクトツリー・autoload を比較します（`--network=none`）。最新結果は PHP 8.3/8.4/8.5 とも MATCH 1377・KNOWN-DIFF 9（理由は compatibility.md）・DIFF 0 です。
+- `scripts/compare.sh`: 公式 PHP 8.4（`-image` で 8.3/8.5 も可）と固定 SHA の Composer を podman コンテナで動かし、loopback の fixture リポジトリ（composer、git bare リポジトリ、フォージ API の HTTPS スタブ）に対して 1926 シナリオ（疑似端末での対話・端末表示を含む）で gocomposer と出力・終了コード・lock・プロジェクトツリー・autoload を比較します（`--network=none`）。最新結果は PHP 8.3/8.4/8.5 とも MATCH 1916・KNOWN-DIFF 10（理由は compatibility.md）・DIFF 0 です。
 - `scripts/integration.sh`: symfony/console（ライブラリ）、CLI アプリ、laravel/laravel、小規模なライブダウンロード、主要プラグイン（composer/installers、php-http/discovery、dealerdirect/phpcodesniffer-composer-installer、pestphp/pest-plugin）、symfony/skeleton（symfony/flex の recipe 適用まで）を使うプロジェクトを公式 Composer と gocomposer で独立に導入し、vendor・autoload・`artisan about/list` を比較します（計 9 プロジェクト、ネットワーク必須）。
 
-`scripts/ci-local.sh` は `.github/workflows/ci.yml` の全ステップを macOS（Go 1.23）と podman の Linux コンテナ（golang:1.23）でローカル実行します。GitHub Actions 上では未実行です。
+`scripts/ci-local.sh` は `.github/workflows/ci.yml` の全ステップを macOS（Go 1.23）と podman の Linux コンテナ（golang:1.23）でローカル実行します。GitHub Actions では、PHP 版ごとの matrix に分ける前のワークフローが run 39983736909（commit 479e793）で全ジョブ成功しています（分割後は未実行）。
 
 前提の oracle 環境（公式 PHP イメージ、Composer の独立コピーと依存）は `scripts/prepare-oracle.sh` で作成します。結果は `docs/validation/<UTC時刻>-{compare,integration}/` に生ログ付きで保存されます。
 

@@ -376,6 +376,7 @@ func (c *composerRepoProvider) GetFilter(pcm *ConstraintMap, configuredLists []s
 		if err != nil {
 			return nil, err
 		}
+		c.repo.ResponseWarnings(decoded)
 		if !isset(decoded, "filter") || !phpjson.IsArray(coalesce(decoded, "filter", nil)) {
 			return nil, &httpdl.TransportError{Msg: "Filter api-url " + *info.APIURL + " returned an unexpected response for " + c.repo.RepoName()}
 		}
@@ -598,6 +599,10 @@ func (c *composerRepoProvider) GetSecurityAdvisories(pcm *ConstraintMap, allowPa
 			data, err := DecodeJSONResponse(resp, apiURL)
 			if err != nil {
 				return nil, err
+			}
+			if start == 0 {
+				// only the first batch response shows the repository warnings
+				c.repo.ResponseWarnings(data)
 			}
 			var aerr error
 			eachArr(coalesce(data, "advisories", nil), func(name string, list phpjson.Value) {

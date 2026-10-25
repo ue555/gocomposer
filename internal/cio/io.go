@@ -76,9 +76,11 @@ func (o *IO) IsDebug() bool       { return o.Verbosity >= Debug }
 func (o *IO) IsQuiet() bool       { return o.Verbosity <= Quiet }
 
 var (
-	reTag    = regexp.MustCompile(`(?i)<(/?)((?:[a-z][^<>]*)?)>`)
-	styles   = map[string]string{"info": "32", "comment": "33", "error": "37;41", "question": "30;46", "warning": "30;43", "highlight": "31"}
-	reStyleK = regexp.MustCompile(`^(?:fg|bg|options|href)=`)
+	// OutputFormatter::formatAndWrap: an opening tag may hold escaped
+	// characters (\<, \>), a closing tag may be empty
+	reTag     = regexp.MustCompile(`(?i)<(?:(/)([a-z][^<>]*)?|([a-z](?:[^\\<>]|\\.)*))>`)
+	styles    = map[string]string{"info": "32", "comment": "33", "error": "37;41", "question": "30;46", "warning": "30;43", "highlight": "31"}
+	reStyleKV = regexp.MustCompile(`([^=]+)=([^;]+)(;|$)`)
 )
 
 // Format applies Symfony OutputFormatter rules: known style tags are
@@ -111,8 +113,16 @@ func (o *IO) Format(msg string) string {
 		if msg[i] == '<' {
 			loc := reTag.FindStringSubmatchIndex(msg[i:])
 			if loc != nil && loc[0] == 0 {
-				closing := msg[i+loc[2]:i+loc[3]] == "/"
-				name := strings.ToLower(msg[i+loc[4] : i+loc[5]])
+				closing := loc[2] >= 0
+				// style names are looked up as written; only the keys and
+				// fg/bg/options values of inline styles are case-insensitive
+				// (OutputFormatter::createStyleFromString)
+				name := ""
+				if closing && loc[4] >= 0 {
+					name = msg[i+loc[4] : i+loc[5]]
+				} else if !closing {
+					name = msg[i+loc[6] : i+loc[7]]
+				}
 				full := msg[i : i+loc[1]]
 				if closing {
 					if name == "" || (len(stack) > 0 && stack[len(stack)-1] == name) {
@@ -123,7 +133,7 @@ func (o *IO) Format(msg string) string {
 						i += loc[1]
 						continue
 					}
-				} else if _, known := styles[name]; (known && !(o.SymfonyStylesOnly && (name == "warning" || name == "highlight"))) || reStyleK.MatchString(name) || o.custom[name] != "" {
+				} else if _, known := styles[name]; (known && !(o.SymfonyStylesOnly && (name == "warning" || name == "highlight"))) || inlineStyle(name) || o.custom[name] != "" {
 					flush()
 					stack = append(stack, name)
 					i += loc[1]
@@ -157,12 +167,14 @@ func (o *IO) applyStyle(name, text string) string {
 	return "\x1b[" + set + "m" + text + "\x1b[" + unset + "m"
 }
 
+// handlesHrefGracefully is OutputFormatterStyle::apply's terminal check
+// (symfony/console v5.4).
 func handlesHrefGracefully() bool {
 	if os.Getenv("TERMINAL_EMULATOR") == "JetBrains-JediTerm" {
 		return false
 	}
 	if k := os.Getenv("KONSOLE_VERSION"); k != "" && k != "0" {
-		if n, _ := strconv.Atoi(k); n <= 201100 {
+		if phpIntPrefix(k) <= 201100 {
 			return false
 		}
 	}
@@ -195,6 +207,10 @@ func (o *IO) styleCodes(name string) (string, string, string) {
 	href, fg, bg := "", "", ""
 	for _, part := range strings.Split(name, ";") {
 		k, v, _ := strings.Cut(part, "=")
+		k = strings.ToLower(k)
+		if k != "href" {
+			v = strings.ToLower(v)
+		}
 		switch k {
 		case "fg":
 			fg = v
@@ -303,13 +319,45 @@ func (o *IO) WriteErrorRaw(msg string) {
 // TerminalWidth is Symfony\Component\Console\Terminal::getWidth(): COLUMNS,
 // else the size of the controlling terminal, else 80.
 func TerminalWidth() int {
-	if c := strings.TrimSpace(os.Getenv("COLUMNS")); c != "" {
-		if n, err := strconv.Atoi(c); err == nil {
-			return n
-		}
+	// getenv('COLUMNS') !== false: (int) trim($width), even when 0
+	if c, ok := os.LookupEnv("COLUMNS"); ok {
+		return phpIntPrefix(strings.TrimSpace(c))
 	}
 	if w := ttyWidth(); w > 0 {
 		return w
 	}
 	return 80
+}
+
+// phpIntPrefix is PHP's (int) cast of a string: the leading optional sign
+// and digits, 0 when there are none.
+func phpIntPrefix(s string) int {
+	s = strings.TrimLeft(s, " \t\n\r\v\f")
+	end := 0
+	if end < len(s) && (s[end] == '+' || s[end] == '-') {
+		end++
+	}
+	for end < len(s) && s[end] >= '0' && s[end] <= '9' {
+		end++
+	}
+	n, _ := strconv.Atoi(s[:end])
+	return n
+}
+
+// inlineStyle reports whether a tag is an inline style
+// (OutputFormatter::createStyleFromString): key=value pairs separated by
+// ";" with the keys fg, bg, href and options in any case.
+func inlineStyle(name string) bool {
+	m := reStyleKV.FindAllStringSubmatch(name, -1)
+	if m == nil {
+		return false
+	}
+	for _, kv := range m {
+		switch strings.ToLower(kv[1]) {
+		case "fg", "bg", "href", "options":
+		default:
+			return false
+		}
+	}
+	return true
 }

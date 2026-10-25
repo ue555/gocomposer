@@ -109,7 +109,11 @@ func archiveRun(ctx *Context, c *composer.Composer, packageName string, version 
 		p = c.Package
 	}
 	io.WriteError(`<info>Creating the archive into "` + dest + `".</info>`)
-	packagePath, err := archivePackage(c, p, format, dest, fileName, ignoreFilters)
+	// $composer->getArchiveManager() when plugins changed it (plugin_archive.go)
+	packagePath, handled, err := composer.PluginArchive(c, p, format, dest, fileName, ignoreFilters)
+	if !handled {
+		packagePath, err = archivePackage(c, p, format, dest, fileName, ignoreFilters)
+	}
 	if err != nil {
 		return 1, err
 	}

@@ -14,6 +14,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"runtime"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -57,6 +58,9 @@ type InstallationManager struct {
 	// (FileDownloader::cleanup uses the path of the installer chosen when
 	// downloading, before plugins installed in the same run were activated).
 	downloadPaths map[*pkg.Package]string
+	// deferredBins are binary installs run after the batch's async
+	// extraction processes were waited on (executeBatch)
+	deferredBins []func()
 }
 
 type preference struct {
@@ -247,15 +251,25 @@ func (im *InstallationManager) download(p, prev *pkg.Package) (func() error, err
 
 func (im *InstallationManager) downloadWith(p, prev *pkg.Package) (func() error, error) {
 	typ := im.downloaderType(p)
+	// a built-in downloader replaced by a plugin (plugin_services.go)
+	if handled, err := im.replacedDownloaderOp(typ, "download", p, prev); handled {
+		return nil, err
+	}
 	switch typ {
-	case "zip", "tar", "gzip", "file", "phar":
+	case "zip", "tar", "gzip", "file", "phar", "xz", "rar":
+		if typ == "zip" {
+			// ZipDownloader::download (archive_cmds.go)
+			if err := im.zipDownloadCheck(); err != nil {
+				return nil, err
+			}
+		}
 		return im.fileDownload(p)
 	case "path":
 		return nil, im.pathDownload(p)
 	case "git":
 		return nil, im.gitDL().download(p, prev)
 	case "svn", "hg", "fossil", "perforce":
-		return nil, unsupportedVcsDownloader(p, typ)
+		return nil, im.sourceDL(typ).download(p, prev)
 	}
 	// downloaders added by plugins (DownloadManager::setDownloader)
 	if handled, err := im.pluginDownloaderOp(typ, "download", p, prev); handled {
@@ -556,19 +570,23 @@ func (im *InstallationManager) absFromCwd(p string) string {
 // installCode is DownloadManager::install for the chosen downloader.
 func (im *InstallationManager) installCode(p *pkg.Package, output bool) error {
 	target := im.InstallPath(p)
+	// a built-in downloader replaced by a plugin (plugin_services.go)
+	if handled, err := im.replacedDownloaderOp(im.downloaderType(p), "install", p, nil); handled {
+		return err
+	}
 	switch im.downloaderType(p) {
 	case "":
 		return nil
 	case "path":
 		return im.pathInstall(p, target, output)
-	case "zip", "tar", "gzip":
+	case "zip", "tar", "gzip", "xz", "rar":
 		return im.archiveInstall(p, target, output)
 	case "file", "phar":
 		return im.fileInstall(p, target, output)
 	case "git":
 		return im.gitDL().install(p, target)
 	case "svn", "hg", "fossil", "perforce":
-		return unsupportedVcsDownloader(p, im.downloaderType(p))
+		return im.sourceDL(im.downloaderType(p)).install(p, target)
 	}
 	// downloaders added by plugins (DownloadManager::setDownloader)
 	if handled, err := im.pluginDownloaderOp(im.downloaderType(p), "install", p, nil); handled {
@@ -616,10 +634,12 @@ func (im *InstallationManager) archiveInstallAs(kind string, p *pkg.Package, tar
 	var err error
 	switch kind {
 	case "zip":
-		err = ExtractZip(fileName, tempDir)
-		if err != nil {
-			err = &UserError{Msg: "Failed to extract " + p.Name + ": " + err.Error(), Code: 1}
-		}
+		// unzip (native), 7z or ZipArchive like ZipDownloader (archive_cmds.go)
+		err = im.extractZipWith(p, fileName, tempDir)
+	case "xz":
+		err = im.extractXz(fileName, tempDir)
+	case "rar":
+		err = im.extractRar(fileName, tempDir)
 	case "tar":
 		err = ExtractTar(fileName, tempDir)
 		if err != nil {
@@ -1058,13 +1078,13 @@ func (im *InstallationManager) downloadAndExecuteBatch(repo *installed.Repositor
 		if err != nil {
 			return err
 		}
+		// Loop::wait runs every transfer to its end before rethrowing a
+		// failure (the post-file-download events of the transfers were
+		// dispatched as they completed, plugin_dlevents.go)
 		for _, err := range errs {
 			if err != nil {
 				return err
 			}
-		}
-		if err := im.flushPluginPostDownloads(); err != nil {
-			return err
 		}
 	}
 	if downloadOnly {
@@ -1103,6 +1123,7 @@ func (im *InstallationManager) downloadAndExecuteBatch(repo *installed.Repositor
 func (im *InstallationManager) executeBatch(repo *installed.Repository, ops []*solver.Operation, devMode, runScripts bool) error {
 	var post []*solver.Operation
 	promises, procJobs := 0, 0
+	im.deferredBins = nil
 	for _, op := range ops {
 		switch op.Type {
 		case solver.OpInstall, solver.OpUpdate, solver.OpUninstall:
@@ -1142,13 +1163,22 @@ func (im *InstallationManager) executeBatch(repo *installed.Repository, ops []*s
 		if handled, err := im.pluginInstallerStage(op, "prepare"); err != nil {
 			return err
 		} else if !handled {
-			if err := im.prepareOp(op); err != nil {
+			if err := im.prepareStage(op); err != nil {
 				return err
 			}
 		}
 		// operations of installers added by plugins are promise chains
 		// settled with the batch (plugin_install.go)
 		if started, err := im.pluginStartOp(repo, op, devMode); err != nil {
+			verb := map[string]string{solver.OpInstall: "Install", solver.OpUpdate: "Update", solver.OpUninstall: "Uninstall"}[op.Type]
+			im.c.IO.WriteError("    <error>" + verb + " of " + op.MainPackage().PrettyName + " failed</error>")
+			return err
+		} else if started {
+			post = append(post, op)
+			continue
+		}
+		// operations of downloaders replaced by plugins (plugin_services.go)
+		if started, err := im.replacedStartOp(repo, op, devMode); err != nil {
 			verb := map[string]string{solver.OpInstall: "Install", solver.OpUpdate: "Update", solver.OpUninstall: "Uninstall"}[op.Type]
 			im.c.IO.WriteError("    <error>" + verb + " of " + op.MainPackage().PrettyName + " failed</error>")
 			return err
@@ -1163,7 +1193,7 @@ func (im *InstallationManager) executeBatch(repo *installed.Repository, ops []*s
 			handled, err = im.pluginInstallerStage(op, "cleanup")
 		}
 		if err == nil && !handled {
-			err = im.cleanupOp(op)
+			err = im.cleanupStage(op)
 		}
 		if err == nil {
 			if !handled {
@@ -1189,6 +1219,10 @@ func (im *InstallationManager) executeBatch(repo *installed.Repository, ops []*s
 			return err
 		}
 	}
+	for _, f := range im.deferredBins {
+		f()
+	}
+	im.deferredBins = nil
 	if runScripts && im.PackageEvent != nil {
 		for _, op := range post {
 			ev := map[string]string{solver.OpInstall: "post-package-install", solver.OpUpdate: "post-package-update", solver.OpUninstall: "post-package-uninstall"}[op.Type]
@@ -1213,7 +1247,14 @@ func (im *InstallationManager) install(repo *installed.Repository, p *pkg.Packag
 		return err
 	}
 	if target != "" {
-		im.installBinaries(p, target, true)
+		if im.asyncProcessJobs(&solver.Operation{Type: solver.OpInstall, Package: p}) > 0 {
+			// Composer extracts zips with an async unzip process; the
+			// binaries are installed in the promise callback, which runs
+			// once Loop::wait collects the finished processes
+			im.deferredBins = append(im.deferredBins, func() { im.installBinaries(p, target, true) })
+		} else {
+			im.installBinaries(p, target, true)
+		}
 	}
 	if !repo.HasPackage(p) {
 		repo.AddPackage(p.Clone())
@@ -1243,7 +1284,7 @@ func (im *InstallationManager) update(repo *installed.Repository, initial, targe
 		targetPath := im.InstallPath(target)
 		if initialPath != targetPath {
 			if strings.HasPrefix(initialPath, targetPath) || strings.HasPrefix(targetPath, initialPath) {
-				if err := im.removeCode(initial, true); err != nil {
+				if err := im.removeCodeDM(initial); err != nil {
 					return err
 				}
 				if err := im.installCode(target, true); err != nil {
@@ -1258,8 +1299,13 @@ func (im *InstallationManager) update(repo *installed.Repository, initial, targe
 				return err
 			}
 		}
-		if im.downloaderType(initial) == "git" && im.downloaderType(target) == "git" {
-			if err := im.gitDL().update(initial, target, targetPath); err != nil {
+		if typ := im.downloaderType(target); typ == im.downloaderType(initial) && im.replacedDownloader(typ) {
+			// a downloader replaced by a plugin (DownloadManager::update)
+			if _, err := im.pluginDownloaderCall(typ, "update", target, initial, ""); err != nil {
+				return err
+			}
+		} else if isVcsDownloaderType(im.downloaderType(target)) && im.downloaderType(initial) == im.downloaderType(target) {
+			if err := im.sourceDL(im.downloaderType(target)).update(initial, target, targetPath); err != nil {
 				return err
 			}
 		} else if im.downloaderType(initial) == im.downloaderType(target) {
@@ -1272,7 +1318,7 @@ func (im *InstallationManager) update(repo *installed.Repository, initial, targe
 			}
 			appendix := ""
 			switch im.downloaderType(target) {
-			case "zip", "tar", "gzip":
+			case "zip", "tar", "gzip", "xz", "rar":
 				appendix = ": Extracting archive"
 			case "path":
 				appendix = im.pathAppendix(target)
@@ -1296,12 +1342,12 @@ func (im *InstallationManager) update(repo *installed.Repository, initial, targe
 		} else {
 			// on a type change the existing source install is about to be
 			// wiped, so run its uninstall guard first
-			if im.downloaderType(initial) == "git" {
-				if err := im.gitDL().prepare("uninstall", initial, nil, targetPath); err != nil {
+			if isVcsDownloaderType(im.downloaderType(initial)) {
+				if err := im.sourceDL(im.downloaderType(initial)).prepare("uninstall", initial, nil, targetPath); err != nil {
 					return err
 				}
 			}
-			if err := im.removeCode(initial, true); err != nil {
+			if err := im.removeCodeDM(initial); err != nil {
 				return err
 			}
 			if err := im.installCode(target, true); err != nil {
@@ -1352,7 +1398,7 @@ func (im *InstallationManager) uninstall(repo *installed.Repository, p *pkg.Pack
 	}
 	if p.Type() == "metapackage" {
 		im.c.IO.WriteError("  - " + (&solver.Operation{Type: solver.OpUninstall, Package: p}).Show(false))
-	} else if err := im.removeCode(p, true); err != nil {
+	} else if err := im.removeCodeDM(p); err != nil {
 		return err
 	}
 	im.removeBinaries(p)
@@ -1389,8 +1435,29 @@ func envTruthy(name string) bool {
 	return ok && v != "" && v != "0"
 }
 
+// maxParallelHTTP is HttpDownloader's maximum number of concurrent
+// transfers: 12, or COMPOSER_MAX_PARALLEL_HTTP clamped to 1..50.
+func maxParallelHTTP() int {
+	v := strings.TrimSpace(os.Getenv("COMPOSER_MAX_PARALLEL_HTTP"))
+	if v == "" {
+		return 12
+	}
+	f, err := strconv.ParseFloat(v, 64)
+	if err != nil {
+		return 12
+	}
+	n := int(f)
+	if n < 1 {
+		n = 1
+	}
+	if n > 50 {
+		n = 50
+	}
+	return n
+}
+
 // waitOnJobs is InstallationManager::waitOnPromises + Loop::wait: it runs n
-// jobs concurrently (at most 12 at a time like the curl multi handle) while
+// jobs concurrently (at most maxParallelHTTP() at a time like the curl multi handle) while
 // drawing the progress bar over activeJobs, the number of async jobs Composer
 // would have in flight when the wait starts.
 func (im *InstallationManager) waitOnJobs(promises, activeJobs, n int, run func(i int) error) error {
@@ -1413,20 +1480,24 @@ func (im *InstallationManager) waitOnJobs(promises, activeJobs, n int, run func(
 		var wg sync.WaitGroup
 		var mu sync.Mutex
 		remaining := n
-		sem := make(chan struct{}, 12)
+		sem := make(chan struct{}, maxParallelHTTP())
 		done := make(chan struct{})
-		for i := 0; i < n; i++ {
-			wg.Add(1)
-			go func(i int) {
+		// the jobs start in order as slots free up, like HttpDownloader's
+		// queue (with COMPOSER_MAX_PARALLEL_HTTP=1 one after the other)
+		wg.Add(n)
+		go func() {
+			for i := 0; i < n; i++ {
 				sem <- struct{}{}
-				defer wg.Done()
-				defer func() { <-sem }()
-				run(i)
-				mu.Lock()
-				remaining--
-				mu.Unlock()
-			}(i)
-		}
+				go func(i int) {
+					defer wg.Done()
+					defer func() { <-sem }()
+					run(i)
+					mu.Lock()
+					remaining--
+					mu.Unlock()
+				}(i)
+			}
+		}()
 		go func() { wg.Wait(); close(done) }()
 		tick := time.NewTicker(100 * time.Millisecond)
 	loop:

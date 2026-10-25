@@ -4,7 +4,7 @@ package cli
 // f83588392df43d4fd027d84d26de459946ef4e80, MIT, (c) Nils Adermann, Jordi Boggiano).
 // Local changes are detected for git sources (git status/unpushed commits/
 // version variations), file based dists (re-download and compare) and path
-// packages. Other VCS downloaders (svn, hg, fossil, perforce) fail explicitly.
+// packages and the svn, hg, fossil and perforce source checkouts.
 
 import (
 	"fmt"
@@ -96,9 +96,7 @@ func statusExecute(ctx *Context, c *composer.Composer) (int, error) {
 			continue
 		}
 		switch typ {
-		case "git", "path", "zip", "tar", "gzip", "file", "phar":
-		case "svn", "hg", "fossil", "perforce":
-			return 1, &composer.UserError{Msg: "gocomposer cannot report the status of " + p.PrettyName + ": the " + typ + " downloader is not supported (only git sources, path packages and dist archives are)", Code: 1}
+		case "git", "svn", "hg", "fossil", "perforce", "path", "zip", "tar", "gzip", "file", "phar", "xz", "rar":
 		default:
 			return 1, &composer.UserError{Msg: "Unknown downloader type: " + typ + ". Available types: git, svn, fossil, hg, perforce, zip, rar, tar, gzip, xz, phar, file, path.", Code: 1}
 		}
@@ -108,9 +106,10 @@ func statusExecute(ctx *Context, c *composer.Composer) (int, error) {
 		}
 		var changes string
 		var err error
-		if typ == "git" {
+		switch typ {
+		case "git", "svn", "hg", "fossil", "perforce":
 			changes, err = im.LocalChanges(p)
-		} else {
+		default:
 			changes, err = im.FileLocalChanges(p, targetDir)
 		}
 		if err != nil {

@@ -200,7 +200,14 @@ func runShow(ctx *Context) (int, error) {
 	case in.Bool("available"):
 		if c == nil {
 			// RepositoryFactory::defaultReposWithDefaultManager (packagist.org)
-			return 1, &composer.UserError{Msg: "show --available without a composer.json (listing the default packagist.org repository) is not supported by gocomposer yet.", Code: 1}
+			dc, err := defaultReposComposer(ctx)
+			if err != nil {
+				return 1, err
+			}
+			sc.installed = repo.NewInstalled(platformRepo)
+			sc.repos = append([]repo.Repository(nil), dc.Repositories...)
+			io.WriteError("No composer.json found in the current directory, showing available packages from " + strings.Join(dc.DefaultRepositoryNames(), ", "))
+			break
 		}
 		sc.installed = repo.NewInstalled(platformRepo, c.LocalRepo)
 		sc.repos = append([]repo.Repository(nil), c.Repositories...)
@@ -228,7 +235,13 @@ func runShow(ctx *Context) (int, error) {
 		}
 		sc.repos = append(sc.repos, c.Repositories...)
 	case in.Bool("all"):
-		return 1, &composer.UserError{Msg: "show --all without a composer.json (listing the default packagist.org repository) is not supported by gocomposer yet.", Code: 1}
+		dc, err := defaultReposComposer(ctx)
+		if err != nil {
+			return 1, err
+		}
+		io.WriteError("No composer.json found in the current directory, showing available packages from " + strings.Join(dc.DefaultRepositoryNames(), ", "))
+		sc.installed = repo.NewInstalled(platformRepo)
+		sc.repos = append(sc.installed.Repositories(), dc.Repositories...)
 	case in.Bool("locked"):
 		locked := false
 		if c != nil {

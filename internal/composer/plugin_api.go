@@ -13,12 +13,14 @@ import (
 	"encoding/base64"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
 	"sync"
 
+	"gocomposer/internal/autoload"
 	"gocomposer/internal/cio"
 	"gocomposer/internal/httpdl"
 	"gocomposer/internal/jsonschema"
@@ -262,6 +264,9 @@ var creatingFromPlugin bool
 
 // apiCallback serves the callbacks of api.php (ok is false for other ops).
 func (pm *PluginManager) apiCallback(op string, a *phpjson.Map) (phpjson.Value, bool, error) {
+	if v, ok, err := pm.servicesCallback(op, a); ok {
+		return v, true, err
+	}
 	switch op {
 	case "http":
 		v, err := pm.httpJobs(a)
@@ -346,6 +351,11 @@ func (pm *PluginManager) apiCallback(op string, a *phpjson.Map) (phpjson.Value, 
 			return nil, true, err
 		}
 		mode, _ := mustGet(a, "schema").(int64)
+		if file, ok := mustGet(a, "schemaFile").(string); ok {
+			// JsonFile::validateJsonSchema with a schema file of its own
+			v, err := validateWithSchemaFile(data, file)
+			return v, true, err
+		}
 		msgs, err := jsonschema.ValidateComposerJSON(data, int(mode))
 		if err != nil {
 			return nil, true, err
@@ -391,6 +401,16 @@ func (pm *PluginManager) httpJobs(a *phpjson.Map) (phpjson.Value, error) {
 	if maxJobs < 1 {
 		maxJobs = 12
 	}
+	// HttpDownloader::addJob: Config::prohibitUrlByConfig with the
+	// request's options (the insecure protocol warning comes with the
+	// request itself)
+	for _, j := range jobs {
+		if options := phpjson.ToMap(mustGet(j, "options")); options != nil {
+			if pu, err := url.Parse(j.Str("url")); err == nil && reHTTPURL.MatchString(j.Str("url")) {
+				pm.sslVerifyWarning(pu.Hostname(), options.Map("ssl"))
+			}
+		}
+	}
 	results := make([]phpjson.Value, len(jobs))
 	sem := make(chan struct{}, maxJobs)
 	var wg sync.WaitGroup
@@ -407,13 +427,6 @@ func (pm *PluginManager) httpJobs(a *phpjson.Map) (phpjson.Value, error) {
 	out := make([]phpjson.Value, len(results))
 	copy(out, results)
 	return out, nil
-}
-
-// unsupportedTransportOptions lists stream context options gocomposer's HTTP
-// client can not apply per request.
-var unsupportedTransportOptions = map[string][]string{
-	"ssl":  {"cafile", "capath", "local_cert", "local_pk", "passphrase", "allow_self_signed", "peer_fingerprint"},
-	"http": {"proxy", "request_fulluri"},
 }
 
 func (pm *PluginManager) httpJob(j *phpjson.Map) phpjson.Value {
@@ -436,30 +449,21 @@ func (pm *PluginManager) httpJob(j *phpjson.Map) phpjson.Value {
 		r.Set("error", e)
 		return r
 	}
-	if options != nil {
-		for group, keys := range unsupportedTransportOptions {
-			gm := options.Map(group)
-			if gm == nil {
-				continue
-			}
-			for _, k := range keys {
-				if v, ok := gm.Get(k); ok && v != nil && v != false {
-					if group == "ssl" && (k == "cafile" || k == "capath") {
-						if s, _ := v.(string); s != "" && s == c.Config.GetString(k) {
-							continue
-						}
-					}
-					return errResult(&UserError{Msg: "The " + group + "." + k + " transport option is not supported by gocomposer's HTTP client (requested by a Composer plugin for " + httpdl.Sanitize(u) + ")"})
-				}
-			}
+	// TLS options of the request (plugin_http.go)
+	client := c.HTTP
+	if ssl := pm.requestTLS(options); ssl != nil {
+		d, err := pm.tlsDownloader(ssl)
+		if err != nil {
+			return errResult(err)
 		}
+		client = d
 	}
 	var resp *httpdl.Response
 	var err error
 	if to := j.Str("copyTo"); to != "" {
-		resp, err = c.HTTP.Download(u, to, transportHeadersOf(options)...)
+		resp, err = client.Download(u, to, transportHeadersOf(options)...)
 	} else {
-		resp, err = c.HTTP.Request(u, options)
+		resp, err = client.Request(u, options)
 	}
 	if err != nil {
 		return errResult(err)
@@ -560,6 +564,13 @@ func repoKindName(k repo.Kind) string {
 // repoDesc describes r; index is its position in the configured repository
 // list (-1 for repositories that are not configured ones).
 func (pm *PluginManager) repoDesc(c *Composer, r repo.Repository, index int) *phpjson.Map {
+	if pr, ok := r.(*phpRepository); ok {
+		m := phpjson.NewMap()
+		m.Set("rid", pm.repoID(r))
+		m.Set("kind", "php")
+		m.Set("id", pr.id)
+		return m
+	}
 	m := phpjson.NewMap()
 	m.Set("rid", pm.repoID(r))
 	kind := repoKindName(r.Kind())
@@ -792,6 +803,9 @@ func (pm *PluginManager) repoAdd(a *phpjson.Map) error {
 		if r == nil {
 			return &UserError{Msg: fmt.Sprintf("Unknown gocomposer repository %d", id), Code: 1}
 		}
+	} else if id, ok := mustGet(a, "php").(int64); ok {
+		// a repository implemented by plugin code (plugin_repos.go)
+		r = pm.phpRepo(id, a.Str("name"))
 	} else {
 		arr := repo.NewArray()
 		var perr error
@@ -829,20 +843,57 @@ func (pm *PluginManager) repoAdd(a *phpjson.Map) error {
 // factoryCreate is Factory::create from a plugin.
 func (pm *PluginManager) factoryCreate(a *phpjson.Map) (phpjson.Value, error) {
 	file, _ := mustGet(a, "file").(string)
-	// Factory::createComposer: a custom composer.json path changes the
-	// working directory of the instance to the file's directory
-	cwd := ""
-	if file != "" {
+	cwd, _ := mustGet(a, "cwd").(string)
+	opts := Options{DisablePlugins: mustGet(a, "disablePlugins") == true || pm.c.DisablePlugins, DisableScripts: mustGet(a, "disableScripts") == true, FullLoad: true}
+	global := mustGet(a, "global") == true
+	if global {
+		// Factory::createGlobal: createGlobalComposer with the home's
+		// composer.json (failures are only reported at debug verbosity)
+		home := pm.c.Config.GetString("home")
+		file, cwd = home+"/composer.json", home
+	}
+	if js, ok := mustGet(a, "json").(string); ok {
+		// a configuration given as an array: no composer.json file, so no
+		// schema check, config source, auth.json nor lock file (Composer's
+		// Locker reads/writes the null device); gocomposer keeps the
+		// encoded configuration in a file of the plugin runtime directory
+		// that has no lock file next to it
+		base := filepath.Join(pm.host.dir, "factory")
+		if err := os.MkdirAll(base, 0o700); err != nil {
+			return nil, err
+		}
+		dir, err := os.MkdirTemp(base, "config-")
+		if err != nil {
+			return nil, err
+		}
+		file = filepath.Join(dir, "composer.json")
+		if err := os.WriteFile(file, []byte(js), 0o600); err != nil {
+			return nil, err
+		}
+		opts.SkipSchemaValidation = true
+		if cwd == "" {
+			if wd, err := os.Getwd(); err == nil {
+				cwd = wd
+			}
+		}
+	} else if file != "" && cwd == "" {
+		// Factory::createComposer: a custom composer.json path changes the
+		// working directory of the instance to the file's directory
 		if st, err := os.Stat(file); err == nil && !st.IsDir() {
 			if abs, err := filepath.Abs(filepath.Dir(file)); err == nil {
 				cwd = abs
 			}
 		}
 	}
+	opts.ComposerFile, opts.Cwd = file, cwd
 	prev := creatingFromPlugin
 	creatingFromPlugin = true
-	nc, err := Create(pm.c.IO, Options{ComposerFile: file, Cwd: cwd, DisablePlugins: mustGet(a, "disablePlugins") == true || pm.c.DisablePlugins, DisableScripts: mustGet(a, "disableScripts") == true, FullLoad: true})
+	nc, err := Create(pm.c.IO, opts)
 	creatingFromPlugin = prev
+	if err != nil && global {
+		pm.c.IO.WriteErrorV("Failed to initialize global composer: "+err.Error(), true, cio.Debug)
+		return nil, nil
+	}
 	if err != nil {
 		if ue, ok := err.(*UserError); ok && strings.HasPrefix(ue.Msg, "Composer could not find") {
 			// Factory::createComposer throws InvalidArgumentException
@@ -853,6 +904,12 @@ func (pm *PluginManager) factoryCreate(a *phpjson.Map) (phpjson.Value, error) {
 	if pm.instances == nil {
 		pm.instances = map[int64]*Composer{}
 	}
+	if opts.SkipSchemaValidation {
+		if pm.arrayConfigs == nil {
+			pm.arrayConfigs = map[*Composer]bool{}
+		}
+		pm.arrayConfigs[nc] = true
+	}
 	pm.instSeq++
 	id := pm.instSeq
 	pm.instances[id] = nc
@@ -860,6 +917,7 @@ func (pm *PluginManager) factoryCreate(a *phpjson.Map) (phpjson.Value, error) {
 	out.Set("inst", id)
 	out.Set("root", rootDumpOf(nc))
 	out.Set("global", nc.isGlobal())
+	out.Set("disableScripts", nc.DisableScripts)
 	return out, nil
 }
 
@@ -888,6 +946,7 @@ func (pm *PluginManager) installerRun(a *phpjson.Map) (phpjson.Value, error) {
 			in.UpdateMirrors, in.UpdateAllowList, in.UpdateAllowListSet, in.UpdateAllowTransitive = src.UpdateMirrors, src.UpdateAllowList, src.UpdateAllowListSet, src.UpdateAllowTransitive
 			in.PlatformFilter, in.TemporaryConstraints = src.PlatformFilter, src.TemporaryConstraints
 			in.IgnoredTypes, in.AllowedTypes, in.PolicyConfig = src.IgnoredTypes, src.AllowedTypes, src.PolicyConfig
+			in.AdditionalFixedRepository = src.AdditionalFixedRepository
 			in.IM.SetPreferSource(src.PreferSource)
 			in.IM.SetPreferDist(src.PreferDist)
 			in.IM.OutputProgress = src.IM.OutputProgress
@@ -922,6 +981,13 @@ func (pm *PluginManager) installerRun(a *phpjson.Map) (phpjson.Value, error) {
 	b("writeLock", &in.WriteLock)
 	b("executeOperations", &in.ExecuteOperations)
 	b("audit", &in.Audit)
+	if v, ok := opts.Get("additionalFixed"); ok {
+		r, err := pm.repoFromSpec(phpjson.ToMap(v))
+		if err != nil {
+			return nil, err
+		}
+		in.AdditionalFixedRepository = r
+	}
 	b("errorOnAudit", &in.ErrorOnAudit)
 	in.IM.SetPreferSource(in.PreferSource)
 	in.IM.SetPreferDist(in.PreferDist)
@@ -945,7 +1011,12 @@ func (pm *PluginManager) installerRun(a *phpjson.Map) (phpjson.Value, error) {
 		in.UpdateAllowTransitive = int(n)
 	}
 	if v, ok := opts.Get("platformFilter"); ok {
+		if m := phpjson.ToMap(v); m != nil && m.Has("kind") {
+			v = nil
+			in.PlatformFilter = pm.filterFromSpec(m)
+		}
 		switch t := v.(type) {
+		case nil:
 		case bool:
 			if t {
 				in.PlatformFilter = solver.IgnoreAll{}
@@ -1008,6 +1079,13 @@ func (pm *PluginManager) installerRun(a *phpjson.Map) (phpjson.Value, error) {
 		in.suggestions.io = &cio.IO{Out: discard{}, Err: discard{}, Verbosity: cio.Quiet}
 	}
 	code, err := in.Run()
+	if obj, ok := mustGet(a, "obj").(int64); ok {
+		// Installer::getLockTransaction of the object (plugin_repos.go)
+		if pm.lockTxs == nil {
+			pm.lockTxs = map[int64]*solver.LockTransaction{}
+		}
+		pm.lockTxs[obj] = in.lockTransaction
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -1054,12 +1132,6 @@ func (pm *PluginManager) downloaderOp(a *phpjson.Map) (async bool, err error) {
 	kind := a.Str("kind")
 	path := a.Str("path")
 	output := mustGet(a, "output") != false
-	switch kind {
-	case "svn", "hg", "fossil", "perforce":
-		return false, unsupportedVcsDownloader(p, kind)
-	case "rar", "xz":
-		return false, &UserError{Msg: "The " + kind + " archive format is not supported by gocomposer", Code: 1}
-	}
 	if path != "" && a.Str("m") != "remove" {
 		if want := strings.TrimRight(path, "/"); want != "" && fsutilNormalize(im.InstallPath(p)) != fsutilNormalize(want) {
 			return false, &UserError{Msg: "gocomposer can only download " + p.PrettyName + " into its install path (" + im.InstallPath(p) + "), not " + path, Code: 1}
@@ -1073,12 +1145,18 @@ func (pm *PluginManager) downloaderOp(a *phpjson.Map) (async bool, err error) {
 	case "download":
 		var transfer func() error
 		switch kind {
-		case "zip", "tar", "gzip", "file", "phar":
+		case "zip", "tar", "gzip", "file", "phar", "xz", "rar":
+			if kind == "zip" {
+				// ZipDownloader::download (archive_cmds.go)
+				if err := im.zipDownloadCheck(); err != nil {
+					return false, err
+				}
+			}
 			transfer, err = im.fileDownload(p)
 		case "path":
 			err = im.pathDownload(p)
-		case "git":
-			err = im.gitDL().download(p, prev)
+		case "git", "svn", "hg", "fossil", "perforce":
+			err = im.sourceDL(kind).download(p, prev)
 		}
 		if err != nil {
 			return false, err
@@ -1087,17 +1165,17 @@ func (pm *PluginManager) downloaderOp(a *phpjson.Map) (async bool, err error) {
 			if err := transfer(); err != nil {
 				return false, err
 			}
-			return false, im.flushPluginPostDownloads()
+			return false, nil
 		}
 		return false, nil
 	case "prepare":
-		if kind == "git" {
-			return false, im.gitDL().prepare(a.Str("op"), p, prev, im.InstallPath(p))
+		if isVcsDownloaderType(kind) {
+			return false, im.sourceDL(kind).prepare(a.Str("op"), p, prev, im.InstallPath(p))
 		}
 		return false, nil
 	case "cleanup":
-		if kind == "git" {
-			return false, im.gitDL().cleanup(a.Str("op"), p, prev, im.InstallPath(p))
+		if isVcsDownloaderType(kind) {
+			return false, im.sourceDL(kind).cleanup(a.Str("op"), p, prev, im.InstallPath(p))
 		}
 		im.cleanup(p)
 		return false, nil
@@ -1105,7 +1183,7 @@ func (pm *PluginManager) downloaderOp(a *phpjson.Map) (async bool, err error) {
 		async = kind == "zip" && unzipAvailable()
 		return async, im.installCodeAs(kind, p, im.InstallPath(p), output)
 	case "update":
-		async = kind != "path" && kind != "git" && existingDir(prev) || kind == "zip" && unzipAvailable()
+		async = kind != "path" && !isVcsDownloaderType(kind) && existingDir(prev) || kind == "zip" && unzipAvailable()
 		return async, im.updateCodeAs(kind, prev, p, im.InstallPath(p))
 	case "remove":
 		async = kind != "path" && existingDir(p)
@@ -1121,12 +1199,12 @@ func (im *InstallationManager) installCodeAs(kind string, p *pkg.Package, target
 	switch kind {
 	case "path":
 		return im.pathInstall(p, target, output)
-	case "zip", "tar", "gzip":
+	case "zip", "tar", "gzip", "xz", "rar":
 		return im.archiveInstallAs(kind, p, target, output)
 	case "file", "phar":
 		return im.fileInstall(p, target, output)
-	case "git":
-		return im.gitDL().install(p, target)
+	case "git", "svn", "hg", "fossil", "perforce":
+		return im.sourceDL(kind).install(p, target)
 	}
 	return &UserError{Msg: "Unknown downloader type: " + kind, Code: 1}
 }
@@ -1135,8 +1213,8 @@ func (im *InstallationManager) installCodeAs(kind string, p *pkg.Package, target
 // same-type branch of DownloadManager::update).
 func (im *InstallationManager) updateCodeAs(kind string, initial, target *pkg.Package, targetPath string) error {
 	switch kind {
-	case "git":
-		return im.gitDL().update(initial, target, targetPath)
+	case "git", "svn", "hg", "fossil", "perforce":
+		return im.sourceDL(kind).update(initial, target, targetPath)
 	case "path":
 		im.c.IO.WriteError("  - " + (&solver.Operation{Type: solver.OpUpdate, Initial: initial, Target: target}).Show(false) + im.pathAppendix(target))
 		if err := im.removeCode(initial, false); err != nil {
@@ -1146,7 +1224,7 @@ func (im *InstallationManager) updateCodeAs(kind string, initial, target *pkg.Pa
 	}
 	appendix := ""
 	switch kind {
-	case "zip", "tar", "gzip":
+	case "zip", "tar", "gzip", "xz", "rar":
 		appendix = ": Extracting archive"
 	}
 	im.c.IO.WriteError("  - " + (&solver.Operation{Type: solver.OpUpdate, Initial: initial, Target: target}).Show(false) + appendix)
@@ -1156,40 +1234,37 @@ func (im *InstallationManager) updateCodeAs(kind string, initial, target *pkg.Pa
 	return im.installCodeAs(kind, target, targetPath, false)
 }
 
-// autoloadDump is AutoloadGenerator::dump called by plugin code.
+// autoloadDump is AutoloadGenerator::dump called by plugin code (or by an
+// autoload generator a plugin put in place of Composer's, calling
+// parent::dump() for a dump gocomposer handed to it: plugin_services.go).
 func (pm *PluginManager) autoloadDump(a *phpjson.Map) (phpjson.Value, error) {
 	c, err := pm.instance(a)
 	if err != nil {
 		return nil, err
 	}
-	var dev *bool
-	if v, ok := mustGet(a, "dev").(bool); ok {
-		dev = &v
+	if ctx := pm.alCtx; ctx != nil && ctx.c == c {
+		res, err := runAutoloadDump(ctx.c, ctx.events, ctx.localRepo, pm.pluginAutoloadOptions(a, ctx.o))
+		if err != nil {
+			return nil, err
+		}
+		ctx.result = res
+		return classMapValue(res), nil
 	}
-	o := AutoloadOptions{
-		DevMode:               dev,
-		Optimize:              mustGet(a, "optimize") == true,
-		ClassMapAuthoritative: mustGet(a, "authoritative") == true,
-		Apcu:                  mustGet(a, "apcu") == true,
-		RunScripts:            mustGet(a, "runScripts") == true,
-		DryRun:                mustGet(a, "dryRun") == true,
-		StrictAmbiguous:       mustGet(a, "strictAmbiguous") == true,
-	}
-	o.ApcuPrefix, _ = mustGet(a, "apcuPrefix").(string)
-	o.Suffix, _ = mustGet(a, "suffix").(string)
-	if mustGet(a, "platformFilter") == true {
-		o.PlatformFilter = solver.IgnoreAll{}
-	}
+	o := pm.pluginAutoloadOptions(a, AutoloadOptions{})
 	repo := c.LocalRepo
 	if c == pm.c && pm.curRepo != nil {
 		repo = pm.curRepo
 	}
 	d := NewEventDispatcher(c)
 	d.RunScripts = !c.DisableScripts
-	res, err := RunAutoloadDump(c, d, repo, o)
+	res, err := runAutoloadDump(c, d, repo, o)
 	if err != nil {
 		return nil, err
 	}
+	return classMapValue(res), nil
+}
+
+func classMapValue(res *autoload.Result) phpjson.Value {
 	out := phpjson.NewMap()
 	cm := phpjson.NewMap()
 	if res != nil && res.ClassMap != nil {
@@ -1198,7 +1273,10 @@ func (pm *PluginManager) autoloadDump(a *phpjson.Map) (phpjson.Value, error) {
 		}
 	}
 	out.Set("map", cm)
-	return out, nil
+	if res != nil {
+		out.Set("devMode", res.DevMode)
+	}
+	return out
 }
 
 // localRepoOp applies InstalledFilesystemRepository changes made by plugin

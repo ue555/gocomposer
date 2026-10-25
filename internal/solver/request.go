@@ -210,7 +210,11 @@ func (IgnoreAll) IsUpperBoundIgnored(req string) bool { return repo.IsPlatformPa
 // IgnoreList is IgnoreListPlatformRequirementFilter.
 type IgnoreList struct {
 	ignore, upper *regexp.Regexp
+	reqs          []string
 }
+
+// Reqs returns the requirement list the filter was created from.
+func (f *IgnoreList) Reqs() []string { return append([]string(nil), f.reqs...) }
 
 func NewIgnoreList(reqs []string) *IgnoreList {
 	var all, upper []string
@@ -221,7 +225,7 @@ func NewIgnoreList(reqs []string) *IgnoreList {
 			all = append(all, r)
 		}
 	}
-	return &IgnoreList{ignore: PackageNamesToRegexp(all), upper: PackageNamesToRegexp(upper)}
+	return &IgnoreList{ignore: PackageNamesToRegexp(all), upper: PackageNamesToRegexp(upper), reqs: append([]string(nil), reqs...)}
 }
 
 func (f *IgnoreList) IsIgnored(req string) bool {

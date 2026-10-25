@@ -1,0 +1,38 @@
+== library-symfony-console
+   install                      MATCH
+   update-no-install            MATCH
+   update-no-install-no-scripts MATCH
+== cli-app
+   install                      MATCH
+   update-no-install            MATCH
+   update-no-install-no-scripts MATCH
+== laravel
+   install                      MATCH
+   update-no-install            MATCH
+   update-no-install-no-scripts MATCH
+== live-psr
+   install                      MATCH
+   update-no-install            MATCH
+   update-no-install-no-scripts MATCH
+== plugin-installers
+   install                      MATCH
+   update-no-install            MATCH
+   update-no-install-no-scripts MATCH
+== plugin-php-http-discovery
+   install                      MATCH
+   update-no-install            MATCH
+   update-no-install-no-scripts MATCH
+== plugin-phpcs
+   install                      MATCH
+   update-no-install            MATCH
+   update-no-install-no-scripts MATCH
+== plugin-pest
+   install                      MATCH
+   update-no-install            MATCH
+   update-no-install-no-scripts MATCH
+== symfony-skeleton
+   install                      MATCH
+   update-no-install            MATCH
+   update-no-install-no-scripts MATCH
+   recipes-install              MATCH
+results: /Users/kouji/dev/gocomposer/docs/validation/20261024T191929Z-integration

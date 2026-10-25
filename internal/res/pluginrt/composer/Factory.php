@@ -1,9 +1,10 @@
 <?php declare(strict_types=1);
 // gocomposer plugin runtime: static helpers of Composer\Factory, ported from
 // Composer f83588392df43d4fd027d84d26de459946ef4e80 src/Composer/Factory.php
-// (MIT license, (c) Nils Adermann, Jordi Boggiano). Factory::create() makes
-// gocomposer create (and load the plugins of) another Composer instance
-// from a composer.json file; the instance is exposed through the same
+// (MIT license, (c) Nils Adermann, Jordi Boggiano). Factory::create(),
+// createGlobal() and createComposer() make gocomposer create (and load the
+// plugins of) another Composer instance from a composer.json file or a
+// configuration array; the instance is exposed through the same
 // gocomposer-backed stubs.
 
 namespace Composer;
@@ -61,7 +62,7 @@ class Factory
 
     public static function createConfig($io = null, ?string $cwd = null): Config
     {
-        return new Config();
+        return Config::gcCreate($cwd);
     }
 
     /**
@@ -70,19 +71,32 @@ class Factory
      */
     public static function create($io, $config = null, $disablePlugins = false, bool $disableScripts = false): Composer
     {
-        if (is_array($config)) {
-            Unsupported::fail(__METHOD__.' with an array configuration');
-        }
         // for BC reasons, if a config is passed in either as array or a path that is not the default composer.json path
         // we disable local plugins as they really should not be loaded from CWD
         if ($config !== null && $config !== self::getComposerFile() && $disablePlugins === false) {
             $disablePlugins = 'local';
         }
-        $desc = \GocomposerPluginHost\Host::cb('factoryCreate', [
-            'file' => $config,
+
+        return self::gcCreate($config, $disablePlugins, null, $disableScripts);
+    }
+
+    /**
+     * @param string|array<string, mixed>|null $config
+     * @param bool|'local'|'global' $disablePlugins
+     */
+    private static function gcCreate($config, $disablePlugins, ?string $cwd, bool $disableScripts): Composer
+    {
+        $args = [
             'disablePlugins' => $disablePlugins === true || $disablePlugins === 'local',
             'disableScripts' => $disableScripts,
-        ]);
+            'cwd' => $cwd,
+        ];
+        if (is_array($config)) {
+            $args['json'] = \Composer\Json\JsonFile::encode($config);
+        } else {
+            $args['file'] = $config;
+        }
+        $desc = \GocomposerPluginHost\Host::cb('factoryCreate', $args);
 
         return \GocomposerPluginHost\Api::nestedComposer($desc);
     }
@@ -92,18 +106,28 @@ class Factory
         return new \Composer\Util\HttpDownloader($io, $config, $options);
     }
 
-    public static function createGlobal($io, bool $disablePlugins = false, bool $disableScripts = false)
+    public static function createGlobal($io, bool $disablePlugins = false, bool $disableScripts = false): ?Composer
     {
-        Unsupported::fail(__METHOD__);
+        $desc = \GocomposerPluginHost\Host::cb('factoryCreate', ['global' => true, 'disablePlugins' => $disablePlugins, 'disableScripts' => $disableScripts]);
+
+        return $desc === null ? null : \GocomposerPluginHost\Api::nestedComposer($desc);
     }
 
-    public function createComposer(...$args)
+    /**
+     * @param string|array<string, mixed>|null $localConfig
+     * @param bool|'local'|'global' $disablePlugins
+     */
+    public function createComposer($io, $localConfig = null, $disablePlugins = false, ?string $cwd = null, bool $fullLoad = true, bool $disableScripts = false)
     {
-        Unsupported::fail(__METHOD__);
+        if (!$fullLoad) {
+            Unsupported::fail(__METHOD__.' without a full load (PartialComposer)');
+        }
+
+        return self::gcCreate($localConfig, $disablePlugins, $cwd, $disableScripts);
     }
 
     public static function getHomeDir(): string
     {
-        return (string) (new Config())->get('home');
+        return (string) \GocomposerPluginHost\Host::cb('config', ['key' => 'home', 'flags' => 0, 'inst' => 0]);
     }
 }

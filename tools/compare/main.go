@@ -208,6 +208,10 @@ func environmentInfo(root, gobin string) map[string]string {
 		info["oracle_zip_image"] = oracleImage + zipImageSuffix
 		info["oracle_zip_image_digest"] = strings.TrimSpace(string(out))
 	}
+	if out, err := exec.Command("podman", "image", "inspect", oracleImage+"-arch", "--format", "{{.Digest}}").Output(); err == nil {
+		info["oracle_arch_image"] = oracleImage + "-arch"
+		info["oracle_arch_image_digest"] = strings.TrimSpace(string(out))
+	}
 	if out, err := exec.Command("podman", podmanRun("--network=none", oracleImage, "php", "-r", "echo PHP_VERSION;")...).Output(); err == nil {
 		info["php_version"] = strings.TrimSpace(string(out))
 	}
@@ -262,6 +266,10 @@ type Scenario struct {
 	// and feeds it Input (tty.go).
 	TTY   bool
 	Input []TTYStep
+	// Root runs the compared command as uid 0 (podmanRunRoot) with the
+	// container markers Platform::isDocker looks for removed, so Composer's
+	// super user checks apply (scenarios_term.go).
+	Root bool
 }
 
 func copyTree(src, dst string) error {
@@ -362,6 +370,7 @@ func runTool(root, dir, fixtures, gobin string, t tool, command string, sc Scena
 		}
 	}
 	ttyRun := isTTYRun(sc, dir)
+	rootRun := sc.Root && filepath.Base(dir) != "template"
 	runLine := t.cmd + " " + command + ` >/work/out/stdout 2>/work/out/stderr; echo $? >/work/out/exit`
 	if ttyRun {
 		var err error
@@ -372,15 +381,25 @@ func runTool(root, dir, fixtures, gobin string, t tool, command string, sc Scena
 	script := `php -S 127.0.0.1:8899 -t /fixtures >/dev/null 2>&1 &
 i=0; while ! php -r 'exit(@fsockopen("127.0.0.1", 8899) ? 0 : 1);' 2>/dev/null; do i=$((i+1)); [ $i -gt 50 ] && break; sleep 0.1; done
 ` + apiStubScript + `
+` + faultStubScript + `
 cd /work/project
 ` + runLine + `
 `
+	if rootRun {
+		// podman bind-mounts /run/.containerenv; unmounting it needs
+		// CAP_SYS_ADMIN (granted by podmanRunRoot)
+		script = "umount /run/.containerenv 2>/dev/null; rm -f /run/.containerenv /.dockerenv\n" + script
+	}
 	if probe {
 		script += `if [ -f vendor/autoload.php ]; then php /gobin/probe.php >/work/out/probe 2>&1; fi
 `
 	}
 	script += gitStateScript
-	args := podmanRun("--network=none",
+	run := podmanRun
+	if rootRun {
+		run = podmanRunRoot
+	}
+	args := run("--network=none",
 		"-v", fixtures+":/fixtures:ro",
 		"-v", filepath.Join(root, ".cache", "oracle-source")+":/oracle-source:ro",
 		"-v", gobin+":/gobin:ro",
@@ -390,6 +409,8 @@ cd /work/project
 		args = append(args, "-v", gitfx+":/fixtures/git:ro")
 		if isDirPath(filepath.Join(gitfx, "_api")) {
 			args = append(args, forgePodmanArgs...)
+			// further host names of the stub (_api/hosts, scenarios_final_cli.go)
+			args = append(args, apiHostArgs(gitfx)...)
 		}
 	}
 	args = append(args,
@@ -660,16 +681,40 @@ func scenarioImage(sc Scenario) string {
 // array offset" in src/Composer/Util/Svn.php). They report a PHP runtime
 // issue in the oracle, not Composer behaviour, so only these lines (pointing
 // into /oracle-source/src/) are dropped from the oracle's stderr; the raw
-// output stays in the result JSON.
-var reOracleDeprecation = regexp.MustCompile(`^Deprecation Notice: .* in /oracle-source/src/\S+:\d+$`)
+// output stays in the result JSON. Composer's bundled libraries
+// (/oracle-source/vendor/, e.g. symfony/console's ArgvInput under PHP 8.5)
+// are treated the same; gocomposer's PHP runtimes skip their copies' notices.
+var reOracleDeprecation = regexp.MustCompile(`^Deprecation Notice: .* in /oracle-source/(?:src|vendor)/\S+:\d+$`)
 
 func dropOracleRuntimeDeprecations(s string) string {
 	var lines []string
+	dropped, kept := 0, 0
+	inTrace := false
 	for _, l := range strings.Split(s, "\n") {
-		if reOracleDeprecation.MatchString(l) {
+		if reOracleDeprecation.MatchString(l) && !isComposerUserDeprecation(l) {
+			dropped++
+			inTrace = true
 			continue
 		}
+		// the stack trace printed after a dropped notice at -v and above
+		if inTrace && (l == "Stack trace:" || strings.HasPrefix(l, " /")) {
+			continue
+		}
+		inTrace = false
+		if strings.HasPrefix(l, "Deprecation Notice: ") {
+			kept++
+		}
 		lines = append(lines, l)
+	}
+	if dropped > 0 && kept == 0 {
+		// the summary line printed when only dropped notices were hidden
+		var out []string
+		for _, l := range lines {
+			if l != "More deprecation notices were hidden, run again with `-v` to show them." {
+				out = append(out, l)
+			}
+		}
+		lines = out
 	}
 	return strings.Join(lines, "\n")
 }

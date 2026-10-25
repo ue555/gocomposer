@@ -454,6 +454,11 @@ func (h *pluginHost) pkgFromRef(v phpjson.Value) (*pkg.Package, error) {
 		if p, ok := h.byID[int(id)]; ok {
 			return p, nil
 		}
+		if id < 0 {
+			// a package object of plugin code gocomposer adopts (packages
+			// of repositories implemented in PHP): both sides keep the id
+			return h.adopt(int(id), m)
+		}
 		return nil, fmt.Errorf("unknown package reference %d", id)
 	}
 	d := m.Map("d")
@@ -467,6 +472,36 @@ func (h *pluginHost) pkgFromRef(v phpjson.Value) (*pkg.Package, error) {
 	if a := m.Map("alias"); a != nil {
 		p = pkg.NewAlias(p, a.Str("version_normalized"), a.Str("version"))
 	}
+	return p, nil
+}
+
+// adopt loads the package of plugin code with id (negative ids are
+// allocated by the runtime, see Services::adoptRef in services.php).
+func (h *pluginHost) adopt(id int, m *phpjson.Map) (*pkg.Package, error) {
+	d := m.Map("d")
+	if d == nil {
+		return nil, fmt.Errorf("unknown package reference %d", id)
+	}
+	var p *pkg.Package
+	if base, ok := d.Get("_alias_of"); ok {
+		bp, err := h.pkgFromRef(base)
+		if err != nil {
+			return nil, err
+		}
+		p = pkg.NewAlias(bp, d.Str("version_normalized"), d.Str("version"))
+		p.RootPackageAlias = mustGet(d, "_root_alias") == true
+	} else {
+		var err error
+		if p, err = (&pkg.Loader{}).Load(d); err != nil {
+			return nil, err
+		}
+		if p.AliasOf != nil {
+			p = p.AliasOf
+		}
+	}
+	h.ids[p] = id
+	h.byID[id] = p
+	h.sent[id] = true
 	return p, nil
 }
 

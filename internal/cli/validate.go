@@ -49,11 +49,13 @@ func runValidate(ctx *Context) (int, error) {
 		checkVersion = 0
 	}
 	isStrict := in.Bool("strict")
+	// ConfigValidator reads the file with a JsonFile created with the IO
+	composer.ReadingLog(io, file)
 	errs, publishErrors, warnings, fatal := validate.ValidateConfig(file, checkAll, checkVersion, composer.ValidateSchemaFile)
 	if fatal != nil {
 		return 1, fatal
 	}
-	c, err := composer.Create(io, composer.Options{DisablePlugins: in.Bool("no-plugins"), DisableScripts: in.Bool("no-scripts"), FullLoad: true, ComposerFile: file})
+	c, err := composer.CreateInstance(io, composer.Options{DisablePlugins: in.Bool("no-plugins"), DisableScripts: in.Bool("no-scripts"), FullLoad: true, ComposerFile: file})
 	if err != nil {
 		return 1, err
 	}
@@ -106,6 +108,15 @@ func runValidate(ctx *Context) (int, error) {
 				exitCode = depCode
 			}
 		}
+	}
+	d := composer.NewEventDispatcher(c)
+	d.RunScripts = !c.DisableScripts
+	eventCode, err := d.DispatchCommandEventCode("validate", commandInput(ctx))
+	if err != nil {
+		return 1, err
+	}
+	if eventCode > exitCode {
+		return eventCode, nil
 	}
 	return exitCode, nil
 }

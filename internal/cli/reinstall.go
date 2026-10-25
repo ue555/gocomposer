@@ -89,12 +89,15 @@ func runReinstall(ctx *Context) (int, error) {
 		return installOrder[uninstallOps[j].Package.Name]-installOrder[uninstallOps[i].Package.Name] < 0
 	})
 
+	events := composer.NewEventDispatcher(c)
+	events.RunScripts = !c.DisableScripts
+	if err := events.DispatchCommandEvent("reinstall", commandInput(ctx)); err != nil {
+		return 1, err
+	}
 	ps, pd, err := preferredInstall(c, in)
 	if err != nil {
 		return 1, err
 	}
-	events := composer.NewEventDispatcher(c)
-	events.RunScripts = !c.DisableScripts
 	im := composer.NewInstallationManager(c)
 	im.OutputProgress = !in.Bool("no-progress")
 	im.SetPreferSource(ps)

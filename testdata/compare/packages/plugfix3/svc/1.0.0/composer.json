@@ -1,0 +1,1 @@
+{"name":"plugfix3/svc","description":"Fixture plugin replacing and extending Composer services (downloaders, autoload generator, repositories, archive manager, ...)","type":"composer-plugin","license":"MIT","require":{"composer-plugin-api":"^2.1"},"autoload":{"psr-4":{"Plugfix3\\Svc\\":"src/"}},"extra":{"class":"Plugfix3\\Svc\\Plugin"}}

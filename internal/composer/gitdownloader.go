@@ -791,25 +791,21 @@ func isRuntimeException(err error) bool {
 	return true
 }
 
-func unsupportedVcsDownloader(p *pkg.Package, typ string) error {
-	return &vcs.RuntimeError{Msg: "gocomposer cannot install " + p.PrettyName + " from " + typ + " source: the " + typ + " downloader is not supported (only git sources and dist archives are)"}
-}
-
 // prepareOp is DownloadManager::prepare for the operation's package (only
 // the VCS downloaders have a prepare step with side effects).
 func (im *InstallationManager) prepareOp(op *solver.Operation) error {
 	switch op.Type {
 	case solver.OpInstall:
-		if op.Package.Type() != "metapackage" && im.downloaderType(op.Package) == "git" {
-			return im.gitDL().prepare("install", op.Package, nil, strings.TrimRight(im.InstallPath(op.Package), "/"))
+		if t := im.downloaderType(op.Package); op.Package.Type() != "metapackage" && isVcsDownloaderType(t) {
+			return im.sourceDL(t).prepare("install", op.Package, nil, strings.TrimRight(im.InstallPath(op.Package), "/"))
 		}
 	case solver.OpUpdate:
-		if op.Target.Type() != "metapackage" && im.downloaderType(op.Target) == "git" {
-			return im.gitDL().prepare("update", op.Target, op.Initial, strings.TrimRight(im.InstallPath(op.Target), "/"))
+		if t := im.downloaderType(op.Target); op.Target.Type() != "metapackage" && isVcsDownloaderType(t) {
+			return im.sourceDL(t).prepare("update", op.Target, op.Initial, strings.TrimRight(im.InstallPath(op.Target), "/"))
 		}
 	case solver.OpUninstall:
-		if op.Package.Type() != "metapackage" && im.downloaderType(op.Package) == "git" {
-			return im.gitDL().prepare("uninstall", op.Package, nil, strings.TrimRight(im.InstallPath(op.Package), "/"))
+		if t := im.downloaderType(op.Package); op.Package.Type() != "metapackage" && isVcsDownloaderType(t) {
+			return im.sourceDL(t).prepare("uninstall", op.Package, nil, strings.TrimRight(im.InstallPath(op.Package), "/"))
 		}
 	}
 	return nil
@@ -817,8 +813,8 @@ func (im *InstallationManager) prepareOp(op *solver.Operation) error {
 
 // cleanupOp is DownloadManager::cleanup (re-applies stashed changes).
 func (im *InstallationManager) cleanupOp(op *solver.Operation) error {
-	if op.Type == solver.OpUpdate && op.Target.Type() != "metapackage" && im.downloaderType(op.Target) == "git" {
-		return im.gitDL().cleanup("update", op.Target, op.Initial, strings.TrimRight(im.InstallPath(op.Target), "/"))
+	if op.Type == solver.OpUpdate && op.Target.Type() != "metapackage" && isVcsDownloaderType(im.downloaderType(op.Target)) {
+		return im.sourceDL(im.downloaderType(op.Target)).cleanup("update", op.Target, op.Initial, strings.TrimRight(im.InstallPath(op.Target), "/"))
 	}
 	return nil
 }
@@ -826,10 +822,10 @@ func (im *InstallationManager) cleanupOp(op *solver.Operation) error {
 // LocalChanges is DownloadManager/GitDownloader::getLocalChanges for an
 // installed package ("" when the checkout is clean or not a git checkout).
 func (im *InstallationManager) LocalChanges(p *pkg.Package) (string, error) {
-	if im.downloaderType(p) != "git" {
-		return "", nil
+	if t := im.downloaderType(p); isVcsDownloaderType(t) {
+		return im.sourceDL(t).LocalChanges(p, strings.TrimRight(im.InstallPath(p), "/"))
 	}
-	return im.gitDL().LocalChanges(p, strings.TrimRight(im.InstallPath(p), "/"))
+	return "", nil
 }
 
 // UnpushedChanges is GitDownloader::getUnpushedChanges for an installed package.

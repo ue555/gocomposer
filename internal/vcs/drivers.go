@@ -34,6 +34,14 @@ func NewDriver(typ string, repoConfig *phpjson.Map, env *Env) Driver {
 		return NewGitLabDriver(repoConfig, env)
 	case "bitbucket", "git-bitbucket":
 		return NewBitbucketDriver(repoConfig, env)
+	case "svn":
+		return NewSvnDriver(repoConfig, env)
+	case "hg":
+		return NewHgDriver(repoConfig, env)
+	case "fossil":
+		return NewFossilDriver(repoConfig, env)
+	case "perforce":
+		return NewPerforceDriver(repoConfig, env)
 	}
 	return newUnsupportedDriver(typ, repoConfig, env)
 }
@@ -155,24 +163,17 @@ func svnNormalizeURL(u string) string {
 
 func perforceSupports(env *Env, u string, deep bool) bool {
 	if deep || rePerforceURL.MatchString(u) {
-		// Perforce::checkServerExists
-		p := NewProcess(env.IO, env.Process.Timeout)
-		code, _, _ := p.Execute([]string{"p4", "-p", u, "info", "-s"}, "")
-		return code == 0
+		return PerforceCheckServerExists(u, NewProcess(env.IO, env.Process.Timeout))
 	}
 	return false
 }
 
-// unsupportedDriver stands for the hg, svn, fossil, perforce and forgejo
-// drivers: their repositories are detected like Composer does and a missing
-// client binary fails with Composer's own error, but reading them is not
-// implemented and fails explicitly.
+// unsupportedDriver stands for the forgejo driver: its repositories are
+// detected like Composer does, but reading them is not implemented and fails
+// explicitly.
 type unsupportedDriver struct {
 	base
 	typ string
-	// hgMissing: HgDriver on a local path without hg installed reads no
-	// tags/branches and then fails in getRootIdentifier.
-	hgMissing bool
 }
 
 func newUnsupportedDriver(typ string, repoConfig *phpjson.Map, env *Env) *unsupportedDriver {
@@ -180,86 +181,13 @@ func newUnsupportedDriver(typ string, repoConfig *phpjson.Map, env *Env) *unsupp
 }
 
 func (d *unsupportedDriver) err() error {
-	return &RuntimeError{Msg: "The " + d.typ + " VCS driver is not supported by gocomposer (repository " + Sanitize(d.url) + "); only git, github, gitlab and bitbucket repositories can be read"}
+	return &RuntimeError{Msg: "The " + d.typ + " VCS driver is not supported by gocomposer (repository " + Sanitize(d.url) + "); only git, github, gitlab, bitbucket, svn, hg, fossil and perforce repositories can be read"}
 }
 
-func (d *unsupportedDriver) binaryMissing(bin string) (bool, string) {
-	code, _, _ := d.Process.Execute([]string{bin, "--version"}, "")
-	return code == 127, d.Process.ErrorOutput()
-}
-
-func (d *unsupportedDriver) Initialize() error {
-	switch d.typ {
-	case "fossil":
-		// FossilDriver::checkFossil
-		code, _, _ := d.Process.Execute([]string{"fossil", "version"}, "")
-		if code != 0 {
-			return &RuntimeError{Msg: "fossil was not found, check that it is installed and in your PATH env.\n\n" + d.Process.ErrorOutput()}
-		}
-	case "perforce":
-		if _, ok := d.repoConfig.Get("depot"); !ok {
-			return &RuntimeError{Msg: `Undefined array key "depot"`}
-		}
-	case "svn":
-		u := strings.TrimRight(svnNormalizeURL(d.url), "/")
-		// Svn::execute() checks the url first (prohibitUrlByConfig); its
-		// TransportException is a RuntimeException that SvnDriver::execute
-		// replaces by the missing binary message below
-		if d.HTTP != nil {
-			_ = d.HTTP.ProhibitURL(u)
-		}
-		if missing, errOut := d.binaryMissing("svn"); missing {
-			return &RuntimeError{Msg: "Failed to load " + Sanitize(u) + ", svn was not found, check that it is installed and in your PATH env.\n\n" + errOut}
-		}
-	case "hg":
-		if IsLocalPath(d.url) {
-			if missing, _ := d.binaryMissing("hg"); missing {
-				d.hgMissing = true
-				return nil
-			}
-			break
-		}
-		// HgDriver::initialize for a remote url: mirror into cache-vcs-dir
-		cacheDir := d.Config.GetString("cache-vcs-dir")
-		if !CacheUsable(cacheDir) {
-			return &RuntimeError{Msg: "HgDriver requires a usable cache directory, and it looks like you set it to be disabled"}
-		}
-		_ = os.MkdirAll(cacheDir, 0o777)
-		if !dirWritable(cacheDir) {
-			return &RuntimeError{Msg: "Can not clone " + Sanitize(d.url) + ` to access package information. The "` + cacheDir + `" directory is not writable by the current user.`}
-		}
-		if d.HTTP != nil {
-			if err := d.HTTP.ProhibitURL(d.url); err != nil {
-				return err
-			}
-		}
-		// Hg::runCommand fails the clone; Hg::throwException reports a
-		// missing binary through Hg::getVersion()
-		if missing, errOut := d.binaryMissing("hg"); missing {
-			return &RuntimeError{Msg: Sanitize("Failed to clone " + d.url + ", hg was not found, check that it is installed and in your PATH env.\n\n" + errOut)}
-		}
-	}
-	return d.err()
-}
-
-func (d *unsupportedDriver) RootIdentifier() (string, error) {
-	if d.hgMissing {
-		return "", &RuntimeError{Msg: "Undefined array key 0"}
-	}
-	return "", d.err()
-}
-func (d *unsupportedDriver) Branches() ([]Ref, error) {
-	if d.hgMissing {
-		return nil, nil
-	}
-	return nil, d.err()
-}
-func (d *unsupportedDriver) Tags() ([]Ref, error) {
-	if d.hgMissing {
-		return nil, nil
-	}
-	return nil, d.err()
-}
+func (d *unsupportedDriver) Initialize() error                    { return d.err() }
+func (d *unsupportedDriver) RootIdentifier() (string, error)      { return "", d.err() }
+func (d *unsupportedDriver) Branches() ([]Ref, error)             { return nil, d.err() }
+func (d *unsupportedDriver) Tags() ([]Ref, error)                 { return nil, d.err() }
 func (d *unsupportedDriver) Source(string) *phpjson.Map           { return nil }
 func (d *unsupportedDriver) Dist(string) (*phpjson.Map, error)    { return nil, d.err() }
 func (d *unsupportedDriver) HasComposerFile(string) (bool, error) { return false, d.err() }

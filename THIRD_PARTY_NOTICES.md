@@ -55,7 +55,9 @@ generation stay in Go, and the PHP side calls back into Go through stubs.
   events, IO, Package, Json, Installer base classes) copied unmodified from
   composer/composer f83588392df43d4fd027d84d26de459946ef4e80, plus
   gocomposer-written stubs (Composer, Config, Factory, EventDispatcher, …)
-  whose header names the Composer file they stand in for. MIT,
+  whose header names the Composer file they stand in for, and a few files
+  copied with a change described in their header (e.g.
+  `Package/Archiver/ArchiveManager.php`, `Json/JsonFile.php`). MIT,
   (c) Nils Adermann, Jordi Boggiano — `internal/res/pluginrt/composer/LICENSE`.
 - `internal/res/pluginrt/vendor/`: the PHP libraries Composer ships with
   plugins at the versions locked in the oracle's `composer.lock`

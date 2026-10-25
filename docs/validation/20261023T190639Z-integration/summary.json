@@ -1,0 +1,211 @@
+{
+  "all_match": true,
+  "environment": {
+    "gocomposer_linux_sha256": "c522d1adac25fb2fe9fe9f7943e9202d2e535344ef16d655f79222e00f0f90ce",
+    "host_os": "darwin/arm64",
+    "oracle_composer_lock_sha256": "7e7ed6afe532a728d4c2cccec04f476c382048aab6148e0ceb1e7594c7f0d34c",
+    "oracle_image": "localhost/gocomposer-oracle:8.4",
+    "oracle_image_digest": "sha256:7c3d859839a08d290aa1b5cce89e88d709ddbe6421525d715a3464a651103607",
+    "oracle_source_head": "f83588392df43d4fd027d84d26de459946ef4e80",
+    "upstream_commit": "f83588392df43d4fd027d84d26de459946ef4e80"
+  },
+  "generated": "20261023T190639Z",
+  "results": [
+    {
+      "project": "library-symfony-console",
+      "step": "install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "library-symfony-console",
+      "step": "update-no-install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "library-symfony-console",
+      "step": "update-no-install-no-scripts",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "cli-app",
+      "step": "install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "cli-app",
+      "step": "update-no-install",
+      "status": "MATCH",
+      "oracle_exit": 255,
+      "go_exit": 255
+    },
+    {
+      "project": "cli-app",
+      "step": "update-no-install-no-scripts",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "laravel",
+      "step": "install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "laravel",
+      "step": "update-no-install",
+      "status": "MATCH",
+      "oracle_exit": 255,
+      "go_exit": 255
+    },
+    {
+      "project": "laravel",
+      "step": "update-no-install-no-scripts",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "live-psr",
+      "step": "install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "live-psr",
+      "step": "update-no-install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "live-psr",
+      "step": "update-no-install-no-scripts",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-installers",
+      "step": "install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-installers",
+      "step": "update-no-install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-installers",
+      "step": "update-no-install-no-scripts",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-php-http-discovery",
+      "step": "install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-php-http-discovery",
+      "step": "update-no-install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-php-http-discovery",
+      "step": "update-no-install-no-scripts",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-phpcs",
+      "step": "install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-phpcs",
+      "step": "update-no-install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-phpcs",
+      "step": "update-no-install-no-scripts",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-pest",
+      "step": "install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-pest",
+      "step": "update-no-install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "plugin-pest",
+      "step": "update-no-install-no-scripts",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "symfony-skeleton",
+      "step": "install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "symfony-skeleton",
+      "step": "update-no-install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "symfony-skeleton",
+      "step": "update-no-install-no-scripts",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    },
+    {
+      "project": "symfony-skeleton",
+      "step": "recipes-install",
+      "status": "MATCH",
+      "oracle_exit": 0,
+      "go_exit": 0
+    }
+  ]
+}

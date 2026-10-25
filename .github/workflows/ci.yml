@@ -35,9 +35,15 @@ jobs:
         run: go build -o bin/gocomposer ./cmd/gocomposer
 
   oracle:
-    # Differential comparison against the pinned official Composer and the
-    # fixed real-project integration (needs podman and network access).
-    name: compare + integration (linux)
+    # Differential comparison against the pinned official Composer, one job
+    # per PHP version so each stays well under the 6 hour job limit. Every
+    # job prepares its own images (8.4 is always built: it installs the
+    # Composer dependencies in .cache/oracle-source).
+    name: compare (PHP ${{ matrix.php }}, linux)
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.4', '8.3', '8.5']
     runs-on: ubuntu-24.04
     needs: unit
     steps:
@@ -45,18 +51,37 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.23'
-      - name: prepare oracle (php 8.3/8.4/8.5 images, composer f83588392df4)
+      - name: prepare oracle (php ${{ matrix.php }} image, composer f83588392df4)
         run: scripts/prepare-oracle.sh
-      - name: compare (PHP 8.4)
-        run: scripts/compare.sh
-      - name: compare (PHP 8.3)
-        run: scripts/compare.sh -image localhost/gocomposer-oracle:8.3
-      - name: compare (PHP 8.5)
-        run: scripts/compare.sh -image localhost/gocomposer-oracle:8.5
+        env:
+          ORACLE_VERSIONS: ${{ matrix.php }}
+      - name: compare (PHP ${{ matrix.php }})
+        run: scripts/compare.sh -image localhost/gocomposer-oracle:${{ matrix.php }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-compare-${{ matrix.php }}
+          path: docs/validation/
+
+  integration:
+    # Fixed real projects installed by the official Composer and gocomposer
+    # (needs podman and network access).
+    name: integration (linux)
+    runs-on: ubuntu-24.04
+    needs: unit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+      - name: prepare oracle (php 8.4 image, composer f83588392df4)
+        run: scripts/prepare-oracle.sh
+        env:
+          ORACLE_VERSIONS: '8.4'
       - name: integration
         run: scripts/integration.sh
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: validation
+          name: validation-integration
           path: docs/validation/

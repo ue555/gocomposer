@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"os"
 	"regexp"
-	"sort"
 	"strings"
 
 	"gocomposer/internal/cio"
@@ -222,6 +221,7 @@ func (a *App) Run(argv []string) int {
 	// ConsoleOutput: decorated when both streams support colors
 	io.Decorated = cio.HasColorSupport(os.Stdout) && cio.HasColorSupport(os.Stderr)
 	io.Interactive = isTerminal(os.Stdin)
+	registerErrorHandler(io)
 	// the PHP processes running Composer plugins end with the command
 	defer composer.ShutdownPlugins()
 	// Application::doRun reports the program status to the terminal
@@ -337,38 +337,8 @@ func programStatusReported(io *cio.IO, argv []string) bool {
 	return probe.IsProgramStatusEnabled()
 }
 
-func (a *App) findCommand(name string) (*Command, error) {
-	if c, ok := a.byName[name]; ok {
-		return c, nil
-	}
-	// abbreviations like Symfony: unique prefix match
-	var matches []string
-	for n := range a.byName {
-		if strings.HasPrefix(n, name) {
-			matches = append(matches, n)
-		}
-	}
-	uniq := map[*Command]bool{}
-	for _, m := range matches {
-		uniq[a.byName[m]] = true
-	}
-	if len(uniq) == 1 {
-		for c := range uniq {
-			return c, nil
-		}
-	}
-	if len(uniq) > 1 {
-		sort.Strings(matches)
-		return nil, &CLIError{Msg: fmt.Sprintf("Command \"%s\" is ambiguous.\nDid you mean one of these?\n    %s", name, strings.Join(matches, "\n    "))}
-	}
-	if pos := strings.LastIndex(name, ":"); pos >= 0 {
-		// Symfony's Application::findNamespace (plugin_commands.go)
-		if err := a.findNamespace(name[:pos]); err != nil {
-			return nil, err
-		}
-	}
-	return nil, &CLIError{Msg: a.notDefinedMessage(name)}
-}
+// findCommand is Symfony's Application::find (descriptor.go).
+func (a *App) findCommand(name string) (*Command, error) { return a.find(name) }
 
 func (a *App) run(io *cio.IO, argv []string) (int, error) {
 	// first pass: find command name and global flags affecting IO
@@ -408,12 +378,11 @@ func (a *App) run(io *cio.IO, argv []string) (int, error) {
 	if v := os.Getenv("COMPOSER_NO_INTERACTION"); v != "" && v != "0" {
 		io.Interactive = false
 	}
-	if cmdName == "" {
-		for _, arg := range argv {
-			if arg == "-V" || arg == "--version" {
-				io.Write(versionLine())
-				return 0, nil
-			}
+	noCommand := cmdName == ""
+	if noCommand {
+		if hasParameterOption(argv, true, "--version", "-V") {
+			printVersion(io)
+			return 0, nil
 		}
 		cmdName = "list"
 	}
@@ -427,6 +396,7 @@ func (a *App) run(io *cio.IO, argv []string) (int, error) {
 	if err := a.addPluginCommands(io, argv, cmdName); err != nil {
 		return 1, err
 	}
+	a.debugRunningLine(io, argv, cmdName)
 	if err := a.addScriptCommands(io, argv, cmdName); err != nil {
 		return 1, err
 	}
@@ -439,6 +409,15 @@ func (a *App) run(io *cio.IO, argv []string) (int, error) {
 		return 1, nil
 	}
 	a.running = cmd
+	// Symfony's Application::doRun: --version is handled before binding,
+	// --help/-h runs the help command for the command (descriptor.go)
+	if hasParameterOption(argv, true, "--version", "-V") {
+		printVersion(io)
+		return 0, nil
+	}
+	if hasParameterOption(argv, true, "--help", "-h") {
+		return a.runHelpFlag(io, argv, cmd, noCommand, cmdName)
+	}
 	in, err := parseInput(cmd, argv, cmdName)
 	strictErr := err
 	if err != nil && cmd.IgnoreValidationErrors {
@@ -446,13 +425,6 @@ func (a *App) run(io *cio.IO, argv []string) (int, error) {
 	}
 	if err != nil {
 		return 1, err
-	}
-	if in.Bool("version") {
-		io.Write(versionLine())
-		return 0, nil
-	}
-	if in.Bool("help") {
-		return a.renderHelp(io, cmd), nil
 	}
 	if in.missing != nil && cmd.Name == "global" {
 		// GlobalCommand overrides Command::run and fails before initialize() (after --version/--help);
